@@ -31,21 +31,24 @@
 }
 
 - (void)initPort {
-    int portGet  = [PnrPortEntity getPort_get];
+    int portGet  = [self getPort_get];
     if (portGet != 0) {
         self.portGetInt  = portGet;
     }else{
         self.portGetInt  = PnrPortGet;
-        [PnrPortEntity savePort_get:[NSString stringWithFormat:@"%i", PnrPortGet]];
+        NSString * text  = [NSString stringWithFormat:@"%i", PnrPortGet];
+        [self savePort_get:text];
+        [SqliteCofing addPort:text];
     }
 }
 
 #pragma mark - plist
-+ (void)savePort_get:(NSString *)port {
+- (void)savePort_get:(NSString *)port {
     [SqliteCofing updatePort:port];
+    self.portGetInt = port.intValue;
 }
 
-+ (int)getPort_get {
+- (int)getPort_get {
     NSString * info = [SqliteCofing getPort];
     return info.intValue;
 }

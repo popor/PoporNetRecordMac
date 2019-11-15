@@ -67,9 +67,13 @@
 - (void)startListServerAsyn:(NSMutableString *)listBodyH5 {
     if (!listBodyH5) {
         listBodyH5 = [NSMutableString new];
-        //return;
     }
     self.h5List = [PnrWebBody listH5:listBodyH5];
+    
+    [self startWebServer];
+}
+
+- (void)startWebServer {
     __weak typeof(self) weakSelf = self;
     
     if (!self.webServer) {
@@ -97,7 +101,7 @@
                     else{
                         int index = [path intValue];
                         if ([path isEqualToString:[NSString stringWithFormat:@"%i", index]]) {
-                            completionBlock([GCDWebServerDataResponse responseWithHTML:[PnrWebBody rootBodyIndex:index]]);                            
+                            completionBlock([GCDWebServerDataResponse responseWithHTML:[PnrWebBody rootBodyIndex:index]]);
                         }else{
                             completionBlock([GCDWebServerDataResponse responseWithHTML:ErrorUrl]);
                         }
@@ -147,6 +151,12 @@
         PnrPortEntity * port = [PnrPortEntity share];
         [server startWithPort:port.portGetInt bonjourName:nil];
     }
+}
+
+- (void)updatePort {
+    [self.webServer stop];
+    self.webServer = nil;
+    [self startWebServer];
 }
 
 // 分析 get 请求

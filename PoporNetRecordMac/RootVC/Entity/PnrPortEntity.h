@@ -18,8 +18,8 @@ static int PnrPortGet = 9010;
 + (instancetype)share;
 
 #pragma mark - plist
-+ (void)savePort_get:(NSString *)port;
-+ (int)getPort_get;
+- (void)savePort_get:(NSString *)port;
+- (int)getPort_get;
 
 @end
 

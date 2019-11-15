@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PoporNetRecord : NSObject
 
 @property (nonatomic, weak  ) PnrConfig * config;
+@property (nonatomic, weak  ) PnrWebServer * webServer;
 
 @property (nonatomic, strong) NSMutableArray * infoArray;
 

@@ -32,7 +32,7 @@
     [SqliteCofing updateTable];
     
     NSWindow * window = [NSApplication sharedApplication].keyWindow;
-    window.minSize = CGSizeMake(600, 400);
+    window.minSize = CGSizeMake(500, 200);
     
     window.title = @"Record";
     self.window = window;
@@ -44,7 +44,10 @@
     tool.blockResetWindow = ^(){
         NSScreen * screen = [NSScreen mainScreen];
         int w = MIN(1000, screen.frame.size.width*0.8);
-        int h = MIN(600, screen.frame.size.height*0.6);;
+        int h = MIN(600, screen.frame.size.height*0.6);
+        w = 500;
+        h = 200;
+        
         int x = (screen.frame.size.width - w)/2;
         int y = (screen.frame.size.height - h)/2;
         

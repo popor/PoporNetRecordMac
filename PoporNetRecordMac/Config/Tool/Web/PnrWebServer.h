@@ -35,6 +35,8 @@ static NSString * UrlPathUrl = @"addUrl";
 - (void)startListServer:(NSMutableString * _Nullable)listBodyH5;
 - (void)stopServer;
 
+- (void)updatePort;
+
 - (void)clearListWeb;
 
 @end

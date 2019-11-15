@@ -22,9 +22,6 @@
 
 #pragma mark - VCDataSource
 
-- (void)startServer {
-    [PoporNetRecord share];
-    
-}
+
 
 @end

@@ -14,8 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 // 处理Entity事件
 @interface RootVCInteractor : NSObject
 
-- (void)startServer;
-
 @end
 
 NS_ASSUME_NONNULL_END
