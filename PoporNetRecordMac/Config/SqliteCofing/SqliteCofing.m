@@ -10,7 +10,10 @@
 
 //#import "MoveFolderEntity.h"
 //#import "MoveTagEntity.h"
-//#import "ColumnEntity.h"
+#import "ColumnEntity.h"
+#import "PnrListEntity.h"
+#import "PnrEntity.h"
+#import "PnrPortEntity.h"
 
 #import <PoporFMDB/PoporFMDB.h>
 
@@ -19,7 +22,7 @@
 // MARK: 创建table
 + (void)updateTable {
     // 更新PoporFMDB
-    //[PoporFMDB injectTableArray:@[[MoveFolderEntity class], [MoveTagEntity class], [ColumnEntity class]]];
+    [PoporFMDB injectTableArray:@[[ColumnEntity class], [PnrListEntity class], [PnrEntity class]]];
 }
 
 // MARK: 主 window frame 相关
@@ -34,6 +37,19 @@
 + (NSString *)getWindowFrame {
     return [PoporFMDB getPlistKey:WindowFrameKey];
 }
+//
++ (void)updatePort:(NSString *)port {
+    [PoporFMDB updatePlistKey:PNR_Port value:port];
+}
+
++ (void)addPort:(NSString *)port {
+    [PoporFMDB addPlistKey:PNR_Port value:port];
+}
+
++ (NSString *)getPort {
+    return [PoporFMDB getPlistKey:PNR_Port];
+}
+
 
 // MARK: 其他
 

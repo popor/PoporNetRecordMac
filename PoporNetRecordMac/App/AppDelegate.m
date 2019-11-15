@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "SqliteCofing.h"
 #import "WindowFrameTool.h"
+#import <PoporFMDB/PoporFMDB.h>
 
 @interface AppDelegate ()
 
@@ -18,12 +19,22 @@
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification {
     
+#ifndef __OPTIMIZE__
+    NSString * iosInjectionPath = @"/Applications/InjectionIII.app/Contents/Resources/macOSInjection.bundle";
+    if ([[NSFileManager defaultManager] fileExistsAtPath:iosInjectionPath]) {
+        [[NSBundle bundleWithPath:iosInjectionPath] load];
+    }
+    
+#else
+
+#endif
+    
     [SqliteCofing updateTable];
     
     NSWindow * window = [NSApplication sharedApplication].keyWindow;
     window.minSize = CGSizeMake(600, 400);
     
-    window.title = @"Move File";
+    window.title = @"Record";
     self.window = window;
     
     [self resumeLastFrameOrigin];
@@ -78,6 +89,16 @@
         [self.window makeKeyAndOrderFront:self];
         return YES;
     }
+}
+
+- (IBAction)openDbFolderBTAction:(id)sender {
+    [self openPath:PDBShare.DBPath];
+}
+
+- (void)openPath:(NSString *)path {
+    NSURL * url = [NSURL fileURLWithPath:path];
+    NSString * folder = [path substringToIndex:path.length - url.lastPathComponent.length];
+    [[NSWorkspace sharedWorkspace] selectFile:path inFileViewerRootedAtPath:folder];
 }
 
 - (IBAction)resetWindowFrame:(id)sender {

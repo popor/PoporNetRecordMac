@@ -1,0 +1,6 @@
+framework module PoporJsonModel {
+  umbrella header "PoporJsonModel-umbrella.h"
+
+  export *
+  module * { export * }
+}

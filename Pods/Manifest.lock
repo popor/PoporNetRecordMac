@@ -2,6 +2,9 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - GCDWebServer (3.5.3):
+    - GCDWebServer/Core (= 3.5.3)
+  - GCDWebServer/Core (3.5.3)
   - JSONModel (1.8.0)
   - Masonry (1.1.0)
   - PoporFMDB (1.01):
@@ -46,33 +49,42 @@ PODS:
   - PoporFoundation/Os (1.09)
   - PoporFoundation/Prefix (1.09):
     - PoporFoundation/Os
+  - PoporJsonModel (0.04):
+    - JSONModel
+    - PoporFoundation/NSObject
   - ReactiveObjC (3.1.1)
 
 DEPENDENCIES:
   - FMDB
+  - GCDWebServer
   - JSONModel
   - Masonry
   - PoporFMDB
   - PoporFoundation
+  - PoporJsonModel
   - ReactiveObjC
 
 SPEC REPOS:
   trunk:
     - FMDB
+    - GCDWebServer
     - JSONModel
     - Masonry
     - PoporFMDB
     - PoporFoundation
+    - PoporJsonModel
     - ReactiveObjC
 
 SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  GCDWebServer: c0ab22c73e1b84f358d1e2f74bf6afd1c60829f2
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   PoporFMDB: 8743b825107234a368e293ec6cb56fb0bf14f8a7
   PoporFoundation: f080da19da868487426639289bd3a263a7c65aea
+  PoporJsonModel: e99396194a9b629907e14a134fe01677ed14b560
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
 
-PODFILE CHECKSUM: cea4e4ab4dc5585f1ffd4775777e6ae599d502d5
+PODFILE CHECKSUM: 85773d808d7288d8fbb721be22afc067d57d15c1
 
 COCOAPODS: 1.8.4

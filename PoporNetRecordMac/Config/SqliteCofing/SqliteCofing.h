@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)getWindowFrame;
 
+// MARK: 端口号
++ (void)updatePort:(NSString *)port;
++ (void)addPort:(NSString *)port;
++ (NSString *)getPort;
+
 // MARK: 其他
 
 

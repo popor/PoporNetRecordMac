@@ -12,5 +12,9 @@
 
 @property (nonatomic, weak  ) NSWindow * window;
 
+- (IBAction)openDbFolderBTAction:(id)sender;
+
+- (IBAction)resetWindowFrame:(id)sender;
+
 @end
 

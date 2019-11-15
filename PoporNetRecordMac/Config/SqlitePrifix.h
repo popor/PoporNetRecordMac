@@ -11,6 +11,7 @@
 
 // MARK: key window
 static NSString * const WindowFrameKey = @"WindowFrame";
+static NSString * const PNR_Port       = @"port";
 
 // MARK: key tv
 static NSString * TvColumnId_tag1       = @"tag1";
