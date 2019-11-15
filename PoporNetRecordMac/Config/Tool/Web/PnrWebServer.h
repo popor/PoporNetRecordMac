@@ -13,11 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * UrlPathLog = @"addLog";
-static NSString * UrlPathUrl = @"addUrl";
-
-
-
+static NSString * UrlPath = @"add";
 
 @interface PnrWebServer : NSObject
 

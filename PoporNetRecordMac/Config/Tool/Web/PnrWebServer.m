@@ -120,13 +120,7 @@
                 path = [path substringFromIndex:1];
                 NSArray * pathArray = [path componentsSeparatedByString:@"/"];
                 if (pathArray.count == 1) {
-                    if ([path isEqualToString:UrlPathLog]) {
-                        GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
-                        NSDictionary * dic = formRequest.jsonObject;
-                        [PoporNetRecord addDic:dic];
-                        
-                        completionBlock([GCDWebServerDataResponse responseWithText:@"{\"status\":1}"]);
-                    } else if ([path isEqualToString:UrlPathUrl]) {
+                    if ([path isEqualToString:UrlPath]) {
                         GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
                         NSDictionary * dic = formRequest.jsonObject;
                         [PoporNetRecord addDic:dic];
