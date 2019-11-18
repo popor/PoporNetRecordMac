@@ -79,6 +79,7 @@ static NSString * PnrClassTaAutoH  = @"TaAutoH";
 @property (nonatomic, strong) NSString * listWebH5; // 列表网页html5代码
 
 //@property (nonatomic        ) float cellH;
+@property (nonatomic, strong) NSString * deviceName;
 
 - (void)createListWebH5:(NSInteger)index;
 

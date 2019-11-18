@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static int PnrPortGet = 9010;
+static int PnrPortGet = 9000;
 
 @interface PnrPortEntity : NSObject
 
