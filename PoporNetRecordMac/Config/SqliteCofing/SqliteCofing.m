@@ -11,7 +11,7 @@
 //#import "MoveFolderEntity.h"
 //#import "MoveTagEntity.h"
 #import "ColumnEntity.h"
-#import "PnrListEntity.h"
+#import "PnrDeviceEntity.h"
 #import "PnrEntity.h"
 #import "PnrPortEntity.h"
 
@@ -22,7 +22,7 @@
 // MARK: 创建table
 + (void)updateTable {
     // 更新PoporFMDB
-    [PoporFMDB injectTableArray:@[[ColumnEntity class], [PnrListEntity class], [PnrEntity class]]];
+    [PoporFMDB injectTableArray:@[[ColumnEntity class], [PnrDeviceEntity class], [PnrEntity class]]];
 }
 
 // MARK: 主 window frame 相关

@@ -23,9 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSViewController *)vc;
 
 // MARK: 自己的
-//@property (nonatomic, strong) NSTableView  * infoTV;
-//@property (nonatomic, strong) NSScrollView * infoTV_CSV;
-//@property (nonatomic, strong) NSMenu       * infoTVClickMenu;
+@property (nonatomic, strong) NSTableView  * infoTV;
+@property (nonatomic, strong) NSScrollView * infoTV_CSV;
+@property (nonatomic, strong) NSMenu       * infoTVClickMenu;
 
 
 @property (nonatomic, strong) EditableTextField * ipTF;

@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 static NSString * TvColumnId_info1       = @"tag1";
-static NSString * TvColumnTitle_info1    = @"标题";
+static NSString * TvColumnTitle_info1    = @"开关";
 static NSString * TvColumnTip_info1      = @"";
 
 static NSString * TvColumnId_info2       = @"tag2";
@@ -20,7 +20,7 @@ static NSString * TvColumnTitle_info2    = @"备注";
 static NSString * TvColumnTip_info2      = @"";
 
 static NSString * TvColumnId_info3       = @"tag3";
-static NSString * TvColumnTitle_info3    = @"recordeID";
+static NSString * TvColumnTitle_info3    = @"设备名称";
 static NSString * TvColumnTip_info3      = @"";
 
 //static NSString * TvColumnId_info4       = @"tag4";

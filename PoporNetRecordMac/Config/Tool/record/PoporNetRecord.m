@@ -28,9 +28,11 @@
     static PoporNetRecord * instance;
     dispatch_once(&once, ^{
         instance = [self new];
-        instance.infoArray = [NSMutableArray new];
-        instance.listWebH5 = [NSMutableString new];
-        instance.config    = [PnrConfig share];
+        instance.infoArray       = [NSMutableArray new];
+        instance.deviceNameDic   = [NSMutableDictionary new];
+        instance.deviceNameArray = [NSMutableArray new];
+        instance.listWebH5       = [NSMutableString new];
+        instance.config          = [PnrConfig share];
         
         // 相关联的关联数组
         instance.webServer = [PnrWebServer share];
@@ -140,11 +142,30 @@
 
 + (void)addDic:(NSDictionary *)dic {
     PnrEntity * entity = [[PnrEntity alloc] initWithDictionary:dic error:nil];
-    entity.headValue      = dic[@"headValue"];
-    entity.parameterValue = dic[@"parameterValue"];
-    entity.responseValue  = dic[@"responseValue"];
     
-    [self addEntity:entity];
+    PoporNetRecord * pnr = [PoporNetRecord share];
+    PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[entity.deviceName];
+    if (!deviceEntity) {
+        deviceEntity = [PnrDeviceEntity new];
+        deviceEntity.receive = YES;
+        deviceEntity.deviceName = entity.deviceName;
+        
+        [pnr.deviceNameArray addObject:deviceEntity];
+        [pnr.deviceNameDic setObject:deviceEntity forKey:deviceEntity.deviceName];
+        
+        if (pnr.blockFreshDeviceName) {
+            pnr.blockFreshDeviceName();
+        }
+    }
+    
+    if (deviceEntity.receive) {
+        
+        entity.headValue      = dic[@"headValue"];
+        entity.parameterValue = dic[@"parameterValue"];
+        entity.responseValue  = dic[@"responseValue"];
+        
+        [self addEntity:entity];
+    }
 }
 
 + (void)addEntity:(PnrEntity *)entity {

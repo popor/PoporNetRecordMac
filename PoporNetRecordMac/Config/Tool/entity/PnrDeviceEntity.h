@@ -1,5 +1,5 @@
 //
-//  PnrListEntity.h
+//  PnrDeviceEntity.h
 //  PoporNetRecordMac
 //
 //  Created by apple on 2019/11/13.
@@ -8,20 +8,17 @@
 
 #import <PoporJsonModel/PoporJsonModel.h>
 
-#import "PnrEntity.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol PnrListEntity;
-@interface PnrListEntity : PoporJsonModel
+@protocol PnrDeviceEntity;
+@interface PnrDeviceEntity : PoporJsonModel
 
 @property (nonatomic        ) NSInteger  sort;
 
-@property (nonatomic, strong) NSString * title;
+@property (nonatomic        ) BOOL       receive; // 是否接收
 @property (nonatomic, strong) NSString * note;
-@property (nonatomic, strong) NSString * recordID;
+@property (nonatomic, strong) NSString * deviceName;
 
-@property (nonatomic, strong) NSMutableArray<PnrEntity> * list;
 @end
 
 NS_ASSUME_NONNULL_END

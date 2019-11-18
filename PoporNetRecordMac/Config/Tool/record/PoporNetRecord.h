@@ -10,16 +10,21 @@
 #import "PnrPrefix.h"
 #import "PnrConfig.h"
 #import "PnrEntity.h"
+#import "PnrDeviceEntity.h"
 #import "PnrWebServer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PoporNetRecord : NSObject
 
-@property (nonatomic, weak  ) PnrConfig * config;
-@property (nonatomic, weak  ) PnrWebServer * webServer;
+@property (nonatomic, weak  ) PnrConfig           * config;
+@property (nonatomic, weak  ) PnrWebServer        * webServer;
 
-@property (nonatomic, strong) NSMutableArray * infoArray;
+@property (nonatomic, strong) NSMutableArray      * infoArray;
+@property (nonatomic, strong) NSMutableArray      * deviceNameArray;
+@property (nonatomic, strong) NSMutableDictionary * deviceNameDic;
+
+@property (nonatomic, copy  ) BlockPVoid          blockFreshDeviceName;
 
 + (instancetype)share;
 
@@ -41,7 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)addRecordID:(NSString *)recordID log:(NSString *)log title:(NSString *)title;
 
 + (void)addDic:(NSDictionary *)dic;
-//+ (void)addEntity:(PnrEntity *)entity;
 
 @end
 

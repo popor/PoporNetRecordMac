@@ -9,7 +9,9 @@
 #ifndef PoporNetRecordMac_prefix_h
 #define PoporNetRecordMac_prefix_h
 
+#import <PoporFoundation/PoporFoundation.h>
 #import <Masonry/Masonry.h>
 #import "NSView_prefix.h"
+#import <ReactiveObjC.h>
 
 #endif /* PoporNetRecordMac_prefix_h */
