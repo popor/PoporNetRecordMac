@@ -26,8 +26,8 @@
 @synthesize wifiTF;
 
 @synthesize freshBT;
-@synthesize urlBT;
-@synthesize startBT;
+//@synthesize urlBT;
+//@synthesize startBT;
 @synthesize openWebBT;
 
 - (instancetype)initWithDic:(NSDictionary *)dic {
@@ -89,7 +89,7 @@
 
 // MARK: 简化ui
 - (void)addTFBT {
-    int btH = 30;// 不起作用
+    int btH = 25;// 不起作用
     self.wifiTF = ({
         EditableTextField * tf = [[EditableTextField alloc] init];
         tf.editable = NO;
@@ -122,18 +122,18 @@
         button;
     });
     
-    self.urlBT = ({
-        NSButton * button = [NSButton buttonWithTitle:@"复制URL" target:self.present action:@selector(copyUrlAction)];
-        [self.view addSubview:button];
-        
-        button;
-    });
-    self.startBT = ({
-        NSButton * button = [NSButton buttonWithTitle:@"已开始" target:self.present action:@selector(satrtAction)];
-        [self.view addSubview:button];
-        
-        button;
-    });
+    //    self.urlBT = ({
+    //        NSButton * button = [NSButton buttonWithTitle:@"复制URL" target:self.present action:@selector(copyUrlAction)];
+    //        [self.view addSubview:button];
+    //
+    //        button;
+    //    });
+    //    self.startBT = ({
+    //        NSButton * button = [NSButton buttonWithTitle:@"已开始" target:self.present action:@selector(satrtAction)];
+    //        [self.view addSubview:button];
+    //
+    //        button;
+    //    });
     self.openWebBT = ({
            NSButton * button = [NSButton buttonWithTitle:@"查看" target:self.present action:@selector(webviewAction)];
            [self.view addSubview:button];
@@ -144,56 +144,56 @@
     [self.wifiTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
         make.left.mas_equalTo(16);
-        make.width.mas_greaterThanOrEqualTo(80);
+        make.width.mas_greaterThanOrEqualTo(40);
         
         make.height.mas_equalTo(22);
     }];
     
     [self.ipTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
-        make.left.mas_equalTo(self.wifiTF.mas_right).mas_offset(15);
-        make.width.mas_greaterThanOrEqualTo(200);
+        make.left.mas_equalTo(self.wifiTF.mas_right).mas_offset(10);
+        make.width.mas_greaterThanOrEqualTo(100);
         //make.width.mas_equalTo(200);
         
-        make.height.mas_equalTo(24);
+        make.height.mas_equalTo(self.wifiTF);
     }];
     
     [self.editPortBT mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
-        make.left.mas_equalTo(self.ipTF.mas_right).mas_offset(20);
+        make.left.mas_equalTo(self.ipTF.mas_right).mas_offset(10);
         make.right.mas_equalTo(-16);
         
-        make.width.mas_greaterThanOrEqualTo(80);
+        make.width.mas_equalTo(60);
         
-        make.height.mas_equalTo(btH);
+        make.height.mas_equalTo(self.wifiTF);
     }];
     
     // ----------------
     [self.freshBT mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.wifiTF.mas_bottom).mas_offset(30);
+        make.top.mas_equalTo(self.wifiTF.mas_bottom).mas_offset(10);
         make.left.mas_equalTo(16);
-        make.width.mas_greaterThanOrEqualTo(80);
+        make.width.mas_greaterThanOrEqualTo(60);
         
         make.height.mas_equalTo(btH);
     }];
-    [self.urlBT mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.freshBT);
-        make.left.mas_equalTo(self.freshBT.mas_right).mas_offset(20);
-        make.width.mas_greaterThanOrEqualTo(80);
-        
-        make.height.mas_equalTo(btH);
-    }];
-    [self.startBT mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.freshBT);
-        make.left.mas_equalTo(self.urlBT.mas_right).mas_offset(20);
-        make.width.mas_greaterThanOrEqualTo(80);
-        
-        make.height.mas_equalTo(btH);
-    }];
+    //    [self.urlBT mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.mas_equalTo(self.freshBT);
+    //        make.left.mas_equalTo(self.freshBT.mas_right).mas_offset(20);
+    //        make.width.mas_greaterThanOrEqualTo(80);
+    //
+    //        make.height.mas_equalTo(btH);
+    //    }];
+    //    [self.startBT mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.mas_equalTo(self.freshBT);
+    //        make.left.mas_equalTo(self.urlBT.mas_right).mas_offset(20);
+    //        make.width.mas_greaterThanOrEqualTo(80);
+    //
+    //        make.height.mas_equalTo(btH);
+    //    }];
     [self.openWebBT mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.freshBT);
-        make.left.mas_equalTo(self.startBT.mas_right).mas_offset(20);
-        make.width.mas_greaterThanOrEqualTo(80);
+        make.left.mas_equalTo(self.freshBT.mas_right).mas_offset(20);
+        make.width.mas_greaterThanOrEqualTo(60);
         
         make.height.mas_equalTo(btH);
     }];

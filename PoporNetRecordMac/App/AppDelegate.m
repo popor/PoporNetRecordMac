@@ -32,7 +32,7 @@
     [SqliteCofing updateTable];
     
     NSWindow * window = [NSApplication sharedApplication].keyWindow;
-    window.minSize = CGSizeMake(500, 200);
+    window.minSize = CGSizeMake(100, 200);
     
     window.title = @"Record";
     self.window = window;

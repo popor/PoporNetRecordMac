@@ -34,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSButton          * editPortBT;
 @property (nonatomic, strong) NSButton          * freshBT;
-@property (nonatomic, strong) NSButton          * urlBT;
-@property (nonatomic, strong) NSButton          * startBT;
+//@property (nonatomic, strong) NSButton          * urlBT;
+//@property (nonatomic, strong) NSButton          * startBT;
 @property (nonatomic, strong) NSButton          * openWebBT;
 
 // MARK: 外部注入的
