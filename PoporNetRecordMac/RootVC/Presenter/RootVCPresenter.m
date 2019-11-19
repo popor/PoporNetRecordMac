@@ -23,6 +23,9 @@ static int CellHeight = 23;
 @property (nonatomic, strong) RootVCInteractor * interactor;
 
 @property (nonatomic, weak  ) PoporNetRecord * pnr;
+
+@property (nonatomic, strong) NSStatusItem *statusItem;
+
 @end
 
 @implementation RootVCPresenter
@@ -59,6 +62,9 @@ static int CellHeight = 23;
     };
     
     [self setPnrResubmit];
+    
+    [self setPnrConfig];
+    //[self setStatusImage];
 }
 
 - (void)setPnrResubmit {
@@ -107,6 +113,50 @@ static int CellHeight = 23;
             [[PoporAFN new] title:title url:urlStr method:PoporMethodGet parameters:parameterStr.toDic afnManager:manager success:finishBlock failure:errorBlock];
         }
     } extraDic:@{}];
+}
+
+- (void)setStatusImage {
+    //获取系统单例NSStatusBar对象
+    self.statusItem = ({
+        NSStatusBar * statusBar = [NSStatusBar systemStatusBar];
+        NSStatusItem * item = [statusBar statusItemWithLength:NSVariableStatusItemLength];
+        //NSStatusItem *statusItem = [statusBar statusItemWithLength:NSSquareStatusItemLength];
+        item.button.image = [NSImage imageNamed:@"icon_16x16"];
+        
+        [item.button setTarget:self];
+        [item.button setAction:@selector(statusItemAction:)];
+        
+        item.menu = [NSMenu new];
+        {
+            NSMenuItem * mi = [[NSMenuItem alloc] initWithTitle:@"显示" action:@selector(menuShow) keyEquivalent:@""];
+            
+            [item.menu addItem:mi];
+        }
+        {
+            NSMenuItem * mi = [NSMenuItem separatorItem];
+            [item.menu addItem:mi];
+        }
+        {
+            NSMenuItem * mi = [[NSMenuItem alloc] initWithTitle:@"退出" action:@selector(menuExit) keyEquivalent:@""];
+            mi.enabled = YES;
+            
+            [item.menu addItem:mi];
+        }
+        
+        item;
+    });
+    
+}
+
+- (void)statusItemAction:(NSStatusItem *)item {NSLog(@"%s", __func__); }
+- (void)menuExit { }
+- (void)menuShow { }
+
+- (void)setPnrConfig {
+    PnrConfig * config = [PnrConfig share];
+    //NSImage * image = [NSImage imageNamed:@"icon"];
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"];
+    config.webIconData = [NSData dataWithContentsOfFile:path];
 }
 
 // MARK: 获取manager
@@ -283,7 +333,7 @@ static int CellHeight = 23;
     
     
     return cell;
-     // */
+    // */
 }
 
 // 返回编辑状态下成白色的背景色的TF.
