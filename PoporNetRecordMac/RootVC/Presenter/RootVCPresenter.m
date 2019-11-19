@@ -13,6 +13,7 @@
 #import "NSButton+Address.h"
 #import "PnrPortEntity.h"
 #import "PoporNetRecord.h"
+#import <PoporAFN/PoporAFN.h>
 
 static int CellHeight = 23;
 
@@ -56,6 +57,75 @@ static int CellHeight = 23;
             [self.view.infoTV reloadData];
         });
     };
+    
+    [self setPnrResubmit];
+}
+
+- (void)setPnrResubmit {
+    [PoporAFNConfig share].recordBlock = ^(NSString *url, NSString *title, NSString *method, id head, id parameters, id response) {
+        [PoporNetRecord addUrl:url title:title method:method head:head parameter:parameters response:response]; //PoporNetRecord 会触发 blockExtraRecord
+    };
+    [PoporNetRecord setPnrBlockResubmit:^(NSDictionary *formDic, PnrBlockFeedback  _Nonnull blockFeedback) {
+        NSString * title        = formDic[@"title"];
+        NSString * urlStr       = formDic[@"url"];
+        NSString * methodStr    = formDic[@"method"];
+        NSString * headStr      = formDic[@"head"];
+        NSString * parameterStr = formDic[@"parameter"];
+        //NSString * extraStr     = formDic[@"extra"];
+        title = [title hasPrefix:@"["] ? title:[NSString stringWithFormat:@"[%@]", title];
+        
+        AFHTTPSessionManager * manager = [self managerDic:headStr.toDic];
+        
+        PoporAFNFinishBlock finishBlock = ^(NSString * _Nonnull url, NSData * _Nonnull data, NSDictionary * _Nonnull dic) {
+            // 结果反馈给PoporNetRecord
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if (dic) {
+                    blockFeedback(dic.toJsonString);
+                }else{
+                    blockFeedback(@{@"error":@"非dic"}.toJsonString);
+                }
+            });
+        };
+        
+        PoporAFNFailureBlock errorBlock = ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // 结果反馈给PoporNetRecord
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                blockFeedback(@{@"error":error.localizedDescription}.toJsonString);
+            });
+        };
+        
+        {
+            PoporMethod method;
+            if ([methodStr.lowercaseString isEqualToString:@"get"]) {
+                method = PoporMethodGet;
+            } else if ([methodStr.lowercaseString isEqualToString:@"post"]) {
+                method = PoporMethodPost;
+            } else {
+                return ;
+            }
+            
+            [[PoporAFN new] title:title url:urlStr method:PoporMethodGet parameters:parameterStr.toDic afnManager:manager success:finishBlock failure:errorBlock];
+        }
+    } extraDic:@{}];
+}
+
+// MARK: 获取manager
+- (AFHTTPSessionManager *)managerDic:(NSDictionary *)dic {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    manager.requestSerializer =  [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil]; // 不然不支持www.baidu.com.
+    
+    NSArray * keyArray = dic.allKeys;
+    for (NSString * key in keyArray) {
+        [manager.requestSerializer setValue:dic[key] forHTTPHeaderField:key];
+    }
+    
+    manager.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    manager.requestSerializer.timeoutInterval = 10.0f;
+    
+    return manager;
 }
 
 #pragma mark - VC_EventHandler
@@ -91,7 +161,7 @@ static int CellHeight = 23;
 
 - (void)createRequestAction {
     [PoporNetRecord addDic:
-     @{@"deviceName":@"模拟",
+     @{@"deviceName":SimulatorName,
        @"title":@"title",
        @"url":@"http://www.baidu.com",
        @"method":@"POST",

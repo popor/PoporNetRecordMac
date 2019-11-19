@@ -15,6 +15,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString * SimulatorName = @"模拟";
+
 @interface PoporNetRecord : NSObject
 
 @property (nonatomic, weak  ) PnrConfig           * config;

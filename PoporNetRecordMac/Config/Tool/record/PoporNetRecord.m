@@ -59,7 +59,10 @@
         entity.parameterValue = parameterValue;
         entity.responseValue  = responseValue;
         entity.time           = [NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"];
-
+        
+        // MARK: 模拟
+        entity.deviceName     = SimulatorName;
+        
         if (urlString.length>0) {
             NSURL * url = [NSURL URLWithString:urlString];
             if (url.baseURL) {

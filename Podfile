@@ -16,6 +16,7 @@ target 'PoporNetRecordMac' do
     pod 'PoporFoundation'
     pod 'PoporFMDB'
     pod 'PoporJsonModel'
+    pod 'PoporAFN'
     
     pod 'GCDWebServer'
     
