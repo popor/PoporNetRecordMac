@@ -42,17 +42,16 @@
     return instance;
 }
 
-+ (void)addRecordID:(NSString *)recordID url:(NSString *)urlString method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue
++ (void)addUrl:(NSString *)urlString method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue
 {
-    [self addRecordID:recordID url:urlString title:@"--" method:method head:headValue parameter:parameterValue response:responseValue];
+    [self addUrl:urlString title:@"--" method:method head:headValue parameter:parameterValue response:responseValue];
 }
 
-+ (void)addRecordID:(NSString *)recordID url:(NSString *)urlString title:(NSString *)title method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue
++ (void)addUrl:(NSString *)urlString title:(NSString *)title method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue
 {
     PoporNetRecord * pnr = [PoporNetRecord share];
     if (pnr.config.isRecord) {
         PnrEntity * entity = [PnrEntity new];
-        entity.recordID       = recordID;
         entity.title          = title;
         entity.url            = urlString;
         entity.method         = method;
@@ -106,15 +105,14 @@
 
 // Log 部分
 
-+ (void)addRecordID:(NSString *)recordID log:(NSString *)log {
-    [self addRecordID:recordID log:log title:@"日志"];
++ (void)addLog:(NSString *)log {
+    [self addLog:log title:@"日志"];
 }
 
-+ (void)addRecordID:(NSString *)recordID log:(NSString *)log title:(NSString *)title {
++ (void)addLog:(NSString *)log title:(NSString *)title {
     PoporNetRecord * pnr = [PoporNetRecord share];
     if (pnr.config.isRecord) {
         PnrEntity * entity = [PnrEntity new];
-        entity.recordID = recordID;
         entity.log   = log;
         entity.title = title;
         entity.time  = [NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"];

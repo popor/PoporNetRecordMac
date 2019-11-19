@@ -89,12 +89,18 @@ static int CellHeight = 23;
     }];
 }
 
-- (void)copyUrlAction {
-    
-}
-
-- (void)satrtAction {
-    
+- (void)createRequestAction {
+    [PoporNetRecord addDic:
+     @{@"deviceName":@"模拟",
+       @"title":@"title",
+       @"url":@"http://www.baidu.com",
+       @"method":@"POST",
+       @"path":@"path",
+       @"headValue":@{@"headValue":@"headValue"},
+       @"parameterValue":@{@"parameterValue":@"parameterValue"},
+       @"responseValue":@{@"responseValue":@"responseValue"},
+       @"time":[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
+     }];
 }
 
 - (void)freshAction {

@@ -22,13 +22,9 @@
 
 @synthesize editPortBT;
 @synthesize ipTF;
-@synthesize portTF;
 @synthesize wifiTF;
 
-@synthesize freshBT;
-//@synthesize urlBT;
-//@synthesize startBT;
-@synthesize openWebBT;
+@synthesize funFirstBT;
 
 - (instancetype)initWithDic:(NSDictionary *)dic {
     if (self = [super init]) {
@@ -78,6 +74,7 @@
 - (void)addViews {
     
     [self addTFBT];
+    [self addFunBT];
     [self addTagTVs];
 }
 
@@ -89,7 +86,6 @@
 
 // MARK: 简化ui
 - (void)addTFBT {
-    int btH = 25;// 不起作用
     self.wifiTF = ({
         EditableTextField * tf = [[EditableTextField alloc] init];
         tf.editable = NO;
@@ -115,31 +111,6 @@
         button;
     });
     
-    self.freshBT = ({
-        NSButton * button = [NSButton buttonWithTitle:@"刷新" target:self.present action:@selector(freshAction)];
-        [self.view addSubview:button];
-        
-        button;
-    });
-    
-    //    self.urlBT = ({
-    //        NSButton * button = [NSButton buttonWithTitle:@"复制URL" target:self.present action:@selector(copyUrlAction)];
-    //        [self.view addSubview:button];
-    //
-    //        button;
-    //    });
-    //    self.startBT = ({
-    //        NSButton * button = [NSButton buttonWithTitle:@"已开始" target:self.present action:@selector(satrtAction)];
-    //        [self.view addSubview:button];
-    //
-    //        button;
-    //    });
-    self.openWebBT = ({
-           NSButton * button = [NSButton buttonWithTitle:@"查看" target:self.present action:@selector(webviewAction)];
-           [self.view addSubview:button];
-           
-           button;
-       });
     // -------------------------------------------------------------------------
     [self.wifiTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
@@ -168,36 +139,55 @@
         make.height.mas_equalTo(self.wifiTF);
     }];
     
-    // ----------------
-    [self.freshBT mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.wifiTF.mas_bottom).mas_offset(10);
-        make.left.mas_equalTo(16);
-        make.width.mas_greaterThanOrEqualTo(60);
-        
-        make.height.mas_equalTo(btH);
-    }];
-    //    [self.urlBT mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.top.mas_equalTo(self.freshBT);
-    //        make.left.mas_equalTo(self.freshBT.mas_right).mas_offset(20);
-    //        make.width.mas_greaterThanOrEqualTo(80);
-    //
-    //        make.height.mas_equalTo(btH);
-    //    }];
-    //    [self.startBT mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.top.mas_equalTo(self.freshBT);
-    //        make.left.mas_equalTo(self.urlBT.mas_right).mas_offset(20);
-    //        make.width.mas_greaterThanOrEqualTo(80);
-    //
-    //        make.height.mas_equalTo(btH);
-    //    }];
-    [self.openWebBT mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.freshBT);
-        make.left.mas_equalTo(self.freshBT.mas_right).mas_offset(20);
-        make.width.mas_greaterThanOrEqualTo(60);
-        
-        make.height.mas_equalTo(btH);
-    }];
+}
+
+- (void)addFunBT {
     
+    int btH = 25;
+    NSArray * titleArray = @[FunFresh, FunAddRequest, FunView];
+    NSButton * bt;
+    for (int i = 0; i<titleArray.count; i++) {
+        
+        NSButton * oneBT = ({
+            NSButton * button = [NSButton buttonWithTitle:titleArray[i] target:self action:@selector(buttonAction:)];
+            [self.view addSubview:button];
+            
+            button;
+        });
+        if (!bt) {
+            bt = oneBT;
+            [bt mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.wifiTF.mas_bottom).mas_offset(10);
+                make.left.mas_equalTo(16);
+                make.width.mas_greaterThanOrEqualTo(60);
+                
+                make.height.mas_equalTo(btH);
+            }];
+            self.funFirstBT = bt;
+        } else {
+            [oneBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(bt);
+                make.left.mas_equalTo(bt.mas_right).mas_offset(10);
+                make.width.mas_greaterThanOrEqualTo(60);
+                
+                make.height.mas_equalTo(btH);
+            }];
+            
+            bt = oneBT;
+        }
+    }
+    
+}
+
+- (void)buttonAction:(NSButton *)button {
+    
+    if ([button.title isEqualToString:FunFresh]) {
+        [self.present freshAction];
+    } else if ([button.title isEqualToString:FunView]) {
+        [self.present webviewAction];
+    } else if ([button.title isEqualToString:FunAddRequest]) {
+        [self.present createRequestAction];
+    }
 }
 
 //- (void)wifi1 {
@@ -259,7 +249,7 @@
     [tableContainer mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
         make.right.mas_equalTo(-10);
-        make.top.mas_equalTo(self.freshBT.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.funFirstBT.mas_bottom).mas_offset(15);
         make.bottom.mas_equalTo(-10);
     }];
     

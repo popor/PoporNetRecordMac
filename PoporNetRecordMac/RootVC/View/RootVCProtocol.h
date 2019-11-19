@@ -15,6 +15,10 @@
 
 #import <CoreWLAN/CoreWLAN.h>
 
+static NSString * FunFresh = @"刷新";
+static NSString * FunView = @"查看";
+static NSString * FunAddRequest = @"新增请求";
+
 NS_ASSUME_NONNULL_BEGIN
 
 // MARK: 对外接口
@@ -27,16 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSScrollView * infoTV_CSV;
 @property (nonatomic, strong) NSMenu       * infoTVClickMenu;
 
-
 @property (nonatomic, strong) EditableTextField * ipTF;
-@property (nonatomic, strong) EditableTextField * portTF;
 @property (nonatomic, strong) EditableTextField * wifiTF;
-
 @property (nonatomic, strong) NSButton          * editPortBT;
-@property (nonatomic, strong) NSButton          * freshBT;
-//@property (nonatomic, strong) NSButton          * urlBT;
-//@property (nonatomic, strong) NSButton          * startBT;
-@property (nonatomic, strong) NSButton          * openWebBT;
+
+@property (nonatomic, strong) NSButton          * funFirstBT;
 
 // MARK: 外部注入的
 
@@ -54,8 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)freshAction;
 - (void)editPortAction;
-- (void)copyUrlAction;
-- (void)satrtAction;
+- (void)createRequestAction;
 - (void)webviewAction;
 
 @end

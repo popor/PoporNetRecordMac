@@ -34,16 +34,16 @@ NS_ASSUME_NONNULL_BEGIN
  parameterValue: NSDictionary | NSString
  responseValue:  NSDictionary | NSString
  */
-+ (void)addRecordID:(NSString *)recordID url:(NSString *)urlString method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue;
++ (void)addUrl:(NSString *)urlString method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue;
 
 // 增加title
-+ (void)addRecordID:(NSString *)recordID url:(NSString *)urlString title:(NSString *)title method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue;
++ (void)addUrl:(NSString *)urlString title:(NSString *)title method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue;
 
 + (void)setPnrBlockResubmit:(PnrBlockResubmit _Nullable)block extraDic:(NSDictionary * _Nullable)dic;
 
 // Log 部分
-+ (void)addRecordID:(NSString *)recordID log:(NSString *)log;
-+ (void)addRecordID:(NSString *)recordID log:(NSString *)log title:(NSString *)title;
++ (void)addLog:(NSString *)log;
++ (void)addLog:(NSString *)log title:(NSString *)title;
 
 + (void)addDic:(NSDictionary *)dic;
 
