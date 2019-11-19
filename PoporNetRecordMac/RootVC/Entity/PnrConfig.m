@@ -31,8 +31,8 @@ static NSString * KeyLog       = @"PoporNetRecord_logDetail";
         instance.activeAlpha         = 1.0;
         instance.normalAlpha         = 0.6;
 
-        instance.recordType          = PoporNetRecordAuto;
-        instance.webType             = PoporNetRecordAuto;
+        instance.recordType          = PoporNetRecordEnable;
+        instance.webType             = PoporNetRecordEnable;
         
         instance.vcRootTitle         = @"网络请求";
         instance.webRootTitle        = @"网络请求";

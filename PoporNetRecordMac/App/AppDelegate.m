@@ -19,15 +19,15 @@
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification {
     
-#ifndef __OPTIMIZE__
-    NSString * iosInjectionPath = @"/Applications/InjectionIII.app/Contents/Resources/macOSInjection.bundle";
-    if ([[NSFileManager defaultManager] fileExistsAtPath:iosInjectionPath]) {
-        [[NSBundle bundleWithPath:iosInjectionPath] load];
-    }
-    
-#else
-
-#endif
+    //#ifndef __OPTIMIZE__
+    //    NSString * iosInjectionPath = @"/Applications/InjectionIII.app/Contents/Resources/macOSInjection.bundle";
+    //    if ([[NSFileManager defaultManager] fileExistsAtPath:iosInjectionPath]) {
+    //        [[NSBundle bundleWithPath:iosInjectionPath] load];
+    //    }
+    //    
+    //#else
+    //
+    //#endif
     
     [SqliteCofing updateTable];
     
