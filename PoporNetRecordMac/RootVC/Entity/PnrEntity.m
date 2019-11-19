@@ -23,22 +23,68 @@
     
     if (self.log) {
         // log 日志模式
-        [h5 appendFormat:@"\n\n <div style=\" background:%@; width:100%%; height:%ipx; position:relative; \" onclick= \"parent.detail(%i);\" >", bgColor, PnrListHeight, (int)index];
+        [h5 appendFormat:@"\n\n <div style=' background:%@; width:100%%; height:%ipx; position:relative; ' onclick= 'parent.detail(%i);' >", bgColor, PnrListHeight, (int)index];
         
-        [h5 appendString:@"\n <div style=\" position:relative; width:100%%; top:4px; left:5px; \" >"];
+        [h5 appendString:@"\n <div style=' position:relative; width:100%%; top:4px; left:5px; ' >"];
         
-        [h5 appendFormat:@"\n <div class='oneLine' > <font color='%@'>%i. %@ </font> <font color='%@'>%@  </font> </div>",  config.listColorTitleHex, (int)index, @"Log日志" , config.listColorRequestHex, @""];
+        // 第一行
+        [h5 appendFormat:@"\n <div class='oneLine' > <font color='%@'>%i. %@ </font> <font color='%@'>%@  </font> </div>",  config.listColorTitleHex, (int)index, @"Log日志" , config.listColorRequestHex, self.deviceName];
+        
+        // 第二行
         [h5 appendFormat:@"\n <div class='oneLine' >\n <font style=\" opacity:0.0; \" >%i. </font> <font color='%@'>%@  </font> <font color='%@'>%@ </font> </div>", (int)index, config.listColorTimeHex, self.time, config.listColorDomainHex, self.log];
         
         [h5 appendString:@"</div></div>"];
     }else{
         // 网络请求模式
-        [h5 appendFormat:@"\n\n <div style=\" background:%@; width:100%%; height:%ipx; position:relative; \" onclick= \"parent.detail(%i);\" >", bgColor, PnrListHeight, (int)index];
+        [h5 appendFormat:@"\n\n <div style=' background:%@; width:100%%; height:%ipx; position:relative; ' onclick= 'parent.detail(%i);' >", bgColor, PnrListHeight, (int)index];
         
-        [h5 appendString:@"\n <div style=\" position:relative; width:100%%; top:4px; left:5px; \" >"];
+        [h5 appendString:@"\n <div style=' position:relative; width:100%%; top:4px; left:5px; ' >"];
         
-        [h5 appendFormat:@"\n <div class='oneLine' > <font color='%@'>%i. %@ </font> <font color='%@'>%@  </font> </div>",  config.listColorTitleHex, (int)index, self.title , config.listColorRequestHex, [self.path substringToIndex:MIN(self.path.length, 80)]];
-        [h5 appendFormat:@"\n <div class='oneLine' >\n <font style=\" opacity:0.0; \" >%i. </font> <font color='%@'>%@  </font> <font color='%@'>%@ </font> </div>", (int)index, config.listColorTimeHex, self.time, config.listColorDomainHex, self.domain];
+        // 第一行
+        [h5 appendFormat:@"\n <div class='oneLine' > <font color='%@'>%i. %@ </font> </div>",  config.listColorTitleHex, (int)index, self.title ];
+        
+        // 第二行
+        [h5 appendFormat:@"\n <div class='oneLine' >\n <font style=' opacity:0.0; ' >%i. </font> <font color='%@'>%@ - %@ </font> </div>", (int)index, config.listColorTimeHex, self.time, self.deviceName];
+        
+        [h5 appendString:@"</div></div>"];
+    }
+    self.listWebH5 = [h5 copy];
+}
+
+- (void)createListWebH5_old:(NSInteger)index {
+    PnrConfig * config = [PnrConfig share];
+
+    NSString * bgColor = index%2==1 ? config.listWebColorCell0Hex:config.listWebColorCell1Hex;
+    NSMutableString * h5 = [NSMutableString new];
+    
+    if (self.log) {
+        // log 日志模式
+        [h5 appendFormat:@"\n\n <div style=' background:%@; width:100%%; height:%ipx; position:relative; ' onclick= 'parent.detail(%i);' >", bgColor, PnrListHeight, (int)index];
+        
+        [h5 appendString:@"\n <div style=' position:relative; width:100%%; top:4px; left:5px; ' >"];
+        
+        // 第一行
+        [h5 appendFormat:@"\n <div class='oneLine' > <font color='%@'>%i. %@ </font> <font color='%@'>%@  </font> </div>",  config.listColorTitleHex, (int)index, @"Log日志" , config.listColorRequestHex, self.deviceName];
+        
+        // 第二行
+        [h5 appendFormat:@"\n <div class='oneLine' >\n <font style=\" opacity:0.0; \" >%i. </font> <font color='%@'>%@  </font> <font color='%@'>%@ </font> </div>", (int)index, config.listColorTimeHex, self.time, config.listColorDomainHex, self.log];
+        
+        [h5 appendString:@"</div></div>"];
+    }else{
+        // 网络请求模式
+        [h5 appendFormat:@"\n\n <div style=' background:%@; width:100%%; height:%ipx; position:relative; ' onclick= 'parent.detail(%i);' >", bgColor, PnrListHeight, (int)index];
+        
+        [h5 appendString:@"\n <div style=' position:relative; width:100%%; top:4px; left:5px; ' >"];
+        
+        // 第一行
+        // [h5 appendFormat:@"\n <div class='oneLine' > <font color='%@'>%i. %@ </font> <font color='%@'>%@  </font> </div>",  config.listColorTitleHex, (int)index, self.title , config.listColorRequestHex, [self.path substringToIndex:MIN(self.path.length, 80)]];
+        
+        //[h5 appendFormat:@"\n <div class='oneLine' > <font color='%@'>%i. %@ </font> <font color='%@'>%@  </font> </div>",  config.listColorTitleHex, (int)index, self.title , config.listColorRequestHex, self.deviceName];
+        
+        [h5 appendFormat:@"\n <div class='oneLine' > <font color='%@'>%i. %@ </font> <font color='%@'>%@  </font> </div>",  config.listColorTitleHex, (int)index, self.title , config.listColorRequestHex, self.deviceName];
+        
+        // 第二行
+        [h5 appendFormat:@"\n <div class='oneLine' >\n <font style=' opacity:0.0; ' >%i. </font> <font color='%@'>%@  </font> <font color='%@'>%@ </font> </div>", (int)index, config.listColorTimeHex, self.time, config.listColorDomainHex, self.domain];
         
         [h5 appendString:@"</div></div>"];
     }
