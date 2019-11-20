@@ -12,7 +12,10 @@
 
 - (id)init {
     if (self =[super init]) {
-        _receive = YES;
+        _receive   = YES;
+        _array     = [NSMutableArray<PnrEntity> new];
+        _listWebH5 = [NSMutableString new];
+        
     }
     return self;
 }

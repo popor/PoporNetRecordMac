@@ -30,22 +30,7 @@ static NSString * SimulatorName = @"模拟";
 
 + (instancetype)share;
 
-// 网络请求部分
-/**
- headValue:      NSDictionary | NSString
- parameterValue: NSDictionary | NSString
- responseValue:  NSDictionary | NSString
- */
-+ (void)addUrl:(NSString *)urlString method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue;
-
-// 增加title
-+ (void)addUrl:(NSString *)urlString title:(NSString *)title method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue;
-
 + (void)setPnrBlockResubmit:(PnrBlockResubmit _Nullable)block extraDic:(NSDictionary * _Nullable)dic;
-
-// Log 部分
-+ (void)addLog:(NSString *)log;
-+ (void)addLog:(NSString *)log title:(NSString *)title;
 
 + (void)addDic:(NSDictionary *)dic;
 

@@ -7,6 +7,7 @@
 //
 
 #import <PoporJsonModel/PoporJsonModel.h>
+#import "PnrEntity.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic        ) BOOL       receive; // 是否接收
 @property (nonatomic, strong) NSString * note;
 @property (nonatomic, strong) NSString * deviceName;
+
+@property (nonatomic, strong) NSMutableArray<PnrEntity> * array;
+@property (nonatomic, strong) NSMutableString * listWebH5;
 
 @end
 

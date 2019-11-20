@@ -18,7 +18,7 @@
 
 + (NSString *)jsonReadForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue {
     return [NSString stringWithFormat:@"\n<form id='%@' name='%@' method='POST' target='_blank' > \n <button class=\"w180Green\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看详情 </button> <br> \n <textarea id='%@' name='%@' class='%@'>%@</textarea> \n</form>",
-            formIdName, formIdName, formIdName, btName, taIdName, taIdName, PnrClassTaAutoH, taValue
+            formIdName, formIdName, formIdName, btName, taIdName, taIdName, PnrJsClassTaAutoH, taValue
             ];
 }
 
@@ -31,22 +31,32 @@
     [h5 appendString:@"\n\n<body style=\" TEXT-ALIGN:center; \" >\n"]; // style=\" margin:auto; \"
     // TEXT-ALIGN: center;}
     [h5 appendString:@"\n<script>"];
-    {
-        // 方便 浏览器查看 代码
-        [h5 appendFormat:@"\n function detail(row) {\n var src = '/' +row + '/%@';\n  document.getElementById('%@').src = src;\n }", PnrPathDetail, PnrIframeDetail];
-        
-        [h5 appendFormat:@"\n\n function resubmit() {\n var form = document.getElementById('%@').contentWindow.document.getElementById('%@');\n form.submit();\n }", PnrIframeDetail, PnrFormResubmit];
-        
-        [h5 appendFormat:@"\n\n function freshList() {\n  document.getElementById('%@').contentWindow.location.reload(true);\n  }", PnrIframeList];
-    }
+    
+    // -- 方便 浏览器查看 代码 ----------------------------------------------------
+    //var src = '/' +row + '/%@';\n
+    [h5 appendFormat:@"\n function detail(row) {\n\
+     var deviceName = getQueryVariable('%@')\n\
+     var src = '/%@' + '?' + '%@=' + row + '&%@=' + deviceName ;\n\
+     document.getElementById('%@').src = src;\n\
+     }",
+     PnrKey_DeviceName,
+     PnrGet_ViewDetail, PnrKey_index, PnrKey_DeviceName,
+     PnrIframeDetail];
+    
+    [h5 appendFormat:@"\n\n function resubmit() {\n var form = document.getElementById('%@').contentWindow.document.getElementById('%@');\n form.submit();\n }", PnrIframeDetail, PnrFormResubmit];
+    
+    [h5 appendFormat:@"\n\n function freshList() {\n  document.getElementById('%@').contentWindow.location.reload(true);\n  }", PnrIframeList];
+    [h5 appendString:[PnrWebJs getQuery]];
+    // -------------------------------------------------------------------------
+    
     [h5 appendString:@"\n\n </script>\n"];
     
     if (index == 0) {
-        [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%@' style=\"width:%i%%; height:97%%; marginwidth:0;  background-color:%@; \" ></iframe>", PnrIframeList, PnrIframeList, PnrPathList, config.listWebWidth, config.listWebColorBgHex];
+        [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%@' style=\"width:%i%%; height:97%%; marginwidth:0;  background-color:%@; \" ></iframe>", PnrIframeList, PnrIframeList, PnrGet_ViewList, config.listWebWidth, config.listWebColorBgHex];
         [h5 appendFormat:@"\n <iframe id='%@' name='%@' style=\"width:%i%%; height:97%%;\" ></iframe>", PnrIframeDetail, PnrIframeDetail, 100 - config.listWebWidth - 4];
     }else{
-        [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%@' style=\"width:%i%%; height:97%%; background-color:%@; \" ></iframe>", PnrIframeList, PnrIframeList, PnrPathList, config.listWebWidth, config.listWebColorBgHex];
-        [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%i/%@'  style=\"width:%i%%; height:97%%;\" ></iframe>", PnrIframeDetail, PnrIframeDetail, index, PnrPathDetail, 100 - config.listWebWidth - 4];
+        [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%@' style=\"width:%i%%; height:97%%; background-color:%@; \" ></iframe>", PnrIframeList, PnrIframeList, PnrGet_ViewList, config.listWebWidth, config.listWebColorBgHex];
+        [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%i/%@' style=\"width:%i%%; height:97%%;\" ></iframe>", PnrIframeDetail, PnrIframeDetail, index, PnrGet_ViewDetail, 100 - config.listWebWidth - 4];
     }
     
     [h5 appendString:@"\n\n </body></html>"];
@@ -106,7 +116,7 @@
     
     
     void (^ formBtTaBlock)(NSMutableString*, NSString*, id, NSString*) = ^(NSMutableString* html, NSString * btName, NSString * taValue, NSString * formIdName){
-        [html appendString:[PnrWebBody jsonReadForm:formIdName taIdName:PnrKeyConent btName:btName taValue:taValue]];
+        [html appendString:[PnrWebBody jsonReadForm:formIdName taIdName:PnrKey_Conent btName:btName taValue:taValue]];
     };
     
     void (^ btTaBlock)(NSMutableString*, NSString*, NSString*, NSString*) = ^(NSMutableString* html, NSString* btTitle, NSString* taIdName, NSString* taValue){
@@ -115,7 +125,7 @@
          PnrFormResubmit, taIdName, btTitle
          ];
         [html appendFormat:@"\n <textarea id='%@' name='%@' class='%@'>%@</textarea> </p>",
-         taIdName, taIdName, PnrClassTaAutoH, taValue];
+         taIdName, taIdName, PnrJsClassTaAutoH, taValue];
     };
     
     if (!isInit) {
@@ -142,7 +152,7 @@
             NSMutableString * h5 = [NSMutableString new];
             // js
             [h5 appendFormat:@"\n<script> %@", [PnrWebJs jsJsonStatic]];
-            [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrClassTaAutoH]];
+            [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
             
             [h5 appendString:[PnrWebJs getRootUrl]];
             [h5 appendString:[PnrWebJs updateShareUrl]];
@@ -180,7 +190,7 @@
             
             // js
             [h5 appendFormat:@"\n<script> \n%@", [PnrWebJs jsJsonDynamic]];
-            [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrClassTaAutoH]];
+            [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
             [h5 appendString:[PnrWebJs jsJsonStatic]];
             [h5 appendString:[PnrWebJs ajaxResubmit]];
             
@@ -203,10 +213,10 @@
         // 请求详情:log
         NSMutableString * h5 = [NSMutableString new];
         
-        //[h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrPathEdit];
+        //[h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrGet_ViewEdit];
         
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%i.  %@</font>", colorKey, PnrRootTitle0, colorValue, (int)index, pnrEntity.title];
-        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <a > <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrIdShare, PnrIdShare, colorValue,  PnrIdShare];
+        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <a > <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
         
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootTime3, colorValue, pnrEntity.time];
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootLog10, colorValue, pnrEntity.log];
@@ -216,19 +226,19 @@
         // 请求详情:网路求情
         NSMutableString * h5 = [NSMutableString new];
         
-        [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrPathEdit];
+        [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrGet_ViewEdit];
         
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%i.  %@</font>", colorKey, PnrRootTitle0, colorValue, (int)index, pnrEntity.title];
-        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <a > <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrIdShare, PnrIdShare, colorValue,  PnrIdShare];
+        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <a > <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
         
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootTime3, colorValue, pnrEntity.time];
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootPath1, colorValue, pnrEntity.path];
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootUrl2, colorValue, pnrEntity.url];
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootMethod4, colorValue, pnrEntity.method];
         
-        formBtTaBlock(h5, PnrRootHead5,      headStr,      PnrPathHead);
-        formBtTaBlock(h5, PnrRootParameter6, parameterStr, PnrPathParameter);
-        formBtTaBlock(h5, PnrRootResponse7,  responseStr,  PnrPathResponse);
+        formBtTaBlock(h5, PnrRootHead5,      headStr,      PnrKey_Head);
+        formBtTaBlock(h5, PnrRootParameter6, parameterStr, PnrKey_Parameter);
+        formBtTaBlock(h5, PnrRootResponse7,  responseStr,  PnrKey_Response);
         
         [detail appendFormat:@"%@ \n %@ \n %@", h5_detail_head, h5, h5_detail_tail];
     }
@@ -237,7 +247,7 @@
         // 重新提交
         NSMutableString * h5 = [NSMutableString new];
         
-        [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > <==返回 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrPathDetail];
+        [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > <==返回 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrGet_ViewDetail];
         
         [h5 appendFormat:@"<form id='%@' name='%@' >", PnrFormResubmit, PnrFormResubmit];
         
@@ -303,7 +313,7 @@
 //        [h5 appendString:@"\n window.onload=function (){\
 //         parent.parent.freshList();\
 //         } "];
-//        [h5 appendFormat:@"\n %@ \n %@ \n", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrClassTaAutoH]];
+//        [h5 appendFormat:@"\n %@ \n %@ \n", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
 //
 //        [h5 appendString:[PnrWebJs jsJsonStatic]];
 //        [h5 appendString:@"\n </script>"];
@@ -313,7 +323,7 @@
 //        h5_tail = h5;
 //    }
 //
-//    return [NSString stringWithFormat:@"%@ %@ %@", h5_head, [PnrWebBody jsonReadForm:@"feedback" taIdName:PnrKeyConent btName:@"返回数据" taValue:body], h5_tail];
+//    return [NSString stringWithFormat:@"%@ %@ %@", h5_head, [PnrWebBody jsonReadForm:@"feedback" taIdName:PnrKey_Conent btName:@"返回数据" taValue:body], h5_tail];
 //}
 
 @end

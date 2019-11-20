@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)clearText;
 
++ (NSString *)getQuery;
+
 @end
 
 NS_ASSUME_NONNULL_END

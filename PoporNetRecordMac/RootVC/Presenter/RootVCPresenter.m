@@ -69,7 +69,17 @@ static int CellHeight = 23;
 
 - (void)setPnrResubmit {
     [PoporAFNConfig share].recordBlock = ^(NSString *url, NSString *title, NSString *method, id head, id parameters, id response) {
-        [PoporNetRecord addUrl:url title:title method:method head:head parameter:parameters response:response]; //PoporNetRecord 会触发 blockExtraRecord
+        NSDictionary * dic =
+        @{@"url":url,
+          @"title":title,
+          @"method":method,
+          @"headValue":head,
+          @"parameterValue":parameters,
+          @"responseValue":response,
+          @"time":[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
+          @"deviceName":SimulatorName,
+        };
+        [PoporNetRecord addDic:dic];
     };
     [PoporNetRecord setPnrBlockResubmit:^(NSDictionary *formDic, PnrBlockFeedback  _Nonnull blockFeedback) {
         NSString * title        = formDic[@"title"];

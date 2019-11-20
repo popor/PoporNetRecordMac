@@ -42,113 +42,19 @@
     return instance;
 }
 
-+ (void)addUrl:(NSString *)urlString method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue
-{
-    [self addUrl:urlString title:@"--" method:method head:headValue parameter:parameterValue response:responseValue];
-}
-
-+ (void)addUrl:(NSString *)urlString title:(NSString *)title method:(NSString *)method head:(id _Nullable)headValue parameter:(id _Nullable)parameterValue response:(id _Nullable)responseValue
-{
-    PoporNetRecord * pnr = [PoporNetRecord share];
-    if (pnr.config.isRecord) {
-        PnrEntity * entity = [PnrEntity new];
-        entity.title          = title;
-        entity.url            = urlString;
-        entity.method         = method;
-        entity.headValue      = headValue;
-        entity.parameterValue = parameterValue;
-        entity.responseValue  = responseValue;
-        entity.time           = [NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"];
-        
-        // MARK: 模拟
-        entity.deviceName     = SimulatorName;
-        
-        if (urlString.length>0) {
-            NSURL * url = [NSURL URLWithString:urlString];
-            if (url.baseURL) {
-                entity.domain = [NSString stringWithFormat:@"%@://%@", url.scheme, url.host];
-                
-                if (entity.domain.length+1 < urlString.length) {
-                    entity.path = [urlString substringFromIndex:entity.domain.length+1];
-                    NSString * query = url.query;
-                    if (query.length > 0) {
-                        entity.path = [entity.path substringToIndex:entity.path.length-1-query.length];
-                    }
-                }
-            }else{
-                entity.domain = urlString;
-                entity.path   = @"";
-            }
-        }
-        if (pnr.infoArray.count == 0) {
-            // 当执行了数组清空之后, h5代码清零一次.
-            [pnr.listWebH5 setString:@""];
-        }
-        [pnr.infoArray addObject:entity];
-        
-        if (pnr.config.isShowListWeb) {
-            [entity createListWebH5:pnr.infoArray.count - 1];
-            [pnr.listWebH5 insertString:entity.listWebH5 atIndex:0];
-            [[PnrWebServer share] startListServer:pnr.listWebH5];
-        }else{
-            [[PnrWebServer share] stopServer];
-        }
-        
-        // 假如在打开界面的时候收到请求,那么刷新数据
-        if (pnr.config.freshBlock) {
-            pnr.config.freshBlock();
-        }
-    }
-}
-
 + (void)setPnrBlockResubmit:(PnrBlockResubmit _Nullable)block extraDic:(NSDictionary * _Nullable)dic {
-    [PnrWebServer share].resubmitBlock = block;
+    [PnrWebServer share].resubmitBlock    = block;
     [PnrWebServer share].resubmitExtraDic = dic;
 }
 
-// Log 部分
-
-+ (void)addLog:(NSString *)log {
-    [self addLog:log title:@"日志"];
-}
-
-+ (void)addLog:(NSString *)log title:(NSString *)title {
-    PoporNetRecord * pnr = [PoporNetRecord share];
-    if (pnr.config.isRecord) {
-        PnrEntity * entity = [PnrEntity new];
-        entity.log   = log;
-        entity.title = title;
-        entity.time  = [NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"];
-        
-        if (pnr.infoArray.count == 0) {
-            // 当执行了数组清空之后, h5代码清零一次.
-            [pnr.listWebH5 setString:@""];
-        }
-        [pnr.infoArray addObject:entity];
-        
-        if (pnr.config.isShowListWeb) {
-            [entity createListWebH5:pnr.infoArray.count - 1];
-            [pnr.listWebH5 insertString:entity.listWebH5 atIndex:0];
-            [[PnrWebServer share] startListServer:pnr.listWebH5];
-        }else{
-            [[PnrWebServer share] stopServer];
-        }
-        
-        // 假如在打开界面的时候收到请求,那么刷新数据
-        if (pnr.config.freshBlock) {
-            pnr.config.freshBlock();
-        }
-    }
-}
-
 + (void)addDic:(NSDictionary *)dic {
-    PnrEntity * entity = [[PnrEntity alloc] initWithDictionary:dic error:nil];
-    
-    PoporNetRecord * pnr = [PoporNetRecord share];
+    PnrEntity * entity             = [[PnrEntity alloc] initWithDictionary:dic error:nil];
+    PoporNetRecord * pnr           = [PoporNetRecord share];
     PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[entity.deviceName];
+    
     if (!deviceEntity) {
         deviceEntity = [PnrDeviceEntity new];
-        deviceEntity.receive = YES;
+        deviceEntity.receive    = YES;
         deviceEntity.deviceName = entity.deviceName;
         
         [pnr.deviceNameArray addObject:deviceEntity];
@@ -165,11 +71,11 @@
         entity.parameterValue = dic[@"parameterValue"];
         entity.responseValue  = dic[@"responseValue"];
         
-        [self addEntity:entity];
+        [self addEntity:entity deviceEntity:deviceEntity];
     }
 }
 
-+ (void)addEntity:(PnrEntity *)entity {
++ (void)addEntity:(PnrEntity *)entity deviceEntity:(PnrDeviceEntity *)deviceEntity {
     PoporNetRecord * pnr = [PoporNetRecord share];
     if (pnr.config.isRecord) {
         
@@ -178,19 +84,22 @@
             [pnr.listWebH5 setString:@""];
         }
         [pnr.infoArray addObject:entity];
+        [deviceEntity.array addObject:entity];
         
         if (pnr.config.isShowListWeb) {
-            [entity createListWebH5:pnr.infoArray.count - 1];
-            [pnr.listWebH5 insertString:entity.listWebH5 atIndex:0];
+            // 100%
+            NSMutableString * allListH5 = [PnrEntity createListWebH5:entity index:pnr.infoArray.count - 1];
+            NSMutableString * oneListH5 = [PnrEntity createListWebH5:entity index:deviceEntity.array.count - 1];
+            
+            [pnr.listWebH5          insertString:allListH5 atIndex:0];
+            [deviceEntity.listWebH5 insertString:oneListH5 atIndex:0];
+            
             [[PnrWebServer share] startListServer:pnr.listWebH5];
         }else{
+            // 0%
             [[PnrWebServer share] stopServer];
         }
         
-        // 假如在打开界面的时候收到请求,那么刷新数据
-        if (pnr.config.freshBlock) {
-            pnr.config.freshBlock();
-        }
     }
 }
 
