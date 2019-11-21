@@ -197,7 +197,7 @@
                         
                         completionBlock([GCDWebServerDataResponse responseWithText:@"{\"status\":1}"]);
                     } else {
-                        [self analysisPost1Path:path request:request complete:completionBlock];
+                        [self analysisPostPath:path request:request complete:completionBlock];
                     }
                 }
                 
@@ -221,7 +221,7 @@
     [self startWebServer];
 }
 
-- (void)analysisPost1Path:(NSString *)path request:(GCDWebServerRequest * _Nonnull)request complete:(GCDWebServerCompletionBlock  _Nonnull)complete {
+- (void)analysisPostPath:(NSString *)path request:(GCDWebServerRequest * _Nonnull)request complete:(GCDWebServerCompletionBlock  _Nonnull)complete {
     
     GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
     NSDictionary * dic = formRequest.arguments;

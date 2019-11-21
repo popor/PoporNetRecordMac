@@ -20,6 +20,7 @@ static NSString * PnrRootResponse7  = @"返回数据:";
 static NSString * PnrRootExtra8     = @"额外参数:";
 static NSString * PnrRootShare9     = @"分享:";
 static NSString * PnrRootLog10      = @"日志:";
+static NSString * PnrRootDeviceName = @"设备名称:";
 
 static int PnrListHeight            = 50;
 

@@ -28,9 +28,7 @@
 
 - (instancetype)initWithDic:(NSDictionary *)dic {
     if (self = [super init]) {
-        if (dic) {
-            self.title = dic[@"title"];
-        }
+        
     }
     return self;
 }

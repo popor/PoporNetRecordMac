@@ -87,6 +87,8 @@ static int CellHeight = 23;
         NSString * methodStr    = formDic[@"method"];
         NSString * headStr      = formDic[@"head"];
         NSString * parameterStr = formDic[@"parameter"];
+        NSString * deviceName   = formDic[PnrKey_DeviceName];
+        
         //NSString * extraStr     = formDic[@"extra"];
         title = [title hasPrefix:@"["] ? title:[NSString stringWithFormat:@"[%@]", title];
         

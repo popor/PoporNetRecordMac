@@ -325,6 +325,9 @@
         btTaBlock(h5, PnrRootParameter6, @"parameter", parameterStr);
         btTaBlock(h5, PnrRootExtra8,     @"extra",     extraStr);
         
+        // 添加一个隐藏的deviceName
+        [h5 appendFormat:@"<textarea id=\"%@\" name=\"%@\" style=\"height: 0px; visibility:hidden; \" >%@</textarea>", PnrKey_DeviceName, PnrKey_DeviceName, pnrEntity.deviceName];
+        
         [resubmit appendFormat:@"%@ \n %@ \n %@", h5_resubmit_head, h5, h5_resubmit_tail];
     }
     finish(detail, resubmit);
