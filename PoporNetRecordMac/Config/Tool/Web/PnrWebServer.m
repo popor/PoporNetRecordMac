@@ -111,7 +111,7 @@
                         //     }
                         // } else {
                         //     completionBlock(H5String(self.h5Root));
-                        // } 
+                        // }
                     }
                     // MARK: 列表
                     else if ([path isEqualToString:PnrGet_ViewList]){
@@ -127,7 +127,7 @@
                         
                     }
                     // MARK: 详情 重新提交
-                    else if ([path isEqualToString:PnrGet_ViewDetail] || [path isEqualToString:PnrGet_ViewEdit]){
+                    else if ([path isEqualToString:PnrGet_ViewDetail] || [path isEqualToString:PnrGet_ViewResubmit]){
                         NSLog(@"__get query :'%@'", query.description);
                         NSString * deviceName = query[PnrKey_DeviceName];
                         NSString * indexStr   = query[PnrKey_index];

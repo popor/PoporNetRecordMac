@@ -35,7 +35,7 @@ static NSString * PnrFormFeedback   = @"formFeedback";
 static NSString * PnrGet_ViewRoot   = @"view";
 static NSString * PnrGet_ViewList   = @"viewList";
 static NSString * PnrGet_ViewDetail = @"viewDetail";
-static NSString * PnrGet_ViewEdit   = @"viewEdit";
+static NSString * PnrGet_ViewResubmit = @"viewResubmit";
 
 static NSString * PnrPost_Resubmit  = @"resubmit";
 static NSString * PnrPost_Clear     = @"clear";

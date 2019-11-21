@@ -181,7 +181,7 @@
             [h5 appendString:[PnrWebJs copyInnerText]];
             [h5 appendString:[PnrWebJs getQuery]];
 
-            // PnrGet_ViewEdit()
+            // PnrGet_ViewResubmit()
             [h5 appendFormat:@"\n\n\
              function %@() {\n    \
              var deviceName = getQueryVariable('%@')\n    \
@@ -190,10 +190,10 @@
              window.location.href = src;\n    \
              \n\
              }",
-             PnrGet_ViewEdit,
+             PnrGet_ViewResubmit,
              PnrKey_DeviceName,
              PnrKey_index,
-             PnrGet_ViewEdit, PnrKey_DeviceName, PnrKey_index];
+             PnrGet_ViewResubmit, PnrKey_DeviceName, PnrKey_index];
             
             [h5 appendString:@"\n </script>"];
             
@@ -266,7 +266,7 @@
         // 请求详情:log
         NSMutableString * h5 = [NSMutableString new];
         
-        //[h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrGet_ViewEdit];
+        //[h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrGet_ViewResubmit];
         
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%i.  %@</font>", colorKey, PnrRootTitle0, colorValue, (int)index, pnrEntity.title];
         [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
@@ -279,7 +279,7 @@
         // 请求详情:网路求情
         NSMutableString * h5 = [NSMutableString new];
         
-        [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" > <button class=\"w180Red\" type='button' onclick=\"%@(%i)\" > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>",  PnrGet_ViewEdit, (int)index];
+        [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" > <button class=\"w180Red\" type='button' onclick=\"%@(%i)\" > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>",  PnrGet_ViewResubmit, (int)index];
         
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%i.  %@</font>", colorKey, PnrRootTitle0, colorValue, (int)index, pnrEntity.title];
         [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
