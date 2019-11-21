@@ -91,20 +91,13 @@
                 NSArray * pathArray = [path componentsSeparatedByString:@"/"];
                 
                 if (pathArray.count == 1){
-                    
-                    // MARK: 首页(默认)
-                    if ([path isEqualToString:@""]) {
-                        NSLog(@"__get query :'%@'", query.description);
-                        completionBlock(H5String(self.h5Root));
-                    }
                     // MARK: 首页
-                    else if ([path isEqualToString:PnrGet_ViewRoot]){
+                    if ([path isEqualToString:@""] || [path isEqualToString:PnrGet_ViewRoot]){
                         completionBlock(H5String(self.h5Root));
                     }
                     // MARK: 列表
                     else if ([path isEqualToString:PnrGet_ViewList]){
-                        NSLog(@"__get query :'%@'", query.description);
-                        NSString * deviceName = query[@"deviceName"];
+                        NSString * deviceName = query[PnrKey_DeviceName];
                         PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
                         
                         if (deviceEntity) {
@@ -116,7 +109,6 @@
                     }
                     // MARK: 详情 重新提交
                     else if ([path isEqualToString:PnrGet_ViewDetail] || [path isEqualToString:PnrGet_ViewResubmit]){
-                        NSLog(@"__get query :'%@'", query.description);
                         NSString * deviceName = query[PnrKey_DeviceName];
                         NSString * indexStr   = query[PnrKey_index];
                         
@@ -130,7 +122,6 @@
                                 entity = self.infoArray[index];
                             }
                             if (!entity.h5Detail) {
-                                //if ([path isEqualToString:PnrGet_ViewDetail]) {
                                 [self startServerUnitEntity:entity index:index];
                             }
                             
@@ -160,19 +151,11 @@
                         }
                     }
                     
+                    // other
                     else{
                         completionBlock(H5String(ErrorUrl));
                     }
-                    
-                    // // MARK: other
-                    // else{
-                    //     int index = [path intValue];
-                    //     if ([path isEqualToString:[NSString stringWithFormat:@"%i", index]]) {
-                    //         completionBlock(H5String([PnrWebBody rootBodyIndex:index]));
-                    //     }else{
-                    //         completionBlock(H5String(ErrorUrl));
-                    //     }
-                    // }
+                
                 }
             }
             else {
@@ -185,7 +168,7 @@
             @strongify(self);
             
             NSString * path = request.URL.path;
-            NSLog(@"__post path :'%@'", path);
+            //NSLog(@"__post path :'%@'", path);
             if (path.length>=1) {
                 path = [path substringFromIndex:1];
                 NSArray * pathArray = [path componentsSeparatedByString:@"/"];

@@ -233,7 +233,7 @@
             [h5 appendString:@"</form>"];
             
             // 返回数据
-            formBtTaBlock(h5, PnrRootResponse7, @"--", PnrFormFeedback);
+            formBtTaBlock(h5, PnrCN_response, @"--", PnrFormFeedback);
             
             // js
             [h5 appendFormat:@"\n<script> \n%@", [PnrWebJs jsJsonDynamic]];
@@ -277,11 +277,11 @@
         
         //[h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrGet_ViewResubmit];
         
-        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%i.  %@</font>", colorKey, PnrRootTitle0, colorValue, (int)index, pnrEntity.title];
-        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
+        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%i.  %@</font>", colorKey, PnrCN_title, colorValue, (int)index, pnrEntity.title];
+        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrCN_share, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
         
-        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootTime3, colorValue, pnrEntity.time];
-        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootLog10, colorValue, pnrEntity.log];
+        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_time, colorValue, pnrEntity.time];
+        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_log, colorValue, pnrEntity.log];
         
         [detail appendFormat:@"%@ \n %@ \n %@", h5_detail_head, h5, h5_detail_tail];
     }else{
@@ -290,17 +290,17 @@
         
         [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" > <button class=\"w180Red\" type='button' onclick=\"%@(%i)\" > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>",  PnrGet_ViewResubmit, (int)index];
         
-        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%i.  %@</font>", colorKey, PnrRootTitle0, colorValue, (int)index, pnrEntity.title];
-        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
+        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%i.  %@</font>", colorKey, PnrCN_title, colorValue, (int)index, pnrEntity.title];
+        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrCN_share, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
         
-        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootTime3, colorValue, pnrEntity.time];
-        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootPath1, colorValue, pnrEntity.path];
-        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootUrl2, colorValue, pnrEntity.url];
-        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootMethod4, colorValue, pnrEntity.method];
+        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_time, colorValue, pnrEntity.time];
+        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_path, colorValue, pnrEntity.path];
+        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_url, colorValue, pnrEntity.url];
+        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_method, colorValue, pnrEntity.method];
         
-        formBtTaBlock(h5, PnrRootHead5,      headStr,      PnrKey_Head);
-        formBtTaBlock(h5, PnrRootParameter6, parameterStr, PnrKey_Parameter);
-        formBtTaBlock(h5, PnrRootResponse7,  responseStr,  PnrKey_Response);
+        formBtTaBlock(h5, PnrCN_head,      headStr,      PnrKey_Head);
+        formBtTaBlock(h5, PnrCN_parameter, parameterStr, PnrKey_Parameter);
+        formBtTaBlock(h5, PnrCN_response,  responseStr,  PnrKey_Response);
         
         [detail appendFormat:@"%@ \n %@ \n %@", h5_detail_head, h5, h5_detail_tail];
     }
@@ -313,26 +313,26 @@
         
         [h5 appendFormat:@"<form id='%@' name='%@' >", PnrFormResubmit, PnrFormResubmit];
         
-        btTaBlock(h5, PnrRootTitle0,     @"title",     pnrEntity.title);
-        btTaBlock(h5, PnrRootPath1,      @"url", [NSString stringWithFormat:@"%@/%@", pnrEntity.domain, pnrEntity.path]);
+        btTaBlock(h5, PnrCN_title,     @"title",     pnrEntity.title);
+        btTaBlock(h5, PnrCN_path,      @"url", [NSString stringWithFormat:@"%@/%@", pnrEntity.domain, pnrEntity.path]);
         
         if ([pnrEntity.method.lowercaseString isEqualToString:@"post"]) {
             [h5 appendFormat:@"\n <p> <button class=\"w180Green\" type='button' \" > %@ </button> \n\
              <input type='radio' name='method' id='methodGet'  value='GET'          /><label for='methodGet'>GET</label>\n\
              <input type='radio' name='method' id='methodPost' value='POST' checked /><label for='methodPost'>POST</label>\n\
-             </p>\n ", PnrRootMethod4];
+             </p>\n ", PnrCN_method];
         }else if ([pnrEntity.method.lowercaseString isEqualToString:@"get"]) {
             [h5 appendFormat:@"\n <p> <button class=\"w180Green\" type='button' \" > %@ </button> \n\
              <input type='radio' name='method' id='methodGet'  value='GET'  checked /><label for='methodGet'>GET</label>\n\
              <input type='radio' name='method' id='methodPost' value='POST'         /><label for='methodPost'>POST</label>\n\
-             </p>\n ", PnrRootMethod4];
+             </p>\n ", PnrCN_method];
         }else{
-            btTaBlock(h5, PnrRootMethod4, @"method", pnrEntity.method);
+            btTaBlock(h5, PnrCN_method, @"method", pnrEntity.method);
         }
         
-        btTaBlock(h5, PnrRootHead5,      @"head",      headStr);
-        btTaBlock(h5, PnrRootParameter6, @"parameter", parameterStr);
-        btTaBlock(h5, PnrRootExtra8,     @"extra",     extraStr);
+        btTaBlock(h5, PnrCN_head,      @"head",      headStr);
+        btTaBlock(h5, PnrCN_parameter, @"parameter", parameterStr);
+        btTaBlock(h5, PnrCN_extra,     @"extra",     extraStr);
         
         // 添加一个隐藏的deviceName
         [h5 appendFormat:@"<textarea id='%@\' name=\'%@' style=\"height: 0px; visibility:hidden; \" >%@</textarea>", PnrKey_DeviceName, PnrKey_DeviceName, pnrEntity.deviceName];

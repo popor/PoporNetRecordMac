@@ -9,18 +9,17 @@
 #ifndef PnrValuePrifix_h
 #define PnrValuePrifix_h
 
-static NSString * PnrRootTitle0     = @"名称:";
-static NSString * PnrRootPath1      = @"接口:";
-static NSString * PnrRootUrl2       = @"链接:";
-static NSString * PnrRootTime3      = @"时间:";
-static NSString * PnrRootMethod4    = @"方法:";
-static NSString * PnrRootHead5      = @"head参数:";
-static NSString * PnrRootParameter6 = @"请求参数:";
-static NSString * PnrRootResponse7  = @"返回数据:";
-static NSString * PnrRootExtra8     = @"额外参数:";
-static NSString * PnrRootShare9     = @"分享:";
-static NSString * PnrRootLog10      = @"日志:";
-static NSString * PnrRootDeviceName = @"设备名称:";
+static NSString * PnrCN_title     = @"名称:";
+static NSString * PnrCN_path      = @"接口:";
+static NSString * PnrCN_url       = @"链接:";
+static NSString * PnrCN_time      = @"时间:";
+static NSString * PnrCN_method    = @"方法:";
+static NSString * PnrCN_head      = @"head参数:";
+static NSString * PnrCN_parameter = @"请求参数:";
+static NSString * PnrCN_response  = @"返回数据:";
+static NSString * PnrCN_extra     = @"额外参数:";
+static NSString * PnrCN_share     = @"分享:";
+static NSString * PnrCN_log       = @"日志:";
 
 static int PnrListHeight            = 50;
 

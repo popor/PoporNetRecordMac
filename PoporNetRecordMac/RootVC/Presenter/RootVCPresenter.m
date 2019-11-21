@@ -86,7 +86,7 @@ static NSString * SepactorKey = @"_PnrMac_";
           @"parameterValue":parameters,
           @"responseValue":response,
           @"time":[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
-          @"deviceName":deviceName,
+          PnrKey_DeviceName:deviceName,
         };
         [PoporNetRecord addDic:dic];
     };
@@ -232,8 +232,7 @@ static NSString * SepactorKey = @"_PnrMac_";
 
 - (void)createRequestAction {
     [PoporNetRecord addDic:
-     @{@"deviceName":SimulatorName,
-       @"title":@"title",
+     @{@"title":@"title",
        @"url":@"http://www.baidu.com",
        @"method":@"POST",
        @"path":@"path",
@@ -241,6 +240,7 @@ static NSString * SepactorKey = @"_PnrMac_";
        @"parameterValue":@{@"parameterValue":@"parameterValue"},
        @"responseValue":@{@"responseValue":@"responseValue"},
        @"time":[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
+       PnrKey_DeviceName:SimulatorName,
      }];
 }
 
