@@ -139,6 +139,7 @@
      var port = location.port;\n    \
      var protocol = location.protocol;\n    \
      var deviceName = getQueryVariable('%@')\n    \
+     deviceName = decodeURIComponent(deviceName); \n    \
      var row = getQueryVariable('%@')\n    \
      if(deviceName.length > 0){\n        \
      return protocol + '//' + hostname + ':' + port + '/' + '%@' + '?' +'%@=' + deviceName + '&%@=' + row;\n    \
@@ -206,6 +207,6 @@
         \n";
     }
     return js;
-    
 }
+
 @end

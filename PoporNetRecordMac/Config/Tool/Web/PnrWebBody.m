@@ -192,7 +192,7 @@
             // PnrGet_ViewResubmit()
             [h5 appendFormat:@"\n\n\
              function %@() {\n    \
-             var deviceName = getQueryVariable('%@') \n    \
+             var deviceName = getQueryVariable('%@'); \n    \
              var row = getQueryVariable('%@'); \n    \
              var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n    \
              window.location.href = src;\n    \
