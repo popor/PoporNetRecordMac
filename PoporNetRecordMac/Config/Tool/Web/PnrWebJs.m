@@ -130,14 +130,28 @@
 }
 
 + (NSString *)getRootUrl {
-    return @"\n function getRoot() {\n\
-    var hostname = location.hostname;\n\
-    var pathname = location.pathname;\n\
-    var contextPath = pathname.split('/')[1];\n\
-    var port = location.port;\n\
-    var protocol = location.protocol;\n\
-    return protocol + '//' + hostname + ':' + port + '/' + contextPath;\n\
-    }";
+    return
+    [NSString stringWithFormat:
+     @"\n function getRoot() {\n    \
+     var hostname = location.hostname;\n    \
+     var pathname = location.pathname;\n    \
+     var contextPath = pathname.split('/')[1];\n    \
+     var port = location.port;\n    \
+     var protocol = location.protocol;\n    \
+     var deviceName = getQueryVariable('%@')\n    \
+     var row = getQueryVariable('%@')\n    \
+     if(deviceName.length > 0){\n        \
+     return protocol + '//' + hostname + ':' + port + '/' + '%@' + '?' +'%@=' + deviceName + '&%@=' + row;\n    \
+     } else {\n        \
+     return protocol + '//' + hostname + ':' + port + '/' + '%@' + '?' +'%@=' + row ;\n    \
+     }\n    \
+     //return protocol + '//' + hostname + ':' + port + '/' + contextPath;\n\
+     }" ,
+     PnrKey_DeviceName,
+     PnrKey_index,
+     PnrGet_ViewRoot, PnrKey_DeviceName, PnrKey_index,
+     PnrGet_ViewRoot, PnrKey_index
+     ];;
 }
 
 + (NSString *)copyInnerText {
@@ -187,7 +201,7 @@
         var pair = vars[i].split(\"=\");\n        \
         if(pair[0] == variable){return pair[1];}\n    \
         }\n    \
-        return(false);\n\
+        return('');\n\
         }\n\
         \n";
     }

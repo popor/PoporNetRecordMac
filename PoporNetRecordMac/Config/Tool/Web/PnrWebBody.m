@@ -66,12 +66,11 @@
      var deviceName = getQueryVariable('%@')\n    \
      var row        = getQueryVariable('%@')\n    \
      var srcList = '/%@' + '?' + '%@=' + deviceName ;\n    \
-     document.getElementById('%@').src = srcList;\n\
-     var length = row.length; \n    \
-     if(row.length>0){        \
+     document.getElementById('%@').src = srcList;\n    \
+     if(row.length>0){\n        \
      var srcDetail = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row;\n        \
-     document.getElementById('%@').src = srcDetail;\n\
-     }\
+     document.getElementById('%@').src = srcDetail;\n    \
+     }\n\
      }",
      PnrKey_DeviceName,
      PnrKey_index,
@@ -193,12 +192,13 @@
             // PnrGet_ViewResubmit()
             [h5 appendFormat:@"\n\n\
              function %@() {\n    \
-             var deviceName = getQueryVariable('%@')\n    \
-             var row = getQueryVariable('%@')\n    \
+             var deviceName = getQueryVariable('%@') \n    \
+             var row = getQueryVariable('%@'); \n    \
              var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n    \
              window.location.href = src;\n    \
              \n\
-             }",
+             } \n\
+             ",
              PnrGet_ViewResubmit,
              PnrKey_DeviceName,
              PnrKey_index,
