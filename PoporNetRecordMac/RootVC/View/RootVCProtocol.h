@@ -44,8 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: 数据来源
 @protocol RootVCDataSource <NSObject>
 
-- (NSArray *)columnTagArray;
-
 @end
 
 // MARK: UI事件

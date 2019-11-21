@@ -17,6 +17,8 @@
 
 static int CellHeight = 23;
 
+static NSString * SepactorKey = @"_PnrMac_";
+
 @interface RootVCPresenter ()
 
 @property (nonatomic, weak  ) id<RootVCProtocol> view;
@@ -69,6 +71,13 @@ static int CellHeight = 23;
 
 - (void)setPnrResubmit {
     [PoporAFNConfig share].recordBlock = ^(NSString *url, NSString *title, NSString *method, id head, id parameters, id response) {
+        NSRange range = [title rangeOfString:SepactorKey];
+        NSString * deviceName = SimulatorName;
+        if (range.length > 0) {
+            deviceName = [title substringFromIndex:range.location + SepactorKey.length];
+            title = [title substringToIndex:range.location];
+        }
+        
         NSDictionary * dic =
         @{@"url":url,
           @"title":title,
@@ -77,7 +86,7 @@ static int CellHeight = 23;
           @"parameterValue":parameters,
           @"responseValue":response,
           @"time":[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
-          @"deviceName":SimulatorName,
+          @"deviceName":deviceName,
         };
         [PoporNetRecord addDic:dic];
     };
@@ -122,7 +131,7 @@ static int CellHeight = 23;
                 return ;
             }
             
-            [[PoporAFN new] title:title url:urlStr method:PoporMethodGet parameters:parameterStr.toDic afnManager:manager success:finishBlock failure:errorBlock];
+            [[PoporAFN new] title:[NSString stringWithFormat:@"%@%@%@", title, SepactorKey, deviceName] url:urlStr method:PoporMethodGet parameters:parameterStr.toDic afnManager:manager success:finishBlock failure:errorBlock];
         }
     } extraDic:@{}];
 }
