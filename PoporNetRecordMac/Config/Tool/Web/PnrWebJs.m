@@ -20,8 +20,10 @@
     if (!js) {
         js =
         [NSString stringWithFormat: @"\n\
-         function jsonStatic(formKey) {\n\
-         var form = document.getElementById(formKey);\n form.action='/%@';\n form.submit();\n\
+         function jsonStatic(formKey) {\n    \
+         var form = document.getElementById(formKey);\n    \
+         form.action='/%@';\n    \
+         form.submit();\n\
          }\n\
          ", PnrPost_JsonXml];
     }

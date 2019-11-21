@@ -121,7 +121,8 @@
     }
     return [NSString stringWithFormat:@"%@ %@ %@", h5_head, body, h5_tail];
 }
-// self.resubmitExtraDic
+
+// MARK: 详情 重新提交
 + (void)deatilEntity:(PnrEntity *)pnrEntity index:(NSInteger)index extra:(NSDictionary *)extraDic finish:(void (^ __nullable)(NSString * detail, NSString * resubmit))finish
 {
     static BOOL isInit;
@@ -171,12 +172,29 @@
         {
             NSMutableString * h5 = [NSMutableString new];
             // js
-            [h5 appendFormat:@"\n<script> %@", [PnrWebJs jsJsonStatic]];
+            [h5 appendString:@"\n<script> \n"];
+            [h5 appendString:[PnrWebJs jsJsonStatic]];
             [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
             
             [h5 appendString:[PnrWebJs getRootUrl]];
             [h5 appendString:[PnrWebJs updateShareUrl]];
             [h5 appendString:[PnrWebJs copyInnerText]];
+            [h5 appendString:[PnrWebJs getQuery]];
+
+            // PnrGet_ViewEdit()
+            [h5 appendFormat:@"\n\n\
+             function %@() {\n    \
+             var deviceName = getQueryVariable('%@')\n    \
+             var row = getQueryVariable('%@')\n    \
+             var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n    \
+             window.location.href = src;\n    \
+             \n\
+             }",
+             PnrGet_ViewEdit,
+             PnrKey_DeviceName,
+             PnrKey_index,
+             PnrGet_ViewEdit, PnrKey_DeviceName, PnrKey_index];
+            
             [h5 appendString:@"\n </script>"];
             
             [h5 appendString:@"</body></html>"];
@@ -213,6 +231,21 @@
             [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
             [h5 appendString:[PnrWebJs jsJsonStatic]];
             [h5 appendString:[PnrWebJs ajaxResubmit]];
+            [h5 appendString:[PnrWebJs getQuery]];
+            
+            // PnrGet_ViewDetail()
+            [h5 appendFormat:@"\n\n\
+             function %@() {\n    \
+             var deviceName = getQueryVariable('%@')\n    \
+             var row = getQueryVariable('%@')\n    \
+             var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n    \
+             window.location.href = src;\n    \
+             \n\
+             }",
+             PnrGet_ViewDetail,
+             PnrKey_DeviceName,
+             PnrKey_index,
+             PnrGet_ViewDetail, PnrKey_DeviceName, PnrKey_index];
             
             [h5 appendString:@"</script>"];
             
@@ -236,7 +269,7 @@
         //[h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrGet_ViewEdit];
         
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%i.  %@</font>", colorKey, PnrRootTitle0, colorValue, (int)index, pnrEntity.title];
-        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <a > <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
+        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
         
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootTime3, colorValue, pnrEntity.time];
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootLog10, colorValue, pnrEntity.log];
@@ -246,10 +279,10 @@
         // 请求详情:网路求情
         NSMutableString * h5 = [NSMutableString new];
         
-        [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrGet_ViewEdit];
+        [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" > <button class=\"w180Red\" type='button' onclick=\"%@(%i)\" > 重新请求 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>",  PnrGet_ViewEdit, (int)index];
         
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%i.  %@</font>", colorKey, PnrRootTitle0, colorValue, (int)index, pnrEntity.title];
-        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <a > <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
+        [h5 appendFormat:@"<font color='%@'> &nbsp;%@ </font>  <font id='%@' name='%@' color='%@'></font> <button onclick=\"copyInnerText('%@')\" >点击复制</button></p>", colorKey, PnrRootShare9, PnrKey_IdShare, PnrKey_IdShare, colorValue,  PnrKey_IdShare];
         
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootTime3, colorValue, pnrEntity.time];
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrRootPath1, colorValue, pnrEntity.path];
@@ -262,12 +295,12 @@
         
         [detail appendFormat:@"%@ \n %@ \n %@", h5_detail_head, h5, h5_detail_tail];
     }
-    
+    // -------------------------------------------------------------------------
     {
         // 重新提交
         NSMutableString * h5 = [NSMutableString new];
         
-        [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\" href='/%i/%@'> <button class=\"w180Red\" type='button' > <==返回 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", (int)index, PnrGet_ViewDetail];
+        [h5 appendFormat:@"<p> <a style=\"text-decoration: none;\"> <button class=\"w180Red\" type='button'  onclick=\"%@(%i)\" > <==返回 </button> </a> <font color='#d7534a'> 请使用chrome核心浏览器，并且安装JSON-handle插件查看JSON详情页。 </font> </p>", PnrGet_ViewDetail, (int)index];
         
         [h5 appendFormat:@"<form id='%@' name='%@' >", PnrFormResubmit, PnrFormResubmit];
         
