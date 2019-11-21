@@ -37,7 +37,7 @@
     dispatch_once(&once, ^{
         instance = [PnrWebServer new];
         instance.h5List = [NSMutableString new];
-        instance.h5Root = [PnrWebBody rootBodyIndex:0];
+        instance.h5Root = [PnrWebBody rootBody];
         instance.config = [PnrConfig share];
         
         // GCDWebServer 这个配置要求在主线程中执行
@@ -100,18 +100,6 @@
                     // MARK: 首页
                     else if ([path isEqualToString:PnrGet_ViewRoot]){
                         completionBlock(H5String(self.h5Root));
-                        // NSLog(@"__get query :'%@'", query.description);
-                        // NSString * deviceName = query[@"deviceName"];
-                        // if (deviceName) {
-                        //     PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
-                        //     if (deviceEntity) {
-                        //         completionBlock(H5String([PnrWebBody listH5:deviceEntity.listWebH5]));
-                        //     } else {
-                        //         completionBlock(H5String(@""));
-                        //     }
-                        // } else {
-                        //     completionBlock(H5String(self.h5Root));
-                        // }
                     }
                     // MARK: 列表
                     else if ([path isEqualToString:PnrGet_ViewList]){
@@ -164,15 +152,19 @@
                         }
                     }
                     
-                    // MARK: other
                     else{
-                        int index = [path intValue];
-                        if ([path isEqualToString:[NSString stringWithFormat:@"%i", index]]) {
-                            completionBlock(H5String([PnrWebBody rootBodyIndex:index]));
-                        }else{
-                            completionBlock(H5String(ErrorUrl));
-                        }
+                        completionBlock(H5String(ErrorUrl));
                     }
+                    
+                    // // MARK: other
+                    // else{
+                    //     int index = [path intValue];
+                    //     if ([path isEqualToString:[NSString stringWithFormat:@"%i", index]]) {
+                    //         completionBlock(H5String([PnrWebBody rootBodyIndex:index]));
+                    //     }else{
+                    //         completionBlock(H5String(ErrorUrl));
+                    //     }
+                    // }
                 }
             }
             else {

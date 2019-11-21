@@ -22,7 +22,7 @@
             ];
 }
 
-+ (NSString *)rootBodyIndex:(int)index {
++ (NSString *)rootBody {
     PnrConfig * config = [PnrConfig share];
     
     NSMutableString * h5 = [NSMutableString new];

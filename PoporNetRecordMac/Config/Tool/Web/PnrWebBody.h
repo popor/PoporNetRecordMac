@@ -47,7 +47,7 @@ __block int record = 0;\n\
 
 + (NSString *)jsonReadForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue;
 
-+ (NSString *)rootBodyIndex:(int)index;
++ (NSString *)rootBody;
 + (NSString *)listH5:(NSString *)body;
 
 + (void)deatilEntity:(PnrEntity *)pnrEntity index:(NSInteger)index extra:(NSDictionary *)extraDic finish:(void (^ __nullable)(NSString * detail, NSString * resubmit))finish;
