@@ -135,9 +135,17 @@
                             }
                             
                             if ([path isEqualToString:PnrGet_ViewDetail]) {
-                                completionBlock(H5String(entity.h5Detail));
+                                if (entity.h5Detail) {
+                                    completionBlock(H5String(entity.h5Detail));
+                                } else {
+                                    completionBlock(H5String(ErrorEntity));
+                                }
                             } else {
-                                completionBlock(H5String(entity.h5Resubmit));
+                                if (entity.h5Resubmit) {
+                                    completionBlock(H5String(entity.h5Resubmit));
+                                } else {
+                                    completionBlock(H5String(ErrorEntity));
+                                }
                             }
                                 
                         } else {

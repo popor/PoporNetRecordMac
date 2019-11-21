@@ -64,12 +64,21 @@
     [h5 appendFormat:@"\n\
      window.onload=function (){\n    \
      var deviceName = getQueryVariable('%@')\n    \
-     var src = '/%@' + '?' + '%@=' + deviceName ;\n    \
-     document.getElementById('%@').src = src;\n\
+     var row        = getQueryVariable('%@')\n    \
+     var srcList = '/%@' + '?' + '%@=' + deviceName ;\n    \
+     document.getElementById('%@').src = srcList;\n\
+     var length = row.length; \n    \
+     if(row.length>0){        \
+     var srcDetail = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row;\n        \
+     document.getElementById('%@').src = srcDetail;\n\
+     }\
      }",
      PnrKey_DeviceName,
+     PnrKey_index,
      PnrGet_ViewList, PnrKey_DeviceName,
-     PnrIframeList
+     PnrIframeList,
+     PnrGet_ViewDetail, PnrKey_DeviceName, PnrKey_index,
+     PnrIframeDetail
      ];
     
     // -------------------------------------------------------------------------
