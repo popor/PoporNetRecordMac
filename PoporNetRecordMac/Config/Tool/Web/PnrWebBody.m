@@ -32,32 +32,52 @@
     // TEXT-ALIGN: center;}
     [h5 appendString:@"\n<script>"];
     
-    // -- 方便 浏览器查看 代码 ----------------------------------------------------
-    //var src = '/' +row + '/%@';\n
-    [h5 appendFormat:@"\n function detail(row) {\n\
-     var deviceName = getQueryVariable('%@')\n\
-     var src = '/%@' + '?' + '%@=' + row + '&%@=' + deviceName ;\n\
+    // MARK: root h5 js
+    // 获取query id
+    [h5 appendString:[PnrWebJs getQuery]];
+    
+    // detail()
+    [h5 appendFormat:@"\n\
+     function detail(row) {\n    \
+     var deviceName = getQueryVariable('%@')\n    \
+     var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n    \
      document.getElementById('%@').src = src;\n\
      }",
      PnrKey_DeviceName,
-     PnrGet_ViewDetail, PnrKey_index, PnrKey_DeviceName,
+     PnrGet_ViewDetail, PnrKey_DeviceName, PnrKey_index,
      PnrIframeDetail];
     
-    [h5 appendFormat:@"\n\n function resubmit() {\n var form = document.getElementById('%@').contentWindow.document.getElementById('%@');\n form.submit();\n }", PnrIframeDetail, PnrFormResubmit];
+    // resubmit()
+    [h5 appendFormat:@"\n\n\
+     function resubmit() {\n    \
+     var form = document.getElementById('%@').contentWindow.document.getElementById('%@');\n    \
+     form.submit();\n\
+     }", PnrIframeDetail, PnrFormResubmit];
     
-    [h5 appendFormat:@"\n\n function freshList() {\n  document.getElementById('%@').contentWindow.location.reload(true);\n  }", PnrIframeList];
-    [h5 appendString:[PnrWebJs getQuery]];
+    // freshList()
+    [h5 appendFormat:@"\n\n\
+     function freshList() {\n    \
+     document.getElementById('%@').contentWindow.location.reload(true);\n\
+     }", PnrIframeList];
+    
+    // onload()
+    [h5 appendFormat:@"\n\
+     window.onload=function (){\n    \
+     var deviceName = getQueryVariable('%@')\n    \
+     var src = '/%@' + '?' + '%@=' + deviceName ;\n    \
+     document.getElementById('%@').src = src;\n\
+     }",
+     PnrKey_DeviceName,
+     PnrGet_ViewList, PnrKey_DeviceName,
+     PnrIframeList
+     ];
+    
     // -------------------------------------------------------------------------
     
     [h5 appendString:@"\n\n </script>\n"];
     
-    if (index == 0) {
-        [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%@' style=\"width:%i%%; height:97%%; marginwidth:0;  background-color:%@; \" ></iframe>", PnrIframeList, PnrIframeList, PnrGet_ViewList, config.listWebWidth, config.listWebColorBgHex];
-        [h5 appendFormat:@"\n <iframe id='%@' name='%@' style=\"width:%i%%; height:97%%;\" ></iframe>", PnrIframeDetail, PnrIframeDetail, 100 - config.listWebWidth - 4];
-    }else{
-        [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%@' style=\"width:%i%%; height:97%%; background-color:%@; \" ></iframe>", PnrIframeList, PnrIframeList, PnrGet_ViewList, config.listWebWidth, config.listWebColorBgHex];
-        [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%i/%@' style=\"width:%i%%; height:97%%;\" ></iframe>", PnrIframeDetail, PnrIframeDetail, index, PnrGet_ViewDetail, 100 - config.listWebWidth - 4];
-    }
+    [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%@' style=\"width:%i%%; height:97%%; marginwidth:0;  background-color:%@; \" ></iframe>", PnrIframeList, PnrIframeList, PnrGet_ViewList, config.listWebWidth, config.listWebColorBgHex];
+    [h5 appendFormat:@"\n <iframe id='%@' name='%@' style=\"width:%i%%; height:97%%;\" ></iframe>", PnrIframeDetail, PnrIframeDetail, 100 - config.listWebWidth - 4];
     
     [h5 appendString:@"\n\n </body></html>"];
     return h5;

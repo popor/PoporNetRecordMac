@@ -99,17 +99,19 @@
                     }
                     // MARK: 首页
                     else if ([path isEqualToString:PnrGet_ViewRoot]){
-                        NSLog(@"__get query :'%@'", query.description);
-                        NSString * deviceName = query[@"deviceName"];
-                        PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
-                        
-                        if (deviceEntity) {
-                            completionBlock(H5String(self.h5Root));
-                            
-                        } else {
-                            completionBlock(H5String(self.h5Root));
-                        }
-                        
+                        completionBlock(H5String(self.h5Root));
+                        // NSLog(@"__get query :'%@'", query.description);
+                        // NSString * deviceName = query[@"deviceName"];
+                        // if (deviceName) {
+                        //     PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
+                        //     if (deviceEntity) {
+                        //         completionBlock(H5String([PnrWebBody listH5:deviceEntity.listWebH5]));
+                        //     } else {
+                        //         completionBlock(H5String(@""));
+                        //     }
+                        // } else {
+                        //     completionBlock(H5String(self.h5Root));
+                        // } 
                     }
                     // MARK: 列表
                     else if ([path isEqualToString:PnrGet_ViewList]){
@@ -183,7 +185,7 @@
             @strongify(self);
             
             NSString * path = request.URL.path;
-            //NSLog(@"__post path :'%@'", path);
+            NSLog(@"__post path :'%@'", path);
             if (path.length>=1) {
                 path = [path substringFromIndex:1];
                 NSArray * pathArray = [path componentsSeparatedByString:@"/"];
