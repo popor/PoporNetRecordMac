@@ -85,7 +85,6 @@
             NSString * path      = request.URL.path;
             NSDictionary * query = request.query;
             
-            NSLog(@"__get path :'%@'", path);
             if (path.length >= 1) {
                 path = [path substringFromIndex:1];
                 NSArray * pathArray = [path componentsSeparatedByString:@"/"];
@@ -168,12 +167,11 @@
             @strongify(self);
             
             NSString * path = request.URL.path;
-            //NSLog(@"__post path :'%@'", path);
             if (path.length>=1) {
                 path = [path substringFromIndex:1];
                 NSArray * pathArray = [path componentsSeparatedByString:@"/"];
                 if (pathArray.count == 1) {
-                    if ([path isEqualToString:UrlPath]) {
+                    if ([path isEqualToString:PnrPost_Add]) {
                         GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
                         NSDictionary * dic = formRequest.jsonObject;
                         [PoporNetRecord addDic:dic];

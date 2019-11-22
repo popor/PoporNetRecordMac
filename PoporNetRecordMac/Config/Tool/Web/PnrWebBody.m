@@ -313,8 +313,8 @@
         
         [h5 appendFormat:@"<form id='%@' name='%@' >", PnrFormResubmit, PnrFormResubmit];
         
-        btTaBlock(h5, PnrCN_title,     @"title",     pnrEntity.title);
-        btTaBlock(h5, PnrCN_path,      @"url", [NSString stringWithFormat:@"%@/%@", pnrEntity.domain, pnrEntity.path]);
+        btTaBlock(h5, PnrCN_title,     PnrKey_Title,     pnrEntity.title);
+        btTaBlock(h5, PnrCN_path,      PnrKey_Url, [NSString stringWithFormat:@"%@/%@", pnrEntity.domain, pnrEntity.path]);
         
         if ([pnrEntity.method.lowercaseString isEqualToString:@"post"]) {
             [h5 appendFormat:@"\n <p> <button class=\"w180Green\" type='button' \" > %@ </button> \n\
@@ -327,11 +327,11 @@
              <input type='radio' name='method' id='methodPost' value='POST'         /><label for='methodPost'>POST</label>\n\
              </p>\n ", PnrCN_method];
         }else{
-            btTaBlock(h5, PnrCN_method, @"method", pnrEntity.method);
+            btTaBlock(h5, PnrCN_method, PnrKey_Method, pnrEntity.method);
         }
         
-        btTaBlock(h5, PnrCN_head,      @"head",      headStr);
-        btTaBlock(h5, PnrCN_parameter, @"parameter", parameterStr);
+        btTaBlock(h5, PnrCN_head,      PnrKey_Head,      headStr);
+        btTaBlock(h5, PnrCN_parameter, PnrKey_Parameter, parameterStr);
         btTaBlock(h5, PnrCN_extra,     @"extra",     extraStr);
         
         // 添加一个隐藏的deviceName
@@ -352,43 +352,5 @@
     }
 }
 
-// 弃用了
-//+ (NSString *)feedbackH5:(NSString *)body {
-//    static NSString * h5_head;
-//    static NSString * h5_tail;
-//    if (!h5_head) {
-//        NSMutableString * h5 = [NSMutableString new];
-//        [h5 setString:@"<html> <head><title>update</title></head>"];
-//
-//        // css
-//        [h5 appendString:@"\n<style type='text/css'>"];
-//        [h5 appendString:[PnrWebCss cssTextarea]];
-//        [h5 appendString:[PnrWebCss cssButton]];
-//        [h5 appendString:@"\n</style>"];
-//
-//        // body
-//        [h5 appendString:@"\n<body>"];
-//        h5_head = h5;
-//    }
-//    if (!h5_tail) {
-//        NSMutableString * h5 = [NSMutableString new];
-//        [h5 appendString:@"\n<script>"];
-//
-//        // js
-//        [h5 appendString:@"\n window.onload=function (){\
-//         parent.parent.freshList();\
-//         } "];
-//        [h5 appendFormat:@"\n %@ \n %@ \n", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
-//
-//        [h5 appendString:[PnrWebJs jsJsonStatic]];
-//        [h5 appendString:@"\n </script>"];
-//
-//        [h5 appendString:@"\n</body></html>"];
-//
-//        h5_tail = h5;
-//    }
-//
-//    return [NSString stringWithFormat:@"%@ %@ %@", h5_head, [PnrWebBody jsonReadForm:@"feedback" taIdName:PnrKey_Conent btName:@"返回数据" taValue:body], h5_tail];
-//}
 
 @end

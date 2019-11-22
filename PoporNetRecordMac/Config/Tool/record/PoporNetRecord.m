@@ -67,9 +67,9 @@
     
     if (deviceEntity.receive) {
         
-        entity.headValue      = dic[@"headValue"];
-        entity.parameterValue = dic[@"parameterValue"];
-        entity.responseValue  = dic[@"responseValue"];
+        entity.headValue      = dic[PnrKey_Head];
+        entity.parameterValue = dic[PnrKey_Parameter];
+        entity.responseValue  = dic[PnrKey_Response];
         
         [self addEntity:entity deviceEntity:deviceEntity];
     }

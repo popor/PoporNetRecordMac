@@ -79,23 +79,23 @@ static NSString * SepactorKey = @"_PnrMac_";
         }
         
         NSDictionary * dic =
-        @{@"url":url,
-          @"title":title,
-          @"method":method,
-          @"headValue":head,
-          @"parameterValue":parameters,
-          @"responseValue":response,
-          @"time":[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
+        @{PnrKey_Url:url,
+          PnrKey_Title:title,
+          PnrKey_Method:method,
+          PnrKey_Head:head,
+          PnrKey_Parameter:parameters,
+          PnrKey_Response:response,
+          PnrKey_Time:[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
           PnrKey_DeviceName:deviceName,
         };
         [PoporNetRecord addDic:dic];
     };
     [PoporNetRecord setPnrBlockResubmit:^(NSDictionary *formDic, PnrBlockFeedback  _Nonnull blockFeedback) {
-        NSString * title        = formDic[@"title"];
-        NSString * urlStr       = formDic[@"url"];
-        NSString * methodStr    = formDic[@"method"];
-        NSString * headStr      = formDic[@"head"];
-        NSString * parameterStr = formDic[@"parameter"];
+        NSString * title        = formDic[PnrKey_Title];
+        NSString * urlStr       = formDic[PnrKey_Url];
+        NSString * methodStr    = formDic[PnrKey_Method];
+        NSString * headStr      = formDic[PnrKey_Head];
+        NSString * parameterStr = formDic[PnrKey_Parameter];
         NSString * deviceName   = formDic[PnrKey_DeviceName];
         
         //NSString * extraStr     = formDic[@"extra"];
@@ -232,14 +232,14 @@ static NSString * SepactorKey = @"_PnrMac_";
 
 - (void)createRequestAction {
     [PoporNetRecord addDic:
-     @{@"title":@"title",
-       @"url":@"http://www.baidu.com",
-       @"method":@"POST",
-       @"path":@"path",
-       @"headValue":@{@"headValue":@"headValue"},
-       @"parameterValue":@{@"parameterValue":@"parameterValue"},
-       @"responseValue":@{@"responseValue":@"responseValue"},
-       @"time":[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
+     @{PnrKey_Title:PnrKey_Title,
+       PnrKey_Url:@"http://www.baidu.com",
+       PnrKey_Method:@"POST",
+       PnrKey_Path:@"/path",
+       PnrKey_Head:@{PnrKey_Head:PnrKey_Head},
+       PnrKey_Parameter:@{PnrKey_Parameter:PnrKey_Parameter},
+       PnrKey_Response:@{PnrKey_Response:PnrKey_Response},
+       PnrKey_Time:[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
        PnrKey_DeviceName:SimulatorName,
      }];
 }

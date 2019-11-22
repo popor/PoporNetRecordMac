@@ -13,8 +13,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * UrlPath = @"add";
-
 @interface PnrWebServer : NSObject
 
 + (instancetype)share;

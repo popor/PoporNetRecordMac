@@ -40,12 +40,22 @@ static NSString * PnrGet_ViewResubmit = @"viewResubmit";
 static NSString * PnrPost_Resubmit  = @"resubmit";
 static NSString * PnrPost_Clear     = @"clear";
 static NSString * PnrPost_JsonXml   = @"jsonXml";
+static NSString * PnrPost_Add       = @"add";
 
 // web key
 static NSString * PnrKey_Conent     = @"content";
-static NSString * PnrKey_Head       = @"head";
-static NSString * PnrKey_Parameter  = @"parameter";
-static NSString * PnrKey_Response   = @"response";
+
+static NSString * PnrKey_Title      = @"title";
+static NSString * PnrKey_Url        = @"url";
+static NSString * PnrKey_Method     = @"method";
+static NSString * PnrKey_Path       = @"path";
+
+static NSString * PnrKey_Head       = @"headValue";
+static NSString * PnrKey_Parameter  = @"parameterValue";
+static NSString * PnrKey_Response   = @"responseValue";
+
+static NSString * PnrKey_Time       = @"time";
+
 static NSString * PnrKey_DeviceName = @"deviceName";
 static NSString * PnrKey_index      = @"index";
 
