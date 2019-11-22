@@ -170,11 +170,11 @@
             [html appendFormat:@"\n\
              window.onload=function (){\n    \
              var index = getQueryVariable('%@');\n    \
-             if (index >= 0){\n        \
-             selectRowOld = index;\n        \
-             var oldId = '%@' + index.toString();\n        \
-             var text1 = '%@' + index.toString();\n        \
-             var text2 = '%@' + index.toString();\n        \
+             if (index.length >= 0){\n        \
+             selectRowOld = parseInt(index);\n        \
+             var oldId = '%@' + selectRowOld.toString();\n        \
+             var text1 = '%@' + selectRowOld.toString();\n        \
+             var text2 = '%@' + selectRowOld.toString();\n        \
              document.getElementById(oldId).style.background = selectBgColor;\n        \
              document.getElementById(text1).style.color = selectTextColor;\n        \
              document.getElementById(text2).style.color = selectTextColor;\n    \
