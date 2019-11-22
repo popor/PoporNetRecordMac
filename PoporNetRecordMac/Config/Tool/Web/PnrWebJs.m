@@ -173,7 +173,7 @@
     if (!js) {
         js =
         [NSString stringWithFormat:
-         @"\n\
+         @"\n\n\
          function clearAction() {\n\
          var xmlhttp = new XMLHttpRequest();\n\
          xmlhttp.open('POST','/%@',true);\n\
@@ -185,7 +185,7 @@
          \n\
          \n\
          xmlhttp.send('clear'); \n\
-         }\n", PnrPost_Clear];
+         }\n\n", PnrPost_Clear];
     }
     return js;
 }

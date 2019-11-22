@@ -65,7 +65,7 @@
      window.onload=function (){\n    \
      var deviceName = getQueryVariable('%@')\n    \
      var row        = getQueryVariable('%@')\n    \
-     var srcList = '/%@' + '?' + '%@=' + deviceName ;\n    \
+     var srcList = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row;\n    \
      document.getElementById('%@').src = srcList;\n    \
      if(row.length>0){\n        \
      var srcDetail = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row;\n        \
@@ -74,7 +74,7 @@
      }",
      PnrKey_DeviceName,
      PnrKey_index,
-     PnrGet_ViewList, PnrKey_DeviceName,
+     PnrGet_ViewList, PnrKey_DeviceName, PnrKey_index,
      PnrIframeList,
      PnrGet_ViewDetail, PnrKey_DeviceName, PnrKey_index,
      PnrIframeDetail
@@ -125,7 +125,8 @@
             //[html appendString:@"var selectBgColor = 'bbbbbb';\n"];
             //[html appendString:@"var selectBgColor = 'bbbbbb';\n"];
             
-            [html appendFormat:@"\n %@ \n", [PnrWebJs clearText]];
+            [html appendString:[PnrWebJs clearText]];
+            [html appendString:[PnrWebJs getQuery]];
             
             //
             [html appendFormat:
@@ -168,16 +169,19 @@
             // onload()
             [html appendFormat:@"\n\
              window.onload=function (){\n    \
-             if (selectRowOld >= 0){\n        \
-             var oldId = '%@' + selectRowOld.toString();\n        \
-             var text1 = '%@' + selectRowOld.toString();\n        \
-             var text2 = '%@' + selectRowOld.toString();\n        \
+             var index = getQueryVariable('%@');\n    \
+             if (index >= 0){\n        \
+             selectRowOld = index;\n        \
+             var oldId = '%@' + index.toString();\n        \
+             var text1 = '%@' + index.toString();\n        \
+             var text2 = '%@' + index.toString();\n        \
              document.getElementById(oldId).style.background = selectBgColor;\n        \
              document.getElementById(text1).style.color = selectTextColor;\n        \
              document.getElementById(text2).style.color = selectTextColor;\n    \
              }\
              \n\
              }"
+             , PnrKey_index
              , PnrH5_list
              , PnrH5_listText1
              , PnrH5_listText2
