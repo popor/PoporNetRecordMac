@@ -102,7 +102,8 @@
                         if (deviceEntity) {
                             completionBlock(H5String([PnrWebBody listH5:deviceEntity.listWebH5]));
                         } else {
-                            completionBlock(H5String(self.h5List));
+                            completionBlock(H5String([PnrWebBody listH5:pnr.listWebH5]));
+                            //completionBlock(H5String(self.h5List));
                         }
                         
                     }

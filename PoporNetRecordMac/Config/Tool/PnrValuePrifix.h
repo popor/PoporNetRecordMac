@@ -20,6 +20,7 @@ static NSString * PnrCN_response  = @"返回数据:";
 static NSString * PnrCN_extra     = @"额外参数:";
 static NSString * PnrCN_share     = @"分享:";
 static NSString * PnrCN_log       = @"日志:";
+static NSString * PnrCN_Simulator = @"模拟";
 
 static int PnrListHeight            = 50;
 

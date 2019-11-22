@@ -72,7 +72,7 @@ static NSString * SepactorKey = @"_PnrMac_";
 - (void)setPnrResubmit {
     [PoporAFNConfig share].recordBlock = ^(NSString *url, NSString *title, NSString *method, id head, id parameters, id response) {
         NSRange range = [title rangeOfString:SepactorKey];
-        NSString * deviceName = SimulatorName;
+        NSString * deviceName = PnrCN_Simulator;
         if (range.length > 0) {
             deviceName = [title substringFromIndex:range.location + SepactorKey.length];
             title = [title substringToIndex:range.location];
@@ -240,7 +240,7 @@ static NSString * SepactorKey = @"_PnrMac_";
        PnrKey_Parameter:@{PnrKey_Parameter:PnrKey_Parameter},
        PnrKey_Response:@{PnrKey_Response:PnrKey_Response},
        PnrKey_Time:[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
-       PnrKey_DeviceName:SimulatorName,
+       PnrKey_DeviceName:PnrCN_Simulator,
      }];
 }
 

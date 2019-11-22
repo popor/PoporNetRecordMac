@@ -17,8 +17,6 @@
 
 @interface PoporNetRecord ()
 
-@property (nonatomic, strong) NSMutableString * listWebH5;
-
 @end
 
 @implementation PoporNetRecord
@@ -92,9 +90,7 @@
             NSMutableString * oneListH5 = [PnrEntity createListWebH5:entity index:deviceEntity.array.count - 1];
             
             [pnr.listWebH5          insertString:allListH5 atIndex:0];
-            [deviceEntity.listWebH5 insertString:oneListH5 atIndex:0];
-            
-            [[PnrWebServer share] startListServer:pnr.listWebH5];
+            [deviceEntity.listWebH5 insertString:oneListH5 atIndex:0]
         }else{
             // 0%
             [[PnrWebServer share] stopServer];

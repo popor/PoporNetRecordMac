@@ -15,8 +15,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * SimulatorName = @"模拟";
-
 @interface PoporNetRecord : NSObject
 
 @property (nonatomic, weak  ) PnrConfig           * config;
@@ -27,6 +25,8 @@ static NSString * SimulatorName = @"模拟";
 @property (nonatomic, strong) NSMutableDictionary * deviceNameDic;
 
 @property (nonatomic, copy  ) BlockPVoid          blockFreshDeviceName;
+
+@property (nonatomic, strong) NSMutableString     * listWebH5;
 
 + (instancetype)share;
 
