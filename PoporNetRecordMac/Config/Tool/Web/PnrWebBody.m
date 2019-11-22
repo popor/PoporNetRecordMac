@@ -193,7 +193,7 @@
         
         [html appendFormat:@"\n <div style=\" background-color:%@; height:100%%; width:100%%; float:left; \">", config.listWebColorCellBgHex];
         [html appendString:@"\n <button class='w49p' type='button' onclick='clearAction();' > 清空 </button>"];
-        [html appendString:@"\n <button class='w49p' type='button' onclick='location.reload();' > 刷新 </button>"];
+        [html appendString:@"\n <button class='w49p_r' type='button' onclick='location.reload();' > 刷新 </button>"];
         
         h5_head = html;
     }

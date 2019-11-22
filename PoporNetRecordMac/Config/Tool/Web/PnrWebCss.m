@@ -53,10 +53,13 @@
             color:%@; width:100%%; font-size:16px;\
             }\n\
             \n button.w49p {\n\
-            color:%@; width:49%%; font-size:16px;\
+            color:%@; width:47%%; font-size:16px;\
+            }\n\
+            \n button.w49p_r {\n\
+            color:%@; width:48%%; font-size:16px; float:right;\
             }\n\
             "
-            , colorKey, @"#d7534a", colorKey, colorKey];
+            , colorKey, @"#d7534a", colorKey, colorKey, colorKey];
 }
 
 @end
