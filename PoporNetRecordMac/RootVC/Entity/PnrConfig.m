@@ -69,7 +69,7 @@ static NSString * KeyLog       = @"PoporNetRecord_logDetail";
             instance.listColorCell0     = [NSColor whiteColor];
             instance.listColorCell1     = [NSColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
 
-            instance.listWebWidth       = 25;
+            instance.listWebWidth       = 20;
             instance.listWebColorCellBg = PRGB16(0XEEEEEE);
             instance.listWebColorCell0  = PRGB16(0XE2E2E2);
             instance.listWebColorCell1  = PRGB16(0XF2F2F2);
