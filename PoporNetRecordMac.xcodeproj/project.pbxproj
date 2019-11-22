@@ -100,6 +100,7 @@
 		18A06E45237C051F0084506B /* PnrDeviceEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PnrDeviceEntity.h; sourceTree = "<group>"; };
 		18A06E46237C051F0084506B /* PnrDeviceEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PnrDeviceEntity.m; sourceTree = "<group>"; };
 		18A0C8CE238502F800B29401 /* PnrValuePrifix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PnrValuePrifix.h; sourceTree = "<group>"; };
+		18AFBA082387B7F900A2D12E /* work list.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "work list.txt"; sourceTree = "<group>"; };
 		18BAE79023826C3500BB6A3C /* NSButton+Address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSButton+Address.h"; sourceTree = "<group>"; };
 		18BAE79123826C3500BB6A3C /* NSButton+Address.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSButton+Address.m"; sourceTree = "<group>"; };
 		272A82FDE599135FF461AD1C /* Pods-PoporNetRecordMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.debug.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.debug.xcconfig"; sourceTree = "<group>"; };
@@ -196,6 +197,7 @@
 		18A06DE8237BCF7B0084506B /* PoporNetRecordMac */ = {
 			isa = PBXGroup;
 			children = (
+				18AFBA082387B7F900A2D12E /* work list.txt */,
 				18988F41238399C300A1E082 /* media */,
 				18A06E09237BD1E20084506B /* common */,
 				18A06E01237BD1E10084506B /* Config */,
@@ -242,7 +244,6 @@
 		18A06E01237BD1E10084506B /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				18A06E08237BD1E10084506B /* SqlitePrifix.h */,
 				18A06E02237BD1E10084506B /* WindowFrameTool */,
 				18A06E05237BD1E10084506B /* SqliteCofing */,
 				18A06E3A237BEFE20084506B /* Tool */,
@@ -262,6 +263,7 @@
 		18A06E05237BD1E10084506B /* SqliteCofing */ = {
 			isa = PBXGroup;
 			children = (
+				18A06E08237BD1E10084506B /* SqlitePrifix.h */,
 				18A06E07237BD1E10084506B /* SqliteCofing.h */,
 				18A06E06237BD1E10084506B /* SqliteCofing.m */,
 			);

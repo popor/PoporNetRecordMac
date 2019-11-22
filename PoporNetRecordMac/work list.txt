@@ -1,0 +1,3 @@
+1. web页面增加 deviceName 列表.
+2. list frame 点击之后, 对应的row变色.
+3.
