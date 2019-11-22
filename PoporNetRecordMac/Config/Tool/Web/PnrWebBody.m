@@ -106,13 +106,82 @@
         [html appendString:[PnrWebCss cssDivWordOneLine]];
         [html appendString:[PnrWebCss cssButton]];
         [html appendString:@"\n</style>"];
-
+        
         // js
         [html appendString:@"\n<script>"];
         {
+            PnrConfig * config = [PnrConfig share];
+            
             // 方便 浏览器查看 代码
+            [html appendString:@"\n\nvar selectRowOld = -1;\n"];
+            [html appendFormat:@"var listWebColorCell0Hex = '%@';\n", config.listWebColorCell0Hex];
+            [html appendFormat:@"var listWebColorCell1Hex = '%@';\n", config.listWebColorCell1Hex];
+            
+            [html appendString:@"var selectBgColor = '#999999';\n"];
+            [html appendString:@"var selectTextColor = '#ffffff';\n"];
+            [html appendFormat:@"var defaultTextColor1 = '%@';\n", config.listColorTitleHex];
+            [html appendFormat:@"var defaultTextColor2 = '%@';\n", config.listColorTimeHex];
+            
+            //[html appendString:@"var selectBgColor = 'bbbbbb';\n"];
+            //[html appendString:@"var selectBgColor = 'bbbbbb';\n"];
+            
             [html appendFormat:@"\n %@ \n", [PnrWebJs clearText]];
             
+            //
+            [html appendFormat:
+             @"\n\n\
+             function selectRow(row) {\n    \
+             if (selectRowOld >= 0){\n        \
+             var oldId = '%@' + selectRowOld.toString();\n        \
+             var text1 = '%@' + selectRowOld.toString();\n        \
+             var text2 = '%@' + selectRowOld.toString();\n        \
+             if(selectRowOld%%2 == 1){\n            \
+             document.getElementById(oldId).style.background = listWebColorCell0Hex;\n        \
+             } else {\n            \
+             document.getElementById(oldId).style.background = listWebColorCell1Hex;\n        \
+             }\n        \
+             document.getElementById(text1).style.color = defaultTextColor1;\n        \
+             document.getElementById(text2).style.color = defaultTextColor2;\n    \
+             }\n    \
+             \n    \
+             {\n        \
+             selectRowOld = row;\n        \
+             var newId = '%@' + row.toString();\n        \
+             var text1 = '%@' + row.toString();\n        \
+             var text2 = '%@' + row.toString();\n        \
+             document.getElementById(newId).style.background = selectBgColor;\n        \
+             document.getElementById(text1).style.color = selectTextColor;\n        \
+             document.getElementById(text2).style.color = selectTextColor;\n    \
+             \n    \
+             }\n    \
+             parent.detail(row);\n    \
+             \n\
+             }\n"
+             , PnrH5_list
+             , PnrH5_listText1
+             , PnrH5_listText2
+             , PnrH5_list
+             , PnrH5_listText1
+             , PnrH5_listText2
+             ];
+            
+            // onload()
+            [html appendFormat:@"\n\
+             window.onload=function (){\n    \
+             if (selectRowOld >= 0){\n        \
+             var oldId = '%@' + selectRowOld.toString();\n        \
+             var text1 = '%@' + selectRowOld.toString();\n        \
+             var text2 = '%@' + selectRowOld.toString();\n        \
+             document.getElementById(oldId).style.background = selectBgColor;\n        \
+             document.getElementById(text1).style.color = selectTextColor;\n        \
+             document.getElementById(text2).style.color = selectTextColor;\n    \
+             }\
+             \n\
+             }"
+             , PnrH5_list
+             , PnrH5_listText1
+             , PnrH5_listText2
+             ];
             
         }
         [html appendString:@"\n\n </script>\n"];
@@ -192,7 +261,7 @@
             [h5 appendString:[PnrWebJs updateShareUrl]];
             [h5 appendString:[PnrWebJs copyInnerText]];
             [h5 appendString:[PnrWebJs getQuery]];
-
+            
             // PnrGet_ViewResubmit()
             [h5 appendFormat:@"\n\n\
              function %@() {\n    \

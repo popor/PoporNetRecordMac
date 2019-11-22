@@ -66,4 +66,9 @@ static NSString * PnrKey_IdShare    = @"idShare";
 static NSString * PnrJsClassTaAutoH = @"TaAutoH";
 
 
+// MARK: 页面
+static NSString * PnrH5_list        = @"list";
+static NSString * PnrH5_listText1   = @"listText1_";
+static NSString * PnrH5_listText2   = @"listText2_";
+
 #endif /* PnrValuePrifix_h */
