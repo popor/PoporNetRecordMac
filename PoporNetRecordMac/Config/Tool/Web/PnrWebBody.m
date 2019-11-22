@@ -84,13 +84,15 @@
     
     [h5 appendString:@"\n\n </script>\n"];
     
-    [h5 appendFormat:@"\n <iframe id='%@' name='%@' src='/%@' style=\"width:%i%%; height:97%%; marginwidth:0;  background-color:%@; \" ></iframe>", PnrIframeList, PnrIframeList, PnrGet_ViewList, config.listWebWidth, config.listWebColorBgHex];
+    // src='/%@'
+    [h5 appendFormat:@"\n <iframe id='%@' name='%@' style=\"width:%i%%; height:97%%; marginwidth:0;  background-color:%@; \" ></iframe>", PnrIframeList, PnrIframeList, config.listWebWidth, config.listWebColorBgHex];
     [h5 appendFormat:@"\n <iframe id='%@' name='%@' style=\"width:%i%%; height:97%%;\" ></iframe>", PnrIframeDetail, PnrIframeDetail, 100 - config.listWebWidth - 4];
     
     [h5 appendString:@"\n\n </body></html>"];
     return h5;
 }
 
+// MARK: 列表页面
 + (NSString *)listH5:(NSString *)body {
     static NSString * h5_head;
     static NSString * h5_tail;
@@ -110,6 +112,8 @@
         {
             // 方便 浏览器查看 代码
             [html appendFormat:@"\n %@ \n", [PnrWebJs clearText]];
+            
+            
         }
         [html appendString:@"\n\n </script>\n"];
         
