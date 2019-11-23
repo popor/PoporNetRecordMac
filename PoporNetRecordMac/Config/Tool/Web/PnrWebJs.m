@@ -64,7 +64,25 @@
 // MARK: 高度自适应的textarea
 + (NSString *)textareaAutoHeightFuntion {
     // http://caibaojian.com/textarea-autoheight.html
-    return @"\n function makeExpandingArea(el) { var setStyle = function (el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }; var delayedResize = function (el) { window.setTimeout(function () { setStyle(el); }, 0); }; if (el.addEventListener) { el.addEventListener('input', function () { setStyle(el) }, false); setStyle(el); } else if (el.attachEvent) { el.attachEvent('onpropertychange', function () { setStyle(el); }); setStyle(el); } if (window.VBArray && window.addEventListener) { el.attachEvent('onkeydown', function () { var key = window.event.keyCode; if (key == 8 || key == 46) {delayedResize(el);} }); el.attachEvent('oncut', function () { delayedResize(el); }); } } ";
+    return @"\n\n\
+    ;function makeExpandingArea(el) {\n\
+    ;    var setStyle = function (el) {\n\
+    ;        el.style.height = 'auto';\n\
+    ;        el.style.height = el.scrollHeight + 'px';\n\
+    ;    };\n\
+    ;    var delayedResize = function (el) { window.setTimeout(function () { setStyle(el);}, 0);};\n\
+    ;    if (el.addEventListener) {\n\
+    ;        el.addEventListener('input', function () { setStyle(el) }, false);\n\
+    ;        setStyle(el);\n\
+    ;    } else if (el.attachEvent) {\n\
+    ;        el.attachEvent('onpropertychange', function () { setStyle(el); });\n\
+    ;        setStyle(el);\n\
+    ;    }\n\
+    ;    if (window.VBArray && window.addEventListener) {\n\
+    ;        el.attachEvent('onkeydown', function () { var key = window.event.keyCode; if (key == 8 || key == 46) {delayedResize(el);} });\n\
+    ;        el.attachEvent('oncut', function () { delayedResize(el); });\n\
+    ;    }\n\
+    } \n";
 }
 
 + (NSString *)textareaAuhoHeigtEventClass:(NSString *)className {
