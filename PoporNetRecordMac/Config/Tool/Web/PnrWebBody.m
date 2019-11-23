@@ -38,40 +38,40 @@
     
     // detail()
     [h5 appendFormat:@"\n\
-     function detail(row) {\n    \
-     var deviceName = getQueryVariable('%@')\n    \
-     var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n    \
-     document.getElementById('%@').src = src;\n\
-     }",
+     ;function detail(row) {\n\
+     ;    var deviceName = getQueryVariable('%@')\n\
+     ;    var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n\
+     ;    document.getElementById('%@').src = src;\n\
+     ;}",
      PnrKey_DeviceName,
      PnrGet_ViewDetail, PnrKey_DeviceName, PnrKey_index,
      PnrIframeDetail];
     
     // resubmit()
     [h5 appendFormat:@"\n\n\
-     function resubmit() {\n    \
-     var form = document.getElementById('%@').contentWindow.document.getElementById('%@');\n    \
-     form.submit();\n\
-     }", PnrIframeDetail, PnrFormResubmit];
+     ;function resubmit() {\n\
+     ;    var form = document.getElementById('%@').contentWindow.document.getElementById('%@');\n\
+     ;    form.submit();\n\
+     ;}", PnrIframeDetail, PnrFormResubmit];
     
     // freshList()
     [h5 appendFormat:@"\n\n\
-     function freshList() {\n    \
-     document.getElementById('%@').contentWindow.location.reload(true);\n\
-     }", PnrIframeList];
+     ;function freshList() {\n\
+     ;    document.getElementById('%@').contentWindow.location.reload(true);\n\
+     ;}", PnrIframeList];
     
     // onload()
     [h5 appendFormat:@"\n\
-     window.onload=function (){\n    \
-     var deviceName = getQueryVariable('%@')\n    \
-     var row        = getQueryVariable('%@')\n    \
-     var srcList = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row;\n    \
-     document.getElementById('%@').src = srcList;\n    \
-     if(row.length>0){\n        \
-     var srcDetail = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row;\n        \
-     document.getElementById('%@').src = srcDetail;\n    \
-     }\n\
-     }",
+     ;window.onload=function (){\n\
+     ;    var deviceName = getQueryVariable('%@')\n\
+     ;    var row        = getQueryVariable('%@')\n\
+     ;    var srcList = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row;\n\
+     ;    document.getElementById('%@').src = srcList;\n\
+     ;    if(row.length>0){\n\
+     ;        var srcDetail = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row;\n\
+     ;        document.getElementById('%@').src = srcDetail;\n\
+     ;    }\n\
+     ;}",
      PnrKey_DeviceName,
      PnrKey_index,
      PnrGet_ViewList, PnrKey_DeviceName, PnrKey_index,
@@ -131,33 +131,31 @@
             //
             [html appendFormat:
              @"\n\n\
-             function selectRow(row) {\n    \
-             if (selectRowOld >= 0){\n        \
-             var oldId = '%@' + selectRowOld.toString();\n        \
-             var text1 = '%@' + selectRowOld.toString();\n        \
-             var text2 = '%@' + selectRowOld.toString();\n        \
-             if(selectRowOld%%2 == 1){\n            \
-             document.getElementById(oldId).style.background = listWebColorCell0Hex;\n        \
-             } else {\n            \
-             document.getElementById(oldId).style.background = listWebColorCell1Hex;\n        \
-             }\n        \
-             document.getElementById(text1).style.color = defaultTextColor1;\n        \
-             document.getElementById(text2).style.color = defaultTextColor2;\n    \
-             }\n    \
-             \n    \
-             {\n        \
-             selectRowOld = row;\n        \
-             var newId = '%@' + row.toString();\n        \
-             var text1 = '%@' + row.toString();\n        \
-             var text2 = '%@' + row.toString();\n        \
-             document.getElementById(newId).style.background = selectBgColor;\n        \
-             document.getElementById(text1).style.color = selectTextColor;\n        \
-             document.getElementById(text2).style.color = selectTextColor;\n    \
-             \n    \
-             }\n    \
-             parent.detail(row);\n    \
-             \n\
-             }\n"
+             ;function selectRow(row) {\n\
+             ;    if (selectRowOld >= 0){\n\
+             ;        var oldId = '%@' + selectRowOld.toString();\n\
+             ;        var text1 = '%@' + selectRowOld.toString();\n\
+             ;        var text2 = '%@' + selectRowOld.toString();\n\
+             ;        if(selectRowOld%%2 == 1){\n\
+             ;            document.getElementById(oldId).style.background = listWebColorCell0Hex;\n\
+             ;        } else {\n\
+             ;            document.getElementById(oldId).style.background = listWebColorCell1Hex;\n\
+             ;        }\n\
+             ;        document.getElementById(text1).style.color = defaultTextColor1;\n\
+             ;        document.getElementById(text2).style.color = defaultTextColor2;\n\
+             ;    }\n\
+             ;    \n\
+             ;    {\n\
+             ;        selectRowOld = row;\n\
+             ;        var newId = '%@' + row.toString();\n\
+             ;        var text1 = '%@' + row.toString();\n\
+             ;        var text2 = '%@' + row.toString();\n\
+             ;        document.getElementById(newId).style.background = selectBgColor;\n\
+             ;        document.getElementById(text1).style.color = selectTextColor;\n\
+             ;        document.getElementById(text2).style.color = selectTextColor;\n\
+             ;    }\n\
+             ;    parent.detail(row);\n\
+             ;}\n"
              , PnrH5_list
              , PnrH5_listText1
              , PnrH5_listText2
@@ -168,21 +166,20 @@
             
             // onload()
             [html appendFormat:@"\n\
-             window.onload=function (){\n    \
-             var index = getQueryVariable('%@');\n    \
-             if (index.length >= 0){\n        \
-             var oldId = '%@' + selectRowOld.toString();\n        \
-             var text1 = '%@' + selectRowOld.toString();\n        \
-             var text2 = '%@' + selectRowOld.toString();\n        \
-             if(document.getElementById(oldId)){\n            \
-             selectRowOld = parseInt(index);\n            \
-             document.getElementById(oldId).style.background = selectBgColor;\n            \
-             document.getElementById(text1).style.color = selectTextColor;\n            \
-             document.getElementById(text2).style.color = selectTextColor;\n        \
-             }\n    \
-             }\n    \
-             \n\
-             }"
+             ;window.onload=function (){\n\
+             ;    var index = getQueryVariable('%@');\n\
+             ;    if (index.length >= 0){\n\
+             ;        var oldId = '%@' + selectRowOld.toString();\n\
+             ;        var text1 = '%@' + selectRowOld.toString();\n\
+             ;        var text2 = '%@' + selectRowOld.toString();\n\
+             ;        if(document.getElementById(oldId)){\n\
+             ;            selectRowOld = parseInt(index);\n\
+             ;            document.getElementById(oldId).style.background = selectBgColor;\n\
+             ;            document.getElementById(text1).style.color = selectTextColor;\n\
+             ;            document.getElementById(text2).style.color = selectTextColor;\n\
+             ;        }\n\
+             ;    }\n\
+             ;}"
              , PnrKey_index
              , PnrH5_list
              , PnrH5_listText1
@@ -270,13 +267,12 @@
             
             // PnrGet_ViewResubmit()
             [h5 appendFormat:@"\n\n\
-             function %@() {\n    \
-             var deviceName = getQueryVariable('%@'); \n    \
-             var row = getQueryVariable('%@'); \n    \
-             var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n    \
-             window.location.href = src;\n    \
-             \n\
-             } \n\
+             ;function %@() {\n\
+             ;    var deviceName = getQueryVariable('%@'); \n\
+             ;    var row = getQueryVariable('%@'); \n\
+             ;    var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n\
+             ;    window.location.href = src;\n\
+             ;}\n\
              ",
              PnrGet_ViewResubmit,
              PnrKey_DeviceName,
@@ -323,13 +319,12 @@
             
             // PnrGet_ViewDetail()
             [h5 appendFormat:@"\n\n\
-             function %@() {\n    \
-             var deviceName = getQueryVariable('%@')\n    \
-             var row = getQueryVariable('%@')\n    \
-             var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n    \
-             window.location.href = src;\n    \
-             \n\
-             }",
+             ;function %@() {\n\
+             ;    var deviceName = getQueryVariable('%@')\n\
+             ;    var row = getQueryVariable('%@')\n\
+             ;    var src = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row ;\n\
+             ;    window.location.href = src;\n\
+             ;}",
              PnrGet_ViewDetail,
              PnrKey_DeviceName,
              PnrKey_index,

@@ -20,11 +20,11 @@
     if (!js) {
         js =
         [NSString stringWithFormat: @"\n\
-         function jsonStatic(formKey) {\n    \
-         var form = document.getElementById(formKey);\n    \
-         form.action='/%@';\n    \
-         form.submit();\n\
-         }\n\
+         ;function jsonStatic(formKey) {\n\
+         ;    var form = document.getElementById(formKey);\n\
+         ;    form.action='/%@';\n\
+         ;    form.submit();\n\
+         ;}\n\
          ", PnrPost_JsonXml];
     }
     return js;
@@ -37,25 +37,25 @@
     if (!js) {
         js =
         [NSString stringWithFormat: @"\n\
-         function jsonDynamic(formKey, contentkey) {\n\
-         var valueFrom = document.forms[formKey].elements[contentkey].value;\n\
-         \n\
-         var dlform = document.createElement('form');\n\
-         dlform.style = 'display:none;';\n\
-         dlform.method = 'POST';\n\
-         dlform.action = '/%@';\n\
-         dlform.target = '_blank';\n\
-         \n\
-         var hdnFilePath = document.createElement('input');\n\
-         hdnFilePath.type = 'hidden';\n\
-         hdnFilePath.name = '%@';\n\
-         hdnFilePath.value = valueFrom;\n\
-         dlform.appendChild(hdnFilePath);\n\
-         \n\
-         document.body.appendChild(dlform);\n\
-         dlform.submit();\n\
-         document.body.removeChild(dlform);\n\
-         }\n\
+         ;function jsonDynamic(formKey, contentkey) {\n\
+         ;    var valueFrom = document.forms[formKey].elements[contentkey].value;\n\
+         ;    \n\
+         ;    var dlform = document.createElement('form');\n\
+         ;    dlform.style = 'display:none;';\n\
+         ;    dlform.method = 'POST';\n\
+         ;    dlform.action = '/%@';\n\
+         ;    dlform.target = '_blank';\n\
+         ;    \n\
+         ;    var hdnFilePath = document.createElement('input');\n\
+         ;    hdnFilePath.type = 'hidden';\n\
+         ;    hdnFilePath.name = '%@';\n\
+         ;    hdnFilePath.value = valueFrom;\n\
+         ;    dlform.appendChild(hdnFilePath);\n\
+         ;    \n\
+         ;    document.body.appendChild(dlform);\n\
+         ;    dlform.submit();\n\
+         ;    document.body.removeChild(dlform);\n\
+         ;}\n\
          ", PnrPost_JsonXml, PnrKey_Conent];
     }
     return js;
@@ -77,24 +77,24 @@
     if (!js) {
         js =
         [NSString stringWithFormat:@"\n\
-         function ajaxResubmit(form) {\n\
-         var ta = document.forms['%@'].elements['%@'];\n\
-         ta.value = \"请等待\"\n\
-         \n\
-         var xmlhttp = new XMLHttpRequest();\n\
-         xmlhttp.open('POST','/%@',true);\n\
-         xmlhttp.onreadystatechange=function() {\n\
-         if (xmlhttp.readyState==4 && xmlhttp.status==200){\n\
-         ta.value = xmlhttp.responseText; \n\
-         makeExpandingArea(ta);\n\
-         parent.freshList();\
-         }\n\
-         }\n\
-         \n\
-         var text = '';\n\
-         for (var i = 0; i < form.elements.length; i++) {\n\
-         var filed = form.elements[i];\n\
-         var type = filed.type;\n\
+         ;function ajaxResubmit(form) {\n\
+         ;    var ta = document.forms['%@'].elements['%@'];\n\
+         ;    ta.value = \"请等待\"\n\
+         ;    \n\
+         ;    var xmlhttp = new XMLHttpRequest();\n\
+         ;    xmlhttp.open('POST','/%@',true);\n\
+         ;    xmlhttp.onreadystatechange=function() {\n\
+         ;        if (xmlhttp.readyState==4 && xmlhttp.status==200){\n\
+         ;            ta.value = xmlhttp.responseText; \n\
+         ;            makeExpandingArea(ta);\n\
+         ;            parent.freshList();\
+         ;        }\n\
+         ;    }\n\
+         ;\n\
+         ;    var text = '';\n\
+         ;    for (var i = 0; i < form.elements.length; i++) {\n\
+         ;        var filed = form.elements[i];\n\
+         ;        var type = filed.type;\n\
          switch (filed.type) {\n\
          case 'textarea': {\n\
          text = text + '&' + filed.name + '=' + filed.value;\n\
@@ -107,10 +107,10 @@
          break;\n\
          }\n\
          }\n\
-         }\n\
-         \n\
-         xmlhttp.send(text.substr(1)); \n\
-         }\n", PnrFormFeedback, PnrKey_Conent, PnrPost_Resubmit];
+         ;    }\n\
+         ;    \n\
+         ;    xmlhttp.send(text.substr(1)); \n\
+         ;}\n", PnrFormFeedback, PnrKey_Conent, PnrPost_Resubmit];
     }
     return js;
     // https://developer.mozilla.org/zh-CN/docs/Web/API/FormData/Using_FormData_Objects
@@ -122,9 +122,10 @@
     if (!js) {
         js =
         [NSString stringWithFormat:
-         @"\n window.onload=function (){\n\
-         document.getElementById('%@').innerText = getRoot(); \n\
-         } \n", PnrKey_IdShare];
+         @"\n\n\
+         ;window.onload=function (){\n\
+         ;    document.getElementById('%@').innerText = getRoot(); \n\
+         ;} \n", PnrKey_IdShare];
     }
     return js;
 }
@@ -132,22 +133,23 @@
 + (NSString *)getRootUrl {
     return
     [NSString stringWithFormat:
-     @"\n function getRoot() {\n    \
-     var hostname = location.hostname;\n    \
-     var pathname = location.pathname;\n    \
-     var contextPath = pathname.split('/')[1];\n    \
-     var port = location.port;\n    \
-     var protocol = location.protocol;\n    \
-     var deviceName = getQueryVariable('%@')\n    \
-     deviceName = decodeURIComponent(deviceName); \n    \
-     var row = getQueryVariable('%@')\n    \
-     if(deviceName.length > 0){\n        \
-     return protocol + '//' + hostname + ':' + port + '/' + '%@' + '?' +'%@=' + deviceName + '&%@=' + row;\n    \
-     } else {\n        \
-     return protocol + '//' + hostname + ':' + port + '/' + '%@' + '?' +'%@=' + row ;\n    \
-     }\n    \
-     //return protocol + '//' + hostname + ':' + port + '/' + contextPath;\n\
-     }" ,
+     @"\n\n\
+     ;function getRoot() {\n\
+     ;    var hostname = location.hostname;\n\
+     ;    var pathname = location.pathname;\n\
+     ;    var contextPath = pathname.split('/')[1];\n\
+     ;    var port = location.port;\n\
+     ;    var protocol = location.protocol;\n\
+     ;    var deviceName = getQueryVariable('%@')\n\
+     ;    deviceName = decodeURIComponent(deviceName); \n\
+     ;    var row = getQueryVariable('%@')\n\
+     ;    if(deviceName.length > 0){\n\
+     ;        return protocol + '//' + hostname + ':' + port + '/' + '%@' + '?' +'%@=' + deviceName + '&%@=' + row;\n\
+     ;    } else {\n\
+     ;        return protocol + '//' + hostname + ':' + port + '/' + '%@' + '?' +'%@=' + row ;\n\
+     ;    }\n\
+     ;    //return protocol + '//' + hostname + ':' + port + '/' + contextPath;\n\
+     ;}" ,
      PnrKey_DeviceName,
      PnrKey_index,
      PnrGet_ViewRoot, PnrKey_DeviceName, PnrKey_index,
@@ -156,16 +158,17 @@
 }
 
 + (NSString *)copyInnerText {
-    return @"\n function copyInnerText(idName) {\n\
-    var text = document.getElementById(idName).innerText;\n\
-    var oInput = document.createElement('input');\n\
-    oInput.value = text;\n\
-    document.body.appendChild(oInput);\n\
-    oInput.select();\n\
-    document.execCommand(\"Copy\");\n\
-    oInput.className = 'oInput';\n\
-    oInput.style.display = 'none';\n\
-    }";
+    return @"\n\n\
+    ;function copyInnerText(idName) {\n\
+    ;    var text = document.getElementById(idName).innerText;\n\
+    ;    var oInput = document.createElement('input');\n\
+    ;    oInput.value = text;\n\
+    ;    document.body.appendChild(oInput);\n\
+    ;    oInput.select();\n\
+    ;    document.execCommand(\"Copy\");\n\
+    ;    oInput.className = 'oInput';\n\
+    ;    oInput.style.display = 'none';\n\
+    ;}";
 }
 
 + (NSString *)clearText {
@@ -174,18 +177,14 @@
         js =
         [NSString stringWithFormat:
          @"\n\n\
-         function clearAction() {\n\
-         var xmlhttp = new XMLHttpRequest();\n\
-         xmlhttp.open('POST','/%@',true);\n\
-         \n\
-         \n\
-         xmlhttp.onreadystatechange=function() {\n\
-         location.reload();\n\
-         }\n\
-         \n\
-         \n\
-         xmlhttp.send('clear'); \n\
-         }\n\n", PnrPost_Clear];
+         ;function clearAction() {\n\
+         ;    var xmlhttp = new XMLHttpRequest();\n\
+         ;    xmlhttp.open('POST','/%@',true);\n\
+         ;    xmlhttp.onreadystatechange=function() {\n\
+         ;        location.reload();\n\
+         ;    }\n\
+         ;    xmlhttp.send('clear'); \n\
+         ;}\n\n", PnrPost_Clear];
     }
     return js;
 }
@@ -194,17 +193,17 @@
     static NSString * js;
     if (!js) {
         js = @"\n\n\
-        function getQueryVariable(variable)\n\
-        {\n    \
-        var query = window.location.search.substring(1);\n    \
-        var vars = query.split(\"&\");\n    \
-        for (var i=0;i<vars.length;i++) {\n        \
-        var pair = vars[i].split(\"=\");\n        \
-        if(pair[0] == variable){return pair[1];}\n    \
-        }\n    \
-        return('');\n\
-        }\n\
-        \n";
+        ;function getQueryVariable(variable){\n\
+        ;    var query = window.location.search.substring(1);\n\
+        ;    var vars = query.split(\"&\");\n\
+        ;    for (var i=0;i<vars.length;i++) {\n\
+        ;        var pair = vars[i].split(\"=\");\n\
+        ;        if(pair[0] == variable){\n\
+        ;             return pair[1];\n\
+        ;        }\n\
+        ;    }\n\
+        ;    return('');\n\
+        ;}\n";
     }
     return js;
 }
