@@ -171,14 +171,16 @@
              window.onload=function (){\n    \
              var index = getQueryVariable('%@');\n    \
              if (index.length >= 0){\n        \
-             selectRowOld = parseInt(index);\n        \
              var oldId = '%@' + selectRowOld.toString();\n        \
              var text1 = '%@' + selectRowOld.toString();\n        \
              var text2 = '%@' + selectRowOld.toString();\n        \
-             document.getElementById(oldId).style.background = selectBgColor;\n        \
-             document.getElementById(text1).style.color = selectTextColor;\n        \
-             document.getElementById(text2).style.color = selectTextColor;\n    \
-             }\
+             if(document.getElementById(oldId)){\n            \
+             selectRowOld = parseInt(index);\n            \
+             document.getElementById(oldId).style.background = selectBgColor;\n            \
+             document.getElementById(text1).style.color = selectTextColor;\n            \
+             document.getElementById(text2).style.color = selectTextColor;\n        \
+             }\n    \
+             }\n    \
              \n\
              }"
              , PnrKey_index
