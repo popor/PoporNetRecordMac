@@ -169,9 +169,9 @@
              ;window.onload=function (){\n\
              ;    var index = getQueryVariable('%@');\n\
              ;    if (index.length >= 0){\n\
-             ;        var oldId = '%@' + selectRowOld.toString();\n\
-             ;        var text1 = '%@' + selectRowOld.toString();\n\
-             ;        var text2 = '%@' + selectRowOld.toString();\n\
+             ;        var oldId = '%@' + index.toString();\n\
+             ;        var text1 = '%@' + index.toString();\n\
+             ;        var text2 = '%@' + index.toString();\n\
              ;        if(document.getElementById(oldId)){\n\
              ;            selectRowOld = parseInt(index);\n\
              ;            document.getElementById(oldId).style.background = selectBgColor;\n\
