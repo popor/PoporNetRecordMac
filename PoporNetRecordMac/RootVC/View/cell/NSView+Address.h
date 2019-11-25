@@ -1,5 +1,5 @@
 //
-//  NSButton+Address.h
+//  NSView+Address.h
 //  PoporNetRecordMac
 //
 //  Created by apple on 2019/11/18.
@@ -8,12 +8,9 @@
 
 #import <AppKit/AppKit.h>
 
-
-#import <Cocoa/Cocoa.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSButton (Address)
+@interface NSView (Address)
 
 @property (nonatomic, weak  ) id weakEntity;
 

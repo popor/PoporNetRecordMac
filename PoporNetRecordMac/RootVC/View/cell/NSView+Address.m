@@ -1,16 +1,16 @@
 //
-//  NSButton+Address.m
+//  NSView+Address.m
 //  PoporNetRecordMac
 //
 //  Created by apple on 2019/11/18.
 //  Copyright © 2019 popor. All rights reserved.
 //
 
-#import "NSButton+Address.h"
+#import "NSView+Address.h"
 
 #import <objc/runtime.h>
 
-@implementation NSButton (Address)
+@implementation NSView (Address)
 @dynamic weakEntity;
 
 - (void)setWeakEntity:(id)weakEntity {

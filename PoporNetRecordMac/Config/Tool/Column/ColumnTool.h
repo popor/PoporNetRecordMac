@@ -16,7 +16,7 @@ static NSString * TvColumnTitle_info1    = @"开关";
 static NSString * TvColumnTip_info1      = @"";
 
 static NSString * TvColumnId_info2       = @"tag2";
-static NSString * TvColumnTitle_info2    = @"备注";
+static NSString * TvColumnTitle_info2    = @"查看";
 static NSString * TvColumnTip_info2      = @"";
 
 static NSString * TvColumnId_info3       = @"tag3";

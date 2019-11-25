@@ -30,8 +30,8 @@
         NSArray * titleArray     = @[TvColumnTitle_info1, TvColumnTitle_info2, TvColumnTitle_info3];
         NSArray * tipArray       = @[TvColumnTip_info1,   TvColumnTip_info2,   TvColumnTip_info3];
         
-        NSArray * widthArray     = @[@(25), @(ColumnTagMiniWidth), @(ColumnTagMiniWidth)];
-        NSArray * miniWidthArray = @[@(25), @(ColumnTagMiniWidth), @(ColumnTagMiniWidth)];
+        NSArray * widthArray     = @[@(25), @(70), @(ColumnTagMiniWidth)];
+        NSArray * miniWidthArray = @[@(25), @(70), @(ColumnTagMiniWidth)];
         
         for (int i=0; i<IDArray.count; i++) {
             ColumnEntity * entity = [ColumnEntity new];

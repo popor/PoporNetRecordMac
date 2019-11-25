@@ -16,6 +16,8 @@
 		182CE848237CE30F00F33F61 /* PnrWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE842237CE30F00F33F61 /* PnrWebServer.m */; };
 		182CE849237CE30F00F33F61 /* PnrWebBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE843237CE30F00F33F61 /* PnrWebBody.m */; };
 		182CE851237CED9300F33F61 /* PoporNetRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE84F237CED9300F33F61 /* PoporNetRecord.m */; };
+		183BE874238B68F900885F6C /* NSButton+pDrawRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 183BE873238B68F900885F6C /* NSButton+pDrawRect.m */; };
+		183BE877238B770F00885F6C /* LLCustomBT.m in Sources */ = {isa = PBXBuildFile; fileRef = 183BE876238B770F00885F6C /* LLCustomBT.m */; };
 		18988F43238399CE00A1E082 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18988F42238399CE00A1E082 /* icon.png */; };
 		18988F452383C2C800A1E082 /* icon_16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 18988F442383C2C700A1E082 /* icon_16x16.png */; };
 		18A06DEB237BCF7B0084506B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06DEA237BCF7B0084506B /* AppDelegate.m */; };
@@ -35,7 +37,7 @@
 		18A06E43237BFC320084506B /* NSTextField+Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E41237BFC320084506B /* NSTextField+Address.m */; };
 		18A06E44237BFC320084506B /* EditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E42237BFC320084506B /* EditableTextField.m */; };
 		18A06E47237C051F0084506B /* PnrDeviceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E46237C051F0084506B /* PnrDeviceEntity.m */; };
-		18BAE79223826C3500BB6A3C /* NSButton+Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE79123826C3500BB6A3C /* NSButton+Address.m */; };
+		18BAE79223826C3500BB6A3C /* NSView+Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE79123826C3500BB6A3C /* NSView+Address.m */; };
 		60165D6F9A867925C9BAF8BF /* Pods_PoporNetRecordMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D96B0733F0A57163C75586A /* Pods_PoporNetRecordMac.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,10 @@
 		182CE845237CE30F00F33F61 /* PnrWebCss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PnrWebCss.h; sourceTree = "<group>"; };
 		182CE84F237CED9300F33F61 /* PoporNetRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoporNetRecord.m; sourceTree = "<group>"; };
 		182CE850237CED9300F33F61 /* PoporNetRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoporNetRecord.h; sourceTree = "<group>"; };
+		183BE872238B68F900885F6C /* NSButton+pDrawRect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSButton+pDrawRect.h"; sourceTree = "<group>"; };
+		183BE873238B68F900885F6C /* NSButton+pDrawRect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSButton+pDrawRect.m"; sourceTree = "<group>"; };
+		183BE875238B770F00885F6C /* LLCustomBT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLCustomBT.h; sourceTree = "<group>"; };
+		183BE876238B770F00885F6C /* LLCustomBT.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLCustomBT.m; sourceTree = "<group>"; };
 		18988F42238399CE00A1E082 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		18988F442383C2C700A1E082 /* icon_16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_16x16.png; sourceTree = "<group>"; };
 		18A06DE6237BCF7B0084506B /* PoporNetRecordMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoporNetRecordMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,8 +107,8 @@
 		18A06E46237C051F0084506B /* PnrDeviceEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PnrDeviceEntity.m; sourceTree = "<group>"; };
 		18A0C8CE238502F800B29401 /* PnrValuePrifix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PnrValuePrifix.h; sourceTree = "<group>"; };
 		18AFBA082387B7F900A2D12E /* work list.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "work list.txt"; sourceTree = "<group>"; };
-		18BAE79023826C3500BB6A3C /* NSButton+Address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSButton+Address.h"; sourceTree = "<group>"; };
-		18BAE79123826C3500BB6A3C /* NSButton+Address.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSButton+Address.m"; sourceTree = "<group>"; };
+		18BAE79023826C3500BB6A3C /* NSView+Address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Address.h"; sourceTree = "<group>"; };
+		18BAE79123826C3500BB6A3C /* NSView+Address.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Address.m"; sourceTree = "<group>"; };
 		272A82FDE599135FF461AD1C /* Pods-PoporNetRecordMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.debug.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.debug.xcconfig"; sourceTree = "<group>"; };
 		9D96B0733F0A57163C75586A /* Pods_PoporNetRecordMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoporNetRecordMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D329B8CD1C3EC314B48AB38C /* Pods-PoporNetRecordMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.release.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.release.xcconfig"; sourceTree = "<group>"; };
@@ -377,8 +383,12 @@
 				18A06E42237BFC320084506B /* EditableTextField.m */,
 				18A06E3F237BFC320084506B /* NSTextField+Address.h */,
 				18A06E41237BFC320084506B /* NSTextField+Address.m */,
-				18BAE79023826C3500BB6A3C /* NSButton+Address.h */,
-				18BAE79123826C3500BB6A3C /* NSButton+Address.m */,
+				18BAE79023826C3500BB6A3C /* NSView+Address.h */,
+				18BAE79123826C3500BB6A3C /* NSView+Address.m */,
+				183BE872238B68F900885F6C /* NSButton+pDrawRect.h */,
+				183BE873238B68F900885F6C /* NSButton+pDrawRect.m */,
+				183BE875238B770F00885F6C /* LLCustomBT.h */,
+				183BE876238B770F00885F6C /* LLCustomBT.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -517,6 +527,7 @@
 			files = (
 				18A06E19237BD1E20084506B /* NSTask+shell.m in Sources */,
 				18A06E44237BFC320084506B /* EditableTextField.m in Sources */,
+				183BE874238B68F900885F6C /* NSButton+pDrawRect.m in Sources */,
 				182CE83A237CE2B200F33F61 /* PnrPortEntity.m in Sources */,
 				18A06E17237BD1E20084506B /* NSBundle+Tool.m in Sources */,
 				18A06E47237C051F0084506B /* PnrDeviceEntity.m in Sources */,
@@ -525,6 +536,7 @@
 				18A06E2C237BE9380084506B /* RootVCInteractor.m in Sources */,
 				182CE849237CE30F00F33F61 /* PnrWebBody.m in Sources */,
 				182CE851237CED9300F33F61 /* PoporNetRecord.m in Sources */,
+				183BE877238B770F00885F6C /* LLCustomBT.m in Sources */,
 				182CE839237CE2B200F33F61 /* PnrEntity.m in Sources */,
 				18A06E43237BFC320084506B /* NSTextField+Address.m in Sources */,
 				18A06E2D237BE9380084506B /* RootVCPresenter.m in Sources */,
@@ -539,7 +551,7 @@
 				18A06DEB237BCF7B0084506B /* AppDelegate.m in Sources */,
 				182CE848237CE30F00F33F61 /* PnrWebServer.m in Sources */,
 				18A06E3D237BEFFC0084506B /* ColumnTool.m in Sources */,
-				18BAE79223826C3500BB6A3C /* NSButton+Address.m in Sources */,
+				18BAE79223826C3500BB6A3C /* NSView+Address.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,8 @@
 
 #import "EditableTextField.h"
 #import "NSTextField+Address.h"
-#import "NSButton+Address.h"
+#import "NSView+Address.h"
+#import "LLCustomBT.h"
 #import "PnrPortEntity.h"
 #import "PoporNetRecord.h"
 #import <PoporAFN/PoporAFN.h>
@@ -280,24 +281,34 @@ static NSString * SepactorKey = @"_PnrMac_";
         }
             
         case 2:{
-            NSTextField * cellTF = [self tableView:tableView cellTFForColumn:tableColumn row:row edit:YES initBlock:^(NSDictionary *dic) {
-                NSTextField * tf = dic[@"tf"];
-                tf.alignment = NSTextAlignmentLeft;
-            }];
-            cellTF.stringValue = entity.note ? :@"null";
-            cell = cellTF;
+            LLCustomBT * cellBT = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self.view];
+            if (!cellBT) {
+                //使用方法
+                cellBT = [[LLCustomBT alloc] initWithFrame:CGRectMake(0, 0, tableColumn.width, CellHeight)];
+                cellBT.isHandCursor = YES;
+                cellBT.defaultTitle = @"单独查看";
+                //cellBT.selectedTitle = @"已选中";
+                cellBT.defaultTitleColor  = [NSColor textColor]; //[NSColor whiteColor];
+                //cellBT.selectedTitleColor = [NSColor blackColor];
+                cellBT.defaultFont  = [NSFont systemFontOfSize:15];
+                //cellBT.selectedFont = [NSFont systemFontOfSize:10];
+                cellBT.defaultBackgroundColor  = [NSColor clearColor];
+                cellBT.selectedBackgroundColor = [NSColor selectedTextBackgroundColor];
+                cellBT.defaultBackgroundImage  = [NSImage imageNamed:@""];
+                cellBT.selectedBackgroundImage = [NSImage imageNamed:@""];
+                //cellBT.rectCorners = LLRectCornerTopLeft|LLRectCornerBottomLeft;
+                //cellBT.radius = 15;
+                cellBT.textAlignment = LLTextAlignmentLeft;
+                //cellBT.textUnderLineStyle = LLTextUnderLineStyleDeleteDouble;
+               
+                [cellBT setTarget:self];
+                [cellBT setAction:@selector(cellViewBTAction:)];
+                
+            }
+            cellBT.weakEntity = entity;
+            //cellBT.state = entity.move ? NSControlStateValueOn:NSControlStateValueOff;
+            cell = cellBT;
             
-            cellTF.weakEntity = entity;
-            __block BOOL startMonitor = NO;
-            [cellTF.rac_textSignal subscribeNext:^(id x) {
-                if (!startMonitor) {
-                    startMonitor = YES;
-                }else{
-                    if (cellTF.weakEntity == entity) {
-                        //[weakSelf.interactor updateEntity:entity originPath:x];
-                    }
-                }
-            }];
             break;
         }
         case 3:{
@@ -350,6 +361,14 @@ static NSString * SepactorKey = @"_PnrMac_";
     PnrDeviceEntity * entity = (PnrDeviceEntity *)cellBT.weakEntity;
     //cellBT.state = entity.receive ? NSControlStateValueOn:NSControlStateValueOff;
     entity.receive = cellBT.state==NSControlStateValueOn ? YES:NO;
+    
+}
+
+- (void)cellViewBTAction:(NSButton *)cellBT {
+    PnrDeviceEntity * entity = (PnrDeviceEntity *)cellBT.weakEntity;
+    PoporNetRecord * pnr     = [PoporNetRecord share];
+    NSString * url           = [NSString stringWithFormat:@"%@%@?%@=%@", pnr.webServer.webServer.serverURL.absoluteString, PnrGet_ViewRoot, PnrKey_DeviceName, entity.deviceName];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
     
 }
 
