@@ -9,7 +9,6 @@
 #import "RootVCInteractor.h"
 
 #import "EditableTextField.h"
-#import "NSTextField+Address.h"
 #import "NSView+Address.h"
 #import "LLCustomBT.h"
 #import "PnrPortEntity.h"
@@ -334,9 +333,9 @@ static NSString * SepactorKey = @"_PnrMac_";
 - (EditableTextField *)tableView:(NSTableView *)tableView cellTFForColumn:(NSTableColumn *)tableColumn row:(NSInteger)row edit:(BOOL)edit initBlock:(BlockPDic)block {
     EditableTextField * cellTF = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self.view];
     if (!cellTF) {
-        int font = 17;
-        cellTF = [[EditableTextField alloc] initWithFrame:CGRectMake(0, (CellHeight-font)/2, tableColumn.width, font)];
-        cellTF.font            = [NSFont systemFontOfSize:font-2];
+        int font = 15;
+        cellTF = [[EditableTextField alloc] initWithFrame:CGRectMake(0, 0, tableColumn.width, CellHeight)];
+        cellTF.font            = [NSFont systemFontOfSize:font];
         cellTF.alignment       = NSTextAlignmentCenter;
         cellTF.editable        = edit;
         cellTF.identifier      = tableColumn.identifier;

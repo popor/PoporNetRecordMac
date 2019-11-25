@@ -34,7 +34,6 @@
 		18A06E2E237BE9380084506B /* RootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E2B237BE9380084506B /* RootVC.m */; };
 		18A06E38237BECA90084506B /* ColumnEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E35237BECA90084506B /* ColumnEntity.m */; };
 		18A06E3D237BEFFC0084506B /* ColumnTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E3C237BEFFC0084506B /* ColumnTool.m */; };
-		18A06E43237BFC320084506B /* NSTextField+Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E41237BFC320084506B /* NSTextField+Address.m */; };
 		18A06E44237BFC320084506B /* EditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E42237BFC320084506B /* EditableTextField.m */; };
 		18A06E47237C051F0084506B /* PnrDeviceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E46237C051F0084506B /* PnrDeviceEntity.m */; };
 		18BAE79223826C3500BB6A3C /* NSView+Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE79123826C3500BB6A3C /* NSView+Address.m */; };
@@ -99,9 +98,7 @@
 		18A06E35237BECA90084506B /* ColumnEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColumnEntity.m; sourceTree = "<group>"; };
 		18A06E3B237BEFFC0084506B /* ColumnTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColumnTool.h; sourceTree = "<group>"; };
 		18A06E3C237BEFFC0084506B /* ColumnTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColumnTool.m; sourceTree = "<group>"; };
-		18A06E3F237BFC320084506B /* NSTextField+Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextField+Address.h"; sourceTree = "<group>"; };
 		18A06E40237BFC320084506B /* EditableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableTextField.h; sourceTree = "<group>"; };
-		18A06E41237BFC320084506B /* NSTextField+Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextField+Address.m"; sourceTree = "<group>"; };
 		18A06E42237BFC320084506B /* EditableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableTextField.m; sourceTree = "<group>"; };
 		18A06E45237C051F0084506B /* PnrDeviceEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PnrDeviceEntity.h; sourceTree = "<group>"; };
 		18A06E46237C051F0084506B /* PnrDeviceEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PnrDeviceEntity.m; sourceTree = "<group>"; };
@@ -381,8 +378,6 @@
 			children = (
 				18A06E40237BFC320084506B /* EditableTextField.h */,
 				18A06E42237BFC320084506B /* EditableTextField.m */,
-				18A06E3F237BFC320084506B /* NSTextField+Address.h */,
-				18A06E41237BFC320084506B /* NSTextField+Address.m */,
 				18BAE79023826C3500BB6A3C /* NSView+Address.h */,
 				18BAE79123826C3500BB6A3C /* NSView+Address.m */,
 				183BE872238B68F900885F6C /* NSButton+pDrawRect.h */,
@@ -538,7 +533,6 @@
 				182CE851237CED9300F33F61 /* PoporNetRecord.m in Sources */,
 				183BE877238B770F00885F6C /* LLCustomBT.m in Sources */,
 				182CE839237CE2B200F33F61 /* PnrEntity.m in Sources */,
-				18A06E43237BFC320084506B /* NSTextField+Address.m in Sources */,
 				18A06E2D237BE9380084506B /* RootVCPresenter.m in Sources */,
 				18A06E2E237BE9380084506B /* RootVC.m in Sources */,
 				18A06E18237BD1E20084506B /* iToast.m in Sources */,
