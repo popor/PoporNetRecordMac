@@ -136,46 +136,8 @@ static NSString * SepactorKey = @"_PnrMac_";
     } extraDic:@{}];
 }
 
-- (void)setStatusImage {
-    //获取系统单例NSStatusBar对象
-    self.statusItem = ({
-        NSStatusBar * statusBar = [NSStatusBar systemStatusBar];
-        NSStatusItem * item = [statusBar statusItemWithLength:NSVariableStatusItemLength];
-        //NSStatusItem *statusItem = [statusBar statusItemWithLength:NSSquareStatusItemLength];
-        item.button.image = [NSImage imageNamed:@"icon_16x16"];
-        
-        [item.button setTarget:self];
-        [item.button setAction:@selector(statusItemAction:)];
-        
-        item.menu = [NSMenu new];
-        {
-            NSMenuItem * mi = [[NSMenuItem alloc] initWithTitle:@"显示" action:@selector(menuShow) keyEquivalent:@""];
-            
-            [item.menu addItem:mi];
-        }
-        {
-            NSMenuItem * mi = [NSMenuItem separatorItem];
-            [item.menu addItem:mi];
-        }
-        {
-            NSMenuItem * mi = [[NSMenuItem alloc] initWithTitle:@"退出" action:@selector(menuExit) keyEquivalent:@""];
-            mi.enabled = YES;
-            
-            [item.menu addItem:mi];
-        }
-        
-        item;
-    });
-    
-}
-
-- (void)statusItemAction:(NSStatusItem *)item {NSLog(@"%s", __func__); }
-- (void)menuExit { }
-- (void)menuShow { }
-
 - (void)setPnrConfig {
     PnrConfig * config = [PnrConfig share];
-    //NSImage * image = [NSImage imageNamed:@"icon"];
     NSString * path = [[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"];
     config.webIconData = [NSData dataWithContentsOfFile:path];
 }
@@ -184,7 +146,7 @@ static NSString * SepactorKey = @"_PnrMac_";
 - (AFHTTPSessionManager *)managerDic:(NSDictionary *)dic {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    manager.requestSerializer =  [AFJSONRequestSerializer serializer];
+    manager.requestSerializer  = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil]; // 不然不支持www.baidu.com.
     
@@ -383,143 +345,6 @@ static NSString * SepactorKey = @"_PnrMac_";
 - (void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn {
     // NSLog(@"clumn : %@", tableColumn.identifier);
 }
-
-//// !!!: column 排序
-//- (void)tableView:(NSTableView *)tableView didDragTableColumn:(NSTableColumn *)tableColumn {
-//    if (tableView.tag == folderTVTag) {
-//        //NSLog(@"tv did drag : %@", tableColumn.identifier);
-//        for (int i=0; i< tableView.tableColumns.count; i++) {
-//            //NSLog(@"i = %i id:%@", i, tableColumn.identifier);
-//            NSTableColumn * column = tableView.tableColumns[i];
-//            [PDB updateClass:[ColumnEntity class] key:@"sort" equal:@(i) where:@"columnID" equal:column.identifier];
-//        }
-//    }
-//}
-//
-//// !!!: column resize 系统通知事件,类似delegate.
-//- (void)tableViewColumnDidResize:(NSNotification *)notification {
-//    if (!self.isAllowColumnUpdateWidth) {
-//        return;
-//    }
-//
-//    NSTableColumn * column = notification.userInfo[@"NSTableColumn"];
-//    if ([column.identifier hasPrefix:@"folder"]) {
-//        // 现在的策略是忽略最后一个NSTableColumn,因为这个会随着window.size变化,忽略即可完美处理.
-//        if ([column isEqual:self.view.folderTV.tableColumns.lastObject]) {
-//            //NSLog(@"ignore");
-//            return;
-//        }else{
-//            //NSLog(@"notification: %@ \n tableColumn.identifier:%@  width:%i", [notification description], column.identifier,  (int)column.width);
-//            //int NSOldWidth = (int)[notification.userInfo[@"NSOldWidth"] intValue];
-//            //NSLog(@"folder TV update column width : id:%@,  width:%i", column.identifier,  (int)column.width);
-//            NSLog(@"更新 folder TV width");
-//            [PDB updateClass:[ColumnEntity class] key:@"width" equal:@(column.width) where:@"columnID" equal:column.identifier];
-//        }
-//    }else if ([column.identifier hasPrefix:@"tag"]) {
-//        //NSLog(@"tag TV update column width : id:%@,  width:%i", column.identifier,  (int)column.width);
-//        NSLog(@"更新 tag TV width");
-//        [PDB updateClass:[ColumnEntity class] key:@"width" equal:@(column.width) where:@"columnID" equal:column.identifier];
-//
-//        [self.view.tagTV_CSV mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.width.mas_equalTo(column.width + 20);
-//        }];
-//    }
-//}
-//
-//- (void)resetTagTVWidth {
-//    int width = 200;
-//    [PDB updateClass:[ColumnEntity class] key:@"width" equal:@(width) where:@"columnID" equal:TvColumnId_tag1];
-//
-//    [self.view.tagTV_CSV mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.width.mas_equalTo(width + 20);
-//    }];
-//}
-//
-//// !!!: row 排序模块
-//// [tableView registerForDraggedTypes:@[NSPasteboardNameDrag]];
-//// https://juejin.im/entry/5795deb90a2b580061c7eb74
-//- (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
-//    if (tableView == self.view.folderTV || tableView == self.view.tagTV) {
-//        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
-//        //NSString * str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-//        [pboard declareTypes:@[NSPasteboardNameDrag] owner:self];
-//
-//        [pboard setData:data forType:NSPasteboardNameDrag];
-//        [pboard setString:[NSString stringWithFormat:@"%li", [rowIndexes firstIndex]] forType:NSPasteboardNameDrag];
-//        return YES;
-//    }else{
-//        return NO;
-//    }
-//}
-//
-//- (NSDragOperation)tableView:(NSTableView *)tableView validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation {
-//    if (tableView == self.view.folderTV || tableView == self.view.tagTV) {
-//        if (dropOperation == NSTableViewDropAbove) {
-//            return NSDragOperationMove;
-//        }else{
-//            return NSDragOperationNone;
-//        }
-//    }else{
-//        return NSDragOperationNone;
-//    }
-//}
-//
-//- (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id <NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation {
-//    NSString * currencyCode = [info.draggingPasteboard stringForType:NSPasteboardNameDrag];
-//    NSInteger from = [currencyCode integerValue];
-//    if (tableView == self.view.folderTV) {
-//        [self resortTV:tableView form:from to:row array:self.interactor.folderEntityArray];
-//        [self updateArray:self.interactor.folderEntityArray key:@"sort" whereKey:@"folderID"];
-//        return YES;
-//    }else if(tableView == self.view.tagTV){
-//        [self resortTV:tableView form:from to:row array:self.interactor.tagEntityArray];
-//        [self updateArray:self.interactor.tagEntityArray key:@"sort" whereKey:@"tagID"];
-//        return YES;
-//    }else{
-//        return NO;
-//    }
-//}
-//
-//- (void)resortTV:(NSTableView *)tableView form:(NSInteger)from to:(NSInteger)to array:(NSMutableArray *)array {
-//    if (array.count > 1 && from != to && (from-to) != -1) {
-//        NSLog(@"from: %li, to:%li", from, to);
-//        id entity = array[from];
-//        [array removeObject:entity];
-//        if (from > to) {
-//            [array insertObject:entity atIndex:to];
-//        }else{
-//            [array insertObject:entity atIndex:to-1];
-//        }
-//        [tableView reloadData];
-//    }
-//}
-//
-//- (void)updateArray:(NSMutableArray *)array key:(NSString *)key whereKey:(NSString *)whereKey {
-//    for (NSInteger i = 0; i<array.count; i++) {
-//        id sortEntity = array[i];
-//        [PDB updateEntity:sortEntity key:key equal:@(i) where:whereKey];
-//    }
-//}
-//
-//#pragma mark - VC_EventHandler
-//- (void)tableViewClick:(NSTableView *)tableView {
-//    NSInteger row = tableView.clickedRow;
-//    //NSInteger Column = tableView.clickedColumn;
-//    //NSLog(@"点击Column: %li row: %li",Column, row);
-//
-//    if (tableView.tag == TagTVTag) {
-//        if (self.interactor.tagEntityArray == 0) {
-//            [self.interactor.folderEntityArray removeAllObjects];
-//            [self.view.folderTV reloadData];
-//        }else{
-//            if (row>-1) {
-//                MoveTagEntity * entity = self.interactor.tagEntityArray[row];
-//                [self.interactor updateMoveFolderArrayWith:entity];
-//                [self.view.folderTV reloadData];
-//            }
-//        }
-//    }
-//}
 
 - (void)cellMoveBTAction:(NSButton *)cellBT {
     PnrDeviceEntity * entity = (PnrDeviceEntity *)cellBT.weakEntity;

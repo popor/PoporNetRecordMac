@@ -8,8 +8,6 @@
 
 #import "SqliteCofing.h"
 
-//#import "MoveFolderEntity.h"
-//#import "MoveTagEntity.h"
 #import "ColumnEntity.h"
 #import "PnrDeviceEntity.h"
 #import "PnrEntity.h"
