@@ -25,7 +25,6 @@
 @property (nonatomic, weak  ) PnrConfig * config;
 
 @property (nonatomic, strong) NSString * h5Root;
-@property (nonatomic, strong) NSString * h5List;
 
 @end
 
@@ -36,7 +35,6 @@
     static PnrWebServer * instance;
     dispatch_once(&once, ^{
         instance = [PnrWebServer new];
-        instance.h5List = [NSMutableString new];
         instance.h5Root = [PnrWebBody rootBody];
         instance.config = [PnrConfig share];
         
@@ -65,7 +63,6 @@
     if (!listBodyH5) {
         listBodyH5 = [NSMutableString new];
     }
-    self.h5List = [PnrWebBody listH5:listBodyH5];
     
     [self startWebServer];
 }
@@ -103,7 +100,6 @@
                             completionBlock(H5String([PnrWebBody listH5:deviceEntity.listWebH5]));
                         } else {
                             completionBlock(H5String([PnrWebBody listH5:pnr.listWebH5]));
-                            //completionBlock(H5String(self.h5List));
                         }
                         
                     }
@@ -231,8 +227,13 @@
         }
     }
     else if([path isEqualToString:PnrPost_Clear]){
+        PoporNetRecord * pnr  = [PoporNetRecord share];
+        for (PnrDeviceEntity * deviceEntity in pnr.deviceNameArray) {
+            [deviceEntity.listWebH5 setString:@""];
+            [deviceEntity.array removeAllObjects];
+        }
         [self.infoArray removeAllObjects];
-        [self clearListWeb];
+        [pnr.listWebH5 setString:@""];
         
         complete(H5String(@"clear finish"));
     }
@@ -258,10 +259,6 @@
 - (void)stopServer {
     [self.webServer stop];
     self.webServer = nil;
-}
-
-- (void)clearListWeb {
-    self.h5List    = [PnrWebBody listH5:@""];
 }
 
 @end
