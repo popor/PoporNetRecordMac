@@ -3,4 +3,5 @@
 3. listWeb 当index=1的时候, max>1, 点击刷新逻辑有问题. 完成
 4. 默认接收开关.
 5. 增加查看deviceName指定的网页功能.
-6.
+6. mac app界面增加add方法和释义
+

@@ -47,6 +47,9 @@
 
 + (void)addDic:(NSDictionary *)dic {
     PnrEntity * entity             = [[PnrEntity alloc] initWithDictionary:dic error:nil];
+    if (!entity.deviceName) {
+        entity.deviceName = @"未知";
+    }
     PoporNetRecord * pnr           = [PoporNetRecord share];
     PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[entity.deviceName];
     
