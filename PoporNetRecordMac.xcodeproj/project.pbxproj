@@ -18,6 +18,7 @@
 		182CE851237CED9300F33F61 /* PoporNetRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE84F237CED9300F33F61 /* PoporNetRecord.m */; };
 		183BE874238B68F900885F6C /* NSButton+pDrawRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 183BE873238B68F900885F6C /* NSButton+pDrawRect.m */; };
 		183BE877238B770F00885F6C /* LLCustomBT.m in Sources */ = {isa = PBXBuildFile; fileRef = 183BE876238B770F00885F6C /* LLCustomBT.m */; };
+		185FD51C23AB6B8E00F80949 /* PnrRequestTestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FD51B23AB6B8E00F80949 /* PnrRequestTestEntity.m */; };
 		18988F43238399CE00A1E082 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18988F42238399CE00A1E082 /* icon.png */; };
 		18988F452383C2C800A1E082 /* icon_16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 18988F442383C2C700A1E082 /* icon_16x16.png */; };
 		18A06DEB237BCF7B0084506B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06DEA237BCF7B0084506B /* AppDelegate.m */; };
@@ -64,6 +65,8 @@
 		183BE873238B68F900885F6C /* NSButton+pDrawRect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSButton+pDrawRect.m"; sourceTree = "<group>"; };
 		183BE875238B770F00885F6C /* LLCustomBT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLCustomBT.h; sourceTree = "<group>"; };
 		183BE876238B770F00885F6C /* LLCustomBT.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLCustomBT.m; sourceTree = "<group>"; };
+		185FD51A23AB6B8E00F80949 /* PnrRequestTestEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PnrRequestTestEntity.h; sourceTree = "<group>"; };
+		185FD51B23AB6B8E00F80949 /* PnrRequestTestEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PnrRequestTestEntity.m; sourceTree = "<group>"; };
 		18988F42238399CE00A1E082 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		18988F442383C2C700A1E082 /* icon_16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_16x16.png; sourceTree = "<group>"; };
 		18A06DE6237BCF7B0084506B /* PoporNetRecordMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoporNetRecordMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -357,6 +360,8 @@
 				18A06E46237C051F0084506B /* PnrDeviceEntity.m */,
 				182CE836237CE2B200F33F61 /* PnrEntity.h */,
 				182CE832237CE2B200F33F61 /* PnrEntity.m */,
+				185FD51A23AB6B8E00F80949 /* PnrRequestTestEntity.h */,
+				185FD51B23AB6B8E00F80949 /* PnrRequestTestEntity.m */,
 			);
 			path = entity;
 			sourceTree = "<group>";
@@ -541,6 +546,7 @@
 				182CE83B237CE2B200F33F61 /* PnrCellEntity.m in Sources */,
 				18A06DF6237BCF800084506B /* main.m in Sources */,
 				182CE83C237CE2B200F33F61 /* PnrConfig.m in Sources */,
+				185FD51C23AB6B8E00F80949 /* PnrRequestTestEntity.m in Sources */,
 				182CE847237CE30F00F33F61 /* PnrWebCss.m in Sources */,
 				18A06DEB237BCF7B0084506B /* AppDelegate.m in Sources */,
 				182CE848237CE30F00F33F61 /* PnrWebServer.m in Sources */,

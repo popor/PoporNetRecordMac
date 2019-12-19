@@ -71,4 +71,7 @@ static NSString * PnrH5_list        = @"list";
 static NSString * PnrH5_listText1   = @"listText1_";
 static NSString * PnrH5_listText2   = @"listText2_";
 
+// 模拟假数据
+static NSString * PnrTestHead       = @"test";
+
 #endif /* PnrValuePrifix_h */

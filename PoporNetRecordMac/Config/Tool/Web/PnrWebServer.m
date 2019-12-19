@@ -17,6 +17,7 @@
 #import <GCDWebServer/GCDWebServerPrivate.h>
 
 #import "PoporNetRecord.h"
+#import "PnrRequestTestEntity.h"
 
 #define H5String(string) [GCDWebServerDataResponse responseWithHTML:string]
 
@@ -146,7 +147,10 @@
                             completionBlock([GCDWebServerDataResponse responseWithData:self.config.webIconData contentType:@"image/x-icon"]);
                         }
                     }
-                    
+                    // MARK: 模拟测试数据
+                    else if ([[path lowercaseString] hasPrefix:PnrTestHead]) {
+                        [self requestTestUrl:path complete:completionBlock];
+                    }
                     // other
                     else{
                         completionBlock(H5String(ErrorUrl));
@@ -168,15 +172,7 @@
                 path = [path substringFromIndex:1];
                 NSArray * pathArray = [path componentsSeparatedByString:@"/"];
                 if (pathArray.count == 1) {
-                    if ([path isEqualToString:PnrPost_Add]) {
-                        GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
-                        NSDictionary * dic = formRequest.jsonObject;
-                        [PoporNetRecord addDic:dic];
-                        
-                        completionBlock([GCDWebServerDataResponse responseWithText:@"{\"status\":1}"]);
-                    } else {
-                        [self analysisPostPath:path request:request complete:completionBlock];
-                    }
+                    [self analysisPostPath:path request:request complete:completionBlock];
                 }
                 
                 else {
@@ -200,10 +196,15 @@
 }
 
 - (void)analysisPostPath:(NSString *)path request:(GCDWebServerRequest * _Nonnull)request complete:(GCDWebServerCompletionBlock  _Nonnull)complete {
-    
     GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
     NSDictionary * dic = formRequest.arguments;
-    if ([path isEqualToString:PnrPost_JsonXml]) {
+    
+    if ([path isEqualToString:PnrPost_Add]) {
+        [PoporNetRecord addDic:formRequest.jsonObject];
+        complete([GCDWebServerDataResponse responseWithText:@"{\"status\":1}"]);
+    }
+    
+    else if ([path isEqualToString:PnrPost_JsonXml]) {
         NSString * str = dic[PnrKey_Conent];
         if (str) {
             complete(H5String(dic[PnrKey_Conent]));
@@ -237,16 +238,29 @@
         
         complete(H5String(@"clear finish"));
     }
-    else if ([path isEqualToString:@"favicon.ico"]){
-        if (self.config.webIconData) {
-            complete([GCDWebServerDataResponse responseWithData:self.config.webIconData contentType:@"image/x-icon"]);
-        }
+    
+    // MARK: 模拟测试数据
+    else if ([[path lowercaseString] hasPrefix:PnrTestHead]) {
+        [self requestTestUrl:path complete:complete];
     }
+    
+    // // 一般不会发生
+    // else if ([path isEqualToString:@"favicon.ico"]){
+    //     if (self.config.webIconData) {
+    //         complete([GCDWebServerDataResponse responseWithData:self.config.webIconData contentType:@"image/x-icon"]);
+    //     }
+    // }
     
     else{
         complete(H5String(ErrorUrl));
     }
 }
+
+- (void)requestTestUrl:(NSString *)url complete:(GCDWebServerCompletionBlock  _Nonnull)complete {
+    PnrRequestTestEntity * entity = [PnrRequestTestEntity findUrl:url];
+    complete(H5String(entity.response));
+}
+
 
 #pragma mark - server 某个单独请求
 - (void)startServerUnitEntity:(PnrEntity *)pnrEntity index:(NSInteger)index {

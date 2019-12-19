@@ -12,6 +12,7 @@
 #import "PnrDeviceEntity.h"
 #import "PnrEntity.h"
 #import "PnrPortEntity.h"
+#import "PnrRequestTestEntity.h"
 
 #import <PoporFMDB/PoporFMDB.h>
 
@@ -20,7 +21,7 @@
 // MARK: 创建table
 + (void)updateTable {
     // 更新PoporFMDB
-    [PoporFMDB injectTableArray:@[[ColumnEntity class], [PnrDeviceEntity class], [PnrEntity class]]];
+    [PoporFMDB injectTableArray:@[[ColumnEntity class], [PnrDeviceEntity class], [PnrEntity class], [PnrRequestTestEntity class]]];
 }
 
 // MARK: 主 window frame 相关
