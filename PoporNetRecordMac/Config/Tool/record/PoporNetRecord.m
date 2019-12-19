@@ -78,27 +78,29 @@
 
 + (void)addEntity:(PnrEntity *)entity deviceEntity:(PnrDeviceEntity *)deviceEntity {
     PoporNetRecord * pnr = [PoporNetRecord share];
-    if (pnr.config.isRecord) {
-        
-        if (pnr.infoArray.count == 0) {
-            // 当执行了数组清空之后, h5代码清零一次.
-            [pnr.listWebH5 setString:@""];
-        }
-        [pnr.infoArray addObject:entity];
-        [deviceEntity.array addObject:entity];
-        
-        if (pnr.config.isShowListWeb) {
-            // 100%
-            NSMutableString * allListH5 = [PnrEntity createListWebH5:entity index:pnr.infoArray.count - 1];
-            NSMutableString * oneListH5 = [PnrEntity createListWebH5:entity index:deviceEntity.array.count - 1];
+    @synchronized (pnr) {
+        if (pnr.config.isRecord) {
             
-            [pnr.listWebH5          insertString:allListH5 atIndex:0];
-            [deviceEntity.listWebH5 insertString:oneListH5 atIndex:0];
-        }else{
-            // 0%
-            [[PnrWebServer share] stopServer];
+            if (pnr.infoArray.count == 0) {
+                // 当执行了数组清空之后, h5代码清零一次.
+                [pnr.listWebH5 setString:@""];
+            }
+            [pnr.infoArray addObject:entity];
+            [deviceEntity.array addObject:entity];
+            
+            if (pnr.config.isShowListWeb) {
+                // 100%
+                NSMutableString * allListH5 = [PnrEntity createListWebH5:entity index:pnr.infoArray.count - 1];
+                NSMutableString * oneListH5 = [PnrEntity createListWebH5:entity index:deviceEntity.array.count - 1];
+                
+                [pnr.listWebH5          insertString:allListH5 atIndex:0];
+                [deviceEntity.listWebH5 insertString:oneListH5 atIndex:0];
+            }else{
+                // 0%
+                [[PnrWebServer share] stopServer];
+            }
+            
         }
-        
     }
 }
 
