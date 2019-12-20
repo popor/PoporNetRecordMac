@@ -52,6 +52,8 @@ __block int record = 0;\n\
 
 + (void)deatilEntity:(PnrEntity *)pnrEntity index:(NSInteger)index extra:(NSDictionary *)extraDic finish:(void (^ __nullable)(NSString * detail, NSString * resubmit))finish;
 
++ (NSString *)requestTestBody;
+
 // 弃用了
 //+ (NSString *)feedbackH5:(NSString *)body;
 

@@ -147,8 +147,15 @@
                             completionBlock([GCDWebServerDataResponse responseWithData:self.config.webIconData contentType:@"image/x-icon"]);
                         }
                     }
+                    // MARK: 模拟测试_编辑页面
+                    else if ([[path lowercaseString] hasPrefix:PnrGet_TestRoot]) {
+                        completionBlock(H5String([PnrWebBody requestTestBody]));
+                    }
+                    else if ([path isEqualToString:PnrGet_TestRoot]) {
+                        completionBlock(H5String([PnrWebBody requestTestBody]));
+                    }
                     // MARK: 模拟测试数据
-                    else if ([[path lowercaseString] hasPrefix:PnrTestHead]) {
+                    else if ([[path lowercaseString] hasPrefix:PnrGet_TestHead]) {
                         [self requestTestUrl:path complete:completionBlock];
                     }
                     // other
@@ -212,6 +219,30 @@
             complete(H5String(ErrorEmpty));
         }
     }
+    
+    else if ([path isEqualToString:PnrPost_TestEdit]) {
+        
+        NSString * content = dic[PnrKey_Conent];
+        NSString * index   = dic[PnrKey_TestIndex];
+        NSString * type    = dic[PnrKey_TestType];
+        
+        BOOL success = NO;
+        if (content && index && type) {
+            if ([type isEqualToString:PnrKey_TestUrl]) {
+                success = [PnrRequestTestEntity updateIndex:[index integerValue] url:content];
+            } else if ([type isEqualToString:PnrKey_TestResponse]) {
+                success = [PnrRequestTestEntity updateIndex:[index integerValue] response:content];
+            } 
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (success) {
+                complete(H5String(PnrKey_success));
+            } else {
+                complete(H5String(PnrKey_fail));
+            }
+        });
+    }
+    
     else if([path isEqualToString:PnrPost_Resubmit]){
         if (self.resubmitBlock) {
             PnrBlockFeedback blockFeedback ;
@@ -221,7 +252,6 @@
                 }
                 complete(H5String(feedback));
             };
-            GCDWebServerURLEncodedFormRequest * formRequest= (GCDWebServerURLEncodedFormRequest *)request;
             self.resubmitBlock(formRequest.arguments, blockFeedback);
         }else{
             complete(H5String(ErrorResubmit));
@@ -240,7 +270,7 @@
     }
     
     // MARK: 模拟测试数据
-    else if ([[path lowercaseString] hasPrefix:PnrTestHead]) {
+    else if ([[path lowercaseString] hasPrefix:PnrGet_TestHead]) {
         [self requestTestUrl:path complete:complete];
     }
     

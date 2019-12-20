@@ -32,7 +32,7 @@ static NSString * PnrIframeDetail   = @"IframeDetail";
 static NSString * PnrFormResubmit   = @"formResubmit";
 static NSString * PnrFormFeedback   = @"formFeedback";
 
-// 路径
+// MARK: 网页请求URL
 static NSString * PnrGet_ViewRoot   = @"view";
 static NSString * PnrGet_ViewList   = @"viewList";
 static NSString * PnrGet_ViewDetail = @"viewDetail";
@@ -43,7 +43,12 @@ static NSString * PnrPost_Clear     = @"clear";
 static NSString * PnrPost_JsonXml   = @"jsonXml";
 static NSString * PnrPost_Add       = @"add";
 
-// web key
+static NSString * PnrPost_TestEdit  = @"requestEdit"; // 模拟假数据 编辑事件
+
+static NSString * PnrGet_TestRoot   = @"request"; // 模拟假数据 编辑页面
+static NSString * PnrGet_TestHead   = @"test"; // 模拟假数据
+
+// MARK: web key
 static NSString * PnrKey_Conent     = @"content";
 
 static NSString * PnrKey_Title      = @"title";
@@ -60,6 +65,16 @@ static NSString * PnrKey_Time       = @"time";
 static NSString * PnrKey_DeviceName = @"deviceName";
 static NSString * PnrKey_index      = @"index";
 
+static NSString * PnrKey_TestUrl        = @"url";
+static NSString * PnrKey_TestResponse   = @"response";
+static NSString * PnrKey_TestIndex      = @"index";
+static NSString * PnrKey_TestType       = @"type";
+static NSString * PnrKey_TestSave       = @"save";
+
+
+static NSString * PnrKey_success    = @"success";
+static NSString * PnrKey_fail       = @"fail";
+
 // 分享url
 static NSString * PnrKey_IdShare    = @"idShare";
 
@@ -71,7 +86,5 @@ static NSString * PnrH5_list        = @"list";
 static NSString * PnrH5_listText1   = @"listText1_";
 static NSString * PnrH5_listText2   = @"listText2_";
 
-// 模拟假数据
-static NSString * PnrTestHead       = @"test";
 
 #endif /* PnrValuePrifix_h */

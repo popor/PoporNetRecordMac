@@ -12,6 +12,7 @@
 #import "PnrWebCss.h"
 #import "PnrWebJs.h"
 
+#import "PnrRequestTestEntity.h"
 #import <PoporFoundation/NSDictionary+pTool.h>
 
 @implementation PnrWebBody
@@ -426,5 +427,79 @@
     }
 }
 
++ (NSString *)requestTestBody {
+    
+    static BOOL       isInit;
+    static NSString * h5_detail_head;
+    static NSString * h5_detail_tail;
+    
+    if (!isInit) {
+        isInit = YES;
+        // MARK: detail 头
+        {
+            NSMutableString * h5 = [NSMutableString new];
+            [h5 appendFormat:@"<html> <head><title>请求测试列表</title></head>"];
+            
+            // css
+            [h5 appendString:@"\n<style type='text/css'>"];
+            [h5 appendString:[PnrWebCss cssTextarea]];
+            [h5 appendString:[PnrWebCss cssButton]];
+            [h5 appendString:[PnrWebCss cssPMarginPadding]];
+            [h5 appendString:@"\n</style>"];
+            
+            // body
+            [h5 appendString:@"\n<body>"];
+            
+            h5_detail_head = h5;
+        }
+        // MARK: detail 尾
+        {
+            NSMutableString * h5 = [NSMutableString new];
+            // js
+            [h5 appendString:@"\n<script> \n"];
+            [h5 appendString:[PnrWebJs jsJsonStatic]];
+            [h5 appendString:[PnrWebJs jsTestEditStatic]];
+            
+            [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
+            
+            [h5 appendString:[PnrWebJs getQuery]];
+            
+            
+            [h5 appendString:@"\n </script>"];
+            
+            [h5 appendString:@"</body></html>"];
+            h5_detail_tail = h5;
+        }
+        
+    }
+    // MARK: 每次都需要拼接的部分
+    
+    NSMutableString * boby = [NSMutableString new];
+    NSArray * array = [PnrRequestTestEntity allEntity];
+    for (PnrRequestTestEntity * entity in array) {
+        NSString * urlKey      = [NSString stringWithFormat:@"%@_%li", PnrKey_TestUrl,      entity.id];
+        NSString * responseKey = [NSString stringWithFormat:@"%@_%li", PnrKey_TestResponse, entity.id];
+        
+        [boby appendString:[PnrWebBody jsonReadEditForm:urlKey      taIdName:PnrKey_Conent btName:PnrKey_TestUrl      taValue:entity.url      index:entity.id type:PnrKey_TestUrl]];
+        
+        [boby appendString:[PnrWebBody jsonReadEditForm:responseKey taIdName:PnrKey_Conent btName:PnrKey_TestResponse taValue:entity.response index:entity.id type:PnrKey_TestResponse]];
+    }
+    NSString * html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, boby, h5_detail_tail];
+    return html;
+}
+
++ (NSString *)jsonReadEditForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index type:(NSString *)type {
+    return [NSString stringWithFormat:
+            @"\n<form id='%@' name='%@' method='POST' target='_blank' > \n\
+            <button class=\"w180Green\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看详情 </button> \n\
+            <button id='%@' class=\"w180Green\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> <br> \n\
+            <textarea id='%@' name='%@' class='%@'>%@</textarea> \n\
+            </form>"
+            , formIdName, formIdName
+            , formIdName, btName
+            , PnrKey_TestSave, formIdName, index, type
+            , taIdName, taIdName, PnrJsClassTaAutoH, taValue
+            ];
+}
 
 @end
