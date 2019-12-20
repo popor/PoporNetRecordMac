@@ -89,11 +89,11 @@
                 
                 if (pathArray.count == 1){
                     // MARK: 首页
-                    if ([path isEqualToString:@""] || [path isEqualToString:PnrGet_ViewRoot]){
+                    if ([path isEqualToString:@""] || [path isEqualToString:PnrGet_recordRoot]){
                         completionBlock(H5String(self.h5Root));
                     }
                     // MARK: 列表
-                    else if ([path isEqualToString:PnrGet_ViewList]){
+                    else if ([path isEqualToString:PnrGet_recordList]){
                         NSString * deviceName = query[PnrKey_DeviceName];
                         PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
                         
@@ -105,7 +105,7 @@
                         
                     }
                     // MARK: 详情 重新提交
-                    else if ([path isEqualToString:PnrGet_ViewDetail] || [path isEqualToString:PnrGet_ViewResubmit]){
+                    else if ([path isEqualToString:PnrGet_recordDetail] || [path isEqualToString:PnrGet_recordResubmit]){
                         NSString * deviceName = query[PnrKey_DeviceName];
                         NSString * indexStr   = query[PnrKey_index];
                         
@@ -122,7 +122,7 @@
                                 [self startServerUnitEntity:entity index:index];
                             }
                             
-                            if ([path isEqualToString:PnrGet_ViewDetail]) {
+                            if ([path isEqualToString:PnrGet_recordDetail]) {
                                 if (entity.h5Detail) {
                                     completionBlock(H5String(entity.h5Detail));
                                 } else {
@@ -155,7 +155,7 @@
                         completionBlock(H5String([PnrWebBody requestTestBody]));
                     }
                     // MARK: 模拟测试数据
-                    else if ([[path lowercaseString] hasPrefix:PnrGet_TestHead]) {
+                    else if ([[path lowercaseString] hasPrefix:PnrGet_TestHeadAdd]) {
                         [self requestTestUrl:path complete:completionBlock];
                     }
                     // other
@@ -206,12 +206,12 @@
     GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
     NSDictionary * dic = formRequest.arguments;
     
-    if ([path isEqualToString:PnrPost_Add]) {
+    if ([path isEqualToString:PnrPost_recordAdd]) {
         [PoporNetRecord addDic:formRequest.jsonObject];
         complete([GCDWebServerDataResponse responseWithText:@"{\"status\":1}"]);
     }
     
-    else if ([path isEqualToString:PnrPost_JsonXml]) {
+    else if ([path isEqualToString:PnrPost_commonJsonXml]) {
         NSString * str = dic[PnrKey_Conent];
         if (str) {
             complete(H5String(dic[PnrKey_Conent]));
@@ -243,7 +243,7 @@
         });
     }
     
-    else if([path isEqualToString:PnrPost_Resubmit]){
+    else if([path isEqualToString:PnrPost_recordResubmit]){
         if (self.resubmitBlock) {
             PnrBlockFeedback blockFeedback ;
             blockFeedback = ^(NSString * feedback) {
@@ -257,7 +257,7 @@
             complete(H5String(ErrorResubmit));
         }
     }
-    else if([path isEqualToString:PnrPost_Clear]){
+    else if([path isEqualToString:PnrPost_recordClear]){
         PoporNetRecord * pnr  = [PoporNetRecord share];
         for (PnrDeviceEntity * deviceEntity in pnr.deviceNameArray) {
             [deviceEntity.listWebH5 setString:@""];
@@ -270,7 +270,7 @@
     }
     
     // MARK: 模拟测试数据
-    else if ([[path lowercaseString] hasPrefix:PnrGet_TestHead]) {
+    else if ([[path lowercaseString] hasPrefix:PnrGet_TestHeadAdd]) {
         [self requestTestUrl:path complete:complete];
     }
     

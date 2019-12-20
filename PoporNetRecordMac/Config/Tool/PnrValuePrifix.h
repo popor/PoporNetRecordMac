@@ -33,20 +33,27 @@ static NSString * PnrFormResubmit   = @"formResubmit";
 static NSString * PnrFormFeedback   = @"formFeedback";
 
 // MARK: 网页请求URL
-static NSString * PnrGet_ViewRoot   = @"view";
-static NSString * PnrGet_ViewList   = @"viewList";
-static NSString * PnrGet_ViewDetail = @"viewDetail";
-static NSString * PnrGet_ViewResubmit = @"viewResubmit";
+// 记录部分
+static NSString * PnrGet_recordRoot      = @"view";
+static NSString * PnrGet_recordList      = @"viewList";
+static NSString * PnrGet_recordDetail    = @"viewDetail";
+static NSString * PnrGet_recordResubmit  = @"viewResubmit";
 
-static NSString * PnrPost_Resubmit  = @"resubmit";
-static NSString * PnrPost_Clear     = @"clear";
-static NSString * PnrPost_JsonXml   = @"jsonXml";
-static NSString * PnrPost_Add       = @"add";
+static NSString * PnrPost_recordResubmit = @"resubmit";
+static NSString * PnrPost_recordClear    = @"clear";
+static NSString * PnrPost_recordAdd      = @"add";
 
-static NSString * PnrPost_TestEdit  = @"requestEdit"; // 模拟假数据 编辑事件
+// 模拟测试部分
+static NSString * PnrGet_TestHeadAdd     = @"test";// 模拟假数据, 假如没有则会增加一个默认数据, post get 都支持
 
-static NSString * PnrGet_TestRoot   = @"request"; // 模拟假数据 编辑页面
-static NSString * PnrGet_TestHead   = @"test"; // 模拟假数据
+static NSString * PnrGet_TestRoot        = @"request";// 模拟假数据 主页面
+static NSString * PnrGet_TestList        = @"requestList";// 模拟假数据 列表页面
+static NSString * PnrGet_TestDetail      = @"requestDetail";// 模拟假数据 详情页面
+
+static NSString * PnrPost_TestEdit       = @"requestEdit";// 模拟假数据 编辑事件
+
+// 公共
+static NSString * PnrPost_commonJsonXml  = @"jsonXml";
 
 // MARK: web key
 static NSString * PnrKey_Conent     = @"content";

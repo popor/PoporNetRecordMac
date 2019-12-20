@@ -38,6 +38,7 @@
 		18A06E44237BFC320084506B /* EditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E42237BFC320084506B /* EditableTextField.m */; };
 		18A06E47237C051F0084506B /* PnrDeviceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E46237C051F0084506B /* PnrDeviceEntity.m */; };
 		18BAE79223826C3500BB6A3C /* NSView+Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE79123826C3500BB6A3C /* NSView+Address.m */; };
+		18C5D2E223ACC95C00C460DF /* PnrWebBodyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C5D2E123ACC95C00C460DF /* PnrWebBodyTest.m */; };
 		60165D6F9A867925C9BAF8BF /* Pods_PoporNetRecordMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D96B0733F0A57163C75586A /* Pods_PoporNetRecordMac.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,8 @@
 		18AFBA082387B7F900A2D12E /* work list.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "work list.txt"; sourceTree = "<group>"; };
 		18BAE79023826C3500BB6A3C /* NSView+Address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Address.h"; sourceTree = "<group>"; };
 		18BAE79123826C3500BB6A3C /* NSView+Address.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Address.m"; sourceTree = "<group>"; };
+		18C5D2E023ACC95C00C460DF /* PnrWebBodyTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PnrWebBodyTest.h; sourceTree = "<group>"; };
+		18C5D2E123ACC95C00C460DF /* PnrWebBodyTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PnrWebBodyTest.m; sourceTree = "<group>"; };
 		272A82FDE599135FF461AD1C /* Pods-PoporNetRecordMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.debug.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.debug.xcconfig"; sourceTree = "<group>"; };
 		9D96B0733F0A57163C75586A /* Pods_PoporNetRecordMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoporNetRecordMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D329B8CD1C3EC314B48AB38C /* Pods-PoporNetRecordMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.release.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 				182CE843237CE30F00F33F61 /* PnrWebBody.m */,
 				182CE845237CE30F00F33F61 /* PnrWebCss.h */,
 				182CE841237CE30F00F33F61 /* PnrWebCss.m */,
+				18C5D2E023ACC95C00C460DF /* PnrWebBodyTest.h */,
+				18C5D2E123ACC95C00C460DF /* PnrWebBodyTest.m */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -536,6 +541,7 @@
 				18A06E2C237BE9380084506B /* RootVCInteractor.m in Sources */,
 				182CE849237CE30F00F33F61 /* PnrWebBody.m in Sources */,
 				182CE851237CED9300F33F61 /* PoporNetRecord.m in Sources */,
+				18C5D2E223ACC95C00C460DF /* PnrWebBodyTest.m in Sources */,
 				183BE877238B770F00885F6C /* LLCustomBT.m in Sources */,
 				182CE839237CE2B200F33F61 /* PnrEntity.m in Sources */,
 				18A06E2D237BE9380084506B /* RootVCPresenter.m in Sources */,

@@ -366,7 +366,7 @@ static NSString * SepactorKey = @"_PnrMac_";
 - (void)cellViewBTAction:(NSButton *)cellBT {
     PnrDeviceEntity * entity = (PnrDeviceEntity *)cellBT.weakEntity;
     PoporNetRecord * pnr     = [PoporNetRecord share];
-    NSString * url           = [NSString stringWithFormat:@"%@%@?%@=%@", pnr.webServer.webServer.serverURL.absoluteString, PnrGet_ViewRoot, PnrKey_DeviceName, entity.deviceName];
+    NSString * url           = [NSString stringWithFormat:@"%@%@?%@=%@", pnr.webServer.webServer.serverURL.absoluteString, PnrGet_recordRoot, PnrKey_DeviceName, entity.deviceName];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
     
 }

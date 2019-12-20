@@ -25,7 +25,7 @@
          ;    form.action='/%@';\n\
          ;    form.submit();\n\
          ;}\n\
-         ", PnrPost_JsonXml];
+         ", PnrPost_commonJsonXml];
     }
     return js;
 }
@@ -92,7 +92,7 @@
          ;    dlform.submit();\n\
          ;    document.body.removeChild(dlform);\n\
          ;}\n\
-         ", PnrPost_JsonXml, PnrKey_Conent];
+         ", PnrPost_commonJsonXml, PnrKey_Conent];
     }
     return js;
 }
@@ -164,7 +164,7 @@
          ;    }\n\
          ;    \n\
          ;    xmlhttp.send(text.substr(1)); \n\
-         ;}\n", PnrFormFeedback, PnrKey_Conent, PnrPost_Resubmit];
+         ;}\n", PnrFormFeedback, PnrKey_Conent, PnrPost_recordResubmit];
     }
     return js;
     // https://developer.mozilla.org/zh-CN/docs/Web/API/FormData/Using_FormData_Objects
@@ -206,8 +206,8 @@
      ;}" ,
      PnrKey_DeviceName,
      PnrKey_index,
-     PnrGet_ViewRoot, PnrKey_DeviceName, PnrKey_index,
-     PnrGet_ViewRoot, PnrKey_index
+     PnrGet_recordRoot, PnrKey_DeviceName, PnrKey_index,
+     PnrGet_recordRoot, PnrKey_index
      ];;
 }
 
@@ -238,7 +238,7 @@
          ;        location.reload();\n\
          ;    }\n\
          ;    xmlhttp.send('clear'); \n\
-         ;}\n\n", PnrPost_Clear];
+         ;}\n\n", PnrPost_recordClear];
     }
     return js;
 }
