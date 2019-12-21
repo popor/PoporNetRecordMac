@@ -17,6 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)cssDivWordOneLine;
 // 自动变换高度
 + (NSString *)cssTextarea;
+/**
+ border颜色 为 #ccc
+ */
++ (NSString *)cssTextarea1;
+
 // button
 + (NSString *)cssButton;
 

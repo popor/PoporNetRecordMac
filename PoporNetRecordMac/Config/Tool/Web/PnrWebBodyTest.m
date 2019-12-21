@@ -50,7 +50,7 @@
             
             // css
             [h5 appendString:@"\n<style type='text/css'>"];
-            [h5 appendString:[PnrWebCss cssTextarea]];
+            [h5 appendString:[PnrWebCss cssTextarea1]];
             [h5 appendString:[PnrWebCss cssButton]];
             [h5 appendString:[PnrWebCss cssPMarginPadding]];
             [h5 appendString:@"\n</style>"];

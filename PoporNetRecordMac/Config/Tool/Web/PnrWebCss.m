@@ -39,6 +39,21 @@
     }";
 }
 
+/**
+ border颜色 为 #ccc
+ */
++ (NSString *)cssTextarea1 {
+    return @"\n textarea {\n\
+    border: 1px solid #ccc;\n\
+    padding: 5px;\n\
+    min-height: 20px;\n\
+    width:100%;\n\
+    font-size:16px;\n\
+    resize:none;\n\
+    overflow-y:hidden;\n\
+    }";
+}
+
 + (NSString *)cssButton {
     static NSString * str;
     if (!str) {
