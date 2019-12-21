@@ -126,15 +126,19 @@
      <button id='%@' class=\"w180Green2\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button>  \n\
      </div>\n\
      <div style=' width:calc(100%% - 120px); float:left; ' >\n\
-     <textarea id='%@' name='%@' class='%@'>%@</textarea> <p><p><p>\n\
+     <textarea id='%@' name='%@' class='%@'>%@</textarea> <p style=' height:10px; '></p> \n\
      </div>\n\
      </form>\n\
-     </div> <p><p><p>\n\n"
+     </div>\n\n"
      , formIdName, formIdName // form1
      , formIdName, btName     // bt1
      , PnrKey_TestSave, formIdName, index, type  // bt2
      , taIdName, taIdName, PnrJsClassTaAutoH, taValue // ta
      ];
+    
+    /**
+     <p style=' height:10px; '></p> 是因为textarea和左边2个bt高度不一致, 不增加的,排列有问题.
+     */
 }
 
 @end
