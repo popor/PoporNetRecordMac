@@ -42,7 +42,7 @@
          ;    formSaveBt.innerText = '保存中';\n\
          ;    var xmlhttp = new XMLHttpRequest();\n\
          ;    xmlhttp.open('POST','/%@',true);\n\
-         ;\
+         ;\n\
          ;    xmlhttp.onreadystatechange = function() {\n\
          ;        if (xmlhttp.readyState == 4) {\n\
          ;            var text = xmlhttp.responseText;\n\
@@ -53,7 +53,7 @@
          ;            }\n\
          ;        }\n\
          ;    }\n\
-         ;\
+         ;\n\
          ;    var text = '%@='+ formContent + '&%@='+ index +'&%@='+ type; \n\
          ;    xmlhttp.send(text);\n\
          ;}\n\n"
@@ -98,6 +98,25 @@
 }
 
 // MARK: 高度自适应的textarea
+
+/**
+ 获取所有的ta
+ */
++ (NSString *)textareaAuhoHeigtEventClass:(NSString *)className {
+    // http://caibaojian.com/textarea-autoheight.html
+    return
+    [NSString stringWithFormat:@"\n\
+     ;var taArray = document.getElementsByClassName('%@');\n\
+     ;for (var i = 0; i < taArray.length; i++) {\n\
+     ;    makeExpandingArea(taArray[i]);\n\
+     ;} \n"
+     , className
+     ];
+}
+
+/**
+ 给ta增加监听事件,刷新ta高度.
+ */
 + (NSString *)textareaAutoHeightFuntion {
     // http://caibaojian.com/textarea-autoheight.html
     return @"\n\n\
@@ -119,10 +138,6 @@
     ;        el.attachEvent('oncut', function () { delayedResize(el); });\n\
     ;    }\n\
     } \n";
-}
-
-+ (NSString *)textareaAuhoHeigtEventClass:(NSString *)className {
-    return [NSString stringWithFormat:@"\n var taArray = document.getElementsByClassName('%@'); for (var i = 0; i < taArray.length; i++) { makeExpandingArea(taArray[i]); } \n", className];
 }
 
 // MARK: ajax 刷新增加

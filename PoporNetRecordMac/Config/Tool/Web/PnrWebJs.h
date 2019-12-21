@@ -20,8 +20,16 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)jsJsonDynamic;
 
 // MARK: 高度自适应的textarea
-+ (NSString *)textareaAutoHeightFuntion;
+/**
+ 获取所有的ta
+ */
 + (NSString *)textareaAuhoHeigtEventClass:(NSString *)className;
+
+/**
+ 给ta增加监听事件,刷新ta高度.
+ */
++ (NSString *)textareaAutoHeightFuntion;
+
 
 // MARK: ajax 刷新增加
 + (NSString *)ajaxResubmit;

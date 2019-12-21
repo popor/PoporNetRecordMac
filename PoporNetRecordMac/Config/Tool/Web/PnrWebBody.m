@@ -480,26 +480,54 @@
         NSString * urlKey      = [NSString stringWithFormat:@"%@_%li", PnrKey_TestUrl,      entity.id];
         NSString * responseKey = [NSString stringWithFormat:@"%@_%li", PnrKey_TestResponse, entity.id];
         
-        [boby appendString:[PnrWebBody jsonReadEditForm:urlKey      taIdName:PnrKey_Conent btName:PnrKey_TestUrl      taValue:entity.url      index:entity.id type:PnrKey_TestUrl]];
+        [boby appendString:[PnrWebBody jsonReadEditUrlForm:urlKey      taIdName:PnrKey_Conent btName:PnrKey_TestUrl      taValue:entity.url      index:entity.id type:PnrKey_TestUrl]];
         
-        [boby appendString:[PnrWebBody jsonReadEditForm:responseKey taIdName:PnrKey_Conent btName:PnrKey_TestResponse taValue:entity.response index:entity.id type:PnrKey_TestResponse]];
+        [boby appendString:[PnrWebBody jsonReadEditResponseForm:responseKey taIdName:PnrKey_Conent btName:PnrKey_TestResponse taValue:entity.response index:entity.id type:PnrKey_TestResponse]];
     }
     NSString * html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, boby, h5_detail_tail];
     return html;
 }
 
-+ (NSString *)jsonReadEditForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index type:(NSString *)type {
-    return [NSString stringWithFormat:
-            @"\n<form id='%@' name='%@' method='POST' target='_blank' > \n\
-            <button class=\"w180Green\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看详情 </button> \n\
-            <button id='%@' class=\"w180Green\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> <br> \n\
-            <textarea id='%@' name='%@' class='%@'>%@</textarea> \n\
-            </form>"
-            , formIdName, formIdName
-            , formIdName, btName
-            , PnrKey_TestSave, formIdName, index, type
-            , taIdName, taIdName, PnrJsClassTaAutoH, taValue
-            ];
++ (NSString *)jsonReadEditUrlForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index type:(NSString *)type {
+    // method='POST' target='_blank'
+    // background-color:#3c8877; 
+    return
+    [NSString stringWithFormat:
+     @"\n\
+     <div style=' width:100%%; ' >\n\
+     <form id='%@' name='%@' > \n\
+     <button id='%@' class=\"w180Green\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> \n\
+     <input id='%@' name='%@' style=\" width:auto; height:28px; font-size:16px; marginwidth:0; \" value='%@' ></input> \n\
+     </form>\n\
+     </div> \n"
+     , formIdName, formIdName
+     , PnrKey_TestSave, formIdName, index, type
+     , taIdName, taIdName, taValue
+     ];
+}
+
++ (NSString *)jsonReadEditResponseForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index type:(NSString *)type {
+    // background-color:#336ff9;
+    // background-color:#ff0000;
+    return
+    [NSString stringWithFormat:
+     @"\n\
+     <div style=' width:100%%; ' >\n\
+     <form id='%@' name='%@' method='POST' target='_blank' > \n\
+     <div style=' width:20%%; float:left; ' >\n\
+     <button         class=\"w180Green1\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看 </button> <br> \n\
+     <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button>  \n\
+     </div>\n\
+     <div style=' width:77%%; float:right; ' >\n\
+     <textarea id='%@' name='%@' class='%@'>%@</textarea> <p><p><p>\n\
+     </div>\n\
+     </form>\n\
+     </div> \n\n"
+     , formIdName, formIdName // form1
+     , formIdName, btName     // bt1
+     , PnrKey_TestSave, formIdName, index, type  // bt2
+     , taIdName, taIdName, PnrJsClassTaAutoH, taValue // ta
+     ];
 }
 
 @end

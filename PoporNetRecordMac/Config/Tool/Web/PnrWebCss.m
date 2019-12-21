@@ -40,28 +40,38 @@
 }
 
 + (NSString *)cssButton {
-    PnrConfig * config  = [PnrConfig share];
-    NSString * colorKey = config.rootColorKeyHex;
-    
-    return
-    [NSString stringWithFormat:
-     @"\n button.w180Green {\n\
-     color:%@; width:180px; font-size:16px;\
-     }\n\
-     \n button.w180Red {\n\
-     color:%@; width:180px; font-size:16px;\
-     }\n\
-     \n button.w100p {\n\
-     color:%@; width:100%%; font-size:16px;\
-     }\n\
-     \n button.w49p {\n\
-     color:%@; width:47%%; font-size:16px;\
-     }\n\
-     \n button.w49p_r {\n\
-     color:%@; width:48%%; font-size:16px; float:right;\
-     }\n\
-     "
-     , colorKey, @"#d7534a", colorKey, colorKey, colorKey];
+    static NSString * str;
+    if (!str) {
+        PnrConfig * config  = [PnrConfig share];
+        NSString * colorKey = config.rootColorKeyHex;
+        str =
+        [NSString stringWithFormat:
+        @"\n\
+        \n button.w180Green {\n\
+        color:%@; width:180px; font-size:16px;\
+        }\n\
+        \n button.w180Green1 {\n\
+        color:%@; width:98%%; font-size:16px;\
+        }\n\
+        \n button.w180Green2 {\n\
+        color:%@; width:98%%; font-size:16px;\
+        }\n\
+        \n button.w180Red {\n\
+        color:%@; width:180px; font-size:16px;\
+        }\n\
+        \n button.w100p {\n\
+        color:%@; width:100%%; font-size:16px;\
+        }\n\
+        \n button.w49p {\n\
+        color:%@; width:47%%; font-size:16px;\
+        }\n\
+        \n button.w49p_r {\n\
+        color:%@; width:48%%; font-size:16px; float:right;\
+        }\n\
+        "
+        , colorKey, colorKey, colorKey, @"#d7534a", colorKey, colorKey, colorKey];
+    }
+    return str;
 }
 
 @end
