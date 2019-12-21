@@ -494,12 +494,16 @@
     return
     [NSString stringWithFormat:
      @"\n\
-     <div style=' width:100%%; ' >\n\
+     <div style=' width:100%%;  background-color:#336ff9;  ' >\n\
      <form id='%@' name='%@' > \n\
-     <button id='%@' class=\"w180Green\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> \n\
-     <input id='%@' name='%@' style=\" width:auto; height:28px; font-size:16px; marginwidth:0; \" value='%@' ></input> \n\
+     <div style=' width:10%%; float:left; ' >\n\
+     <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> \n\
+     </div>\n\
+     <div style=' width:88%%; float:left; ' >\n\
+     <input  id='%@' name='%@' style=\" height:28px; font-size:16px; \" value='%@' ></input> \n\
+     </div>\n\
      </form>\n\
-     </div> \n"
+     </div> <p><p><p>\n"
      , formIdName, formIdName
      , PnrKey_TestSave, formIdName, index, type
      , taIdName, taIdName, taValue
@@ -514,15 +518,15 @@
      @"\n\
      <div style=' width:100%%; ' >\n\
      <form id='%@' name='%@' method='POST' target='_blank' > \n\
-     <div style=' width:20%%; float:left; ' >\n\
-     <button         class=\"w180Green1\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看 </button> <br> \n\
-     <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button>  \n\
+     <div style=' width:10%%; float:left; ' >\n\
+     <button         class=\"w180Green2\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看 </button> <br> \n\
+     <button id='%@' class=\"w180Green2\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button>  \n\
      </div>\n\
-     <div style=' width:77%%; float:right; ' >\n\
+     <div style=' width:88%%; float:left; ' >\n\
      <textarea id='%@' name='%@' class='%@'>%@</textarea> <p><p><p>\n\
      </div>\n\
      </form>\n\
-     </div> \n\n"
+     </div> <p><p><p>\n\n"
      , formIdName, formIdName // form1
      , formIdName, btName     // bt1
      , PnrKey_TestSave, formIdName, index, type  // bt2

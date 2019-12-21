@@ -51,10 +51,10 @@
         color:%@; width:180px; font-size:16px;\
         }\n\
         \n button.w180Green1 {\n\
-        color:%@; width:98%%; font-size:16px;\
+        color:%@; width:98%%; height:28px;font-size:16px;\
         }\n\
         \n button.w180Green2 {\n\
-        color:%@; width:98%%; font-size:16px;\
+        color:%@; width:98%%; height:28px; font-size:16px;\
         }\n\
         \n button.w180Red {\n\
         color:%@; width:180px; font-size:16px;\
