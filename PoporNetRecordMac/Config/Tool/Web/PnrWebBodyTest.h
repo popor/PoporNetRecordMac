@@ -12,9 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PnrWebBodyTest : NSObject
 
-+ (NSString *)requestTestRootBody;
-+ (NSString *)requestTestListBody;
-+ (NSString *)requestTestDetailBody;
+//+ (NSString *)requestTestRootBody;
+//+ (NSString *)requestTestListBody;
+//+ (NSString *)requestTestDetailBody;
+
++ (NSString *)requestTestBody;
 
 @end
 

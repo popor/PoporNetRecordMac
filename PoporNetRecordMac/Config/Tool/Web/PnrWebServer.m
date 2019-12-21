@@ -10,6 +10,7 @@
 #import "PnrEntity.h"
 #import "PnrPortEntity.h"
 #import "PnrWebBody.h"
+#import "PnrWebBodyTest.h"
 #import "PnrConfig.h"
 
 #import <GCDWebServer/GCDWebServer.h>
@@ -148,11 +149,8 @@
                         }
                     }
                     // MARK: 模拟测试_编辑页面
-                    else if ([[path lowercaseString] hasPrefix:PnrGet_TestRoot]) {
-                        completionBlock(H5String([PnrWebBody requestTestBody]));
-                    }
                     else if ([path isEqualToString:PnrGet_TestRoot]) {
-                        completionBlock(H5String([PnrWebBody requestTestBody]));
+                        completionBlock(H5String([PnrWebBodyTest requestTestBody]));
                     }
                     // MARK: 模拟测试数据
                     else if ([[path lowercaseString] hasPrefix:PnrGet_TestHeadAdd]) {
