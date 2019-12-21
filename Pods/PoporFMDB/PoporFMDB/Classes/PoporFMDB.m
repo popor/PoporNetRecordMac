@@ -143,6 +143,18 @@
 }
 
 + (NSMutableArray *)arrayClass:(Class)class where:(NSString *)whereKey equal:(id)whereValue orderBy:(NSString *)orderKey asc:(BOOL)asc {
+    return [self arrayClass:class where:whereKey equalSymbol:@"="    equal:whereValue orderBy:orderKey asc:asc];
+}
+
++ (NSMutableArray *)arrayClass:(Class)class where:(NSString *)whereKey like:(id)whereValue {
+    return [self arrayClass:class where:whereKey equalSymbol:@"like" equal:whereValue orderBy:nil asc:YES];
+}
+
++ (NSMutableArray *)arrayClass:(Class)class where:(NSString *)whereKey like:(id)whereValue orderBy:(NSString *)orderKey asc:(BOOL)asc {
+    return [self arrayClass:class where:whereKey equalSymbol:@"like" equal:whereValue orderBy:orderKey asc:asc];
+}
+
++ (NSMutableArray *)arrayClass:(Class)class where:(NSString *)whereKey equalSymbol:(NSString *)equalSymbol equal:(id)whereValue orderBy:(NSString *)orderKey asc:(BOOL)asc {
     if (!class) {
         return nil;
     }
@@ -156,7 +168,7 @@
     FMResultSet *rs;
     NSString * futureSQL;
     if (whereKey && !orderKey) {
-        futureSQL = [NSString stringWithFormat:@"SELECT * FROM %@ where %@ = ?;", tableName, whereKey];
+        futureSQL = [NSString stringWithFormat:@"SELECT * FROM %@ where %@ %@ ?;", tableName, whereKey, equalSymbol];
         rs = [tool.db executeQuery:futureSQL, whereValue];
         
     }else if(!whereKey && orderKey){
@@ -164,7 +176,7 @@
         rs = [tool.db executeQuery:futureSQL];
         
     } else if (whereKey && orderKey) {
-        futureSQL = [NSString stringWithFormat:@"SELECT * FROM %@ where %@ = ? ORDER BY %@ %@;", tableName, whereKey, orderKey, ascValue];
+        futureSQL = [NSString stringWithFormat:@"SELECT * FROM %@ where %@ %@ ? ORDER BY %@ %@;", tableName, whereKey, equalSymbol, orderKey, ascValue];
         rs = [tool.db executeQuery:futureSQL, whereValue];
         
     }else{

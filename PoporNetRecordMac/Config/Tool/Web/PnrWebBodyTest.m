@@ -18,24 +18,7 @@
 
 @implementation PnrWebBodyTest
 
-+ (NSString *)requestTestRootBody {
-    
-    return nil;
-}
-
-
-+ (NSString *)requestTestListBody {
-    
-    return nil;
-}
-
-
-+ (NSString *)requestTestDetailBody {
-    
-    return nil;
-}
-
-+ (NSString *)requestTestBody {
++ (NSString *)requestTestBody:(NSDictionary *)dic {
     
     static BOOL       isInit;
     static NSString * h5_detail_head;
@@ -58,6 +41,19 @@
             // body
             [h5 appendString:@"\n<body>"];
             
+            // 搜索栏
+            [h5 appendFormat:
+             @"\n<div' style=\" width:100%%; \" >\n\
+             <form id='%@' >\n\
+             <input id='%@' type='text' style=\" width:200px; height:28px; font-size:16px; justify-content: center; \"  onkeydown=\"if(event.keyCode==13){return false;}\" ></input>\n\
+             <button id='%@' class=\"wBlack_80_0\" type='button' \" onclick=\"jsTestSearchStatic('%@')\" > 搜索 </button> \n\
+             </form>\n\
+             </div>\n "
+             , PnrKey_TestSearchForm
+             , PnrKey_Conent
+             , PnrKey_TestSearch, PnrKey_TestSearchForm
+             ];
+            
             h5_detail_head = h5;
         }
         // MARK: detail 尾
@@ -67,11 +63,23 @@
             [h5 appendString:@"\n<script> \n"];
             [h5 appendString:[PnrWebJs jsJsonStatic]];
             [h5 appendString:[PnrWebJs jsTestEditStatic]];
+            [h5 appendString:[PnrWebJs jsTestSearchStatic]];
             
             [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
             
             [h5 appendString:[PnrWebJs getQuery]];
             
+            // onload()
+            [h5 appendFormat:@"\n\
+             ;window.onload=function (){\n\
+             ;    var searchWord = getQueryVariable('%@')\n\
+             ;    if(searchWord.length>0){\n\
+             ;        document.forms['%@'].elements['%@'].value = searchWord;\n\
+             ;    }\n\
+             ;}"
+             , PnrKey_TestSearch
+             , PnrKey_TestSearchForm, PnrKey_Conent
+             ];
             
             [h5 appendString:@"\n </script>"];
             
@@ -83,7 +91,7 @@
     // MARK: 每次都需要拼接的部分
     
     NSMutableString * boby = [NSMutableString new];
-    NSArray * array = [PnrRequestTestEntity allEntity];
+    NSArray * array = [PnrRequestTestEntity allEntitySearch:dic[PnrKey_TestSearch]];
     for (PnrRequestTestEntity * entity in array) {
         NSString * urlKey      = [NSString stringWithFormat:@"%@_%li", PnrKey_TestUrl,      entity.id];
         NSString * responseKey = [NSString stringWithFormat:@"%@_%li", PnrKey_TestResponse, entity.id];

@@ -47,10 +47,8 @@ static NSString * PnrPost_recordAdd      = @"add";
 static NSString * PnrGet_TestHeadAdd     = @"test";// 模拟假数据, 假如没有则会增加一个默认数据, post get 都支持
 
 static NSString * PnrGet_TestRoot        = @"request";// 模拟假数据 主页面
-static NSString * PnrGet_TestList        = @"requestList";// 模拟假数据 列表页面
-static NSString * PnrGet_TestDetail      = @"requestDetail";// 模拟假数据 详情页面
-
 static NSString * PnrPost_TestEdit       = @"requestEdit";// 模拟假数据 编辑事件
+static NSString * PnrPost_TestDelete     = @"requestDelete";// 模拟假数据 删除事件
 
 // 公共
 static NSString * PnrPost_commonJsonXml  = @"jsonXml";
@@ -77,6 +75,10 @@ static NSString * PnrKey_TestResponse   = @"response";
 static NSString * PnrKey_TestIndex      = @"index";
 static NSString * PnrKey_TestType       = @"type";
 static NSString * PnrKey_TestSave       = @"save";
+static NSString * PnrKey_TestDelete     = @"delete";
+static NSString * PnrKey_TestSearch     = @"search";
+static NSString * PnrKey_TestSearchWord = @"word";
+static NSString * PnrKey_TestSearchForm = @"searchForm";
 
 
 static NSString * PnrKey_success    = @"success";

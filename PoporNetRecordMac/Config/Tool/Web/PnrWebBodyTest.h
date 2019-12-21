@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 //+ (NSString *)requestTestListBody;
 //+ (NSString *)requestTestDetailBody;
 
-+ (NSString *)requestTestBody;
++ (NSString *)requestTestBody:(NSDictionary *)dic;
 
 @end
 

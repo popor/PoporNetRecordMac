@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)updateIndex:(NSInteger)index url:(NSString *)url;
 + (BOOL)updateIndex:(NSInteger)index response:(NSString *)response;
 
-+ (NSMutableArray *)allEntity;
++ (NSMutableArray *)allEntitySearch:(NSString *)searchWord;
 
 @end
 

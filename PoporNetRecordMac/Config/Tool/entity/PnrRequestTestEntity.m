@@ -60,8 +60,12 @@
     return success;
 }
 
-+ (NSMutableArray *)allEntity {
-    return [PoporFMDB arrayClass:[PnrRequestTestEntity class]];
++ (NSMutableArray *)allEntitySearch:(NSString *)searchWord {
+    if (searchWord.length <= 0) {
+        return [PoporFMDB arrayClass:[PnrRequestTestEntity class]];
+    } else {
+        return [PoporFMDB arrayClass:[PnrRequestTestEntity class] where:@"url" like:[NSString stringWithFormat:@"%%%@%%", searchWord]];
+    }
 }
 
 @end

@@ -38,6 +38,9 @@
 + (NSMutableArray *)arrayClass:(Class)class where:(NSString *)whereKey equal:(id)whereValue;
 + (NSMutableArray *)arrayClass:(Class)class where:(NSString *)whereKey equal:(id)whereValue orderBy:(NSString *)orderKey asc:(BOOL)asc;
 
++ (NSMutableArray *)arrayClass:(Class)class where:(NSString *)whereKey like:(id)whereValue;
++ (NSMutableArray *)arrayClass:(Class)class where:(NSString *)whereKey like:(id)whereValue orderBy:(NSString *)orderKey asc:(BOOL)asc;
+
 #pragma mark - 模仿plist数据
 
 + (NSString *)getPlistKey:(NSString *)key;

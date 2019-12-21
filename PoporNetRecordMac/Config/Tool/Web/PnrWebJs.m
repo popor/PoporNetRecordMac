@@ -66,6 +66,60 @@
     return js;
 }
 
++ (NSString *)jsTestSearchStatic {
+    static NSString * js;
+    if (!js) {
+        js =
+        [NSString stringWithFormat:
+         @"\n\n\
+         ;function jsTestSearchStatic(formKey) {\n\
+         ;    var formSearch = document.forms[formKey].elements['%@'].value;\n\
+         ;    var src = '/%@' + '?' + '%@=' + formSearch ;\n\
+         ;    window.location.href = src;\n\
+         }\n\n"
+         , PnrKey_Conent
+         , PnrGet_TestRoot, PnrKey_TestSearch
+         ];
+    }
+    return js;
+}
+
++ (NSString *)jsTestDeleteStatic {
+    static NSString * js;
+    if (!js) {
+        js =
+        [NSString stringWithFormat:
+         @"\n\n\
+         ;function jsTestDeleteStatic(formKey, index, type) {\n\
+         ;    var formContent = document.forms[formKey].elements['%@'].value;\n\
+         ;    var formSaveBt  = document.forms[formKey].elements['%@'];\n\
+         ;    formSaveBt.innerText = '保存中';\n\
+         ;    var xmlhttp = new XMLHttpRequest();\n\
+         ;    xmlhttp.open('POST','/%@',true);\n\
+         ;\n\
+         ;    xmlhttp.onreadystatechange = function() {\n\
+         ;        if (xmlhttp.readyState == 4) {\n\
+         ;            var text = xmlhttp.responseText;\n\
+         ;            if (text == 'success') {\n\
+         ;                formSaveBt.innerText = '保存 成功';\n\
+         ;            } else {\n\
+         ;                formSaveBt.innerText = '保存 失败';\n\
+         ;            }\n\
+         ;        }\n\
+         ;    }\n\
+         ;\n\
+         ;    var text = '%@='+ formContent + '&%@='+ index +'&%@='+ type; \n\
+         ;    xmlhttp.send(text);\n\
+         ;}\n\n"
+         , PnrKey_Conent
+         , PnrKey_TestSave
+         , PnrPost_TestEdit
+         , PnrKey_Conent, PnrKey_TestIndex, PnrKey_TestType
+         ];
+    }
+    return js;
+}
+
 // MARK: 动态的查看json js代码, 生成新的form,并且submit.
 + (NSString *)jsJsonDynamic {
     // http://www.cnblogs.com/haoqipeng/p/create-form-with-js.html

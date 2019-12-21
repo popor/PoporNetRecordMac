@@ -150,7 +150,7 @@
                     }
                     // MARK: 模拟测试_编辑页面
                     else if ([path isEqualToString:PnrGet_TestRoot]) {
-                        completionBlock(H5String([PnrWebBodyTest requestTestBody]));
+                        completionBlock(H5String([PnrWebBodyTest requestTestBody:query]));
                     }
                     // MARK: 模拟测试数据
                     else if ([[path lowercaseString] hasPrefix:PnrGet_TestHeadAdd]) {
