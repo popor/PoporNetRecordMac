@@ -104,10 +104,10 @@
      @"\n\
      <div style=' width:100%%;  background-color:#336ff9;  ' >\n\
      <form id='%@' name='%@' > \n\
-     <div style=' width:10%%; float:left; ' >\n\
+     <div style=' width:120px; float:left; ' >\n\
      <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> \n\
      </div>\n\
-     <div style=' width:90%%; float:left; ' >\n\
+     <div style=' width:calc(100%% - 120px); float:left; ' >\n\
      <input  id='%@' name='%@' style=\" width:100%%; height:28px; font-size:16px; \" value='%@' ></input> \n\
      </div>\n\
      </form>\n\
@@ -126,11 +126,11 @@
      @"\n\
      <div style=' width:100%%; ' >\n\
      <form id='%@' name='%@' method='POST' target='_blank' > \n\
-     <div style=' width:10%%; float:left; ' >\n\
+     <div style=' width:120px; float:left; ' >\n\
      <button         class=\"w180Green2\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看 </button> <br> \n\
      <button id='%@' class=\"w180Green2\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button>  \n\
      </div>\n\
-     <div style=' width:90%%; float:left; ' >\n\
+     <div style=' width:calc(100%% - 120px); float:left; ' >\n\
      <textarea id='%@' name='%@' class='%@'>%@</textarea> <p><p><p>\n\
      </div>\n\
      </form>\n\
