@@ -102,7 +102,7 @@
     return
     [NSString stringWithFormat:
      @"\n\
-     <div style=' width:100%%;  background-color:#336ff9;  ' >\n\
+     <div style=' width:100%%; ' >\n\
      <form id='%@' name='%@' > \n\
      <div style=' width:120px; float:left; ' >\n\
      <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> \n\
@@ -111,7 +111,7 @@
      <input  id='%@' name='%@' style=\" width:100%%; height:28px; font-size:16px; \" value='%@' ></input> \n\
      </div>\n\
      </form>\n\
-     </div> <p><p><p>\n"
+     </div> \n"
      , formIdName, formIdName
      , PnrKey_TestSave, formIdName, index, type
      , taIdName, taIdName, taValue
