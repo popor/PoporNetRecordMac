@@ -100,6 +100,7 @@
     [NSString stringWithFormat:
      @"\n\
      <div style=' width:100%%; ' >\n\
+     <p style=' width:100%%; height:2px; background-color:#ccc; float:left; '></p> \n\
      <form id='%@' name='%@' > \n\
      <div style=' width:120px; float:left; ' >\n\
      <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> \n\
@@ -108,6 +109,7 @@
      <input  id='%@' name='%@' type='text' style=\" width:100%%; height:28px; font-size:16px; \" value='%@' onkeydown=\"if(event.keyCode==13){return false;}\" ></input> \n\
      </div>\n\
      </form>\n\
+     <p style=' width:100%%; height:1px; float:left; '></p> \n\
      </div> \n"
      , formIdName, formIdName
      , PnrKey_TestSave, formIdName, index, type
