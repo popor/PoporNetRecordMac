@@ -89,7 +89,6 @@
         NSString * responseKey = [NSString stringWithFormat:@"%@_%li", PnrKey_TestResponse, entity.id];
         
         [boby appendString:[self jsonReadEditUrlForm:urlKey taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:entity.url index:entity.id type:PnrKey_TestUrl]];
-        
         [boby appendString:[self jsonReadEditResponseForm:responseKey taIdName:PnrKey_Conent btName:PnrKey_TestResponse taValue:entity.response index:entity.id type:PnrKey_TestResponse]];
     }
     NSString * html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, boby, h5_detail_tail];
@@ -97,8 +96,6 @@
 }
 
 + (NSString *)jsonReadEditUrlForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index type:(NSString *)type {
-    // method='POST' target='_blank'
-    // background-color:#3c8877;
     return
     [NSString stringWithFormat:
      @"\n\
@@ -108,7 +105,7 @@
      <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> \n\
      </div>\n\
      <div style=' width:calc(100%% - 120px); float:left; ' >\n\
-     <input  id='%@' name='%@' style=\" width:100%%; height:28px; font-size:16px; \" value='%@' ></input> \n\
+     <input  id='%@' name='%@' type='text' style=\" width:100%%; height:28px; font-size:16px; \" value='%@' onkeydown=\"if(event.keyCode==13){return false;}\" ></input> \n\
      </div>\n\
      </form>\n\
      </div> \n"
@@ -119,8 +116,6 @@
 }
 
 + (NSString *)jsonReadEditResponseForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index type:(NSString *)type {
-    // background-color:#336ff9;
-    // background-color:#ff0000;
     return
     [NSString stringWithFormat:
      @"\n\
