@@ -41,16 +41,16 @@
             // body
             [h5 appendString:@"\n<body>"];
             
-            // 搜索栏
+            // 搜索栏 
             [h5 appendFormat:
              @"\n<div' style=\" width:100%%; \" >\n\
              <form id='%@' >\n\
-             <input id='%@' type='text' style=\" width:200px; height:28px; font-size:16px; justify-content: center; \"  onkeydown=\"if(event.keyCode==13){return false;}\" ></input>\n\
+             <input id='%@' type='text' style=\" width:200px; height:28px; font-size:16px; justify-content: center; \"  onkeydown=\"if(event.keyCode==13){ jsTestSearchStatic('%@'); return false;}\"  ></input>\n\
              <button id='%@' class=\"wBlack_80_0\" type='button' \" onclick=\"jsTestSearchStatic('%@')\" > 搜索 </button> \n\
              </form>\n\
              </div>\n "
              , PnrKey_TestSearchForm
-             , PnrKey_Conent
+             , PnrKey_Conent, PnrKey_TestSearchForm
              , PnrKey_TestSearch, PnrKey_TestSearchForm
              ];
             
