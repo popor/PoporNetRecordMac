@@ -1,12 +1,12 @@
 //
-//  PnrWebBody.m
+//  PnrWebBodyRecord.m
 //  PoporNetRecord
 //
 //  Created by apple on 2019/3/15.
 //  Copyright © 2019 wangkq. All rights reserved.
 //
 
-#import "PnrWebBody.h"
+#import "PnrWebBodyRecord.h"
 #import "PnrEntity.h"
 #import "PnrConfig.h"
 #import "PnrWebCss.h"
@@ -15,7 +15,7 @@
 #import "PnrRequestTestEntity.h"
 #import <PoporFoundation/NSDictionary+pTool.h>
 
-@implementation PnrWebBody
+@implementation PnrWebBodyRecord
 
 + (NSString *)jsonReadForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue {
     return [NSString stringWithFormat:@"\n<form id='%@' name='%@' method='POST' target='_blank' > \n <button class=\"w180Green\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看详情 </button> <br> \n <textarea id='%@' name='%@' class='%@'>%@</textarea> \n</form>",
@@ -222,7 +222,7 @@
     
     
     void (^ formBtTaBlock)(NSMutableString*, NSString*, id, NSString*) = ^(NSMutableString* html, NSString * btName, NSString * taValue, NSString * formIdName){
-        [html appendString:[PnrWebBody jsonReadForm:formIdName taIdName:PnrKey_Conent btName:btName taValue:taValue]];
+        [html appendString:[PnrWebBodyRecord jsonReadForm:formIdName taIdName:PnrKey_Conent btName:btName taValue:taValue]];
     };
     
     void (^ btTaBlock)(NSMutableString*, NSString*, NSString*, NSString*) = ^(NSMutableString* html, NSString* btTitle, NSString* taIdName, NSString* taValue){

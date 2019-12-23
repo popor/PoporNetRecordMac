@@ -1,5 +1,5 @@
 //
-//  PnrWebBody.h
+//  PnrWebBodyRecord.h
 //  PoporNetRecord
 //
 //  Created by apple on 2019/3/15.
@@ -43,7 +43,7 @@ __block int record = 0;\n\
 &#9; });\n\
 } extraDic:@{@\"exKey\":@\"exValue\"}]; </pre> \n ";
 
-@interface PnrWebBody : NSObject
+@interface PnrWebBodyRecord : NSObject
 
 + (NSString *)jsonReadForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue;
 

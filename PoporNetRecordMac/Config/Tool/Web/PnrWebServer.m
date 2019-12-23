@@ -9,7 +9,7 @@
 
 #import "PnrEntity.h"
 #import "PnrPortEntity.h"
-#import "PnrWebBody.h"
+#import "PnrWebBodyRecord.h"
 #import "PnrWebBodyTest.h"
 #import "PnrConfig.h"
 
@@ -37,7 +37,7 @@
     static PnrWebServer * instance;
     dispatch_once(&once, ^{
         instance = [PnrWebServer new];
-        instance.h5Root = [PnrWebBody rootBody];
+        instance.h5Root = [PnrWebBodyRecord rootBody];
         instance.config = [PnrConfig share];
         
         // GCDWebServer 这个配置要求在主线程中执行
@@ -99,9 +99,9 @@
                         PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
                         
                         if (deviceEntity) {
-                            completionBlock(H5String([PnrWebBody listH5:deviceEntity.listWebH5]));
+                            completionBlock(H5String([PnrWebBodyRecord listH5:deviceEntity.listWebH5]));
                         } else {
-                            completionBlock(H5String([PnrWebBody listH5:pnr.listWebH5]));
+                            completionBlock(H5String([PnrWebBodyRecord listH5:pnr.listWebH5]));
                         }
                         
                     }
@@ -202,7 +202,6 @@
 
 - (void)analysisPostPath:(NSString *)path request:(GCDWebServerRequest * _Nonnull)request complete:(GCDWebServerCompletionBlock  _Nonnull)complete {
     GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
-    NSDictionary * dic = formRequest.arguments;
     
     if ([path isEqualToString:PnrPost_recordAdd]) {
         [PoporNetRecord addDic:formRequest.jsonObject];
@@ -210,6 +209,7 @@
     }
     
     else if ([path isEqualToString:PnrPost_commonJsonXml]) {
+        NSDictionary * dic = formRequest.arguments;
         NSString * str = dic[PnrKey_Conent];
         if (str) {
             complete(H5String(dic[PnrKey_Conent]));
@@ -219,6 +219,10 @@
     }
     
     else if ([path isEqualToString:PnrPost_TestEdit]) {
+        GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
+        //NSString * str = [[NSString alloc] initWithData:dataReq.data encoding:NSUTF8StringEncoding];
+        NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"测试: %@", dic);
         
         NSString * content = dic[PnrKey_Conent];
         NSString * index   = dic[PnrKey_TestIndex];
@@ -292,7 +296,7 @@
 
 #pragma mark - server 某个单独请求
 - (void)startServerUnitEntity:(PnrEntity *)pnrEntity index:(NSInteger)index {
-    [PnrWebBody deatilEntity:pnrEntity index:index extra:self.resubmitExtraDic finish:^(NSString * _Nonnull detail, NSString * _Nonnull resubmit) {
+    [PnrWebBodyRecord deatilEntity:pnrEntity index:index extra:self.resubmitExtraDic finish:^(NSString * _Nonnull detail, NSString * _Nonnull resubmit) {
         pnrEntity.h5Detail   = detail;
         pnrEntity.h5Resubmit = resubmit;
     }];

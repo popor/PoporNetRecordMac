@@ -33,6 +33,28 @@
 + (NSString *)jsTestEditStatic {
     static NSString * js;
     if (!js) {
+        // https://blog.csdn.net/harryhare/article/details/80778066
+        // function send(type) {
+        //     url = "http://127.0.0.1:8080/";
+        //     xhr = new XMLHttpRequest();
+        //     xhr.open("post", url, true);
+        //     var data;
+        //     if (type === "formdata") {
+        //         data = new FormData();
+        //         data.append("key", "value");
+        //     } else if (type === "json") {
+        //         xhr.setRequestHeader("Content-Type", "application/json");
+        //         data = JSON.stringify({"key": "value"});
+        //     } else if (type === "text") {
+        //         data = "key=value";
+        //     } else if (type === "www") {
+        //         // 这个header 其实是 传统post 表单的格式
+        //         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //         data = "key=value";
+        //     }
+        //     xhr.send(data);
+        // }
+    
         js =
         [NSString stringWithFormat:
          @"\n\n\
@@ -54,13 +76,15 @@
          ;        }\n\
          ;    }\n\
          ;\n\
-         ;    var text = '%@='+ formContent + '&%@='+ index +'&%@='+ type; \n\
-         ;    xmlhttp.send(text);\n\
+         ;    xmlhttp.setRequestHeader('Content-Type', 'application/json');\n\
+         ;    var data = JSON.stringify({\"%@\": type, \"%@\": index, \"%@\": formContent }); \n\
+         ;    //data = JSON.stringify({\"key\": \"value\"}); \n\
+         ;    xmlhttp.send(data);\n\
          ;}\n\n"
          , PnrKey_Conent
          , PnrKey_TestSave
          , PnrPost_TestEdit
-         , PnrKey_Conent, PnrKey_TestIndex, PnrKey_TestType
+         , PnrKey_TestType, PnrKey_TestIndex, PnrKey_Conent
          ];
     }
     return js;
