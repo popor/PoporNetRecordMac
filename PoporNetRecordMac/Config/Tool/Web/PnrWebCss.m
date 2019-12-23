@@ -80,7 +80,7 @@
          color:%@; width:180px; font-size:16px;\
          }\n\
          \n button.w180Red1 {\n\
-         color:%@; background-color:%@; width:100%%; font-size:16px;\
+         color:%@; background-color:%@; width:100%%; height:28px; font-size:16px;\
          }\n\
          \n\
          \n\

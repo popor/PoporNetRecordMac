@@ -139,7 +139,8 @@
      <div style=' width:100%%; ' >\n\
      <form id='%@' name='%@' method='POST' target='_blank' > \n\
      <div style=' width:120px; float:left; ' >\n\
-     <button         class=\"w180Green2\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看 </button> <br> \n\
+     <button         class=\"w180Green2\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看 </button> \n\
+     <div style=' width:100%%; height:1px; float:left; '></div> \n\
      <button id='%@' class=\"w180Green2\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button>  \n\
      </div>\n\
      <div style=' width:calc(100%% - 120px); float:left; ' >\n\
