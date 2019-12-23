@@ -92,16 +92,19 @@
     }
     // MARK: 每次都需要拼接的部分
     
-    NSMutableString * boby = [NSMutableString new];
+    NSMutableString * body = [NSMutableString new];
     NSArray * array = [PnrRequestTestEntity allEntitySearch:dic[PnrKey_TestSearch]];
     for (PnrRequestTestEntity * entity in array) {
         NSString * urlKey      = [NSString stringWithFormat:@"%@_%li", PnrKey_TestUrl,      entity.id];
         NSString * responseKey = [NSString stringWithFormat:@"%@_%li", PnrKey_TestResponse, entity.id];
         
-        [boby appendString:[self jsonReadEditUrlForm:urlKey taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:entity.url index:entity.id type:PnrKey_TestUrl]];
-        [boby appendString:[self jsonReadEditResponseForm:responseKey taIdName:PnrKey_Conent btName:PnrKey_TestResponse taValue:entity.response index:entity.id type:PnrKey_TestResponse]];
+        [body appendString:[self jsonReadEditUrlForm:urlKey taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:entity.url index:entity.id type:PnrKey_TestUrl]];
+        [body appendString:[self jsonReadEditResponseForm:responseKey taIdName:PnrKey_Conent btName:PnrKey_TestResponse taValue:entity.response index:entity.id type:PnrKey_TestResponse]];
     }
-    NSString * html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, boby, h5_detail_tail];
+    if (body.length == 0) {
+        [body setString:@"<p>暂无内容</p>"];
+    }
+    NSString * html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, body, h5_detail_tail];
     return html;
 }
 
