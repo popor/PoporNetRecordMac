@@ -233,9 +233,16 @@ static NSString * SepactorKey = @"_PnrMac_";
     //}
 }
 
-- (void)webviewAction {
+- (void)webview_recordAction {
     PoporNetRecord * pnr = [PoporNetRecord share];
     [[NSWorkspace sharedWorkspace] openURL:pnr.webServer.webServer.serverURL];
+}
+
+- (void)webview_testRequstAction {
+    
+    PoporNetRecord * pnr = [PoporNetRecord share];
+    NSString * url = [NSString stringWithFormat:@"%@%@", pnr.webServer.webServer.serverURL, PnrGet_TestRoot];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
 #pragma mark table delegate

@@ -142,7 +142,7 @@
 - (void)addFunBT {
     
     int btH = 25;
-    NSArray * titleArray = @[FunFresh, FunAddRequest, FunView];
+    NSArray * titleArray = @[FunRecord_Fresh, FunRecord_AddRequest, FunRecord_View, FunTest_Request];
     NSButton * bt;
     for (int i = 0; i<titleArray.count; i++) {
         
@@ -179,13 +179,15 @@
 
 - (void)buttonAction:(NSButton *)button {
     
-    if ([button.title isEqualToString:FunFresh]) {
+    if ([button.title isEqualToString:FunRecord_Fresh]) {
         [self.present freshAction];
-    } else if ([button.title isEqualToString:FunView]) {
-        [self.present webviewAction];
-    } else if ([button.title isEqualToString:FunAddRequest]) {
+    } else if ([button.title isEqualToString:FunRecord_View]) {
+        [self.present webview_recordAction];
+    } else if ([button.title isEqualToString:FunRecord_AddRequest]) {
         [self.present createRequestAction];
-    }
+    } else if ([button.title isEqualToString:FunTest_Request]) {
+           [self.present webview_testRequstAction];
+       }
 }
 
 //- (void)wifi1 {

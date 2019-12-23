@@ -1,3 +1,6 @@
+1.4
+增加模拟测试功能
+
 1. web页面增加 deviceName 列表.
 2. list frame 点击之后, 对应的row变色. 完成
 3. listWeb 当index=1的时候, max>1, 点击刷新逻辑有问题. 完成
