@@ -11,13 +11,50 @@
 #import "WindowFrameTool.h"
 #import <PoporFMDB/PoporFMDB.h>
 
+#import "PnrRequestTestEntity.h"
+#import "PoporAppInfo.h"
+
+void UncaughtExceptionHandler(NSException *exception) {
+    
+    NSString * version = [PoporAppInfo getAppVersion_short];
+    NSString * buide   = [PoporAppInfo getAppVersion_build];
+    
+    NSArray  * arr     = [exception callStackSymbols];
+    NSString * reason  = [exception reason];
+    NSString * name    = [exception name];
+    NSString * content = [arr componentsJoinedByString:@"\r\n"];
+    
+    NSDictionary * dic =
+    @{
+        @"version":version,
+        @"buide":buide,
+        @"reason":reason,
+        @"name":name,
+        @"content":content,
+    };
+    PnrRequestTestEntity * entity = [PnrRequestTestEntity new];
+    entity.url      = @"崩溃信息";
+    entity.response = dic.toJsonString;
+    
+    [PnrRequestTestEntity addEntity:entity];
+}
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
+
 - (void)applicationWillFinishLaunching:(NSNotification *)notification {
+    
+    NSSetUncaughtExceptionHandler (&UncaughtExceptionHandler);
+    
+    //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5), dispatch_get_main_queue(), ^{
+    //    NSArray * array = @[];
+    //    NSButton * bt = (NSButton *)array;
+    //    [bt setTitle:@"33"];
+    //});
     
     //#ifndef __OPTIMIZE__
     //    NSString * iosInjectionPath = @"/Applications/InjectionIII.app/Contents/Resources/macOSInjection.bundle";

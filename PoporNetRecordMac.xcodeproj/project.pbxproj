@@ -39,6 +39,7 @@
 		18A06E47237C051F0084506B /* PnrDeviceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06E46237C051F0084506B /* PnrDeviceEntity.m */; };
 		18BAE79223826C3500BB6A3C /* NSView+Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE79123826C3500BB6A3C /* NSView+Address.m */; };
 		18C5D2E223ACC95C00C460DF /* PnrWebBodyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C5D2E123ACC95C00C460DF /* PnrWebBodyTest.m */; };
+		18E3288E23B0943600DBCC27 /* PoporAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3288D23B0943600DBCC27 /* PoporAppInfo.m */; };
 		60165D6F9A867925C9BAF8BF /* Pods_PoporNetRecordMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D96B0733F0A57163C75586A /* Pods_PoporNetRecordMac.framework */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,8 @@
 		18BAE79123826C3500BB6A3C /* NSView+Address.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Address.m"; sourceTree = "<group>"; };
 		18C5D2E023ACC95C00C460DF /* PnrWebBodyTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PnrWebBodyTest.h; sourceTree = "<group>"; };
 		18C5D2E123ACC95C00C460DF /* PnrWebBodyTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PnrWebBodyTest.m; sourceTree = "<group>"; };
+		18E3288C23B0943600DBCC27 /* PoporAppInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoporAppInfo.h; sourceTree = "<group>"; };
+		18E3288D23B0943600DBCC27 /* PoporAppInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoporAppInfo.m; sourceTree = "<group>"; };
 		272A82FDE599135FF461AD1C /* Pods-PoporNetRecordMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.debug.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.debug.xcconfig"; sourceTree = "<group>"; };
 		9D96B0733F0A57163C75586A /* Pods_PoporNetRecordMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoporNetRecordMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D329B8CD1C3EC314B48AB38C /* Pods-PoporNetRecordMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.release.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.release.xcconfig"; sourceTree = "<group>"; };
@@ -235,6 +238,7 @@
 		18A06DFF237BCFA50084506B /* App */ = {
 			isa = PBXGroup;
 			children = (
+				18E3288B23B0940E00DBCC27 /* AppTool */,
 				18A06DE9237BCF7B0084506B /* AppDelegate.h */,
 				18A06DEA237BCF7B0084506B /* AppDelegate.m */,
 			);
@@ -398,6 +402,15 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		18E3288B23B0940E00DBCC27 /* AppTool */ = {
+			isa = PBXGroup;
+			children = (
+				18E3288C23B0943600DBCC27 /* PoporAppInfo.h */,
+				18E3288D23B0943600DBCC27 /* PoporAppInfo.m */,
+			);
+			path = AppTool;
+			sourceTree = "<group>";
+		};
 		3F8697B23CB42847C230D635 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,6 +543,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E3288E23B0943600DBCC27 /* PoporAppInfo.m in Sources */,
 				18A06E19237BD1E20084506B /* NSTask+shell.m in Sources */,
 				18A06E44237BFC320084506B /* EditableTextField.m in Sources */,
 				183BE874238B68F900885F6C /* NSButton+pDrawRect.m in Sources */,
@@ -692,14 +706,14 @@
 				CODE_SIGN_ENTITLEMENTS = PoporNetRecordMac/PoporNetRecordMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				GCC_PREFIX_HEADER = PoporNetRecordMac/PoporNetRecordMac_prefix.h;
 				INFOPLIST_FILE = PoporNetRecordMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ifcar99.PoporNetRecordMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -713,14 +727,14 @@
 				CODE_SIGN_ENTITLEMENTS = PoporNetRecordMac/PoporNetRecordMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				GCC_PREFIX_HEADER = PoporNetRecordMac/PoporNetRecordMac_prefix.h;
 				INFOPLIST_FILE = PoporNetRecordMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ifcar99.PoporNetRecordMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
