@@ -74,6 +74,7 @@
              ;window.onload=function (){\n\
              ;    var searchWord = getQueryVariable('%@')\n\
              ;    if(searchWord.length>0){\n\
+             ;    searchWord = decodeURIComponent(searchWord);\n\
              ;        document.forms['%@'].elements['%@'].value = searchWord;\n\
              ;    }\n\
              ;}"
