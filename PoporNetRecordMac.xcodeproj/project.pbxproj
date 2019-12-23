@@ -692,7 +692,7 @@
 				CODE_SIGN_ENTITLEMENTS = PoporNetRecordMac/PoporNetRecordMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				GCC_PREFIX_HEADER = PoporNetRecordMac/PoporNetRecordMac_prefix.h;
 				INFOPLIST_FILE = PoporNetRecordMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -713,7 +713,7 @@
 				CODE_SIGN_ENTITLEMENTS = PoporNetRecordMac/PoporNetRecordMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				GCC_PREFIX_HEADER = PoporNetRecordMac/PoporNetRecordMac_prefix.h;
 				INFOPLIST_FILE = PoporNetRecordMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
