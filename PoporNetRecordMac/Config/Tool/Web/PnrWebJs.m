@@ -78,7 +78,6 @@
          ;\n\
          ;    xmlhttp.setRequestHeader('Content-Type', 'application/json');\n\
          ;    var data = JSON.stringify({\"%@\": type, \"%@\": index, \"%@\": formContent }); \n\
-         ;    //data = JSON.stringify({\"key\": \"value\"}); \n\
          ;    xmlhttp.send(data);\n\
          ;}\n\n"
          , PnrKey_Conent
@@ -113,33 +112,33 @@
     if (!js) {
         js =
         [NSString stringWithFormat:
-         @"\n\n\
-         ;function jsTestDeleteStatic(formKey, index, type) {\n\
-         ;    var formContent = document.forms[formKey].elements['%@'].value;\n\
-         ;    var formSaveBt  = document.forms[formKey].elements['%@'];\n\
-         ;    formSaveBt.innerText = '保存中';\n\
-         ;    var xmlhttp = new XMLHttpRequest();\n\
-         ;    xmlhttp.open('POST','/%@',true);\n\
-         ;\n\
-         ;    xmlhttp.onreadystatechange = function() {\n\
-         ;        if (xmlhttp.readyState == 4) {\n\
-         ;            var text = xmlhttp.responseText;\n\
-         ;            if (text == 'success') {\n\
-         ;                formSaveBt.innerText = '保存 成功';\n\
-         ;            } else {\n\
-         ;                formSaveBt.innerText = '保存 失败';\n\
-         ;            }\n\
-         ;        }\n\
-         ;    }\n\
-         ;\n\
-         ;    var text = '%@='+ formContent + '&%@='+ index +'&%@='+ type; \n\
-         ;    xmlhttp.send(text);\n\
-         ;}\n\n"
-         , PnrKey_Conent
-         , PnrKey_TestSave
-         , PnrPost_TestEdit
-         , PnrKey_Conent, PnrKey_TestIndex, PnrKey_TestType
-         ];
+        @"\n\n\
+        ;function jsTestDeleteStatic(formKey, index) {\n\
+        ;    var form         = document.forms[formKey];\n\
+        ;    var formDeleteBt = document.forms[formKey].elements['%@'];\n\
+        ;    formDeleteBt.innerText = '删除中';\n\
+        ;    var xmlhttp = new XMLHttpRequest();\n\
+        ;    xmlhttp.open('POST','/%@',true);\n\
+        ;\n\
+        ;    xmlhttp.onreadystatechange = function() {\n\
+        ;        if (xmlhttp.readyState == 4) {\n\
+        ;            var text = xmlhttp.responseText;\n\
+        ;            if (text == 'success') {\n\
+        ;                formDeleteBt.innerText = '删除 成功';\n\
+        ;            } else {\n\
+        ;                formDeleteBt.innerText = '删除 失败';\n\
+        ;            }\n\
+        ;        }\n\
+        ;    }\n\
+        ;\n\
+        ;    xmlhttp.setRequestHeader('Content-Type', 'application/json');\n\
+        ;    var data = JSON.stringify({\"%@\": index}); \n\
+        ;    xmlhttp.send(data);\n\
+        ;}\n\n"
+        , PnrKey_TestDelete
+        , PnrPost_TestDelete
+        , PnrKey_TestIndex
+        ];
     }
     return js;
 }

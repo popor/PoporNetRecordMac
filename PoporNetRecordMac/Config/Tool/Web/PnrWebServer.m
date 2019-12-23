@@ -222,7 +222,7 @@
         GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
         //NSString * str = [[NSString alloc] initWithData:dataReq.data encoding:NSUTF8StringEncoding];
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"测试: %@", dic);
+        //NSLog(@"测试: %@", dic);
         
         NSString * content = dic[PnrKey_Conent];
         NSString * index   = dic[PnrKey_TestIndex];
@@ -235,6 +235,27 @@
             } else if ([type isEqualToString:PnrKey_TestResponse]) {
                 success = [PnrRequestTestEntity updateIndex:[index integerValue] response:content];
             } 
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (success) {
+                complete(H5String(PnrKey_success));
+            } else {
+                complete(H5String(PnrKey_fail));
+            }
+        });
+    }
+    
+    else if ([path isEqualToString:PnrPost_TestDelete]) {
+        GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
+        //NSString * str = [[NSString alloc] initWithData:dataReq.data encoding:NSUTF8StringEncoding];
+        NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
+        //NSLog(@"测试: %@", dic);
+        
+        NSString * index = dic[PnrKey_TestIndex];
+        
+        BOOL success = NO;
+        if ( index ) {
+            success = [PnrRequestTestEntity deleteIndex:index];
         }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (success) {

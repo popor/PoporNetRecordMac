@@ -706,14 +706,14 @@
 				CODE_SIGN_ENTITLEMENTS = PoporNetRecordMac/PoporNetRecordMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				GCC_PREFIX_HEADER = PoporNetRecordMac/PoporNetRecordMac_prefix.h;
 				INFOPLIST_FILE = PoporNetRecordMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ifcar99.PoporNetRecordMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -727,14 +727,14 @@
 				CODE_SIGN_ENTITLEMENTS = PoporNetRecordMac/PoporNetRecordMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				GCC_PREFIX_HEADER = PoporNetRecordMac/PoporNetRecordMac_prefix.h;
 				INFOPLIST_FILE = PoporNetRecordMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ifcar99.PoporNetRecordMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

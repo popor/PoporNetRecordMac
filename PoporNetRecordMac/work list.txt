@@ -1,5 +1,8 @@
 1.4
 增加模拟测试功能
+1.5
+增加收集崩溃日志: http://192.168.1.222:9000/request?search=崩溃
+
 
 1. web页面增加 deviceName 列表.
 2. list frame 点击之后, 对应的row变色. 完成

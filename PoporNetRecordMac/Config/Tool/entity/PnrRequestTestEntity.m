@@ -68,4 +68,8 @@
     }
 }
 
++ (BOOL)deleteIndex:(NSString *)index {
+    return [PoporFMDB deleteClass:[PnrRequestTestEntity class] where:@"id" equal:index];
+}
+
 @end

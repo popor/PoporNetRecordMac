@@ -64,6 +64,7 @@
             [h5 appendString:[PnrWebJs jsJsonStatic]];
             [h5 appendString:[PnrWebJs jsTestEditStatic]];
             [h5 appendString:[PnrWebJs jsTestSearchStatic]];
+            [h5 appendString:[PnrWebJs jsTestDeleteStatic]];
             
             [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
             
@@ -109,13 +110,17 @@
     [NSString stringWithFormat:
      @"\n\
      <div style=' width:100%%; ' >\n\
-     <p style=' width:100%%; height:2px; background-color:#ccc; float:left; '></p> \n\
+     <p style=' width:100%%; height:6px; background-color:#ccc; float:left; '></p> \n\
+     <div style=' width:100%%; height:1px; float:left; '></div> \n\
      <form id='%@' name='%@' > \n\
      <div style=' width:120px; float:left; ' >\n\
      <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> \n\
      </div>\n\
-     <div style=' width:calc(100%% - 120px); float:left; ' >\n\
-     <input  id='%@' name='%@' type='text' style=\" width:100%%; height:28px; font-size:16px; \" value='%@' onkeydown=\"if(event.keyCode==13){return false;}\" ></input> \n\
+     <div style=' width:calc(100%% - 240px); float:left; ' >\n\
+     <input  id='%@' name='%@' type='text' style=\" width:calc(100%% - 2px); height:28px; font-size:16px; \" value='%@' onkeydown=\"if(event.keyCode==13){return false;}\" ></input> \n\
+     </div>\n\
+     <div style=' width:120px; float:left; ' >\n\
+     <button id='%@' class=\"w180Red1\" type='button' \" onclick=\"jsTestDeleteStatic('%@', '%li')\" > 删除 </button> \n\
      </div>\n\
      </form>\n\
      <p style=' width:100%%; height:1px; float:left; '></p> \n\
@@ -123,6 +128,7 @@
      , formIdName, formIdName
      , PnrKey_TestSave, formIdName, index, type
      , taIdName, taIdName, taValue
+     , PnrKey_TestDelete, formIdName, index
      ];
 }
 

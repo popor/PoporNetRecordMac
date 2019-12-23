@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSMutableArray *)allEntitySearch:(NSString *)searchWord;
 
++ (BOOL)deleteIndex:(NSString *)index;
+
 @end
 
 NS_ASSUME_NONNULL_END

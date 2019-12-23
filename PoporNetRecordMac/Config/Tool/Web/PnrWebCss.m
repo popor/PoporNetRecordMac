@@ -74,9 +74,16 @@
          \n button.wBlack_80_0 {\n\
          color:%@; width:80; height:28px; font-size:16px;\
          }\n\
+         \n\
+         \n\
          \n button.w180Red {\n\
          color:%@; width:180px; font-size:16px;\
          }\n\
+         \n button.w180Red1 {\n\
+         color:%@; background-color:%@; width:100%%; font-size:16px;\
+         }\n\
+         \n\
+         \n\
          \n button.w100p {\n\
          color:%@; width:100%%; font-size:16px;\
          }\n\
@@ -87,7 +94,12 @@
          color:%@; width:48%%; font-size:16px; float:right;\
          }\n\
          "
-         , colorKey, colorKey, colorKey, @"#000000", @"#d7534a", colorKey, colorKey, colorKey];
+         , colorKey, colorKey, colorKey, @"#000000"
+         
+         // 红色的部分
+         , @"#d7534a", @"red", @"wheat"
+         
+         , colorKey, colorKey, colorKey];
     }
     return str;
 }
