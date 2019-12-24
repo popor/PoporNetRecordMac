@@ -96,11 +96,11 @@
         [body appendFormat:@"<a href='/%@' class='%@' > 网络请求 </a> <p>", PnrGet_recordRoot, divFunItem];
         [body appendFormat:@"<a href='/%@' class='%@' > 请求测试 </a> <p>", PnrGet_TestRoot,   divFunItem];
         
-        [body appendFormat:@"</div>"];
-        
-        [body appendFormat:@"<p>"];
+        [body appendFormat:@"<p style=' right:10px; bottom:5px; position:absolute; ' >"];
         [body appendFormat:@"版本: %@(%@) ", [PoporAppInfo getAppVersion_short], [PoporAppInfo getAppVersion_build]];
         [body appendFormat:@"</p>"];
+        
+        [body appendFormat:@"</div>"];
         
         html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, body, h5_detail_tail];
     }
