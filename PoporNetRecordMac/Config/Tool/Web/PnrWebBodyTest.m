@@ -29,7 +29,7 @@
         // MARK: detail 头
         {
             NSMutableString * h5 = [NSMutableString new];
-            [h5 appendFormat:@"<html> <head><title>请求测试列表</title></head>"];
+            [h5 appendFormat:@"<html> <head><title>请求测试</title></head>"];
             
             // css
             [h5 appendString:@"\n<style type='text/css'>"];

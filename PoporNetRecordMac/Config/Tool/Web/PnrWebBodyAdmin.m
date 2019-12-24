@@ -21,9 +21,12 @@
     static BOOL       isInit;
     static NSString * h5_detail_head;
     static NSString * h5_detail_tail;
-    
+    static NSMutableString * body;
+    static NSString * html;
     if (!isInit) {
         isInit = YES;
+        NSString * divFunList = @"divFunList";
+        NSString * divFunItem = @"item";
         // MARK: detail 头
         {
             NSMutableString * h5 = [NSMutableString new];
@@ -31,9 +34,38 @@
             
             // css
             [h5 appendString:@"\n<style type='text/css'>"];
-            [h5 appendString:[PnrWebCss cssTextarea1]];
-            [h5 appendString:[PnrWebCss cssButton]];
-            [h5 appendString:[PnrWebCss cssPMarginPadding]];
+            //[h5 appendString:[PnrWebCss cssTextarea1]];
+            //[h5 appendString:[PnrWebCss cssButton]];
+            //[h5 appendString:[PnrWebCss cssPMarginPadding]];
+            
+            [h5 appendFormat:@"\n\nbody { background-color:beige; }\n"];
+            
+            [h5 appendFormat:@"\n\n.%@{ background-color: white; }\n", divFunList];
+            
+            [h5 appendFormat:@"\n\n.%@ a{display: block; text-decoration: none; text-align:center; width:120px;  }\n", divFunList];
+            
+            [h5 appendFormat:
+             @".%@ .%@{\n\
+             height: 40px;\n\
+             line-height: 40px;\n\
+             color: #333333;\n\
+             position: relative;\n\
+             } \n"
+             , divFunList, divFunItem];
+            
+            [h5 appendFormat:
+             @"\n\n.%@ .%@:hover:after{\n\
+             content: '';\n\
+             display: block;\n\
+             position: absolute;\n\
+             width: 60px;\n\
+             height: 2px;\n\
+             bottom: 5px;\n\
+             left: 30px;\n\
+             background-color: #FD463E;\n\
+             } \n"
+             , divFunList, divFunItem];
+            
             [h5 appendString:@"\n</style>"];
             
             // body
@@ -55,13 +87,18 @@
             h5_detail_tail = h5;
         }
         
+        // MARK: 每次都需要拼接的部分
+        body = [NSMutableString new];
+        // text-align:center;
+        // background-color:linen;
+        [body appendFormat:@"<div class='%@' style=' width:1000px; height:100%%; margin:0 auto; ' >", divFunList];
+        [body appendFormat:@"<a href='/%@' class='%@' > 网络请求 </a> <p>", PnrGet_recordRoot, divFunItem];
+        [body appendFormat:@"<a href='/%@' class='%@' > 请求测试 </a> <p>", PnrGet_TestRoot,   divFunItem];
+        
+        [body appendFormat:@"</div>"];
+        html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, body, h5_detail_tail];
     }
-    // MARK: 每次都需要拼接的部分
-    NSMutableString * body = [NSMutableString new];
-    [body appendFormat:@"<a href='/%@' > 网络请求 </a> <p>", PnrGet_recordRoot];
-    [body appendFormat:@"<a href='/%@' > 请求测试列表 </a> <p>", PnrGet_TestRoot];
     
-    NSString * html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, body, h5_detail_tail];
     return html;
 }
 
