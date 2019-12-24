@@ -10,6 +10,7 @@
 #import "PnrPortEntity.h"
 #import "PnrEntity.h"
 #import "PnrPrefix.h"
+#import <PoporFoundation/Block+pPrefix.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy  ) PnrBlockResubmit resubmitBlock;
 @property (nonatomic, strong) NSDictionary * resubmitExtraDic;
 
-- (void)startListServer:(NSMutableString * _Nullable)listBodyH5;
+@property (nonatomic, copy  ) BlockPBool serverLaunchFinish;
+- (void)startServer;
+
 - (void)stopServer;
 
 - (void)updatePort;
-
-- (void)clearListWeb;
 
 @end
 

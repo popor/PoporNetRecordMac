@@ -56,22 +56,9 @@
     return self;
 }
 
-#pragma mark - list server
-- (void)startListServer:(NSMutableString * _Nullable)listBodyH5 {
-    [self startListServerAsyn:listBodyH5];
-}
+#pragma mark - start
 
-// 异步执行, GCDWebServer初始化会和主线程冲突.
-- (void)startListServerAsyn:(NSMutableString *)listBodyH5 {
-    if (!listBodyH5) {
-        listBodyH5 = [NSMutableString new];
-    }
-    
-    [self startWebServer];
-}
-
-- (void)startWebServer {
-    
+- (void)startServer {
     if (!self.webServer) {
         GCDWebServer * server = [GCDWebServer new];
         self.webServer = server;
@@ -195,15 +182,35 @@
             }
         }];
         
-        PnrPortEntity * port = [PnrPortEntity share];
-        [server startWithPort:port.portGetInt bonjourName:nil];
+        [self startServerPort];
+    }
+}
+
+- (void)startServerPort {
+    PnrPortEntity * port = [PnrPortEntity share];
+    if ([self.webServer startWithPort:port.portGetInt bonjourName:nil]) {
+        if (self.serverLaunchFinish) {
+            self.serverLaunchFinish(YES);
+        }
+    } else {
+        if (self.serverLaunchFinish) {
+            self.serverLaunchFinish(NO);
+        }
+        // 如果生成server失败,则更改port参数,重新生成
+        port.portGetInt ++;
+        [port savePort_get:[NSString stringWithFormat:@"%i", port.portGetInt]];
+        
+        [self stopServer];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self startServer];
+        });
     }
 }
 
 - (void)updatePort {
-    [self.webServer stop];
-    self.webServer = nil;
-    [self startWebServer];
+    [self stopServer];
+    [self startServer];
 }
 
 - (void)analysisPostPath:(NSString *)path request:(GCDWebServerRequest * _Nonnull)request complete:(GCDWebServerCompletionBlock  _Nonnull)complete {
@@ -330,7 +337,7 @@
 }
 
 - (void)stopServer {
-    [self.webServer stop];
+    //[self.webServer removeAllHandlers];
     self.webServer = nil;
 }
 

@@ -52,16 +52,22 @@ static NSString * SepactorKey = @"_PnrMac_";
 
 // 开始执行事件,比如获取网络数据
 - (void)startEvent {
-    [self freshAction];
     
     @weakify(self);
     _pnr.blockFreshDeviceName = ^(void) {
         @strongify(self);
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.view.infoTV reloadData];
         });
     };
+    
+    [PnrWebServer share].serverLaunchFinish = ^(BOOL value) {
+        @strongify(self);
+        if (value) {
+            [self freshAction];
+        }
+    };
+    [[PnrWebServer share] startServer];
     
     [self setPnrResubmit];
     
@@ -183,10 +189,12 @@ static NSString * SepactorKey = @"_PnrMac_";
         if (returnCode == NSAlertFirstButtonReturn) {
             int port = accessory.stringValue.intValue;
             if (port > 0) {
-                [[PnrPortEntity share] savePort_get:[NSString stringWithFormat:@"%i", port]];
-                
-                [[PoporNetRecord share].webServer updatePort];
                 [weakSelf freshAction];
+                
+                [[PnrPortEntity share] savePort_get:[NSString stringWithFormat:@"%i", port]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[PoporNetRecord share].webServer updatePort];
+                });
             }
         }
     }];

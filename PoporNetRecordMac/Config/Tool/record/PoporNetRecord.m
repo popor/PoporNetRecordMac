@@ -35,7 +35,7 @@
         // 相关联的关联数组
         instance.webServer = [PnrWebServer share];
         [PnrWebServer share].infoArray = instance.infoArray;
-        [[PnrWebServer share] startListServer:nil];
+        //[[PnrWebServer share] startListServer:nil];
     });
     return instance;
 }
