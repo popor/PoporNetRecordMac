@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)stopServer;
 
-- (void)updatePort;
+- (void)updateServerPort;
 
 @end
 

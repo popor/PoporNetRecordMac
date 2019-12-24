@@ -90,21 +90,37 @@
         if (self.serverLaunchFinish) {
             self.serverLaunchFinish(NO);
         }
+        
         // 如果生成server失败,则更改port参数,重新生成
-        port.portGetInt ++;
-        [port savePort_get:[NSString stringWithFormat:@"%i", port.portGetInt]];
-        
-        [self stopServer];
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self startServer];
+            port.portGetInt ++;
+            [port savePort_get:[NSString stringWithFormat:@"%i", port.portGetInt]];
+            [self updateServerPort];
         });
     }
 }
 
-- (void)updatePort {
+- (void)updateServerPort {
     [self stopServer];
-    [self startServer];
+    
+    PnrPortEntity * port = [PnrPortEntity share];
+    
+    if ([self.webServer startWithPort:port.portGetInt bonjourName:nil]) {
+        if (self.serverLaunchFinish) {
+            self.serverLaunchFinish(YES);
+        }
+    } else {
+        if (self.serverLaunchFinish) {
+            self.serverLaunchFinish(NO);
+        }
+        
+        // 如果生成server失败,则更改port参数,重新生成
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            port.portGetInt ++;
+            [port savePort_get:[NSString stringWithFormat:@"%i", port.portGetInt]];
+            [self updateServerPort];
+        });
+    }
 }
 
 - (void)analysisGetRequest:(GCDWebServerRequest * _Nonnull)request complete:(GCDWebServerCompletionBlock  _Nonnull)completionBlock {
@@ -319,7 +335,6 @@
     complete(H5String(entity.response));
 }
 
-
 #pragma mark - server 某个单独请求
 - (void)startServerUnitEntity:(PnrEntity *)pnrEntity index:(NSInteger)index {
     [PnrWebBodyRecord deatilEntity:pnrEntity index:index extra:self.resubmitExtraDic finish:^(NSString * _Nonnull detail, NSString * _Nonnull resubmit) {
@@ -329,8 +344,9 @@
 }
 
 - (void)stopServer {
-    //[self.webServer removeAllHandlers];
-    self.webServer = nil;
+    if ([self.webServer isRunning]) {
+        [self.webServer stop];
+    }
 }
 
 @end
