@@ -34,10 +34,13 @@ static NSString * PnrFormFeedback   = @"formFeedback";
 
 // MARK: 网页请求URL
 // 记录部分
-static NSString * PnrGet_recordRoot      = @"view";
-static NSString * PnrGet_recordList      = @"viewList";
-static NSString * PnrGet_recordDetail    = @"viewDetail";
-static NSString * PnrGet_recordResubmit  = @"viewResubmit";
+static NSString * PnrGet_admin           = @"admin";
+
+// 记录部分
+static NSString * PnrGet_recordRoot      = @"record";
+static NSString * PnrGet_recordList      = @"recordList";
+static NSString * PnrGet_recordDetail    = @"recordDetail";
+static NSString * PnrGet_recordResubmit  = @"recordResubmit";
 
 static NSString * PnrPost_recordResubmit = @"resubmit";
 static NSString * PnrPost_recordClear    = @"clear";

@@ -233,9 +233,15 @@ static NSString * SepactorKey = @"_PnrMac_";
     //}
 }
 
+- (void)webview_adminAction {
+    PoporNetRecord * pnr = [PoporNetRecord share];
+       NSString * url = [NSString stringWithFormat:@"%@", pnr.webServer.webServer.serverURL];
+       [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+}
 - (void)webview_recordAction {
     PoporNetRecord * pnr = [PoporNetRecord share];
-    [[NSWorkspace sharedWorkspace] openURL:pnr.webServer.webServer.serverURL];
+    NSString * url = [NSString stringWithFormat:@"%@%@", pnr.webServer.webServer.serverURL, PnrGet_recordRoot];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
 - (void)webview_testRequstAction {

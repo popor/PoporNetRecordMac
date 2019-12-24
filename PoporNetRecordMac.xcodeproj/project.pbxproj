@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1807B32323B1BA1C0073A9E6 /* PnrWebBodyAdmin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807B32223B1BA1C0073A9E6 /* PnrWebBodyAdmin.m */; };
 		182CE839237CE2B200F33F61 /* PnrEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE832237CE2B200F33F61 /* PnrEntity.m */; };
 		182CE83A237CE2B200F33F61 /* PnrPortEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE833237CE2B200F33F61 /* PnrPortEntity.m */; };
 		182CE83B237CE2B200F33F61 /* PnrCellEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE837237CE2B200F33F61 /* PnrCellEntity.m */; };
@@ -44,6 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1807B32123B1BA1C0073A9E6 /* PnrWebBodyAdmin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PnrWebBodyAdmin.h; sourceTree = "<group>"; };
+		1807B32223B1BA1C0073A9E6 /* PnrWebBodyAdmin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PnrWebBodyAdmin.m; sourceTree = "<group>"; };
 		182CE830237CE2B200F33F61 /* PnrConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PnrConfig.h; sourceTree = "<group>"; };
 		182CE831237CE2B200F33F61 /* PnrCellEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PnrCellEntity.h; sourceTree = "<group>"; };
 		182CE832237CE2B200F33F61 /* PnrEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PnrEntity.m; path = ../../../RootVC/Entity/PnrEntity.m; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				182CE83F237CE30F00F33F61 /* PnrWebJs.m */,
 				182CE845237CE30F00F33F61 /* PnrWebCss.h */,
 				182CE841237CE30F00F33F61 /* PnrWebCss.m */,
+				1807B32123B1BA1C0073A9E6 /* PnrWebBodyAdmin.h */,
+				1807B32223B1BA1C0073A9E6 /* PnrWebBodyAdmin.m */,
 				182CE840237CE30F00F33F61 /* PnrWebBodyRecord.h */,
 				182CE843237CE30F00F33F61 /* PnrWebBodyRecord.m */,
 				18C5D2E023ACC95C00C460DF /* PnrWebBodyTest.h */,
@@ -562,6 +567,7 @@
 				18A06E2E237BE9380084506B /* RootVC.m in Sources */,
 				18A06E18237BD1E20084506B /* iToast.m in Sources */,
 				18A06E15237BD1E20084506B /* WindowFrameTool.m in Sources */,
+				1807B32323B1BA1C0073A9E6 /* PnrWebBodyAdmin.m in Sources */,
 				18A06E16237BD1E20084506B /* SqliteCofing.m in Sources */,
 				182CE83B237CE2B200F33F61 /* PnrCellEntity.m in Sources */,
 				18A06DF6237BCF800084506B /* main.m in Sources */,

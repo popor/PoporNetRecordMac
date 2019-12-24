@@ -142,7 +142,7 @@
 - (void)addFunBT {
     
     int btH = 25;
-    NSArray * titleArray = @[FunRecord_Fresh, FunRecord_AddRequest, FunRecord_View, FunTest_Request];
+    NSArray * titleArray = @[FunRecord_Fresh, FunRecord_AddRequest, FunAdmin];
     NSButton * bt;
     for (int i = 0; i<titleArray.count; i++) {
         
@@ -181,11 +181,20 @@
     
     if ([button.title isEqualToString:FunRecord_Fresh]) {
         [self.present freshAction];
-    } else if ([button.title isEqualToString:FunRecord_View]) {
-        [self.present webview_recordAction];
-    } else if ([button.title isEqualToString:FunRecord_AddRequest]) {
+    }
+    else if ([button.title isEqualToString:FunRecord_AddRequest]) {
         [self.present createRequestAction];
-    } else if ([button.title isEqualToString:FunTest_Request]) {
+    }
+    
+    else if ([button.title isEqualToString:FunRecord_View]) {
+        [self.present webview_recordAction];
+    }
+    
+    else if ([button.title isEqualToString:FunAdmin]) {
+        [self.present webview_adminAction];
+    }
+    
+    else if ([button.title isEqualToString:FunTest_Request]) {
            [self.present webview_testRequstAction];
     }
 }

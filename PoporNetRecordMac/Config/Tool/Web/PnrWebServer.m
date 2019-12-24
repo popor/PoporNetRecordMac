@@ -19,6 +19,7 @@
 
 #import "PoporNetRecord.h"
 #import "PnrRequestTestEntity.h"
+#import "PnrWebBodyAdmin.h"
 
 #define H5String(string) [GCDWebServerDataResponse responseWithHTML:string]
 
@@ -89,8 +90,12 @@
                 NSArray * pathArray = [path componentsSeparatedByString:@"/"];
                 
                 if (pathArray.count == 1){
-                    // MARK: 首页
-                    if ([path isEqualToString:@""] || [path isEqualToString:PnrGet_recordRoot]){
+                    // MARK: admin
+                    if ([path isEqualToString:@""] || [[path lowercaseString] hasPrefix:PnrGet_admin]){
+                        completionBlock(H5String([PnrWebBodyAdmin html]));
+                    }
+                    // MARK: record
+                    else if ([path isEqualToString:PnrGet_recordRoot]){
                         completionBlock(H5String(self.h5Root));
                     }
                     // MARK: 列表
@@ -156,6 +161,7 @@
                     else if ([[path lowercaseString] hasPrefix:PnrGet_TestHeadAdd]) {
                         [self requestTestUrl:path complete:completionBlock];
                     }
+                    
                     // other
                     else{
                         completionBlock(H5String(ErrorUrl));
