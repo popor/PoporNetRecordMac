@@ -67,119 +67,13 @@
         // MARK: get 方法
         [self.webServer addDefaultHandlerForMethod:@"GET" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
             @strongify(self);
-            PoporNetRecord * pnr  = [PoporNetRecord share];
-            
-            NSString * path      = request.URL.path;
-            NSDictionary * query = request.query;
-            
-            if (path.length >= 1) {
-                path = [path substringFromIndex:1];
-                NSArray * pathArray = [path componentsSeparatedByString:@"/"];
-                
-                if (pathArray.count == 1){
-                    // MARK: admin
-                    if ([path isEqualToString:@""] || [[path lowercaseString] hasPrefix:PnrGet_admin]){
-                        completionBlock(H5String([PnrWebBodyAdmin html]));
-                    }
-                    // MARK: record
-                    else if ([path isEqualToString:PnrGet_recordRoot]){
-                        completionBlock(H5String(self.h5Root));
-                    }
-                    // MARK: 列表
-                    else if ([path isEqualToString:PnrGet_recordList]){
-                        NSString * deviceName = query[PnrKey_DeviceName];
-                        PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
-                        
-                        if (deviceEntity) {
-                            completionBlock(H5String([PnrWebBodyRecord listH5:deviceEntity.listWebH5]));
-                        } else {
-                            completionBlock(H5String([PnrWebBodyRecord listH5:pnr.listWebH5]));
-                        }
-                        
-                    }
-                    // MARK: 详情 重新提交
-                    else if ([path isEqualToString:PnrGet_recordDetail] || [path isEqualToString:PnrGet_recordResubmit]){
-                        NSString * deviceName = query[PnrKey_DeviceName];
-                        NSString * indexStr   = query[PnrKey_index];
-                        
-                        if (indexStr) {
-                            NSInteger index                = indexStr.integerValue;
-                            PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
-                            PnrEntity * entity;
-                            if (deviceEntity) {
-                                entity = deviceEntity.array[index];
-                            } else {
-                                entity = self.infoArray[index];
-                            }
-                            if (!entity.h5Detail) {
-                                [self startServerUnitEntity:entity index:index];
-                            }
-                            
-                            if ([path isEqualToString:PnrGet_recordDetail]) {
-                                if (entity.h5Detail) {
-                                    completionBlock(H5String(entity.h5Detail));
-                                } else {
-                                    completionBlock(H5String(ErrorEntity));
-                                }
-                            } else {
-                                if (entity.h5Resubmit) {
-                                    completionBlock(H5String(entity.h5Resubmit));
-                                } else {
-                                    completionBlock(H5String(ErrorEntity));
-                                }
-                            }
-                                
-                        } else {
-                            completionBlock(H5String(ErrorEntity));
-                        }
-                        
-                    }
-                    // MARK: icon
-                    else if ([path isEqualToString:@"favicon.ico"]){
-                        if (self.config.webIconData) {
-                            completionBlock([GCDWebServerDataResponse responseWithData:self.config.webIconData contentType:@"image/x-icon"]);
-                        }
-                    }
-                    // MARK: 模拟测试_编辑页面
-                    else if ([path isEqualToString:PnrGet_TestRoot]) {
-                        completionBlock(H5String([PnrWebBodyTest requestTestBody:query]));
-                    }
-                    // MARK: 模拟测试数据
-                    else if ([[path lowercaseString] hasPrefix:PnrGet_TestHeadAdd]) {
-                        [self requestTestUrl:path complete:completionBlock];
-                    }
-                    
-                    // other
-                    else{
-                        completionBlock(H5String(ErrorUrl));
-                    }
-                
-                }
-            }
-            else {
-                completionBlock(H5String(ErrorUrl));
-            }
+            [self analysisGetRequest:request complete:completionBlock];
         }];
         
         // MARK: post 方法
         [self.webServer addDefaultHandlerForMethod:@"POST" requestClass:[GCDWebServerURLEncodedFormRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
             @strongify(self);
-            
-            NSString * path = request.URL.path;
-            if (path.length>=1) {
-                path = [path substringFromIndex:1];
-                NSArray * pathArray = [path componentsSeparatedByString:@"/"];
-                if (pathArray.count == 1) {
-                    [self analysisPostPath:path request:request complete:completionBlock];
-                }
-                
-                else {
-                    completionBlock(H5String(ErrorUrl));
-                }
-            }
-            else{
-                completionBlock(H5String(ErrorUrl));
-            }
+            [self analysisPostRequest:request complete:completionBlock];
         }];
         
         [self startServerPort];
@@ -213,7 +107,105 @@
     [self startServer];
 }
 
-- (void)analysisPostPath:(NSString *)path request:(GCDWebServerRequest * _Nonnull)request complete:(GCDWebServerCompletionBlock  _Nonnull)complete {
+- (void)analysisGetRequest:(GCDWebServerRequest * _Nonnull)request complete:(GCDWebServerCompletionBlock  _Nonnull)completionBlock {
+    
+    PoporNetRecord * pnr  = [PoporNetRecord share];
+    
+    NSString * path      = request.URL.path;
+    NSDictionary * query = request.query;
+    
+    if (path.length >= 1) {
+        path = [path substringFromIndex:1];
+        NSArray * pathArray = [path componentsSeparatedByString:@"/"];
+        
+        if (pathArray.count == 1){
+            // MARK: admin
+            if ([path isEqualToString:@""] || [[path lowercaseString] hasPrefix:PnrGet_admin]){
+                completionBlock(H5String([PnrWebBodyAdmin html]));
+            }
+            // MARK: record
+            else if ([path isEqualToString:PnrGet_recordRoot]){
+                completionBlock(H5String(self.h5Root));
+            }
+            // MARK: 列表
+            else if ([path isEqualToString:PnrGet_recordList]){
+                NSString * deviceName = query[PnrKey_DeviceName];
+                PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
+                
+                if (deviceEntity) {
+                    completionBlock(H5String([PnrWebBodyRecord listH5:deviceEntity.listWebH5]));
+                } else {
+                    completionBlock(H5String([PnrWebBodyRecord listH5:pnr.listWebH5]));
+                }
+                
+            }
+            // MARK: 详情 重新提交
+            else if ([path isEqualToString:PnrGet_recordDetail] || [path isEqualToString:PnrGet_recordResubmit]){
+                NSString * deviceName = query[PnrKey_DeviceName];
+                NSString * indexStr   = query[PnrKey_index];
+                
+                if (indexStr) {
+                    NSInteger index                = indexStr.integerValue;
+                    PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
+                    PnrEntity * entity;
+                    if (deviceEntity) {
+                        entity = deviceEntity.array[index];
+                    } else {
+                        entity = self.infoArray[index];
+                    }
+                    if (!entity.h5Detail) {
+                        [self startServerUnitEntity:entity index:index];
+                    }
+                    
+                    if ([path isEqualToString:PnrGet_recordDetail]) {
+                        if (entity.h5Detail) {
+                            completionBlock(H5String(entity.h5Detail));
+                        } else {
+                            completionBlock(H5String(ErrorEntity));
+                        }
+                    } else {
+                        if (entity.h5Resubmit) {
+                            completionBlock(H5String(entity.h5Resubmit));
+                        } else {
+                            completionBlock(H5String(ErrorEntity));
+                        }
+                    }
+                        
+                } else {
+                    completionBlock(H5String(ErrorEntity));
+                }
+                
+            }
+            // MARK: icon
+            else if ([path isEqualToString:@"favicon.ico"]){
+                if (self.config.webIconData) {
+                    completionBlock([GCDWebServerDataResponse responseWithData:self.config.webIconData contentType:@"image/x-icon"]);
+                }
+            }
+            // MARK: 模拟测试_编辑页面
+            else if ([path isEqualToString:PnrGet_TestRoot]) {
+                completionBlock(H5String([PnrWebBodyTest requestTestBody:query]));
+            }
+            // MARK: 模拟测试数据
+            else if ([[path lowercaseString] hasPrefix:PnrGet_TestHeadAdd]) {
+                [self requestTestUrl:path complete:completionBlock];
+            }
+            
+            // other
+            else{
+                completionBlock(H5String(ErrorUrl));
+            }
+        
+        }
+    }
+    else {
+        completionBlock(H5String(ErrorUrl));
+    }
+}
+
+- (void)analysisPostRequest:(GCDWebServerRequest * _Nonnull)request complete:(GCDWebServerCompletionBlock  _Nonnull)complete {
+    
+    NSString * path = request.URL.path;
     GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
     
     if ([path isEqualToString:PnrPost_recordAdd]) {
