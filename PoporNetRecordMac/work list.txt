@@ -7,7 +7,7 @@
 1.7
 搜索 增加回车搜索功能
 1.8
-
+增加了admin页面,修改recordAdd的url,从'add'改为'recordAdd'.
 
 1. web页面增加 deviceName 列表.
 2. list frame 点击之后, 对应的row变色. 完成
