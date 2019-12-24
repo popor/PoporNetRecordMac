@@ -14,6 +14,7 @@
 #import "PnrPortEntity.h"
 #import "PoporNetRecord.h"
 #import <PoporAFN/PoporAFN.h>
+#import "iToast.h"
 
 static int CellHeight = 23;
 
@@ -65,6 +66,8 @@ static NSString * SepactorKey = @"_PnrMac_";
         @strongify(self);
         if (value) {
             [self freshAction];
+        } else {
+            AlertToastTitle(@"端口被占用", self.view.vc.view);
         }
     };
     [[PnrWebServer share] startServer];
@@ -193,7 +196,7 @@ static NSString * SepactorKey = @"_PnrMac_";
                 
                 [[PnrPortEntity share] savePort_get:[NSString stringWithFormat:@"%i", port]];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [[PoporNetRecord share].webServer updatePort];
+                    [[PoporNetRecord share].webServer updateServerPort];
                 });
             }
         }
