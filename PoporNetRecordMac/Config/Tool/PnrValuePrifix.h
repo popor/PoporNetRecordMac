@@ -42,9 +42,9 @@ static NSString * PnrGet_recordList      = @"recordList";
 static NSString * PnrGet_recordDetail    = @"recordDetail";
 static NSString * PnrGet_recordResubmit  = @"recordResubmit";
 
-static NSString * PnrPost_recordResubmit = @"resubmit";
-static NSString * PnrPost_recordClear    = @"clear";
-static NSString * PnrPost_recordAdd      = @"add";
+static NSString * PnrPost_recordResubmit = @"recordResubmit";
+static NSString * PnrPost_recordClear    = @"recordClear";
+static NSString * PnrPost_recordAdd      = @"recordAdd";
 
 // 模拟测试部分
 static NSString * PnrGet_TestHeadAdd     = @"test";// 模拟假数据, 假如没有则会增加一个默认数据, post get 都支持
