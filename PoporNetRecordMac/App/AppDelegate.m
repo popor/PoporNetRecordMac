@@ -15,6 +15,8 @@
 #import "PoporAppInfo.h"
 #import "PnrValuePrifix.h"
 
+static NSString * keepAtFrontKey = @"keepAtFront";
+
 void UncaughtExceptionHandler(NSException *exception) {
     
     NSString * version = [PoporAppInfo getAppVersion_short];
@@ -94,6 +96,8 @@ void UncaughtExceptionHandler(NSException *exception) {
         [SqliteCofing updateWindowFrame:rect];
         [weakSelf.window setFrame:rect display:YES];
     };
+    
+    [self checkKeepAtFrontStatus];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -149,6 +153,33 @@ void UncaughtExceptionHandler(NSException *exception) {
     }
     if (tool.blockResetTv) {
         tool.blockResetTv();
+    }
+}
+
+- (IBAction)keepAtFront:(NSMenuItem *)item {
+    if (item.state == NSControlStateValueOn) {
+        item.state = NSControlStateValueOff;
+        [NSApp.windows[0] setLevel:NSNormalWindowLevel];
+        [PoporFMDB updatePlistKey:keepAtFrontKey value:@"0"];
+    }else{
+        item.state = NSControlStateValueOn;
+        [NSApp.windows[0] setLevel:NSFloatingWindowLevel];
+        [PoporFMDB updatePlistKey:keepAtFrontKey value:@"1"];
+    }
+}
+
+- (void)checkKeepAtFrontStatus {
+    NSString * status = [PoporFMDB getPlistKey:keepAtFrontKey];
+    if (!status) {
+        [PoporFMDB addPlistKey:keepAtFrontKey value:@"0"];
+    } else {
+        if ([status isEqualToString:@"1"]) {
+            [NSApp.windows[0] setLevel:NSFloatingWindowLevel];
+            self.keepAtFrontMenuItem.state = NSControlStateValueOn;
+        } else {
+            [NSApp.windows[0] setLevel:NSNormalWindowLevel];
+            self.keepAtFrontMenuItem.state = NSControlStateValueOff;
+        }
     }
 }
 

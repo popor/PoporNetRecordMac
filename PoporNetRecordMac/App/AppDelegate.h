@@ -11,10 +11,13 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (nonatomic, weak  ) NSWindow * window;
+@property (nonatomic, weak  ) IBOutlet NSMenuItem * keepAtFrontMenuItem;
 
 - (IBAction)openDbFolderBTAction:(id)sender;
 
 - (IBAction)resetWindowFrame:(id)sender;
+
+- (IBAction)keepAtFront:(NSMenuItem *)item;
 
 @end
 
