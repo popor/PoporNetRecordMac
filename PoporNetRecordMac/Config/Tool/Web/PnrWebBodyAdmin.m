@@ -97,6 +97,15 @@
         [body appendFormat:@"<a href='/%@' class='%@' > 请求测试 </a> <p>", PnrGet_TestRoot,   divFunItem];
         [body appendFormat:@"<a href='/%@?%@=%@' class='%@' > 崩溃日志 </a> <p>", PnrGet_TestRoot, PnrKey_TestSearch, PnrCN_crashTitle,  divFunItem];
         
+        // MARK: 增加注释
+        [body appendString:@"<ul>\n"];
+        [body appendFormat:@"<li>新增网络请求接口:%@ </li>\n", PnrPost_recordAdd];
+        
+        [body appendString:@"<li> </li>\n"];
+        
+        [body appendString:@"</ul>\n"];
+        
+        
         [body appendFormat:@"<p style=' right:10px; bottom:5px; position:absolute; ' >"];
         [body appendFormat:@"版本: %@(%@) ", [PoporAppInfo getAppVersion_short], [PoporAppInfo getAppVersion_build]];
         [body appendFormat:@"</p>"];
