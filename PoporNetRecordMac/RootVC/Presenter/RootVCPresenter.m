@@ -15,6 +15,7 @@
 #import "PoporNetRecord.h"
 #import <PoporAFN/PoporAFN.h>
 #import "iToast.h"
+#import "PnrRequestTestEntity.h"
 
 static int CellHeight = 23;
 
@@ -215,6 +216,54 @@ static NSString * SepactorKey = @"_PnrMac_";
        PnrKey_Time:[NSDate stringFromDate:[NSDate date] formatter:@"HH:mm:ss"],
        PnrKey_DeviceName:PnrCN_Simulator,
      }];
+}
+
+- (void)createTestAction {
+    NSView * view;
+    NSTextField * urlTF;
+    NSTextField * responseTF;
+    {
+        urlTF = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 30, 300, 20)];
+        urlTF.placeholderString = @"test 开头的URL";
+        urlTF.stringValue = @"test_";
+        [urlTF setEditable:YES];
+    }
+    {
+        responseTF = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 20)];
+        responseTF.placeholderString = @"返回数据";
+        responseTF.stringValue = PnrCN_testDefaultResponse;
+        [responseTF setEditable:YES];
+    }
+    {
+        view = [[NSView alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
+        [view addSubview:urlTF];
+        [view addSubview:responseTF];
+    }
+    NSString * message = FunRecord_TestAdd;
+    NSAlert * alert = [NSAlert new];
+    [alert addButtonWithTitle:@"确定"];
+    [alert addButtonWithTitle:@"取消"];
+    [alert setMessageText:message];
+    [alert setAlertStyle:NSAlertStyleCritical];
+    
+    [alert setAccessoryView:view];
+    
+    //__weak typeof(self) weakSelf = self;
+    [alert beginSheetModalForWindow:self.view.vc.view.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            PnrRequestTestEntity * entity = [PnrRequestTestEntity new];
+            entity.url = urlTF.stringValue;
+            entity.response = responseTF.stringValue;
+            
+            if ([PnrRequestTestEntity addEntity:entity]) {
+                AlertToastTitle(@"新增完成", self.view.vc.view);
+            } else {
+                AlertToastTitle(@"新增失败", self.view.vc.view);
+            }
+            
+            
+        }
+    }];
 }
 
 - (void)freshAction {

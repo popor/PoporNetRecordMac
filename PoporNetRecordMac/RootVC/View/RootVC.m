@@ -142,7 +142,7 @@
 - (void)addFunBT {
     
     int btH = 25;
-    NSArray * titleArray = @[FunRecord_Fresh, FunRecord_AddRequest, FunAdmin];
+    NSArray * titleArray = @[FunRecord_Fresh, FunAdmin, FunRecord_RequestAdd, FunRecord_TestAdd];
     NSButton * bt;
     for (int i = 0; i<titleArray.count; i++) {
         
@@ -182,8 +182,11 @@
     if ([button.title isEqualToString:FunRecord_Fresh]) {
         [self.present freshAction];
     }
-    else if ([button.title isEqualToString:FunRecord_AddRequest]) {
+    else if ([button.title isEqualToString:FunRecord_RequestAdd]) {
         [self.present createRequestAction];
+    }
+    else if ([button.title isEqualToString:FunRecord_TestAdd]) {
+        [self.present createTestAction];
     }
     
     else if ([button.title isEqualToString:FunRecord_View]) {
@@ -198,31 +201,6 @@
            [self.present webview_testRequstAction];
     }
 }
-
-//- (void)wifi1 {
-//    CWInterface *wif = [[CWWiFiClient  sharedWiFiClient] interface];
-//    //当前wifi名称
-//    NSLog(@"BSD if name: %@", wif.interfaceName);
-//    //ssid
-//    NSLog(@"SSID: %@", wif.ssid);
-//    self.wifiTF.stringValue = [NSString stringWithFormat:@"WIFI: %@", wif.ssid];
-//
-//
-//    //wifi列表  当前可以连接的WIFI
-//    for (CWNetwork *newwork in [wif cachedScanResults]) {
-//        //遍历WIFI列表
-//        if ([newwork.ssid isEqualToString:@"连接的wifi"]) { //选取一个
-//            NSError *error = nil;
-//            BOOL is =  [wif associateToNetwork:newwork password:@"输入连接的密码" error:&error];
-//            if (is && !error) {
-//                NSLog(@"连接成功");
-//            }  else {
-//                NSLog(@"连接失败  %@",error);
-//            }
-//            break;
-//        }
-//    }
-//}
 
 // MARK: tv
 - (NSScrollView *)addTagTVs {
@@ -270,3 +248,28 @@
 
 
 @end
+
+//- (void)wifi1 {
+//    CWInterface *wif = [[CWWiFiClient  sharedWiFiClient] interface];
+//    //当前wifi名称
+//    NSLog(@"BSD if name: %@", wif.interfaceName);
+//    //ssid
+//    NSLog(@"SSID: %@", wif.ssid);
+//    self.wifiTF.stringValue = [NSString stringWithFormat:@"WIFI: %@", wif.ssid];
+//
+//
+//    //wifi列表  当前可以连接的WIFI
+//    for (CWNetwork *newwork in [wif cachedScanResults]) {
+//        //遍历WIFI列表
+//        if ([newwork.ssid isEqualToString:@"连接的wifi"]) { //选取一个
+//            NSError *error = nil;
+//            BOOL is =  [wif associateToNetwork:newwork password:@"输入连接的密码" error:&error];
+//            if (is && !error) {
+//                NSLog(@"连接成功");
+//            }  else {
+//                NSLog(@"连接失败  %@",error);
+//            }
+//            break;
+//        }
+//    }
+//}

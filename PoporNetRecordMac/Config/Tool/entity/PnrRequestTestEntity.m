@@ -7,11 +7,12 @@
 //
 
 #import "PnrRequestTestEntity.h"
+#import "PnrValuePrifix.h"
 
 @implementation PnrRequestTestEntity
 
-+ (void)addEntity:(PnrRequestTestEntity *)entity {
-    [PoporFMDB addEntity:entity];
++ (BOOL)addEntity:(PnrRequestTestEntity *)entity {
+    return [PoporFMDB addEntity:entity];
 }
 
 + (PnrRequestTestEntity *)findUrl:(NSString *)url {
@@ -21,7 +22,7 @@
     } else {
         PnrRequestTestEntity * entity = [PnrRequestTestEntity new];
         entity.url = url;
-        entity.response = @"{\"status\":200}";
+        entity.response = PnrCN_testDefaultResponse;
         [PoporFMDB addEntity:entity];
         return entity;
     }

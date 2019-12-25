@@ -22,7 +22,9 @@ static NSString * FunRecord_View        = @"查看";
 
 static NSString * FunAdmin              = @"网页入口";
 
-static NSString * FunRecord_AddRequest  = @"新增请求";
+static NSString * FunRecord_RequestAdd  = @"新增记录";
+static NSString * FunRecord_TestAdd     = @"新增测试";
+
 static NSString * FunTest_Request       = @"模拟管理";
 
 // MARK: 对外接口
@@ -56,6 +58,7 @@ static NSString * FunTest_Request       = @"模拟管理";
 - (void)freshAction;
 - (void)editPortAction;
 - (void)createRequestAction;
+- (void)createTestAction;
 
 - (void)webview_adminAction;
 - (void)webview_recordAction;
