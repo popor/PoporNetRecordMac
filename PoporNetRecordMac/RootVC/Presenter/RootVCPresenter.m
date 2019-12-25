@@ -219,7 +219,7 @@ static NSString * SepactorKey = @"_PnrMac_";
 
 - (void)freshAction {
     [self freshWifiName];
-    [self startServer];
+    [self freshUrlValue];
     [self.view.infoTV reloadData];
 }
 
@@ -232,16 +232,11 @@ static NSString * SepactorKey = @"_PnrMac_";
     self.view.wifiTF.stringValue = [NSString stringWithFormat:@"WIFI: %@", wif.ssid];
 }
 
-- (void)startServer {
+- (void)freshUrlValue {
     PoporNetRecord * pnr = [PoporNetRecord share];
-    self.view.ipTF.stringValue = pnr.webServer.webServer.serverURL.absoluteString;
-    
-    //if (pnr.webServer.webServer.serverURL) {
-    //    NSString * url = pnr.webServer.webServer.serverURL.absoluteString;
-    //    self.view.portTF.stringValue = [NSString stringWithFormat:@"%i", (int)pnr.webServer.webServer.port];
-    //
-    //    [url substringToIndex:url.length - self.view.portTF.stringValue.length - 2];
-    //}
+    if (pnr.webServer.webServer.serverURL.absoluteString) {
+        self.view.ipTF.stringValue = pnr.webServer.webServer.serverURL.absoluteString;
+    }
 }
 
 - (void)webview_adminAction {
