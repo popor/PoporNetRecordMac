@@ -225,11 +225,11 @@ static NSString * SepactorKey = @"_PnrMac_";
 
 - (void)freshWifiName {
     CWInterface *wif = [[CWWiFiClient  sharedWiFiClient] interface];
-    //当前wifi名称
-    //NSLog(@"BSD if name: %@", wif.interfaceName);
-    //ssid
-    //NSLog(@"SSID: %@", wif.ssid);
-    self.view.wifiTF.stringValue = [NSString stringWithFormat:@"WIFI: %@", wif.ssid];
+    if (wif.ssid) {
+        self.view.wifiTF.stringValue = [NSString stringWithFormat:@"WIFI: %@", wif.ssid];
+    } else {
+        self.view.wifiTF.stringValue = @"WIFI: 无";
+    }
 }
 
 - (void)freshUrlValue {
@@ -267,9 +267,8 @@ static NSString * SepactorKey = @"_PnrMac_";
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    //*
-    __weak typeof(self) weakSelf = self;
     
+    //__weak typeof(self) weakSelf = self;
     NSInteger column = [[tableColumn.identifier substringFromIndex:tableColumn.identifier.length-1] intValue];
     //NSLog(@"column: %li", column);
     NSView *cell;
