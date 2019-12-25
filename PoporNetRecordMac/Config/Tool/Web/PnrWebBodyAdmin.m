@@ -95,6 +95,7 @@
         [body appendFormat:@"<div class='%@' style=' width:1000px; height:100%%; margin:0 auto; ' >", divFunList];
         [body appendFormat:@"<a href='/%@' class='%@' > 网络请求 </a> <p>", PnrGet_recordRoot, divFunItem];
         [body appendFormat:@"<a href='/%@' class='%@' > 请求测试 </a> <p>", PnrGet_TestRoot,   divFunItem];
+        [body appendFormat:@"<a href='/%@?%@=%@' class='%@' > 崩溃日志 </a> <p>", PnrGet_TestRoot, PnrKey_TestSearch, PnrCN_crashTitle,  divFunItem];
         
         [body appendFormat:@"<p style=' right:10px; bottom:5px; position:absolute; ' >"];
         [body appendFormat:@"版本: %@(%@) ", [PoporAppInfo getAppVersion_short], [PoporAppInfo getAppVersion_build]];

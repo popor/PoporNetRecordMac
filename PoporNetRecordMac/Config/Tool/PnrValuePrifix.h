@@ -22,6 +22,8 @@ static NSString * PnrCN_share     = @"分享:";
 static NSString * PnrCN_log       = @"日志:";
 static NSString * PnrCN_Simulator = @"模拟";
 
+static NSString * PnrCN_crashTitle = @"崩溃信息";
+
 static int PnrListHeight            = 50;
 
 // 新窗口

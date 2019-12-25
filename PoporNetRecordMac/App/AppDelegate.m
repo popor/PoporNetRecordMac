@@ -13,6 +13,7 @@
 
 #import "PnrRequestTestEntity.h"
 #import "PoporAppInfo.h"
+#import "PnrValuePrifix.h"
 
 void UncaughtExceptionHandler(NSException *exception) {
     
@@ -33,7 +34,7 @@ void UncaughtExceptionHandler(NSException *exception) {
         @"content":content,
     };
     PnrRequestTestEntity * entity = [PnrRequestTestEntity new];
-    entity.url      = @"崩溃信息";
+    entity.url      = PnrCN_crashTitle;
     entity.response = dic.toJsonString;
     
     [PnrRequestTestEntity addEntity:entity];

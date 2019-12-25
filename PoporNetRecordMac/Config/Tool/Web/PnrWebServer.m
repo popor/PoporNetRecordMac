@@ -222,6 +222,12 @@
 - (void)analysisPostRequest:(GCDWebServerRequest * _Nonnull)request complete:(GCDWebServerCompletionBlock  _Nonnull)complete {
     
     NSString * path = request.URL.path;
+    if (path.length<1) {
+        complete(H5String(ErrorUrl));
+        return;
+    } else {
+        path = [path substringFromIndex:1];
+    }
     GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
     
     if ([path isEqualToString:PnrPost_recordAdd]) {

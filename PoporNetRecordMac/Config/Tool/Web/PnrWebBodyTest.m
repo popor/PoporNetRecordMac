@@ -24,12 +24,14 @@
     static NSString * h5_detail_head;
     static NSString * h5_detail_tail;
     
+    
     if (!isInit) {
         isInit = YES;
+        NSString * h5_title = @"请求测试";
         // MARK: detail 头
         {
             NSMutableString * h5 = [NSMutableString new];
-            [h5 appendFormat:@"<html> <head><title>请求测试</title></head>"];
+            [h5 appendFormat:@"<html> <head><title>%@</title></head>", h5_title];
             
             // css
             [h5 appendString:@"\n<style type='text/css'>"];
@@ -77,10 +79,12 @@
              ;    if(searchWord.length>0){\n\
              ;    searchWord = decodeURIComponent(searchWord);\n\
              ;        document.forms['%@'].elements['%@'].value = searchWord;\n\
+             ;        document.getElementsByTagName('title')[0].innerText = searchWord + '_' + '%@';\n\
              ;    }\n\
              ;}"
              , PnrKey_TestSearch
              , PnrKey_TestSearchForm, PnrKey_Conent
+             , h5_title
              ];
             
             [h5 appendString:@"\n </script>"];
