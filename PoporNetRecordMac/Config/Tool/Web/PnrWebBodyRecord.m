@@ -24,9 +24,14 @@
 }
 
 + (NSString *)rootBody {
+    static NSMutableString * h5;
+    if (h5) {
+        return h5;
+    }
+    
     PnrConfig * config = [PnrConfig share];
     
-    NSMutableString * h5 = [NSMutableString new];
+    h5 = [NSMutableString new];
     [h5 appendFormat:@"<html> <head><title>%@</title></head>", config.webRootTitle];
     
     [h5 appendString:@"\n\n<body style=\" TEXT-ALIGN:center; \" >\n"]; // style=\" margin:auto; \"
@@ -47,6 +52,13 @@
      PnrKey_DeviceName,
      PnrGet_recordDetail, PnrKey_DeviceName, PnrKey_index,
      PnrIframeDetail];
+    
+    // root()
+    [h5 appendFormat:@"\n\
+    ;function root() {\n\
+    ;    window.location.href= '/'; \n\
+    ;}"
+     ];
     
     // resubmit()
     [h5 appendFormat:@"\n\n\
@@ -85,9 +97,13 @@
     
     [h5 appendString:@"\n\n </script>\n"];
     
+    int listWidth = 260;
     // src='/%@'
-    [h5 appendFormat:@"\n <iframe id='%@' name='%@' style=\"width:%i%%; height:97%%; marginwidth:0;  background-color:%@; \" ></iframe>", PnrIframeList, PnrIframeList, config.listWebWidth, config.listWebColorBgHex];
-    [h5 appendFormat:@"\n <iframe id='%@' name='%@' style=\"width:%i%%; height:97%%;\" ></iframe>", PnrIframeDetail, PnrIframeDetail, 100 - config.listWebWidth - 4];
+    [h5 appendFormat:@"\n <iframe id='%@' name='%@' style=' width:%ipx; height:97%%; marginwidth:0;  background-color:%@; ' ></iframe>"
+     , PnrIframeList, PnrIframeList, listWidth, config.listWebColorBgHex];
+    
+    [h5 appendFormat:@"\n <iframe id='%@' name='%@' style=' width:calc(100%% - %ipx); height:97%%; '  ></iframe>"
+     , PnrIframeDetail, PnrIframeDetail, listWidth+16];
     
     [h5 appendString:@"\n\n </body></html>"];
     return h5;
@@ -192,8 +208,9 @@
         
         
         [html appendFormat:@"\n <div style=\" background-color:%@; height:100%%; width:100%%; float:left; \">", config.listWebColorCellBgHex];
+        [html appendString:@"\n<img src ='favicon.ico' style=' width:28px; height:28px; margin:0 0 -8px 10px; ' onclick='parent.root()' ></img>\n "];
         [html appendString:@"\n <button class='w49p' type='button' onclick='clearAction();' > 清空 </button>"];
-        [html appendString:@"\n <button class='w49p_r' type='button' onclick='location.reload();' > 刷新 </button>"];
+        [html appendString:@"\n <button class='w49p' type='button' onclick='location.reload();' > 刷新 </button>"];
         
         h5_head = html;
     }

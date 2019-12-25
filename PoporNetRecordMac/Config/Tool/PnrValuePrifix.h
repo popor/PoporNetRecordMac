@@ -9,6 +9,8 @@
 #ifndef PnrValuePrifix_h
 #define PnrValuePrifix_h
 
+//#define NSLogSuccess(FORMAT, ...) NSLog(@"%s: %s", [@"✅" UTF8String], [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+
 static NSString * PnrCN_title     = @"名称:";
 static NSString * PnrCN_path      = @"接口:";
 static NSString * PnrCN_url       = @"链接:";
