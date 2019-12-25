@@ -88,7 +88,7 @@
          color:%@; width:100%%; font-size:16px;\
          }\n\
          \n button.w49p {\n\
-         color:%@; width:96px; font-size:16px;\
+         color:%@; width:95px; font-size:16px;\
          }\n\
          \n button.w49p_r {\n\
          color:%@; width:48%%; font-size:16px; float:right;\

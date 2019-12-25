@@ -206,11 +206,18 @@
         }
         [html appendString:@"\n\n </script>\n"];
         
-        
+        // div root
         [html appendFormat:@"\n <div style=\" background-color:%@; height:100%%; width:100%%; float:left; \">", config.listWebColorCellBgHex];
-        [html appendString:@"\n<img src ='favicon.ico' style=' width:28px; height:28px; margin:0 0 -8px 10px; ' onclick='parent.root()' ></img>\n "];
-        [html appendString:@"\n <button class='w49p' type='button' onclick='clearAction();' > 清空 </button>"];
-        [html appendString:@"\n <button class='w49p' type='button' onclick='location.reload();' > 刷新 </button>"];
+        
+        // 按钮
+        [html appendString:@"\n <div style=' width:100%; height:32px; background-color:white; '> \n"];
+        [html appendString:@"\n <img src ='favicon.ico' style=' width:28px; height:28px; margin:0 0 -8px 10px; ' onclick='parent.root()' ></img>\n "];
+        [html appendString:@"\n <button class='w49p' style =' margin-left:4px; ' type='button' onclick='clearAction();' > 清空 </button>"];
+        [html appendString:@"\n <button class='w49p' type='button' onclick='location.reload();' > 刷新 </button> \n "];
+        [html appendString:@"\n </div> \n "];
+        
+        // div line
+        //[html appendString:@"\n <div style=' width:100%; height:4px; background-color:white; '> </div> \n "];
         
         h5_head = html;
     }
