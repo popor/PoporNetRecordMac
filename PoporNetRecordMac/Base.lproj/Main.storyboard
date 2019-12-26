@@ -659,7 +659,7 @@
                                         </menuItem>
                                         <menuItem title="Keep At Front" keyEquivalent="1" id="tOz-24-lJQ">
                                             <connections>
-                                                <action selector="keepAtFront:" target="Voe-Tx-rLC" id="uiM-ic-sgu"/>
+                                                <action selector="keepAtFrontAction:" target="Voe-Tx-rLC" id="msq-F1-GMI"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>

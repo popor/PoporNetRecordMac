@@ -159,7 +159,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 /**
  item的快捷键不能和系统自带的冲突,不然无法触发.
  */
-- (IBAction)keepAtFront:(NSMenuItem *)item {
+- (IBAction)keepAtFrontAction:(NSMenuItem *)item {
     if (item.state == NSControlStateValueOn) {
         item.state = NSControlStateValueOff;
         [NSApp.windows[0] setLevel:NSNormalWindowLevel];
