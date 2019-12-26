@@ -15,7 +15,11 @@
 
 #import <GCDWebServer/GCDWebServer.h>
 #import <GCDWebServer/GCDWebServerDataResponse.h>
-#import <GCDWebServer/GCDWebServerPrivate.h>
+//#import <GCDWebServer/GCDWebServerPrivate.h>
+#import <GCDWebServer/GCDWebServerDataRequest.h>
+#import <GCDWebServer/GCDWebServerURLEncodedFormRequest.h>
+
+#import <PoporQRCodeMacos/ZwcQRCode.h>
 
 #import "PoporNetRecord.h"
 #import "PnrRequestTestEntity.h"
@@ -40,10 +44,10 @@
         instance = [PnrWebServer new];
         instance.h5Root = [PnrWebBodyRecord rootBody];
         instance.config = [PnrConfig share];
-        
+        instance.qrUrlImageDataDic = [NSMutableDictionary new];
         // GCDWebServer 这个配置要求在主线程中执行
         dispatch_async(dispatch_get_main_queue(), ^{
-            [GCDWebServer setLogLevel:kGCDWebServerLoggingLevel_Error];
+            [GCDWebServer setLogLevel:2];
         });
     });
     return instance;
@@ -200,6 +204,37 @@
                     completionBlock([GCDWebServerDataResponse responseWithData:self.config.webIconData contentType:@"image/x-icon"]);
                 }
             }
+            // MARK: 二维码图片
+            else if ([path isEqualToString:PnrGet_QrUrlSelf]) {
+                NSString * text  = [NSString stringWithFormat:@"%@", request.URL.absoluteURL];
+                NSData * data = self.qrUrlImageDataDic[text];
+                
+                if (!data) {
+                    NSImage  * image = [ZwcQRCode qrImageWithContent:text size:100];
+                    
+                    NSData *imageData = [image TIFFRepresentation];
+                    NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+
+                    [imageRep setSize:[image size]];
+                    
+                    // png
+                    data = [imageRep representationUsingType:NSBitmapImageFileTypePNG properties:nil];
+                    
+                    [self.qrUrlImageDataDic setObject:data forKey:text];
+                    
+                    // jpg
+                    // NSDictionary *imageProps = nil;
+                    // NSNumber *quality = [NSNumber numberWithFloat:.85];
+                    // imageProps = [NSDictionary dictionaryWithObject:quality forKey:NSImageCompressionFactor];
+                    // NSData * imageData1 = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
+                    // ————————————————
+                    // 版权声明：本文为CSDN博主「brhave」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+                    // 原文链接：https://blog.csdn.net/bravegogo/article/details/51537140
+                }
+                
+                completionBlock([GCDWebServerDataResponse responseWithData:data contentType:@"image/png"]);
+            }
+            
             // MARK: 模拟测试_编辑页面
             else if ([path isEqualToString:PnrGet_TestRoot]) {
                 completionBlock(H5String([PnrWebBodyTest requestTestBody:query]));

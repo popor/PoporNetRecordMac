@@ -58,6 +58,9 @@ static NSString * PnrGet_TestRoot        = @"request";// 模拟假数据 主页�
 static NSString * PnrPost_TestEdit       = @"requestEdit";// 模拟假数据 编辑事件
 static NSString * PnrPost_TestDelete     = @"requestDelete";// 模拟假数据 删除事件
 
+// 二维码
+static NSString * PnrGet_QrUrlSelf       = @"QrUrlSelf.png";
+
 // 公共
 static NSString * PnrPost_commonJsonXml  = @"jsonXml";
 

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1807B32323B1BA1C0073A9E6 /* PnrWebBodyAdmin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807B32223B1BA1C0073A9E6 /* PnrWebBodyAdmin.m */; };
-		182CE839237CE2B200F33F61 /* PnrEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE832237CE2B200F33F61 /* PnrEntity.m */; };
-		182CE83A237CE2B200F33F61 /* PnrPortEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE833237CE2B200F33F61 /* PnrPortEntity.m */; };
 		182CE83B237CE2B200F33F61 /* PnrCellEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE837237CE2B200F33F61 /* PnrCellEntity.m */; };
 		182CE83C237CE2B200F33F61 /* PnrConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE838237CE2B200F33F61 /* PnrConfig.m */; };
 		182CE846237CE30F00F33F61 /* PnrWebJs.m in Sources */ = {isa = PBXBuildFile; fileRef = 182CE83F237CE30F00F33F61 /* PnrWebJs.m */; };
@@ -20,6 +18,8 @@
 		183BE874238B68F900885F6C /* NSButton+pDrawRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 183BE873238B68F900885F6C /* NSButton+pDrawRect.m */; };
 		183BE877238B770F00885F6C /* LLCustomBT.m in Sources */ = {isa = PBXBuildFile; fileRef = 183BE876238B770F00885F6C /* LLCustomBT.m */; };
 		185FD51C23AB6B8E00F80949 /* PnrRequestTestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FD51B23AB6B8E00F80949 /* PnrRequestTestEntity.m */; };
+		1868BF6023B4646400CAEC33 /* PnrEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868BF5D23B4646400CAEC33 /* PnrEntity.m */; };
+		1868BF6123B4646400CAEC33 /* PnrPortEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868BF5F23B4646400CAEC33 /* PnrPortEntity.m */; };
 		18988F43238399CE00A1E082 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18988F42238399CE00A1E082 /* icon.png */; };
 		18988F452383C2C800A1E082 /* icon_16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 18988F442383C2C700A1E082 /* icon_16x16.png */; };
 		18A06DEB237BCF7B0084506B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A06DEA237BCF7B0084506B /* AppDelegate.m */; };
@@ -49,11 +49,7 @@
 		1807B32223B1BA1C0073A9E6 /* PnrWebBodyAdmin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PnrWebBodyAdmin.m; sourceTree = "<group>"; };
 		182CE830237CE2B200F33F61 /* PnrConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PnrConfig.h; sourceTree = "<group>"; };
 		182CE831237CE2B200F33F61 /* PnrCellEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PnrCellEntity.h; sourceTree = "<group>"; };
-		182CE832237CE2B200F33F61 /* PnrEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PnrEntity.m; path = ../../../RootVC/Entity/PnrEntity.m; sourceTree = "<group>"; };
-		182CE833237CE2B200F33F61 /* PnrPortEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PnrPortEntity.m; path = ../../../RootVC/Entity/PnrPortEntity.m; sourceTree = "<group>"; };
 		182CE834237CE2B200F33F61 /* PnrPrefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PnrPrefix.h; sourceTree = "<group>"; };
-		182CE835237CE2B200F33F61 /* PnrPortEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PnrPortEntity.h; path = ../../../RootVC/Entity/PnrPortEntity.h; sourceTree = "<group>"; };
-		182CE836237CE2B200F33F61 /* PnrEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PnrEntity.h; path = ../../../RootVC/Entity/PnrEntity.h; sourceTree = "<group>"; };
 		182CE837237CE2B200F33F61 /* PnrCellEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PnrCellEntity.m; sourceTree = "<group>"; };
 		182CE838237CE2B200F33F61 /* PnrConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PnrConfig.m; sourceTree = "<group>"; };
 		182CE83E237CE30F00F33F61 /* PnrWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PnrWebServer.h; sourceTree = "<group>"; };
@@ -72,6 +68,10 @@
 		183BE876238B770F00885F6C /* LLCustomBT.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLCustomBT.m; sourceTree = "<group>"; };
 		185FD51A23AB6B8E00F80949 /* PnrRequestTestEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PnrRequestTestEntity.h; sourceTree = "<group>"; };
 		185FD51B23AB6B8E00F80949 /* PnrRequestTestEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PnrRequestTestEntity.m; sourceTree = "<group>"; };
+		1868BF5C23B4646400CAEC33 /* PnrEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PnrEntity.h; sourceTree = "<group>"; };
+		1868BF5D23B4646400CAEC33 /* PnrEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PnrEntity.m; sourceTree = "<group>"; };
+		1868BF5E23B4646400CAEC33 /* PnrPortEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PnrPortEntity.h; sourceTree = "<group>"; };
+		1868BF5F23B4646400CAEC33 /* PnrPortEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PnrPortEntity.m; sourceTree = "<group>"; };
 		18988F42238399CE00A1E082 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		18988F442383C2C700A1E082 /* icon_16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_16x16.png; sourceTree = "<group>"; };
 		18A06DE6237BCF7B0084506B /* PoporNetRecordMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoporNetRecordMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -368,12 +368,12 @@
 		18A06E2F237BECA90084506B /* entity */ = {
 			isa = PBXGroup;
 			children = (
-				182CE835237CE2B200F33F61 /* PnrPortEntity.h */,
-				182CE833237CE2B200F33F61 /* PnrPortEntity.m */,
+				1868BF5C23B4646400CAEC33 /* PnrEntity.h */,
+				1868BF5D23B4646400CAEC33 /* PnrEntity.m */,
+				1868BF5E23B4646400CAEC33 /* PnrPortEntity.h */,
+				1868BF5F23B4646400CAEC33 /* PnrPortEntity.m */,
 				18A06E45237C051F0084506B /* PnrDeviceEntity.h */,
 				18A06E46237C051F0084506B /* PnrDeviceEntity.m */,
-				182CE836237CE2B200F33F61 /* PnrEntity.h */,
-				182CE832237CE2B200F33F61 /* PnrEntity.m */,
 				185FD51A23AB6B8E00F80949 /* PnrRequestTestEntity.h */,
 				185FD51B23AB6B8E00F80949 /* PnrRequestTestEntity.m */,
 			);
@@ -534,7 +534,6 @@
 				18A06E19237BD1E20084506B /* NSTask+shell.m in Sources */,
 				18A06E44237BFC320084506B /* EditableTextField.m in Sources */,
 				183BE874238B68F900885F6C /* NSButton+pDrawRect.m in Sources */,
-				182CE83A237CE2B200F33F61 /* PnrPortEntity.m in Sources */,
 				18A06E17237BD1E20084506B /* NSBundle+Tool.m in Sources */,
 				18A06E47237C051F0084506B /* PnrDeviceEntity.m in Sources */,
 				182CE846237CE30F00F33F61 /* PnrWebJs.m in Sources */,
@@ -544,7 +543,6 @@
 				182CE851237CED9300F33F61 /* PoporNetRecord.m in Sources */,
 				18C5D2E223ACC95C00C460DF /* PnrWebBodyTest.m in Sources */,
 				183BE877238B770F00885F6C /* LLCustomBT.m in Sources */,
-				182CE839237CE2B200F33F61 /* PnrEntity.m in Sources */,
 				18A06E2D237BE9380084506B /* RootVCPresenter.m in Sources */,
 				18A06E2E237BE9380084506B /* RootVC.m in Sources */,
 				18A06E18237BD1E20084506B /* iToast.m in Sources */,
@@ -552,7 +550,9 @@
 				1807B32323B1BA1C0073A9E6 /* PnrWebBodyAdmin.m in Sources */,
 				18A06E16237BD1E20084506B /* SqliteCofing.m in Sources */,
 				182CE83B237CE2B200F33F61 /* PnrCellEntity.m in Sources */,
+				1868BF6123B4646400CAEC33 /* PnrPortEntity.m in Sources */,
 				18A06DF6237BCF800084506B /* main.m in Sources */,
+				1868BF6023B4646400CAEC33 /* PnrEntity.m in Sources */,
 				182CE83C237CE2B200F33F61 /* PnrConfig.m in Sources */,
 				185FD51C23AB6B8E00F80949 /* PnrRequestTestEntity.m in Sources */,
 				182CE847237CE30F00F33F61 /* PnrWebCss.m in Sources */,

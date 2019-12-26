@@ -90,12 +90,16 @@
         
         // MARK: 每次都需要拼接的部分
         body = [NSMutableString new];
+        
         // text-align:center;
         // background-color:linen;
         [body appendFormat:@"<div class='%@' style=' width:1000px; height:100%%; margin:0 auto; ' >", divFunList];
         [body appendFormat:@"<a href='/%@' class='%@' > 网络请求 </a> <p>", PnrGet_recordRoot, divFunItem];
         [body appendFormat:@"<a href='/%@' class='%@' > 请求测试 </a> <p>", PnrGet_TestRoot,   divFunItem];
         [body appendFormat:@"<a href='/%@?%@=%@' class='%@' > 崩溃日志 </a> <p>", PnrGet_TestRoot, PnrKey_TestSearch, PnrCN_crashTitle,  divFunItem];
+        
+        // 二维码
+        [body appendFormat:@"<img style=' width:100px; height:100px; margin-left:30px; ' src ='/%@' > </img>", PnrGet_QrUrlSelf];
         
         // MARK: 增加注释
         [body appendString:@"<ul>\n"];

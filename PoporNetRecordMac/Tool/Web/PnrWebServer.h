@@ -12,6 +12,8 @@
 #import "PnrPrefix.h"
 #import <PoporFoundation/Block+pPrefix.h>
 
+#import <PoporFMDB/PoporFMDB.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PnrWebServer : NSObject
@@ -28,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDictionary * resubmitExtraDic;
 
 @property (nonatomic, copy  ) BlockPBool serverLaunchFinish;
+
+@property (nonatomic, strong) NSMutableDictionary * qrUrlImageDataDic;
+//@property (nonatomic, strong) NSData * qrUrlImageData;
+
 - (void)startServer;
 
 - (void)stopServer;
