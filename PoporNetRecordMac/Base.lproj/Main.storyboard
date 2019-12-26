@@ -657,9 +657,9 @@
                                                 <action selector="resetWindowFrame:" target="Voe-Tx-rLC" id="ooh-Bi-wlt"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Keep At Front" keyEquivalent="S" id="tOz-24-lJQ">
+                                        <menuItem title="Keep At Front" keyEquivalent="1" id="tOz-24-lJQ">
                                             <connections>
-                                                <action selector="keepAtFront:" target="Voe-Tx-rLC" id="a4q-7H-cuh"/>
+                                                <action selector="keepAtFront:" target="Voe-Tx-rLC" id="uiM-ic-sgu"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>

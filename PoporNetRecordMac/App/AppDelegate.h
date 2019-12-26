@@ -17,6 +17,9 @@
 
 - (IBAction)resetWindowFrame:(id)sender;
 
+/**
+item的快捷键不能和系统自带的冲突,不然无法触发.
+*/
 - (IBAction)keepAtFront:(NSMenuItem *)item;
 
 @end
