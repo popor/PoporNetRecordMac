@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -41,7 +41,7 @@
 		18BAE79223826C3500BB6A3C /* NSView+Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE79123826C3500BB6A3C /* NSView+Address.m */; };
 		18C5D2E223ACC95C00C460DF /* PnrWebBodyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C5D2E123ACC95C00C460DF /* PnrWebBodyTest.m */; };
 		18E3288E23B0943600DBCC27 /* PoporAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3288D23B0943600DBCC27 /* PoporAppInfo.m */; };
-		60165D6F9A867925C9BAF8BF /* Pods_PoporNetRecordMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D96B0733F0A57163C75586A /* Pods_PoporNetRecordMac.framework */; };
+		74A839F6FA65D6196019E5A1 /* libPods-PoporNetRecordMac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C01229C8FFA62A9E931675 /* libPods-PoporNetRecordMac.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,8 +118,8 @@
 		18C5D2E123ACC95C00C460DF /* PnrWebBodyTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PnrWebBodyTest.m; sourceTree = "<group>"; };
 		18E3288C23B0943600DBCC27 /* PoporAppInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoporAppInfo.h; sourceTree = "<group>"; };
 		18E3288D23B0943600DBCC27 /* PoporAppInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoporAppInfo.m; sourceTree = "<group>"; };
+		24C01229C8FFA62A9E931675 /* libPods-PoporNetRecordMac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PoporNetRecordMac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		272A82FDE599135FF461AD1C /* Pods-PoporNetRecordMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.debug.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.debug.xcconfig"; sourceTree = "<group>"; };
-		9D96B0733F0A57163C75586A /* Pods_PoporNetRecordMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoporNetRecordMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D329B8CD1C3EC314B48AB38C /* Pods-PoporNetRecordMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.release.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60165D6F9A867925C9BAF8BF /* Pods_PoporNetRecordMac.framework in Frameworks */,
+				74A839F6FA65D6196019E5A1 /* libPods-PoporNetRecordMac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +220,7 @@
 				18988F41238399C300A1E082 /* media */,
 				18A06E09237BD1E20084506B /* common */,
 				18A06E01237BD1E10084506B /* Config */,
+				18A06E3A237BEFE20084506B /* Tool */,
 				18A06DFD237BCF8D0084506B /* other */,
 				18A06DFF237BCFA50084506B /* App */,
 				18A06E00237BCFAC0084506B /* RootVC */,
@@ -266,7 +267,6 @@
 			children = (
 				18A06E02237BD1E10084506B /* WindowFrameTool */,
 				18A06E05237BD1E10084506B /* SqliteCofing */,
-				18A06E3A237BEFE20084506B /* Tool */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -428,7 +428,7 @@
 		4544AFA581558313161E03BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D96B0733F0A57163C75586A /* Pods_PoporNetRecordMac.framework */,
+				24C01229C8FFA62A9E931675 /* libPods-PoporNetRecordMac.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -444,7 +444,6 @@
 				18A06DE2237BCF7B0084506B /* Sources */,
 				18A06DE3237BCF7B0084506B /* Frameworks */,
 				18A06DE4237BCF7B0084506B /* Resources */,
-				7D783FF12B18172024D4959F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -502,23 +501,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7D783FF12B18172024D4959F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		EABF08B32336166AC9DA3588 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

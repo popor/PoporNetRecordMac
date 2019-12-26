@@ -5,7 +5,7 @@
 
 target 'PoporNetRecordMac' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+  # use_frameworks!
 
   # Pods for PoporNetRecordMac
 
@@ -22,5 +22,6 @@ target 'PoporNetRecordMac' do
     
     pod 'GCDWebServer'
     
+    pod 'PoporQRCodeMacos'
 
 end

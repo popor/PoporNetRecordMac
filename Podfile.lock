@@ -69,6 +69,7 @@ PODS:
   - PoporJsonModel (0.04):
     - JSONModel
     - PoporFoundation/NSObject
+  - PoporQRCodeMacos (0.0.1)
   - ReactiveObjC (3.1.1)
 
 DEPENDENCIES:
@@ -80,6 +81,7 @@ DEPENDENCIES:
   - PoporFMDB
   - PoporFoundation
   - PoporJsonModel
+  - PoporQRCodeMacos
   - ReactiveObjC
 
 SPEC REPOS:
@@ -93,6 +95,7 @@ SPEC REPOS:
     - PoporFMDB
     - PoporFoundation
     - PoporJsonModel
+    - PoporQRCodeMacos
     - ReactiveObjC
 
 SPEC CHECKSUMS:
@@ -105,8 +108,9 @@ SPEC CHECKSUMS:
   PoporFMDB: 005cf1056eaa629d6a81b827ad947ee993791b16
   PoporFoundation: 18cf58a61dec95519227ad235ec3f46177653ff4
   PoporJsonModel: e99396194a9b629907e14a134fe01677ed14b560
+  PoporQRCodeMacos: 0e070c3a43f5294b2eee36fa4781cd7fa35b4240
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
 
-PODFILE CHECKSUM: 5b19ed9b0226da38a8a5a4796629b6a208cf843a
+PODFILE CHECKSUM: 8a66181a66caf18484ada6844cd51043d7211869
 
 COCOAPODS: 1.8.4
