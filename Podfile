@@ -23,5 +23,7 @@ target 'PoporNetRecordMac' do
     pod 'GCDWebServer'
     
     pod 'PoporQRCodeMacos'
-
+    
+    pod 'AESHelper'
+    
 end

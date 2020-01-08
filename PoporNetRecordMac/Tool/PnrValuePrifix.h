@@ -58,6 +58,11 @@ static NSString * PnrGet_TestRoot        = @"request";// 模拟假数据 主页�
 static NSString * PnrPost_TestEdit       = @"requestEdit";// 模拟假数据 编辑事件
 static NSString * PnrPost_TestDelete     = @"requestDelete";// 模拟假数据 删除事件
 
+// 图片URL解析
+static NSString * PnrGet_YcUrl           = @"ycUrl";
+static NSString * PnrGet_YcUrlPsd        = @"ycUrlPsd";
+static NSString * PnrGet_YcUrlDecrypt    = @"ycUrlDecrypt";
+
 // 二维码
 static NSString * PnrGet_QrUrlSelf       = @"QrUrlSelf.png";
 

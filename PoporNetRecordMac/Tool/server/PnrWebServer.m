@@ -9,8 +9,6 @@
 
 #import "PnrEntity.h"
 #import "PnrPortEntity.h"
-#import "PnrWebBodyRecord.h"
-#import "PnrWebBodyTest.h"
 #import "PnrConfig.h"
 
 #import <GCDWebServer/GCDWebServer.h>
@@ -22,8 +20,12 @@
 #import <PoporQRCodeMacos/ZwcQRCode.h>
 
 #import "PoporNetRecord.h"
+
+#import "PnrWebBodyRecord.h"
+#import "PnrWebBodyTest.h"
 #import "PnrRequestTestEntity.h"
 #import "PnrWebBodyAdmin.h"
+#import "PnrWebBodyYcUrl.h"
 
 #define H5String(string) [GCDWebServerDataResponse responseWithHTML:string]
 
@@ -218,7 +220,7 @@
                     [imageRep setSize:[image size]];
                     
                     // png
-                    data = [imageRep representationUsingType:NSBitmapImageFileTypePNG properties:nil];
+                    data = [imageRep representationUsingType:NSBitmapImageFileTypePNG properties:@{}];
                     
                     [self.qrUrlImageDataDic setObject:data forKey:text];
                     
@@ -244,7 +246,18 @@
                 [self requestTestUrl:path complete:completionBlock];
             }
             
-            // other
+            // MARK: 模拟测试数据
+            else if ([path hasPrefix:PnrGet_YcUrl]) {
+                completionBlock(H5String([PnrWebBodyYcUrl ycUrlBody]));
+            }
+            else if ([path hasPrefix:PnrGet_YcUrlPsd]) {
+                completionBlock(H5String([PnrWebBodyYcUrl ycUrlBody]));
+            }
+            else if ([path hasPrefix:PnrGet_YcUrlDecrypt]) {
+                completionBlock(H5String([PnrWebBodyYcUrl ycUrlBody]));
+            }
+            
+            // MARK: other
             else{
                 completionBlock(H5String(ErrorUrl));
             }
