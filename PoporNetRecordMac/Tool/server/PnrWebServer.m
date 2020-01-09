@@ -141,7 +141,7 @@
     if (path.length >= 1) {
         path = [path substringFromIndex:1];
         NSArray * pathArray = [path componentsSeparatedByString:@"/"];
-        
+        NSLog(@"get : %@", path);
         if (pathArray.count == 1){
             // MARK: admin
             if ([path isEqualToString:@""] || [[path lowercaseString] hasPrefix:PnrGet_admin]){
@@ -209,10 +209,11 @@
             // MARK: 二维码图片
             else if ([path isEqualToString:PnrGet_QrUrlSelf]) {
                 NSString * text  = [NSString stringWithFormat:@"%@", request.URL.absoluteURL];
+                text = [text substringToIndex:text.length - PnrGet_QrUrlSelf.length];
                 NSData * data = self.qrUrlImageDataDic[text];
                 
                 if (!data) {
-                    NSImage  * image = [ZwcQRCode qrImageWithContent:text size:100];
+                    NSImage  * image = [ZwcQRCode qrImageWithContent:text size:200];
                     
                     NSData *imageData = [image TIFFRepresentation];
                     NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
@@ -246,15 +247,12 @@
                 [self requestTestUrl:path complete:completionBlock];
             }
             
-            // MARK: 模拟测试数据
-            else if ([path hasPrefix:PnrGet_YcUrl]) {
+            // MARK: YcUrl部分
+            else if ([path isEqualToString:PnrGet_YcUrl]) {
                 completionBlock(H5String([PnrWebBodyYcUrl ycUrlBody]));
             }
-            else if ([path hasPrefix:PnrGet_YcUrlPsd]) {
-                completionBlock(H5String([PnrWebBodyYcUrl ycUrlBody]));
-            }
-            else if ([path hasPrefix:PnrGet_YcUrlDecrypt]) {
-                completionBlock(H5String([PnrWebBodyYcUrl ycUrlBody]));
+            else if ([path isEqualToString:Pnrget_YcUrlPsd]) {
+                completionBlock(H5String([PnrWebBodyYcUrl getPsd]));
             }
             
             // MARK: other
@@ -367,6 +365,14 @@
         [pnr.listWebH5 setString:@""];
         
         complete(H5String(@"clear finish"));
+    }
+    
+    // MARK: YcUrl部分
+    else if ([path hasPrefix:PnrPost_YcUrlPsdEdit]) {
+        complete(H5String([PnrWebBodyYcUrl ycUrlBody]));
+    }
+    else if ([path hasPrefix:PnrPost_YcUrlDecrypt]) {
+        complete(H5String([PnrWebBodyYcUrl ycUrlBody]));
     }
     
     // MARK: 模拟测试数据

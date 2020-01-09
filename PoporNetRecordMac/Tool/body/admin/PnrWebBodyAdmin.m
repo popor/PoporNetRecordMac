@@ -100,7 +100,7 @@
         [body appendFormat:@"<a href='/%@' class='%@' > 亿车URL </a> <p>", PnrGet_YcUrl, divFunItem];
         
         // 二维码
-        [body appendFormat:@"<img style=' width:100px; height:100px; margin-left:30px; ' src ='/%@' > </img>", PnrGet_QrUrlSelf];
+        [body appendFormat:@"<img style=' width:200px; height:200px; margin-left:30px; ' src ='/%@' > </img>", PnrGet_QrUrlSelf];
         
         // MARK: 增加注释
         [body appendString:@"<ul>\n"];

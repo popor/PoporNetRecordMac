@@ -14,12 +14,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: 固定的查看json js代码
 + (NSString *)jsJsonStatic;
+
+// MARK: test一些函数
 + (NSString *)jsTestEditStatic;
 + (NSString *)jsTestSearchStatic;
 + (NSString *)jsTestDeleteStatic;
 
 // MARK: 动态的查看json js代码, 生成新的form,并且submit.
 + (NSString *)jsJsonDynamic;
+
+// MARK: YcUrl
+// 修改AES密码
++ (NSString *)jsYcUrlPsdEditStatic;
 
 // MARK: 高度自适应的textarea
 /**

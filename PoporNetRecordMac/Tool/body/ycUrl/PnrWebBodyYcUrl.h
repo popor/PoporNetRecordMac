@@ -10,9 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString * YcUrlPsd_saveKey = @"YcUrlPsd";
+
 @interface PnrWebBodyYcUrl : NSObject
 
 + (NSString *)ycUrlBody;
+
++ (NSString *)getPsd;
++ (void)updatePsd:(NSString *)psd;
 
 @end
 

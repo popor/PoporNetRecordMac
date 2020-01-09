@@ -60,8 +60,9 @@ static NSString * PnrPost_TestDelete     = @"requestDelete";// 模拟假数据 �
 
 // 图片URL解析
 static NSString * PnrGet_YcUrl           = @"ycUrl";
-static NSString * PnrGet_YcUrlPsd        = @"ycUrlPsd";
-static NSString * PnrGet_YcUrlDecrypt    = @"ycUrlDecrypt";
+static NSString * Pnrget_YcUrlPsd        = @"ycUrlPsd";
+static NSString * PnrPost_YcUrlPsdEdit   = @"ycUrlPsdEdit";
+static NSString * PnrPost_YcUrlDecrypt   = @"ycUrlDecrypt";
 
 // 二维码
 static NSString * PnrGet_QrUrlSelf       = @"QrUrlSelf.png";
@@ -96,9 +97,11 @@ static NSString * PnrKey_TestSearch     = @"search";
 static NSString * PnrKey_TestSearchWord = @"word";
 static NSString * PnrKey_TestSearchForm = @"searchForm";
 
+static NSString * PnrKey_success        = @"success";
+static NSString * PnrKey_fail           = @"fail";
 
-static NSString * PnrKey_success    = @"success";
-static NSString * PnrKey_fail       = @"fail";
+static NSString * PnrKey_ycUrlPsd       = @"psd";
+static NSString * PnrKey_ycUrlResult    = @"result";
 
 // 分享url
 static NSString * PnrKey_IdShare    = @"idShare";

@@ -174,6 +174,69 @@
     return js;
 }
 
+// MARK: YcUrl
+// 修改AES密码
++ (NSString *)jsYcUrlPsdEditStatic {
+    static NSString * js;
+    if (!js) {
+        // https://blog.csdn.net/harryhare/article/details/80778066
+        // function send(type) {
+        //     url = "http://127.0.0.1:8080/";
+        //     xhr = new XMLHttpRequest();
+        //     xhr.open("post", url, true);
+        //     var data;
+        //     if (type === "formdata") {
+        //         data = new FormData();
+        //         data.append("key", "value");
+        //     } else if (type === "json") {
+        //         xhr.setRequestHeader("Content-Type", "application/json");
+        //         data = JSON.stringify({"key": "value"});
+        //     } else if (type === "text") {
+        //         data = "key=value";
+        //     } else if (type === "www") {
+        //         // 这个header 其实是 传统post 表单的格式
+        //         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //         data = "key=value";
+        //     }
+        //     xhr.send(data);
+        // }
+    
+        js =
+        [NSString stringWithFormat:
+         @"\n\n\
+         ;function jsYcUrlPsdEditStatic(formKey, index, type) {\n\
+         ;    var formContent = document.forms[formKey].elements['%@'].value;\n\
+         ;    var formSaveBt  = document.forms[formKey].elements['%@'];\n\
+         ;    formSaveBt.innerText = '保存中';\n\
+         ;    var xmlhttp = new XMLHttpRequest();\n\
+         ;    xmlhttp.open('POST','/%@',true);\n\
+         ;\n\
+         ;    xmlhttp.onreadystatechange = function() {\n\
+         ;        if (xmlhttp.readyState == 4) {\n\
+         ;            var text = xmlhttp.responseText;\n\
+         ;            if (text == 'success') {\n\
+         ;                formSaveBt.innerText = '保存 成功';\n\
+         ;            } else {\n\
+         ;                formSaveBt.innerText = '保存 失败';\n\
+         ;            }\n\
+         ;        }\n\
+         ;    }\n\
+         ;\n\
+         ;    xmlhttp.setRequestHeader('Content-Type', 'application/json');\n\
+         ;    var data = JSON.stringify({\"%@\": type}); \n\
+         ;    xmlhttp.send(data);\n\
+         ;}\n\n"
+         , PnrKey_Conent
+         , PnrKey_TestSave
+         , PnrPost_YcUrlPsdEdit
+         , PnrKey_ycUrlPsd
+         ];
+    }
+    return js;
+    
+}
+
+
 // MARK: 高度自适应的textarea
 
 /**
@@ -352,6 +415,34 @@
         ;}\n";
     }
     return js;
+}
+
+// 感觉不太需要
++ (NSString *)ajaxObject {
+    return
+    @"\n\
+    ;function ajaxObject() {\n\
+    ;    var xmlHttp;\n\
+    ;    try {\n\
+    ;        // Firefox, Opera 8.0+, Safari\n\
+    ;        xmlHttp = new XMLHttpRequest();\n\
+    ;        }\n\
+    ;    catch (e) {\n\
+    ;        // Internet Explorer\n\
+    ;        try {\n\
+    ;                xmlHttp = new ActiveXObject(\"Msxml2.XMLHTTP\");\n\
+    ;            } catch (e) {\n\
+    ;            try {\n\
+    ;                xmlHttp = new ActiveXObject(\"Microsoft.XMLHTTP\");\n\
+    ;            } catch (e) {\n\
+    ;                alert(\"您的浏览器不支持AJAX！\");\n\
+    ;                return false;\n\
+    ;            }\n\
+    ;        }\n\
+    ;    }\n\
+    ;    return xmlHttp;\n\
+    ;}\n\
+    ";
 }
 
 @end
