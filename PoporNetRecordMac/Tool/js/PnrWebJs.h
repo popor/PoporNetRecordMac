@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 // 修改AES密码
 + (NSString *)jsYcUrlPsdEditStatic;
 
++ (NSString *)jsYcUrlAnalysisStatic;
+
 // MARK: 高度自适应的textarea
 /**
  获取所有的ta

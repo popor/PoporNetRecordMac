@@ -100,6 +100,10 @@ static NSString * PnrKey_TestSearchForm = @"searchForm";
 static NSString * PnrKey_success        = @"success";
 static NSString * PnrKey_fail           = @"fail";
 
+static NSString * PnrKey_ycUrlBTPsd       = @"btPsd";
+static NSString * PnrKey_ycUrlBTUrl       = @"btUrl";
+static NSString * PnrKey_ycUrlTaResult    = @"result";
+
 static NSString * PnrKey_ycUrlPsd       = @"psd";
 static NSString * PnrKey_ycUrlResult    = @"result";
 

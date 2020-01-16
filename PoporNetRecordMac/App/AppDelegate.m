@@ -137,7 +137,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 }
 
 - (IBAction)openDbFolderBTAction:(id)sender {
-    [self openPath:PDBShare.DBPath];
+    [self openPath:[PoporFMDBPath share].DBPath];
 }
 
 - (void)openPath:(NSString *)path {

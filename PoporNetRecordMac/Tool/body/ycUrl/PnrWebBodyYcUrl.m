@@ -55,6 +55,7 @@
             [h5 appendString:[PnrWebJs jsTestEditStatic]];
             [h5 appendString:[PnrWebJs jsTestSearchStatic]];
             [h5 appendString:[PnrWebJs jsTestDeleteStatic]];
+            [h5 appendString:[PnrWebJs jsYcUrlPsdEditStatic]];
             
             [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
             
@@ -95,7 +96,7 @@
     
     NSMutableString * body = [NSMutableString new];
 
-    [body appendString:[self jsonReadEditPsdForm:PnrKey_ycUrlPsd taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:@"" index:0 type:PnrKey_TestUrl]];
+    [body appendString:[self jsonReadEditPsdForm:PnrKey_ycUrlPsd taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:@"" index:0]];
     [body appendString:[self jsonReadEditUrlForm:@"url" taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:@"a.jpg" index:0 type:PnrKey_TestUrl]];
     [body appendString:[self jsonReadEditResponseForm:@"result" taIdName:PnrKey_Conent btName:PnrKey_TestResponse taValue:@"222" index:0 type:PnrKey_TestResponse]];
     
@@ -104,7 +105,7 @@
 }
 
 // 密码
-+ (NSString *)jsonReadEditPsdForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index type:(NSString *)type {
++ (NSString *)jsonReadEditPsdForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index {
     return
     [NSString stringWithFormat:
      @"\n\
@@ -113,7 +114,7 @@
      <div style=' width:100%%; height:1px; float:left; '></div> \n\
      <form id='%@' name='%@' > \n\
      <div style=' width:120px; float:left; ' >\n\
-     <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button> \n\
+     <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsYcUrlPsdEditStatic('%@', '%li')\" > 保存 </button> \n\
      </div>\n\
      <div style=' width:calc(100%% - 120px); float:left; ' >\n\
      <input  id='%@' name='%@' type='text' style=\" width:calc(100%% - 2px); height:28px; font-size:16px; \" value='%@' onkeydown=\"if(event.keyCode==13){return false;}\" ></input> \n\
@@ -122,7 +123,7 @@
      <p style=' width:100%%; height:1px; float:left; '></p> \n\
      </div> \n"
      , formIdName, formIdName
-     , PnrKey_TestSave, formIdName, index, type
+     , PnrKey_ycUrlBTPsd, formIdName, index
      , taIdName, taIdName, taValue
      ];
 }
@@ -146,7 +147,7 @@
      <p style=' width:100%%; height:1px; float:left; '></p> \n\
      </div> \n"
      , formIdName, formIdName
-     , PnrKey_TestSave, formIdName, index, type
+     , PnrKey_ycUrlBTUrl, formIdName, index, type
      , taIdName, taIdName, taValue
      ];
 }
@@ -178,8 +179,8 @@
     return psd;
 }
 
-+ (void)updatePsd:(NSString *)psd {
-    [PoporFMDB updatePlistKey:YcUrlPsd_saveKey value:psd];
++ (BOOL)updatePsd:(NSString *)psd {
+    return [PoporFMDB updatePlistKey:YcUrlPsd_saveKey value:psd];
 }
 
 @end

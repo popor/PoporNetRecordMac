@@ -73,13 +73,17 @@
         // MARK: get 方法
         [self.webServer addDefaultHandlerForMethod:@"GET" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
             @strongify(self);
-            [self analysisGetRequest:request complete:completionBlock];
+            @synchronized (self) {
+                [self analysisGetRequest:request complete:completionBlock];
+            }
         }];
         
         // MARK: post 方法
         [self.webServer addDefaultHandlerForMethod:@"POST" requestClass:[GCDWebServerURLEncodedFormRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
             @strongify(self);
-            [self analysisPostRequest:request complete:completionBlock];
+            @synchronized (self) {
+                [self analysisPostRequest:request complete:completionBlock];
+            }
         }];
         
         [self startServerPort];
@@ -369,7 +373,17 @@
     
     // MARK: YcUrl部分
     else if ([path hasPrefix:PnrPost_YcUrlPsdEdit]) {
-        complete(H5String([PnrWebBodyYcUrl ycUrlBody]));
+        GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
+        //NSString * str = [[NSString alloc] initWithData:dataReq.data encoding:NSUTF8StringEncoding];
+        NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
+        NSString * psd   = dic[PnrKey_ycUrlPsd];
+        
+        BOOL success = [PnrWebBodyYcUrl updatePsd:psd];
+        if (success) {
+            complete(H5String(PnrKey_success));
+        } else {
+            complete(H5String(PnrKey_fail));
+        }
     }
     else if ([path hasPrefix:PnrPost_YcUrlDecrypt]) {
         complete(H5String([PnrWebBodyYcUrl ycUrlBody]));

@@ -23,7 +23,7 @@ PODS:
   - Masonry (1.1.0)
   - PoporAFN (1.01):
     - AFNetworking
-  - PoporFMDB (1.05):
+  - PoporFMDB (1.07):
     - FMDB
     - PoporFoundation/NSString
   - PoporFoundation (1.10):
@@ -109,7 +109,7 @@ SPEC CHECKSUMS:
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   PoporAFN: 81a1806c70329e70d697bbbb6255efc3582eed02
-  PoporFMDB: 005cf1056eaa629d6a81b827ad947ee993791b16
+  PoporFMDB: aeb61e83c9f2d815a695b74e086499cdf842ca92
   PoporFoundation: 18cf58a61dec95519227ad235ec3f46177653ff4
   PoporJsonModel: e99396194a9b629907e14a134fe01677ed14b560
   PoporQRCodeMacos: 0e070c3a43f5294b2eee36fa4781cd7fa35b4240
