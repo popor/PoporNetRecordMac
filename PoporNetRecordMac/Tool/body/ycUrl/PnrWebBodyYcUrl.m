@@ -56,6 +56,7 @@
             [h5 appendString:[PnrWebJs jsTestSearchStatic]];
             [h5 appendString:[PnrWebJs jsTestDeleteStatic]];
             [h5 appendString:[PnrWebJs jsYcUrlPsdEditStatic]];
+            [h5 appendString:[PnrWebJs jsYcUrlAnalysisStatic]];
             
             [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
             
@@ -96,16 +97,16 @@
     
     NSMutableString * body = [NSMutableString new];
 
-    [body appendString:[self jsonReadEditPsdForm:PnrKey_ycUrlPsd taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:@"" index:0]];
-    [body appendString:[self jsonReadEditUrlForm:@"url" taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:@"a.jpg" index:0 type:PnrKey_TestUrl]];
-    [body appendString:[self jsonReadEditResponseForm:@"result" taIdName:PnrKey_Conent btName:PnrKey_TestResponse taValue:@"222" index:0 type:PnrKey_TestResponse]];
+    [body appendString:[self jsonReadEditPsdForm:PnrKey_ycUrlPsd taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:@""]];
+    [body appendString:[self jsonReadEditUrlForm:PnrKey_ycUrlUrl formShowName:PnrKey_ycUrlResult taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:@""]];
+    [body appendString:[self jsonReadEditResponseForm:PnrKey_ycUrlResult taIdName:PnrKey_Conent taValue:@""]];
     
     NSString * html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, body, h5_detail_tail];
     return html;
 }
 
 // 密码
-+ (NSString *)jsonReadEditPsdForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index {
++ (NSString *)jsonReadEditPsdForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue {
     return
     [NSString stringWithFormat:
      @"\n\
@@ -114,7 +115,7 @@
      <div style=' width:100%%; height:1px; float:left; '></div> \n\
      <form id='%@' name='%@' > \n\
      <div style=' width:120px; float:left; ' >\n\
-     <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsYcUrlPsdEditStatic('%@', '%li')\" > 保存 </button> \n\
+     <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsYcUrlPsdEditStatic('%@')\" > 保存 </button> \n\
      </div>\n\
      <div style=' width:calc(100%% - 120px); float:left; ' >\n\
      <input  id='%@' name='%@' type='text' style=\" width:calc(100%% - 2px); height:28px; font-size:16px; \" value='%@' onkeydown=\"if(event.keyCode==13){return false;}\" ></input> \n\
@@ -123,13 +124,13 @@
      <p style=' width:100%%; height:1px; float:left; '></p> \n\
      </div> \n"
      , formIdName, formIdName
-     , PnrKey_ycUrlBTPsd, formIdName, index
+     , PnrKey_ycUrlBTPsd, formIdName
      , taIdName, taIdName, taValue
      ];
 }
 
 // 分析URL
-+ (NSString *)jsonReadEditUrlForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index type:(NSString *)type {
++ (NSString *)jsonReadEditUrlForm:(NSString *)formIdName formShowName:(NSString *)formShowName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue {
     return
     [NSString stringWithFormat:
      @"\n\
@@ -138,7 +139,7 @@
      <div style=' width:100%%; height:1px; float:left; '></div> \n\
      <form id='%@' name='%@' > \n\
      <div style=' width:120px; float:left; ' >\n\
-     <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 分析 </button> \n\
+     <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsYcUrlAnalysisStatic('%@', '%@')\" > 分析 </button> \n\
      </div>\n\
      <div style=' width:calc(100%% - 120px); float:left; ' >\n\
      <input  id='%@' name='%@' type='text' style=\" width:calc(100%% - 2px); height:28px; font-size:16px; \" value='%@' onkeydown=\"if(event.keyCode==13){return false;}\" ></input> \n\
@@ -147,12 +148,12 @@
      <p style=' width:100%%; height:1px; float:left; '></p> \n\
      </div> \n"
      , formIdName, formIdName
-     , PnrKey_ycUrlBTUrl, formIdName, index, type
+     , PnrKey_ycUrlBTUrl, formIdName, formShowName
      , taIdName, taIdName, taValue
      ];
 }
 
-+ (NSString *)jsonReadEditResponseForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue index:(NSInteger)index type:(NSString *)type {
++ (NSString *)jsonReadEditResponseForm:(NSString *)formIdName taIdName:(NSString *)taIdName taValue:(NSString *)taValue {
     return
     [NSString stringWithFormat:
      @"\n\

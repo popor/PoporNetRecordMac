@@ -68,7 +68,7 @@
          ;    xmlhttp.onreadystatechange = function() {\n\
          ;        if (xmlhttp.readyState == 4) {\n\
          ;            var text = xmlhttp.responseText;\n\
-         ;            if (text == 'success') {\n\
+         ;            if (text == '%@') {\n\
          ;                formSaveBt.innerText = '保存 成功';\n\
          ;            } else {\n\
          ;                formSaveBt.innerText = '保存 失败';\n\
@@ -83,6 +83,7 @@
          , PnrKey_Conent
          , PnrKey_TestSave
          , PnrPost_TestEdit
+         , PnrKey_success
          , PnrKey_TestType, PnrKey_TestIndex, PnrKey_Conent
          ];
     }
@@ -112,33 +113,34 @@
     if (!js) {
         js =
         [NSString stringWithFormat:
-        @"\n\n\
-        ;function jsTestDeleteStatic(formKey, index) {\n\
-        ;    var form         = document.forms[formKey];\n\
-        ;    var formDeleteBt = document.forms[formKey].elements['%@'];\n\
-        ;    formDeleteBt.innerText = '删除中';\n\
-        ;    var xmlhttp = new XMLHttpRequest();\n\
-        ;    xmlhttp.open('POST','/%@',true);\n\
-        ;\n\
-        ;    xmlhttp.onreadystatechange = function() {\n\
-        ;        if (xmlhttp.readyState == 4) {\n\
-        ;            var text = xmlhttp.responseText;\n\
-        ;            if (text == 'success') {\n\
-        ;                formDeleteBt.innerText = '删除 成功';\n\
-        ;            } else {\n\
-        ;                formDeleteBt.innerText = '删除 失败';\n\
-        ;            }\n\
-        ;        }\n\
-        ;    }\n\
-        ;\n\
-        ;    xmlhttp.setRequestHeader('Content-Type', 'application/json');\n\
-        ;    var data = JSON.stringify({\"%@\": index}); \n\
-        ;    xmlhttp.send(data);\n\
-        ;}\n\n"
-        , PnrKey_TestDelete
-        , PnrPost_TestDelete
-        , PnrKey_TestIndex
-        ];
+         @"\n\n\
+         ;function jsTestDeleteStatic(formKey, index) {\n\
+         ;    var form         = document.forms[formKey];\n\
+         ;    var formDeleteBt = document.forms[formKey].elements['%@'];\n\
+         ;    formDeleteBt.innerText = '删除中';\n\
+         ;    var xmlhttp = new XMLHttpRequest();\n\
+         ;    xmlhttp.open('POST','/%@',true);\n\
+         ;\n\
+         ;    xmlhttp.onreadystatechange = function() {\n\
+         ;        if (xmlhttp.readyState == 4) {\n\
+         ;            var text = xmlhttp.responseText;\n\
+         ;            if (text == '%@') {\n\
+         ;                formDeleteBt.innerText = '删除 成功';\n\
+         ;            } else {\n\
+         ;                formDeleteBt.innerText = '删除 失败';\n\
+         ;            }\n\
+         ;        }\n\
+         ;    }\n\
+         ;\n\
+         ;    xmlhttp.setRequestHeader('Content-Type', 'application/json');\n\
+         ;    var data = JSON.stringify({\"%@\": index}); \n\
+         ;    xmlhttp.send(data);\n\
+         ;}\n\n"
+         , PnrKey_TestDelete
+         , PnrPost_TestDelete
+         , PnrKey_success
+         , PnrKey_TestIndex
+         ];
     }
     return js;
 }
@@ -204,7 +206,7 @@
         js =
         [NSString stringWithFormat:
          @"\n\n\
-         ;function jsYcUrlPsdEditStatic(formKey, index) {\n\
+         ;function jsYcUrlPsdEditStatic(formKey) {\n\
          ;    var formContent = document.forms[formKey].elements['%@'].value;\n\
          ;    var formSaveBt  = document.forms[formKey].elements['%@'];\n\
          ;    formSaveBt.innerText = '保存中';\n\
@@ -214,7 +216,7 @@
          ;    xmlhttp.onreadystatechange = function() {\n\
          ;        if (xmlhttp.readyState == 4) {\n\
          ;            var text = xmlhttp.responseText;\n\
-         ;            if (text == 'success') {\n\
+         ;            if (text == '%@') {\n\
          ;                formSaveBt.innerText = '保存 成功';\n\
          ;            } else {\n\
          ;                formSaveBt.innerText = '保存 失败';\n\
@@ -229,6 +231,7 @@
          , PnrKey_Conent
          , PnrKey_ycUrlBTPsd
          , PnrPost_YcUrlPsdEdit
+         , PnrKey_success
          , PnrKey_ycUrlPsd
          ];
     }
@@ -242,32 +245,41 @@
         js =
         [NSString stringWithFormat:
          @"\n\n\
-         ;function jsYcUrlAnalysisStatic(formKey, index, type) {\n\
+         ;function jsYcUrlAnalysisStatic(formKey, formShowKey) {\n\
          ;    var formContent = document.forms[formKey].elements['%@'].value;\n\
          ;    var formSaveBt  = document.forms[formKey].elements['%@'];\n\
+         ;    var formShowTa  = document.forms[formShowKey].elements['%@'];\n\
          ;    formSaveBt.innerText = '分析中';\n\
          ;    var xmlhttp = new XMLHttpRequest();\n\
          ;    xmlhttp.open('POST','/%@',true);\n\
          ;\n\
          ;    xmlhttp.onreadystatechange = function() {\n\
          ;        if (xmlhttp.readyState == 4) {\n\
-         ;            var text = xmlhttp.responseText;\n\
-         ;            if (text == 'success') {\n\
+         ;            //var jsonObj = xmlhttp.responseText.parseJSON();\n\
+         ;            var jsonObj = JSON.parse(xmlhttp.responseText); //由JSON字符串转换为JSON对象\n\
+         ;            var status = jsonObj.%@;\n\
+         ;            if (status == '%@') {\n\
          ;                formSaveBt.innerText = '分析 成功';\n\
+         ;                formShowTa.innerText = jsonObj.%@; \n\
          ;            } else {\n\
          ;                formSaveBt.innerText = '分析 失败';\n\
+         ;                formShowTa.innerText = ''; \n\
          ;            }\n\
          ;        }\n\
          ;    }\n\
          ;\n\
          ;    xmlhttp.setRequestHeader('Content-Type', 'application/json');\n\
-         ;    var data = JSON.stringify({\"%@\": type}); \n\
+         ;    var data = JSON.stringify({\"%@\": formContent}); \n\
          ;    xmlhttp.send(data);\n\
          ;}\n\n"
          , PnrKey_Conent
          , PnrKey_ycUrlBTUrl
+         , PnrKey_Conent
          , PnrPost_YcUrlDecrypt
-         , PnrKey_ycUrlPsd
+         , PnrKey_ycUrlStatus
+         , PnrKey_success
+         , PnrKey_ycUrlValue
+         , PnrKey_ycUrlUrl
          ];
     }
     return js;
