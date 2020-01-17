@@ -96,10 +96,25 @@
     // MARK: 每次都需要拼接的部分
     
     NSMutableString * body = [NSMutableString new];
-
+    
+    NSString * url    = @"TKYsE4CFAK1N1juhVt9Ab2ywQ28FwppbcgW94oLdoK8=";
+    NSString * result =
+    @"\
+    规则\n\
+    1：毫秒时间戳    1579240907000   13位\n\
+    2：用户手机号    15267047620     11位\n\
+    3：上传来源      0=未知，1=android，2=ios，3=flutter   1位\n\
+    4：是否做过压缩   0=未知，1=压缩，2=未压缩               1位\n\
+    5：上传前文件大小 0=未获取，其他数值向上取整如 120         x位\n\
+    6：文件拓展名    .jpg .mp4\n\
+    示例\n\
+    TKYsE4CFAK1N1juhVt9Ab2ywQ28FwppbcgW94oLdoK8=\n\
+    源码为:15792409070001526704762022120\n\
+    ";
+    
     [body appendString:[self jsonReadEditPsdForm:PnrKey_ycUrlPsd taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:@""]];
-    [body appendString:[self jsonReadEditUrlForm:PnrKey_ycUrlUrl formShowName:PnrKey_ycUrlResult taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:@""]];
-    [body appendString:[self jsonReadEditResponseForm:PnrKey_ycUrlResult taIdName:PnrKey_Conent taValue:@""]];
+    [body appendString:[self jsonReadEditUrlForm:PnrKey_ycUrlUrl formShowName:PnrKey_ycUrlResult taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:url]];
+    [body appendString:[self jsonReadEditResponseForm:PnrKey_ycUrlResult taIdName:PnrKey_Conent taValue:result]];
     
     NSString * html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, body, h5_detail_tail];
     return html;
@@ -197,17 +212,16 @@
     
     /*
      文件名字
-
-     1、毫秒时间戳   1578448631309         14位
+     
+     1、毫秒时间戳   1579240907000   13位
      2、用户手机号   15267047620     11位
      3、上传来源  0=未知，1=android，2=ios，3=flutter      1位
      4、是否做过压缩   0=未知，1=压缩，2=未压缩   1位
-     5、文件拓展名   _jpg   _mp4
-     6、上传前文件大小 0=未获取，其他数值向上取整如   _1   _120
-
+     5、上传前文件大小 0=未获取，其他数值向上取整如   _1   _120
+     6、文件拓展名   _jpg   _mp4
+     
      上述字符串使用aes加密
-     1578448631309_15267047620_2_2_120
-     15792409070001526704762022120
+     15792409070001526704762022120.jpg
      */
     NSString * tar = [AESCrypt decrypt:url password:psd];
     if (tar.length == 0) {
@@ -224,12 +238,12 @@
         
         if (tar.length > timeL) {
             NSString * time = [tar substringWithRange:(NSRange){location, timeL}];
-            [text appendFormat:@"\n时间:%@", [NSDate stringFromDate:[NSDate dateFromUnixDate:time.integerValue/1000] formatter:nil]];
+            [text appendFormat:@"\n时间：%@", [NSDate stringFromDate:[NSDate dateFromUnixDate:time.integerValue/1000] formatter:nil]];
             location += timeL;
         }
         if (tar.length > location + phoneL) {
             NSString * phone = [tar substringWithRange:(NSRange){location, phoneL}];
-            [text appendFormat:@"\n电话:%@", phone];
+            [text appendFormat:@"\n电话：%@", phone];
             location += phoneL;
         }
         if (tar.length > location + sourceL) {
@@ -252,7 +266,7 @@
                     break;
                 }
             }
-            [text appendFormat:@"\n来源:%@", source];
+            [text appendFormat:@"\n来源：%@", source];
             location += sourceL;
         }
         if (tar.length > location + compressL) {
@@ -271,11 +285,11 @@
                     break;
                 }
             }
-            [text appendFormat:@"\n压缩:%@", compress];
+            [text appendFormat:@"\n压缩：%@", compress];
             location += sourceL;
         }
         if (tar.length > location) {
-            [text appendFormat:@"\n容量:%@MB", [tar substringFromIndex:location]];
+            [text appendFormat:@"\n容量：%@MB", [tar substringFromIndex:location]];
         }
         return text;
     } else{
