@@ -260,11 +260,13 @@
          ;            var status = jsonObj.%@;\n\
          ;            if (status == '%@') {\n\
          ;                formSaveBt.innerText = '分析 成功';\n\
-         ;                formShowTa.innerText = jsonObj.%@; \n\
+         ;                formShowTa.innerText = jsonObj.%@;//.replace(/\\n/g,'<p>'); ; \n\
          ;            } else {\n\
          ;                formSaveBt.innerText = '分析 失败';\n\
          ;                formShowTa.innerText = ''; \n\
          ;            }\n\
+         ;            //刷新 textarea 高度\n\
+         ;            %@  \n\
          ;        }\n\
          ;    }\n\
          ;\n\
@@ -279,6 +281,7 @@
          , PnrKey_ycUrlStatus
          , PnrKey_success
          , PnrKey_ycUrlValue
+         , [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]
          , PnrKey_ycUrlUrl
          ];
     }

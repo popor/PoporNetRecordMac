@@ -16,11 +16,11 @@
 #import "PnrRequestTestEntity.h"
 #import <PoporFoundation/NSDictionary+pTool.h>
 #import <PoporFMDB/PoporFMDB.h>
+#import "AESCrypt.h"
 
 @implementation PnrWebBodyYcUrl
 
 + (NSString *)ycUrlBody {
-    NSDictionary    * editDic;
     static BOOL       isInit;
     static NSString * h5_detail_head;
     static NSString * h5_detail_tail;
@@ -183,5 +183,115 @@
 + (BOOL)updatePsd:(NSString *)psd {
     return [PoporFMDB updatePlistKey:YcUrlPsd_saveKey value:psd];
 }
+
++ (NSString *)analysisUrl:(NSString *)url {
+    NSString * psd = [PnrWebBodyYcUrl getPsd];
+    //return [AESCrypt decrypt:url password:psd];
+    // NSString * fileName = @"15784486313091526704762022120";
+    // NSInteger  fileInt  = [fileName integerValue];
+    // NSString * hexString= [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1lx",fileInt]];
+    // NSLog(@"hexString: %@", hexString);
+    // NSLog(@"10 String: %@", [self stringToHexWithInt:fileInt]);
+    // NSLog(@"16 String: %@", [self stringToDecimalWithString:[NSString stringToHexWithInt:fileInt]]);
+    // NSLog(@"16 String: %@", [self stringToDecimalWithString:@"7fffffffffffffff"]);
+    
+    /*
+     文件名字
+
+     1、毫秒时间戳   1578448631309         14位
+     2、用户手机号   15267047620     11位
+     3、上传来源  0=未知，1=android，2=ios，3=flutter      1位
+     4、是否做过压缩   0=未知，1=压缩，2=未压缩   1位
+     5、文件拓展名   _jpg   _mp4
+     6、上传前文件大小 0=未获取，其他数值向上取整如   _1   _120
+
+     上述字符串使用aes加密
+     1578448631309_15267047620_2_2_120
+     15792409070001526704762022120
+     */
+    NSString * tar = [AESCrypt decrypt:url password:psd];
+    if (tar.length == 0) {
+        tar = [AESCrypt encrypt:url password:psd];
+    }
+    if (tar.length > 0) {
+        NSMutableString * text = [NSMutableString new];
+        [text appendString:tar];
+        int timeL     = 13;
+        int phoneL    = 11;
+        int sourceL   = 1;
+        int compressL = 1;
+        int location  = 0;
+        
+        if (tar.length > timeL) {
+            NSString * time = [tar substringWithRange:(NSRange){location, timeL}];
+            [text appendFormat:@"\n时间:%@", [NSDate stringFromDate:[NSDate dateFromUnixDate:time.integerValue/1000] formatter:nil]];
+            location += timeL;
+        }
+        if (tar.length > location + phoneL) {
+            NSString * phone = [tar substringWithRange:(NSRange){location, phoneL}];
+            [text appendFormat:@"\n电话:%@", phone];
+            location += phoneL;
+        }
+        if (tar.length > location + sourceL) {
+            NSString * source = [tar substringWithRange:(NSRange){location, sourceL}];
+            switch (source.intValue) {
+                case 1: {
+                    source = @"android";
+                    break;
+                }
+                case 2: {
+                    source = @"iOS";
+                    break;
+                }
+                case 3: {
+                    source = @"flutter";
+                    break;
+                }
+                default:{
+                    source = @"未知";
+                    break;
+                }
+            }
+            [text appendFormat:@"\n来源:%@", source];
+            location += sourceL;
+        }
+        if (tar.length > location + compressL) {
+            NSString * compress = [tar substringWithRange:(NSRange){location, compressL}];
+            switch (compress.intValue) {
+                case 1: {
+                    compress = @"压缩";
+                    break;
+                }
+                case 2: {
+                    compress = @"未压缩";
+                    break;
+                }
+                default:{
+                    compress = @"未知";
+                    break;
+                }
+            }
+            [text appendFormat:@"\n压缩:%@", compress];
+            location += sourceL;
+        }
+        if (tar.length > location) {
+            [text appendFormat:@"\n容量:%@MB", [tar substringFromIndex:location]];
+        }
+        return text;
+    } else{
+        return @"异常";
+    }
+}
+
+//+ (NSString *)stringToHexWithInt:(int)theNumber {
+//    return [NSString stringWithFormat:@"%x", (unsigned int) theNumber];
+//}
+//
+//+ (NSString *)stringToDecimalWithString:(NSString * _Nonnull)theNumber {
+//    if (!theNumber) {
+//        return @"";
+//    }
+//    return [NSString stringWithFormat:@"%i", (int)strtoul([theNumber UTF8String], 0, 16)];
+//}
 
 @end

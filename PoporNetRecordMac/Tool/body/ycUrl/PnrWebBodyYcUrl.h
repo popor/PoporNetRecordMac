@@ -19,6 +19,8 @@ static NSString * YcUrlPsd_saveKey = @"YcUrlPsd";
 + (NSString *)getPsd;
 + (BOOL)updatePsd:(NSString *)psd;
 
++ (NSString *)analysisUrl:(NSString *)url;
+
 @end
 
 NS_ASSUME_NONNULL_END

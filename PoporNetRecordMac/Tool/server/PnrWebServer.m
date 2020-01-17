@@ -389,16 +389,17 @@
         GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
         //NSString * str = [[NSString alloc] initWithData:dataReq.data encoding:NSUTF8StringEncoding];
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
-        NSString * psd   = dic[PnrKey_ycUrlPsd];
-        
-        BOOL success = YES;
-        if (success) {
-            NSDictionary * dic = @{PnrKey_ycUrlStatus:PnrKey_success, PnrKey_ycUrlValue:@"iOS 2020/01/01 22:33 18717930030.jpg"};
-            complete(H5String(dic.toJsonString));
+        NSString * url     = dic[PnrKey_ycUrlUrl];
+        NSString * origin  = [PnrWebBodyYcUrl analysisUrl:url];
+        NSDictionary * responseDic;
+        if (origin) {
+            responseDic = @{PnrKey_ycUrlStatus:PnrKey_success, PnrKey_ycUrlValue:origin};
         } else {
-            NSDictionary * dic = @{PnrKey_ycUrlStatus:PnrKey_fail, PnrKey_ycUrlValue:@"iOS 20200101.jpg"};
-            complete(H5String(dic.toJsonString));
+            responseDic = @{PnrKey_ycUrlStatus:PnrKey_fail, PnrKey_ycUrlValue:@""};
         }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            complete(H5String(responseDic.toJsonString));
+        });
     }
     
     // MARK: 模拟测试数据
