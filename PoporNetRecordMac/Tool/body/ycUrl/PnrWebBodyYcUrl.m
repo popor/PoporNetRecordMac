@@ -133,7 +133,7 @@
      <button id='%@' class=\"w180Green1\" type='button' \" onclick=\"jsYcUrlPsdEditStatic('%@')\" > 保存 </button> \n\
      </div>\n\
      <div style=' width:calc(100%% - 120px); float:left; ' >\n\
-     <input  id='%@' name='%@' type='text' style=\" width:calc(100%% - 2px); height:28px; font-size:16px; \" value='%@' onkeydown=\"if(event.keyCode==13){return false;}\" ></input> \n\
+     <input  id='%@' name='%@' type='password' style=\" width:calc(100%% - 2px); height:28px; font-size:16px; \" value='%@' onkeydown=\"if(event.keyCode==13){return false;}\" ></input> \n\
      </div>\n\
      </form>\n\
      <p style=' width:100%%; height:1px; float:left; '></p> \n\
