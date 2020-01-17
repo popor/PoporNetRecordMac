@@ -260,7 +260,7 @@
          ;            var status = jsonObj.%@;\n\
          ;            if (status == '%@') {\n\
          ;                formSaveBt.innerText = '分析 成功';\n\
-         ;                formShowTa.innerText = jsonObj.%@;//.replace(/\\n/g,'<p>'); ; \n\
+         ;                formShowTa.textContent = jsonObj.%@;\n\
          ;            } else {\n\
          ;                formSaveBt.innerText = '分析 失败';\n\
          ;                formShowTa.innerText = ''; \n\

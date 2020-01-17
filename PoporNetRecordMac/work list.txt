@@ -14,6 +14,9 @@
 首页增加崩溃信息链接, get url 识别bug.
 1.11
 
+1.12
+增加亿车URL内容分析功能
+
 1. web页面增加 deviceName 列表.
 2. list frame 点击之后, 对应的row变色. 完成
 3. listWeb 当index=1的时候, max>1, 点击刷新逻辑有问题. 完成
