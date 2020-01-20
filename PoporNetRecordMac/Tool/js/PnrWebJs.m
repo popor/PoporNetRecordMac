@@ -259,7 +259,9 @@
          ;            var jsonObj = JSON.parse(xmlhttp.responseText); //由JSON字符串转换为JSON对象\n\
          ;            var status = jsonObj.%@;\n\
          ;            if (status == '%@') {\n\
-         ;                formSaveBt.innerText = '分析 成功';\n\
+         ;                \n\
+         ;                var type = jsonObj.%@; \n\
+         ;                if(type.length > 0) { formSaveBt.innerText = type +' 成功'; } else { formSaveBt.innerText = '分析 成功'; }\n\
          ;                formShowTa.textContent = jsonObj.%@;\n\
          ;            } else {\n\
          ;                formSaveBt.innerText = '分析 失败';\n\
@@ -280,6 +282,7 @@
          , PnrPost_YcUrlDecrypt
          , PnrKey_ycUrlStatus
          , PnrKey_success
+         , PnrKey_ycUrlType
          , PnrKey_ycUrlValue
          , [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]
          , PnrKey_ycUrlUrl

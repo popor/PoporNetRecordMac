@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 static NSString * YcUrlPsd_saveKey = @"YcUrlPsd";
 
+static int YcUrl_timeL     = 13;// 包括毫秒为13位,否则10位.
+static int YcUrl_phoneL    = 11;
+static int YcUrl_sourceL   = 1;
+static int YcUrl_compressL = 1;
+
 @interface PnrWebBodyYcUrl : NSObject
 
 + (NSString *)ycUrlBody;
@@ -19,7 +24,7 @@ static NSString * YcUrlPsd_saveKey = @"YcUrlPsd";
 + (NSString *)getPsd;
 + (BOOL)updatePsd:(NSString *)psd;
 
-+ (NSString *)analysisUrl:(NSString *)url;
++ (NSDictionary *)analysisUrl:(NSString *)url;
 
 @end
 

@@ -110,6 +110,7 @@
     示例\n\
     TKYsE4CFAK1N1juhVt9Ab2ywQ28FwppbcgW94oLdoK8=\n\
     源码为:15792409070001526704762022120\n\
+    密码为: 123456\n\
     ";
     
     [body appendString:[self jsonReadEditPsdForm:PnrKey_ycUrlPsd taIdName:PnrKey_Conent btName:PnrKey_TestUrl taValue:@""]];
@@ -199,9 +200,9 @@
     return [PoporFMDB updatePlistKey:YcUrlPsd_saveKey value:psd];
 }
 
-+ (NSString *)analysisUrl:(NSString *)url {
++ (NSDictionary *)analysisUrl:(NSString *)url {
     NSString * psd = [PnrWebBodyYcUrl getPsd];
-    //return [AESCrypt decrypt:url password:psd];
+    // return [AESCrypt decrypt:url password:psd];
     // NSString * fileName = @"15784486313091526704762022120";
     // NSInteger  fileInt  = [fileName integerValue];
     // NSString * hexString= [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1lx",fileInt]];
@@ -223,89 +224,88 @@
      上述字符串使用aes加密
      15792409070001526704762022120.jpg
      */
-    NSString * tar = [AESCrypt decrypt:url password:psd];
-    if (tar.length == 0) {
-        tar = [AESCrypt encrypt:url password:psd];
-    }
-    if (tar.length > 0) {
-        NSMutableString * text = [NSMutableString new];
-        [text appendString:tar];
-        int timeL     = 13;
-        int phoneL    = 11;
-        int sourceL   = 1;
-        int compressL = 1;
-        int location  = 0;
-        
-        if (tar.length > timeL) {
-            NSString * time = [tar substringWithRange:(NSRange){location, timeL}];
-            [text appendFormat:@"\n时间：%@", [NSDate stringFromDate:[NSDate dateFromUnixDate:time.integerValue/1000] formatter:nil]];
-            location += timeL;
-        }
-        if (tar.length > location + phoneL) {
-            NSString * phone = [tar substringWithRange:(NSRange){location, phoneL}];
-            [text appendFormat:@"\n电话：%@", phone];
-            location += phoneL;
-        }
-        if (tar.length > location + sourceL) {
-            NSString * source = [tar substringWithRange:(NSRange){location, sourceL}];
-            switch (source.intValue) {
-                case 1: {
-                    source = @"android";
-                    break;
-                }
-                case 2: {
-                    source = @"iOS";
-                    break;
-                }
-                case 3: {
-                    source = @"flutter";
-                    break;
-                }
-                default:{
-                    source = @"未知";
-                    break;
-                }
+    NSString * type        = @""; // 加密还是解密
+    NSMutableString * text = [NSMutableString new];
+    NSString * reg = [url stringWithREG:@"\\[a-z]"]; // 查找是否包含字母
+    if (reg.length == 0) {
+        type = @"解密";
+        NSString * tar = [AESCrypt decrypt:url password:psd];
+        if (tar.length > 0) {
+            [text appendString:tar];
+            int timeL     = YcUrl_timeL;// 包括毫秒为13位,否则10位.
+            int phoneL    = YcUrl_phoneL;
+            int sourceL   = YcUrl_sourceL;
+            int compressL = YcUrl_compressL;
+            int location  = 0;
+            
+            if (tar.length > timeL) {
+                NSString * time = [tar substringWithRange:(NSRange){location, timeL}];
+                [text appendFormat:@"\n时间：%@", [NSDate stringFromDate:[NSDate dateFromUnixDate:time.integerValue/1000] formatter:nil]];
+                location += timeL;
             }
-            [text appendFormat:@"\n来源：%@", source];
-            location += sourceL;
-        }
-        if (tar.length > location + compressL) {
-            NSString * compress = [tar substringWithRange:(NSRange){location, compressL}];
-            switch (compress.intValue) {
-                case 1: {
-                    compress = @"压缩";
-                    break;
-                }
-                case 2: {
-                    compress = @"未压缩";
-                    break;
-                }
-                default:{
-                    compress = @"未知";
-                    break;
-                }
+            if (tar.length > location + phoneL) {
+                NSString * phone = [tar substringWithRange:(NSRange){location, phoneL}];
+                [text appendFormat:@"\n电话：%@", phone];
+                location += phoneL;
             }
-            [text appendFormat:@"\n压缩：%@", compress];
-            location += sourceL;
+            if (tar.length > location + sourceL) {
+                NSString * source = [tar substringWithRange:(NSRange){location, sourceL}];
+                switch (source.intValue) {
+                    case 1: {
+                        source = @"android";
+                        break;
+                    }
+                    case 2: {
+                        source = @"iOS";
+                        break;
+                    }
+                    case 3: {
+                        source = @"flutter";
+                        break;
+                    }
+                    default:{
+                        source = @"未知";
+                        break;
+                    }
+                }
+                [text appendFormat:@"\n来源：%@", source];
+                location += sourceL;
+            }
+            if (tar.length > location + compressL) {
+                NSString * compress = [tar substringWithRange:(NSRange){location, compressL}];
+                switch (compress.intValue) {
+                    case 1: {
+                        compress = @"压缩";
+                        break;
+                    }
+                    case 2: {
+                        compress = @"未压缩";
+                        break;
+                    }
+                    default:{
+                        compress = @"未知";
+                        break;
+                    }
+                }
+                [text appendFormat:@"\n压缩：%@", compress];
+                location += sourceL;
+            }
+            if (tar.length > location) {
+                [text appendFormat:@"\n容量：%@MB", [tar substringFromIndex:location]];
+            }
+        } else{
+            [text appendFormat: @"异常: 可能是密码不匹配"];
         }
-        if (tar.length > location) {
-            [text appendFormat:@"\n容量：%@MB", [tar substringFromIndex:location]];
-        }
-        return text;
-    } else{
-        return @"异常";
+    } else {
+        type = @"加密";
+        [text appendFormat:@"%@", [AESCrypt encrypt:url password:psd]];
     }
+    
+    return
+    @{PnrKey_ycUrlValue:text,
+      PnrKey_ycUrlStatus:PnrKey_success,
+      PnrKey_ycUrlType:type,
+    };
 }
-
-//+ (NSString *)stringToHexWithInt:(int)theNumber {
-//    return [NSString stringWithFormat:@"%x", (unsigned int) theNumber];
-//}
-//
-//+ (NSString *)stringToDecimalWithString:(NSString * _Nonnull)theNumber {
-//    if (!theNumber) {
-//        return @"";
-//    }
-//    return [NSString stringWithFormat:@"%i", (int)strtoul([theNumber UTF8String], 0, 16)];
-//}
 
 @end

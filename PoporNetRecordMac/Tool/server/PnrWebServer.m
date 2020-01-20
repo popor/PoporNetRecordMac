@@ -388,15 +388,10 @@
     else if ([path hasPrefix:PnrPost_YcUrlDecrypt]) {
         GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
         //NSString * str = [[NSString alloc] initWithData:dataReq.data encoding:NSUTF8StringEncoding];
-        NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
-        NSString * url     = dic[PnrKey_ycUrlUrl];
-        NSString * origin  = [PnrWebBodyYcUrl analysisUrl:url];
-        NSDictionary * responseDic;
-        if (origin) {
-            responseDic = @{PnrKey_ycUrlStatus:PnrKey_success, PnrKey_ycUrlValue:origin};
-        } else {
-            responseDic = @{PnrKey_ycUrlStatus:PnrKey_fail, PnrKey_ycUrlValue:@""};
-        }
+        NSDictionary * dic         = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
+        NSString * url             = dic[PnrKey_ycUrlUrl];
+        NSDictionary * responseDic = [PnrWebBodyYcUrl analysisUrl:url];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             complete(H5String(responseDic.toJsonString));
         });

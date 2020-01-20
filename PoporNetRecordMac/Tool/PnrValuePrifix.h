@@ -109,6 +109,7 @@ static NSString * PnrKey_ycUrlUrl       = @"url"; // 需要解密的url
 static NSString * PnrKey_ycUrlResult    = @"result";
 
 static NSString * PnrKey_ycUrlStatus    = @"status";
+static NSString * PnrKey_ycUrlType      = @"type";
 static NSString * PnrKey_ycUrlValue     = @"value";
 
 // 分享url
