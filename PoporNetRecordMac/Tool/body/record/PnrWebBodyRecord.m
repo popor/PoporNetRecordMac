@@ -14,8 +14,19 @@
 
 #import "PnrRequestTestEntity.h"
 #import <PoporFoundation/NSDictionary+pTool.h>
+#import "PnrWebServer.h"
 
 @implementation PnrWebBodyRecord
+
++ (instancetype)share {
+    static dispatch_once_t once;
+    static PnrWebBodyRecord * instance;
+    dispatch_once(&once, ^{
+        instance = [self new];
+        instance.recordLeftIframeWidth = [instance getRecordLeftIframeWidth];
+    });
+    return instance;
+}
 
 + (NSString *)jsonReadForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue {
     return [NSString stringWithFormat:@"\n<form id='%@' name='%@' method='POST' target='_blank' > \n <button class=\"w180Green\" type='button' \" onclick=\"jsonStatic('%@')\" > %@ 查看详情 </button> <br> \n <textarea id='%@' name='%@' class='%@'>%@</textarea> \n</form>",
@@ -24,14 +35,13 @@
 }
 
 + (NSString *)rootBody {
-    static NSMutableString * h5;
-    if (h5) {
-        return h5;
+    PnrWebBodyRecord * share = [PnrWebBodyRecord share];
+    if (share.html) {
+        return share.html;
     }
-    
+    NSMutableString * h5 = [NSMutableString new];
+
     PnrConfig * config = [PnrConfig share];
-    
-    h5 = [NSMutableString new];
     [h5 appendFormat:@"<html> <head><title>%@</title></head>", config.webRootTitle];
     
     [h5 appendString:@"\n\n<body style=\" TEXT-ALIGN:center; \" >\n"]; // style=\" margin:auto; \"
@@ -97,7 +107,7 @@
     
     [h5 appendString:@"\n\n </script>\n"];
     
-    int listWidth = 260;
+    int listWidth = share.recordLeftIframeWidth;// 260;
     // src='/%@'
     [h5 appendFormat:@"\n <iframe id='%@' name='%@' style=' width:%ipx; height:97%%; marginwidth:0;  background-color:%@; ' ></iframe>"
      , PnrIframeList, PnrIframeList, listWidth, config.listWebColorBgHex];
@@ -106,7 +116,10 @@
      , PnrIframeDetail, PnrIframeDetail, listWidth+16];
     
     [h5 appendString:@"\n\n </body></html>"];
-    return h5;
+    
+    share.html = h5;
+    
+    return share.html;
 }
 
 // MARK: 列表页面
@@ -451,5 +464,36 @@
         return @"NULL";
     }
 }
+
+// MARK: 设置 iframe 宽度
+- (void)saveRecordLeftIframeWidth:(int)recordLeftIframeWidth {
+    if (recordLeftIframeWidth < KrecordLeftIframeMiniWidth) {
+        recordLeftIframeWidth = KrecordLeftIframeMiniWidth;
+    }
+    _recordLeftIframeWidth = recordLeftIframeWidth;
+    
+    [PDB updatePlistKey:KrecordLeftIframeMiniWidthKey value:[NSString stringWithFormat:@"%i", recordLeftIframeWidth]];
+    self.html = nil;
+    PnrWebServer * PnrWebServerShare = [PnrWebServer share];
+    [PnrWebServerShare resetH5Root];
+}
+
+- (int)getRecordLeftIframeWidth {
+    NSString * value = [PDB getPlistKey:KrecordLeftIframeMiniWidthKey];
+    if (value) {
+        return [value intValue];
+    } else {
+        [PDB addPlistKey:KrecordLeftIframeMiniWidthKey value:[NSString stringWithFormat:@"%i", KrecordLeftIframeMiniWidth]];
+        return KrecordLeftIframeMiniWidth;
+    }
+}
+
+//- (int)recordLeftIframeWidth {
+//    //self.recordLeftIframeWidth;
+//    if (_recordLeftIframeWidth == 0) {
+//        _recordLeftIframeWidth = KrecordLeftIframeMiniWidth;
+//    }
+//    return KrecordLeftIframeMiniWidth;
+//}
 
 @end

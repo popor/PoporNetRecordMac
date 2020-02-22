@@ -204,6 +204,42 @@ static NSString * SepactorKey = @"_PnrMac_";
     }];
 }
 
+- (void)editLeftIfrmeAction {
+    PnrWebBodyRecord * share = [PnrWebBodyRecord share];
+    NSTextField *accessory = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 20)];
+    accessory.placeholderString = [NSString stringWithFormat:@"%i", KrecordLeftIframeMiniWidth];
+    accessory.stringValue = [NSString stringWithFormat:@"%i", share.recordLeftIframeWidth];
+    [accessory setEditable:YES];
+    
+    NSString * message = @"修改网络请求左侧窗口宽度";
+    NSAlert * alert = [NSAlert new];
+    [alert addButtonWithTitle:@"确定"];
+    [alert addButtonWithTitle:@"取消"];
+    [alert setMessageText:message];
+    [alert setAlertStyle:NSAlertStyleCritical];
+    
+    [alert setAccessoryView:accessory];
+    
+    __weak typeof(self) weakSelf = self;
+    [alert beginSheetModalForWindow:self.view.vc.view.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            int width = accessory.stringValue.intValue;
+            if (width <= KrecordLeftIframeMiniWidth) {
+                AlertToastTitle(@"最小宽度为: 166 px", weakSelf.view.vc.view);
+                return;
+            }
+            if (width > 0) {
+                [share saveRecordLeftIframeWidth:width];
+                [weakSelf freshAction];
+                if (width >= 1000) {
+                    AlertToastTitle(@"宽度超过屏幕宽度的话，显示会出错。", weakSelf.view.vc.view);
+                }
+            }
+            
+        }
+    }];
+}
+
 - (void)createRequestAction {
     [PoporNetRecord addDic:
      @{PnrKey_Title:PnrKey_Title,
@@ -269,6 +305,7 @@ static NSString * SepactorKey = @"_PnrMac_";
 - (void)freshAction {
     [self freshWifiName];
     [self freshUrlValue];
+    [self freshLeftIfrmeL];
     [self.view.infoTV reloadData];
 }
 
@@ -286,6 +323,17 @@ static NSString * SepactorKey = @"_PnrMac_";
     if (pnr.webServer.webServer.serverURL.absoluteString) {
         self.view.ipTF.stringValue = pnr.webServer.webServer.serverURL.absoluteString;
     }
+}
+
+- (void)freshLeftIfrmeL {
+    PnrWebBodyRecord * share = [PnrWebBodyRecord share];
+    NSMutableAttributedString * att = [NSMutableAttributedString new];
+    NSFont * font = [NSFont systemFontOfSize:13];
+    
+    [att addString:@"网络请求左侧窗口宽度: " font:font color:[NSColor darkGrayColor]];
+    [att addString:[NSString stringWithFormat:@"%i", share.recordLeftIframeWidth] font:font color:[NSColor blackColor]];
+    [att addString:@" px" font:font color:[NSColor darkGrayColor]];
+    
 }
 
 - (void)webview_adminAction {

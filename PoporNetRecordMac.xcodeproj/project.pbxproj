@@ -47,6 +47,7 @@
 		18DF310A23C582CA006CE371 /* PnrWebBodyYcUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF310923C582CA006CE371 /* PnrWebBodyYcUrl.m */; };
 		18E3288E23B0943600DBCC27 /* PoporAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3288D23B0943600DBCC27 /* PoporAppInfo.m */; };
 		74A839F6FA65D6196019E5A1 /* libPods-PoporNetRecordMac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C01229C8FFA62A9E931675 /* libPods-PoporNetRecordMac.a */; };
+		E45077CF2400D0C0000BB208 /* JHLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E45077CE2400D0C0000BB208 /* JHLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,6 +137,8 @@
 		24C01229C8FFA62A9E931675 /* libPods-PoporNetRecordMac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PoporNetRecordMac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		272A82FDE599135FF461AD1C /* Pods-PoporNetRecordMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.debug.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.debug.xcconfig"; sourceTree = "<group>"; };
 		D329B8CD1C3EC314B48AB38C /* Pods-PoporNetRecordMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoporNetRecordMac.release.xcconfig"; path = "Target Support Files/Pods-PoporNetRecordMac/Pods-PoporNetRecordMac.release.xcconfig"; sourceTree = "<group>"; };
+		E45077CD2400D0BF000BB208 /* JHLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHLabel.h; sourceTree = "<group>"; };
+		E45077CE2400D0C0000BB208 /* JHLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +397,8 @@
 		18A06E3E237BFC320084506B /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				E45077CD2400D0BF000BB208 /* JHLabel.h */,
+				E45077CE2400D0C0000BB208 /* JHLabel.m */,
 				18A06E40237BFC320084506B /* EditableTextField.h */,
 				18A06E42237BFC320084506B /* EditableTextField.m */,
 				18BAE79023826C3500BB6A3C /* NSView+Address.h */,
@@ -629,6 +634,7 @@
 			files = (
 				18E3288E23B0943600DBCC27 /* PoporAppInfo.m in Sources */,
 				18A06E19237BD1E20084506B /* NSTask+shell.m in Sources */,
+				E45077CF2400D0C0000BB208 /* JHLabel.m in Sources */,
 				18A06E44237BFC320084506B /* EditableTextField.m in Sources */,
 				183BE874238B68F900885F6C /* NSButton+pDrawRect.m in Sources */,
 				18A06E17237BD1E20084506B /* NSBundle+Tool.m in Sources */,
@@ -796,7 +802,7 @@
 				CODE_SIGN_ENTITLEMENTS = PoporNetRecordMac/PoporNetRecordMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				GCC_PREFIX_HEADER = PoporNetRecordMac/PoporNetRecordMac_prefix.h;
 				INFOPLIST_FILE = PoporNetRecordMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -804,7 +810,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ifcar99.PoporNetRecordMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -818,7 +824,7 @@
 				CODE_SIGN_ENTITLEMENTS = PoporNetRecordMac/PoporNetRecordMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				GCC_PREFIX_HEADER = PoporNetRecordMac/PoporNetRecordMac_prefix.h;
 				INFOPLIST_FILE = PoporNetRecordMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -826,7 +832,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ifcar99.PoporNetRecordMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

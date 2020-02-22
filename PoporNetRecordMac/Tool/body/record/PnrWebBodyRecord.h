@@ -43,7 +43,12 @@ __block int record = 0;\n\
 &#9; });\n\
 } extraDic:@{@\"exKey\":@\"exValue\"}]; </pre> \n ";
 
+static int KrecordLeftIframeMiniWidth = 166;
+static NSString * KrecordLeftIframeMiniWidthKey = @"recordLeftIframeWidth";
+
 @interface PnrWebBodyRecord : NSObject
+
++ (instancetype)share;
 
 + (NSString *)jsonReadForm:(NSString *)formIdName taIdName:(NSString *)taIdName btName:(NSString *)btName taValue:(NSString *)taValue;
 
@@ -52,8 +57,9 @@ __block int record = 0;\n\
 
 + (void)deatilEntity:(PnrEntity *)pnrEntity index:(NSInteger)index extra:(NSDictionary *)extraDic finish:(void (^ __nullable)(NSString * detail, NSString * resubmit))finish;
 
-// 弃用了
-//+ (NSString *)feedbackH5:(NSString *)body;
+@property (nonatomic, strong, nullable) NSMutableString * html; // 为了不重启刷新
+@property (nonatomic        ) int recordLeftIframeWidth;
+- (void)saveRecordLeftIframeWidth:(int)recordLeftIframeWidth;
 
 @end
 
