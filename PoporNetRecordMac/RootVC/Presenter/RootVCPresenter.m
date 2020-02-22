@@ -76,6 +76,7 @@ static NSString * SepactorKey = @"_PnrMac_";
     [self setPnrResubmit];
     
     [self setPnrConfig];
+    [self freshLeftIfrmeL];
     //[self setStatusImage];
 }
 
@@ -327,13 +328,20 @@ static NSString * SepactorKey = @"_PnrMac_";
 
 - (void)freshLeftIfrmeL {
     PnrWebBodyRecord * share = [PnrWebBodyRecord share];
-    NSMutableAttributedString * att = [NSMutableAttributedString new];
-    NSFont * font = [NSFont systemFontOfSize:13];
+    self.view.LeftIfrmeL.text = [NSString stringWithFormat:@"网络请求左侧窗口宽度: %i px", share.recordLeftIframeWidth];
     
-    [att addString:@"网络请求左侧窗口宽度: " font:font color:[NSColor darkGrayColor]];
-    [att addString:[NSString stringWithFormat:@"%i", share.recordLeftIframeWidth] font:font color:[NSColor blackColor]];
-    [att addString:@" px" font:font color:[NSColor darkGrayColor]];
-    
+    //    NSMutableAttributedString * att = [NSMutableAttributedString new];
+    //    NSFont * font = [NSFont systemFontOfSize:13];
+    //
+    //    //NSColor * color1 = [NSColor textBackgroundColor];
+    //    NSColor * color1 = [NSColor textColor];
+    //    NSColor * color2 = [NSColor textColor]; //[NSColor redColor];[NSColor selectedTextColor];
+    //
+    //    [att addString:@"网络请求左侧窗口宽度: " font:font color:color1];
+    //    [att addString:[NSString stringWithFormat:@"%i", share.recordLeftIframeWidth] font:font color:color2];
+    //    [att addString:@" px" font:font color:color1];
+    //
+    //    self.view.LeftIfrmeL.attributedText = att;
 }
 
 - (void)webview_adminAction {

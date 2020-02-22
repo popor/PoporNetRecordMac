@@ -148,6 +148,7 @@
         JHLabel * l = [JHLabel new];
         l.backgroundColor    = [NSColor clearColor];
         l.font               = [NSFont systemFontOfSize:13];
+        l.textColor          = [NSColor textColor];
         
         [self.view addSubview:l];
         l;
