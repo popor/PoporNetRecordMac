@@ -114,6 +114,7 @@
     });
     
     // -------------------------------------------------------------------------
+    [self.wifiTF setContentHuggingPriority:NSLayoutPriorityRequired forOrientation:NSLayoutConstraintOrientationHorizontal];
     [self.wifiTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
         make.left.mas_equalTo(16);
