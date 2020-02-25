@@ -16,6 +16,11 @@
 
 1.12
 增加亿车URL内容分析功能
+1.13
+PnrWebBodyRecord: 清空刷新 UI布局更新, 小屏幕内容多的时候,显示有bug
+
+1.14
+允许编辑网络请求页面 左窗口宽度 
 
 1. web页面增加 deviceName 列表.
 2. list frame 点击之后, 对应的row变色. 完成

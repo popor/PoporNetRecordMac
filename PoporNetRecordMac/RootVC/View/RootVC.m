@@ -26,6 +26,9 @@
 
 @synthesize funFirstBT;
 
+@synthesize LeftIfrmeL;
+@synthesize editLeftIfrmeBT;
+
 - (instancetype)initWithDic:(NSDictionary *)dic {
     if (self = [super init]) {
         
@@ -72,6 +75,7 @@
 - (void)addViews {
     
     [self addTFBT];
+    [self addRecordLeftIframe];
     [self addFunBT];
     [self addTagTVs];
 }
@@ -110,6 +114,7 @@
     });
     
     // -------------------------------------------------------------------------
+    [self.wifiTF setContentHuggingPriority:NSLayoutPriorityRequired forOrientation:NSLayoutConstraintOrientationHorizontal];
     [self.wifiTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
         make.left.mas_equalTo(16);
@@ -139,6 +144,39 @@
     
 }
 
+- (void)addRecordLeftIframe {
+    self.LeftIfrmeL = ({
+        JHLabel * l = [JHLabel new];
+        l.backgroundColor    = [NSColor clearColor];
+        l.font               = [NSFont systemFontOfSize:13];
+        l.textColor          = [NSColor textColor];
+        
+        [self.view addSubview:l];
+        l;
+    });
+    
+    self.editLeftIfrmeBT = ({
+        NSButton * button = [NSButton buttonWithTitle:@"修改" target:self.present action:@selector(editLeftIfrmeAction)];
+        [self.view addSubview:button];
+        
+        button;
+    });
+    
+    [self.LeftIfrmeL mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.wifiTF.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(self.wifiTF);
+        make.height.mas_equalTo(self.wifiTF);
+        
+    }];
+    
+    [self.editLeftIfrmeBT mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.LeftIfrmeL);
+        make.left.mas_equalTo(self.editPortBT);
+        make.height.mas_equalTo(self.editPortBT);
+        make.right.mas_equalTo(self.editPortBT);
+    }];
+}
+
 - (void)addFunBT {
     
     int btH = 25;
@@ -155,7 +193,7 @@
         if (!bt) {
             bt = oneBT;
             [bt mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(self.wifiTF.mas_bottom).mas_offset(10);
+                make.top.mas_equalTo(self.LeftIfrmeL.mas_bottom).mas_offset(10);
                 make.left.mas_equalTo(16);
                 make.width.mas_greaterThanOrEqualTo(60);
                 

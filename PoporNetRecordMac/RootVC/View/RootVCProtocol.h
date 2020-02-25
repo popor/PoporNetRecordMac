@@ -9,6 +9,8 @@
 
 #import "ColumnTool.h"
 #import "EditableTextField.h"
+#import "JHLabel.h"
+#import "PnrWebBodyRecord.h"
 
 //#import <SystemConfiguration/CaptiveNetwork.h>
 //#import <SystemConfiguration/SystemConfiguration.h>
@@ -43,6 +45,9 @@ static NSString * FunTest_Request       = @"模拟管理";
 
 @property (nonatomic, strong) NSButton          * funFirstBT;
 
+@property (nonatomic, strong) JHLabel           * LeftIfrmeL;
+@property (nonatomic, strong) NSButton          * editLeftIfrmeBT;
+
 // MARK: 外部注入的
 
 @end
@@ -57,12 +62,15 @@ static NSString * FunTest_Request       = @"模拟管理";
 
 - (void)freshAction;
 - (void)editPortAction;
+- (void)editLeftIfrmeAction;
 - (void)createRequestAction;
 - (void)createTestAction;
 
 - (void)webview_adminAction;
 - (void)webview_recordAction;
 - (void)webview_testRequstAction;
+
+- (void)freshLeftIfrmeL;
 
 @end
 

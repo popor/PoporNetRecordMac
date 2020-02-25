@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updateServerPort;
 
+- (void)resetH5Root;
+
 @end
 
 NS_ASSUME_NONNULL_END

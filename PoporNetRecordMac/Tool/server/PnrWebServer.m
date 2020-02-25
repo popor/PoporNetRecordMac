@@ -433,4 +433,7 @@
     }
 }
 
+- (void)resetH5Root {
+    self.h5Root = [PnrWebBodyRecord rootBody];
+}
 @end
