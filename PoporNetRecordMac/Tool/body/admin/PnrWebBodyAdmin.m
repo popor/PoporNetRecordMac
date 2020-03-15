@@ -97,7 +97,7 @@
         [body appendFormat:@"<a href='/%@' class='%@' > 网络请求 </a> <p>", PnrGet_recordRoot, divFunItem];
         [body appendFormat:@"<a href='/%@' class='%@' > 请求测试 </a> <p>", PnrGet_TestRoot,   divFunItem];
         [body appendFormat:@"<a href='/%@?%@=%@' class='%@' > 崩溃日志 </a> <p>", PnrGet_TestRoot, PnrKey_TestSearch, PnrCN_crashTitle,  divFunItem];
-        [body appendFormat:@"<a href='/%@' class='%@' > 亿车URL </a> <p>", PnrGet_YcUrl, divFunItem];
+        [body appendFormat:@"<a href='/%@' class='%@' > MD5Test </a> <p>", PnrGet_YcUrl, divFunItem];
         
         // 二维码
         [body appendFormat:@"<img style=' width:200px; height:200px; margin-left:30px; ' src ='/%@' > </img>", PnrGet_QrUrlSelf];

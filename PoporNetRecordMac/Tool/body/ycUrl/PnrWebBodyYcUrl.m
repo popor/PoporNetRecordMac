@@ -28,7 +28,7 @@
     
     if (!isInit) {
         isInit = YES;
-        NSString * h5_title = @"亿车URL分析";
+        NSString * h5_title = @"MD5Test";
         // MARK: detail 头
         {
             NSMutableString * h5 = [NSMutableString new];
