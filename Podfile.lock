@@ -1,70 +1,72 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
+  - AFNetworking (4.0.0):
+    - AFNetworking/NSURLSession (= 4.0.0)
+    - AFNetworking/Reachability (= 4.0.0)
+    - AFNetworking/Security (= 4.0.0)
+    - AFNetworking/Serialization (= 4.0.0)
+    - AFNetworking/UIKit (= 4.0.0)
+  - AFNetworking/NSURLSession (4.0.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/Reachability (4.0.0)
+  - AFNetworking/Security (4.0.0)
+  - AFNetworking/Serialization (4.0.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - GCDWebServer (3.5.3):
-    - GCDWebServer/Core (= 3.5.3)
-  - GCDWebServer/Core (3.5.3)
+  - GCDWebServer (3.5.4):
+    - GCDWebServer/Core (= 3.5.4)
+  - GCDWebServer/Core (3.5.4)
   - JSONModel (1.8.0)
   - Masonry (1.1.0)
-  - PoporAFN (1.01):
+  - PoporAFN (1.02):
     - AFNetworking
   - PoporFMDB (1.07):
     - FMDB
     - PoporFoundation/NSString
-  - PoporFoundation (1.11):
-    - PoporFoundation/KVO (= 1.11)
-    - PoporFoundation/NSArray (= 1.11)
-    - PoporFoundation/NSAssistant (= 1.11)
-    - PoporFoundation/NSData (= 1.11)
-    - PoporFoundation/NSDate (= 1.11)
-    - PoporFoundation/NSDecimalNumber (= 1.11)
-    - PoporFoundation/NSDictionary (= 1.11)
-    - PoporFoundation/NSFileManager (= 1.11)
-    - PoporFoundation/NSObject (= 1.11)
-    - PoporFoundation/NSString (= 1.11)
-    - PoporFoundation/NSURL (= 1.11)
-    - PoporFoundation/Os (= 1.11)
-    - PoporFoundation/Prefix (= 1.11)
-  - PoporFoundation/KVO (1.11)
-  - PoporFoundation/NSArray (1.11):
+  - PoporFoundation (1.14):
+    - PoporFoundation/KVO (= 1.14)
+    - PoporFoundation/NSArray (= 1.14)
+    - PoporFoundation/NSAssistant (= 1.14)
+    - PoporFoundation/NSData (= 1.14)
+    - PoporFoundation/NSDate (= 1.14)
+    - PoporFoundation/NSDecimalNumber (= 1.14)
+    - PoporFoundation/NSDictionary (= 1.14)
+    - PoporFoundation/NSFileManager (= 1.14)
+    - PoporFoundation/NSObject (= 1.14)
+    - PoporFoundation/NSString (= 1.14)
+    - PoporFoundation/NSTimer (= 1.14)
+    - PoporFoundation/NSURL (= 1.14)
+    - PoporFoundation/Os (= 1.14)
+    - PoporFoundation/Prefix (= 1.14)
+  - PoporFoundation/KVO (1.14)
+  - PoporFoundation/NSArray (1.14):
     - PoporFoundation/NSObject
     - PoporFoundation/Prefix
-  - PoporFoundation/NSAssistant (1.11):
+  - PoporFoundation/NSAssistant (1.14):
     - PoporFoundation/Os
     - PoporFoundation/Prefix
-  - PoporFoundation/NSData (1.11)
-  - PoporFoundation/NSDate (1.11):
+  - PoporFoundation/NSData (1.14)
+  - PoporFoundation/NSDate (1.14):
     - PoporFoundation/NSString
-  - PoporFoundation/NSDecimalNumber (1.11):
+  - PoporFoundation/NSDecimalNumber (1.14):
     - PoporFoundation/NSObject
-  - PoporFoundation/NSDictionary (1.11):
+  - PoporFoundation/NSDictionary (1.14):
     - PoporFoundation/NSObject
     - PoporFoundation/Prefix
-  - PoporFoundation/NSFileManager (1.11)
-  - PoporFoundation/NSObject (1.11)
-  - PoporFoundation/NSString (1.11):
+  - PoporFoundation/NSFileManager (1.14)
+  - PoporFoundation/NSObject (1.14)
+  - PoporFoundation/NSString (1.14):
     - PoporFoundation/NSObject
     - PoporFoundation/Os
     - PoporFoundation/Prefix
-  - PoporFoundation/NSURL (1.11):
+  - PoporFoundation/NSTimer (1.14)
+  - PoporFoundation/NSURL (1.14):
     - PoporFoundation/NSObject
     - PoporFoundation/NSString
-  - PoporFoundation/Os (1.11)
-  - PoporFoundation/Prefix (1.11):
+  - PoporFoundation/Os (1.14)
+  - PoporFoundation/Prefix (1.14):
     - PoporFoundation/Os
   - PoporJsonModel (0.04):
     - JSONModel
@@ -85,7 +87,7 @@ DEPENDENCIES:
   - ReactiveObjC
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - FMDB
     - GCDWebServer
@@ -99,18 +101,18 @@ SPEC REPOS:
     - ReactiveObjC
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AFNetworking: d9fdf484a3c723ec3c558a41cc5754c7e845ee77
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  GCDWebServer: c0ab22c73e1b84f358d1e2f74bf6afd1c60829f2
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  PoporAFN: 81a1806c70329e70d697bbbb6255efc3582eed02
+  PoporAFN: 6946d6eb1778bbf1702a148960bebca84ca4d798
   PoporFMDB: aeb61e83c9f2d815a695b74e086499cdf842ca92
-  PoporFoundation: dc29699873b618827eb3922510f4b4d807fc8b2a
+  PoporFoundation: 25f70450a23ad082beec1458185e993c16172ea4
   PoporJsonModel: e99396194a9b629907e14a134fe01677ed14b560
   PoporQRCodeMacos: 0e070c3a43f5294b2eee36fa4781cd7fa35b4240
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
 
-PODFILE CHECKSUM: 9854d3534872b4567aa7a505f2fd14a7cd342a7a
+PODFILE CHECKSUM: 316494efd73b614bf35fa8bbb54c8c9e7a617cb0
 
 COCOAPODS: 1.9.1

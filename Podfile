@@ -3,6 +3,10 @@
 
 #source 'https://cdn.cocoapods.org/'
 
+# 推荐继续使用 传统的 pod
+source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://cdn.cocoapods.org/'
+
 target 'PoporNetRecordMac' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
