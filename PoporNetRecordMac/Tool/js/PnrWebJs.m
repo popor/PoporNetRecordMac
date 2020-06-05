@@ -335,6 +335,77 @@
     } \n";
 }
 
++ (NSString *)textareaAutoHeightFuntionNew {
+    return @"\n\n\
+    var autoTextarea = function (elem, extra, maxHeight) {\n\
+    extra = extra || 0;\n\
+    var isFirefox = !!document.getBoxObjectFor || 'mozInnerScreenX' in window,\n\
+    isOpera = !!window.opera && !!window.opera.toString().indexOf('Opera'),\n\
+    addEvent = function (type, callback) {\n\
+        elem.addEventListener ?\n\
+        elem.addEventListener(type, callback, false) :\n\
+        elem.attachEvent('on' + type, callback);\n\
+    },\n\
+    getStyle = elem.currentStyle ? function (name) {\n\
+        var val = elem.currentStyle[name];\n\
+        \n\
+        if (name === 'height' && val.search(/px/i) !== 1) {\n\
+            var rect = elem.getBoundingClientRect();\n\
+            return rect.bottom - rect.top -\n\
+            parseFloat(getStyle('paddingTop')) -\n\
+            parseFloat(getStyle('paddingBottom')) + 'px';\n\
+        };\n\
+        \n\
+        return val;\n\
+    } : function (name) {\n\
+        return getComputedStyle(elem, null)[name];\n\
+    },\n\
+    minHeight = parseFloat(getStyle('height'));\n\
+    \n\
+    elem.style.resize = 'none';\n\
+    \n\
+    var change = function () {\n\
+        var scrollTop, height,\n\
+        padding = 0,\n\
+        style = elem.style;\n\
+        \n\
+        if (elem._length === elem.value.length) return;\n\
+        elem._length = elem.value.length;\n\
+        \n\
+        if (!isFirefox && !isOpera) {\n\
+            padding = parseInt(getStyle('paddingTop')) + parseInt(getStyle('paddingBottom'));\n\
+        };\n\
+        scrollTop = document.body.scrollTop || document.documentElement.scrollTop;\n\
+        \n\
+        elem.style.height = minHeight + 'px';\n\
+        if (elem.scrollHeight > minHeight) {\n\
+            if (maxHeight && elem.scrollHeight > maxHeight) {\n\
+                height = maxHeight - padding;\n\
+                style.overflowY = 'auto';\n\
+            } else {\n\
+                height = elem.scrollHeight - padding;\n\
+                style.overflowY = 'hidden';\n\
+            };\n\
+            style.height = height + extra + 'px';\n\
+            scrollTop += parseInt(style.height) - elem.currHeight;\n\
+            document.body.scrollTop = scrollTop;\n\
+            document.documentElement.scrollTop = scrollTop;\n\
+            elem.currHeight = parseInt(style.height);\n\
+        };\n\
+    };\n\
+    \n\
+    addEvent('propertychange', change);\n\
+    addEvent('input', change);\n\
+    addEvent('focus', change);\n\
+    change();\n\
+};\n\
+var text = document.getElementsByClassName('content')\n\
+for (var i = 0; i < text.length; i++) {\n\
+    autoTextarea(text[i]);\n\
+}\n\
+    \n";
+}
+
 // MARK: ajax 刷新增加
 + (NSString *)ajaxResubmit {
     static NSString * js;

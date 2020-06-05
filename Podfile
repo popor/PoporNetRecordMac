@@ -7,6 +7,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 #source 'https://cdn.cocoapods.org/'
 
+# 忽略pod第三方库文件警告
+inhibit_all_warnings!
+
 target 'PoporNetRecordMac' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!

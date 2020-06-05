@@ -70,7 +70,9 @@
             [h5 appendString:[PnrWebJs jsTestSearchStatic]];
             [h5 appendString:[PnrWebJs jsTestDeleteStatic]];
             
-            [h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
+            //[h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
+            
+            [h5 appendString:[PnrWebJs textareaAutoHeightFuntionNew]];
             
             [h5 appendString:[PnrWebJs getQuery]];
             
@@ -153,7 +155,7 @@
      <button id='%@' class=\"w180Green2\" type='button' \" onclick=\"jsTestEditStatic('%@', '%li', '%@')\" > 保存 </button>  \n\
      </div>\n\
      <div style=' width:calc(100%% - 120px); float:left; ' >\n\
-     <textarea id='%@' name='%@' class='%@'>%@</textarea> <p style=' height:10px; '></p> \n\
+     <textarea id='%@' name='%@' class='content %@'>%@</textarea> <p style=' height:10px; '></p> \n\
      </div>\n\
      </form>\n\
      </div>\n\n"
