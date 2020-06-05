@@ -380,10 +380,10 @@
         elem.style.height = minHeight + 'px';\n\
         if (elem.scrollHeight > minHeight) {\n\
             if (maxHeight && elem.scrollHeight > maxHeight) {\n\
-                height = maxHeight - padding;\n\
+                height = maxHeight;\n\
                 style.overflowY = 'auto';\n\
             } else {\n\
-                height = elem.scrollHeight - padding;\n\
+                height = elem.scrollHeight;\n\
                 style.overflowY = 'hidden';\n\
             };\n\
             style.height = height + extra + 'px';\n\
