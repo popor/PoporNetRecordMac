@@ -70,6 +70,11 @@ static NSString * PnrGet_QrUrlSelf       = @"QrUrlSelf.png";
 // 公共
 static NSString * PnrPost_commonJsonXml  = @"jsonXml";
 
+// 文件
+static NSString * PnrGet_file            = @"file";
+static NSString * PnrGet_fileName        = @"name";
+static NSString * PnrGet_fileFolder      = @"file";
+
 // MARK: web key
 static NSString * PnrKey_Conent     = @"content";
 

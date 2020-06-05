@@ -264,6 +264,22 @@
                 completionBlock(H5String(ErrorUrl));
             }
         
+        } else if(pathArray.count == 2){
+            NSString * path1 = pathArray.firstObject;
+            NSString * path2 = pathArray.lastObject;
+            
+            // MARK: file部分
+            if ([path1 isEqualTo:PnrGet_file]) {
+                NSString * fileName = path2;
+                NSString * url = [NSString stringWithFormat:@"%@/%@/%@", [PoporFMDBPath share].cachesPath, PnrGet_fileFolder, fileName];
+                NSData * data  = [NSData dataWithContentsOfFile:url];
+                if (data) {
+                    completionBlock([GCDWebServerDataResponse responseWithData:data contentType:@"video/mp4"]);// image/png
+                    //completionBlock([GCDWebServerDataResponse responseWithData:data contentType:@""]);// image/png
+                } else {
+                    completionBlock(H5String(ErrorUrl));
+                }
+            }
         }
     }
     else {
