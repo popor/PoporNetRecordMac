@@ -409,7 +409,24 @@
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_time, colorValue, pnrEntity.time];
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_path, colorValue, pnrEntity.path];
         [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_url, colorValue, pnrEntity.url];
-        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_method, colorValue, pnrEntity.method];
+        
+        NSString * methodName;
+        switch (pnrEntity.method) {
+            case PoporMethodGet:
+                methodName = @"Get";
+                break;
+            case PoporMethodPost:
+                methodName = @"Post(Json)";
+                break;
+            case PoporMethodFormData:
+                methodName = @"Post(Form-Data)";
+                break;
+            default:
+                methodName = [NSString stringWithFormat:@"未知(%li)", pnrEntity.method];
+                break;
+        }
+        
+        [h5 appendFormat:@"<p><font color='%@'>%@&nbsp;</font><font color='%@'>%@</font></p>", colorKey, PnrCN_method, colorValue, methodName];
         
         formBtTaBlock(h5, PnrCN_head,      headStr,      PnrKey_Head);
         formBtTaBlock(h5, PnrCN_parameter, parameterStr, PnrKey_Parameter);
@@ -429,19 +446,28 @@
         btTaBlock(h5, PnrCN_title,     PnrKey_Title,     pnrEntity.title);
         btTaBlock(h5, PnrCN_path,      PnrKey_Url, [NSString stringWithFormat:@"%@/%@", pnrEntity.domain, pnrEntity.path]);
         
-        if ([pnrEntity.method.lowercaseString isEqualToString:@"post"]) {
-            [h5 appendFormat:@"\n <p> <button class=\"w180Green\" type='button' \" > %@ </button> \n\
-             <input type='radio' name='method' id='methodGet'  value='GET'          /><label for='methodGet'>GET</label>\n\
-             <input type='radio' name='method' id='methodPost' value='POST' checked /><label for='methodPost'>POST</label>\n\
-             </p>\n ", PnrCN_method];
-        }else if ([pnrEntity.method.lowercaseString isEqualToString:@"get"]) {
-            [h5 appendFormat:@"\n <p> <button class=\"w180Green\" type='button' \" > %@ </button> \n\
-             <input type='radio' name='method' id='methodGet'  value='GET'  checked /><label for='methodGet'>GET</label>\n\
-             <input type='radio' name='method' id='methodPost' value='POST'         /><label for='methodPost'>POST</label>\n\
-             </p>\n ", PnrCN_method];
-        }else{
-            btTaBlock(h5, PnrCN_method, PnrKey_Method, pnrEntity.method);
+        NSString * checkGet      = @"";
+        NSString * checkPost     = @"";
+        NSString * checkFormData = @"";
+        switch (pnrEntity.method) {
+            case PoporMethodGet:
+                checkGet = @"checked";
+                break;
+            case PoporMethodPost:
+                checkPost = @"checked";
+                break;
+            case PoporMethodFormData:
+                checkFormData = @"checked";
+                break;
+                
+            default:
+                break;
         }
+        [h5 appendFormat:@"\n <p> <button class=\"w180Green\" type='button' \" > %@ </button> \n\
+         <input type='radio' name='method' id='methodGet'      value='%li' %@ /><label for='methodGet'>GET</label>\n\
+         <input type='radio' name='method' id='methodPost'     value='%li' %@ /><label for='methodPost'>POST(Json)</label>\n\
+         <input type='radio' name='method' id='methodFormData' value='%li' %@ /><label for='methodFormData'>Post(FormData)</label>\n\
+         </p>\n ", PnrCN_method, PoporMethodGet, checkGet, PoporMethodPost, checkPost, PoporMethodFormData, checkFormData];
         
         btTaBlock(h5, PnrCN_head,      PnrKey_Head,      headStr);
         btTaBlock(h5, PnrCN_parameter, PnrKey_Parameter, parameterStr);

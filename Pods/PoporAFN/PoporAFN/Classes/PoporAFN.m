@@ -13,56 +13,15 @@
 
 @implementation PoporAFN
 
-#pragma mark - OLD
-// 使用默认 AFHTTPSessionManager
-- (void)postUrl:(NSString *_Nullable)urlString
-     parameters:(NSDictionary * _Nullable)parameters
-        success:(PoporAFNFinishBlock _Nullable)success
-        failure:(PoporAFNFailureBlock _Nullable)failure
-{
-    [self postUrl:urlString title:nil parameters:parameters afnManager:nil success:success failure:failure];
-}
-
-// 使用自定义 AFHTTPSessionManager,title
-- (void)postUrl:(NSString *_Nullable)urlString
-          title:(NSString *_Nullable)title
-     parameters:(NSDictionary * _Nullable)parameters
-     afnManager:(AFHTTPSessionManager * _Nullable)manager
-        success:(PoporAFNFinishBlock _Nullable )success
-        failure:(PoporAFNFailureBlock _Nullable)failure
-{
-    [self title:title url:urlString method:PoporMethodPost parameters:parameters afnManager:manager success:success failure:failure];
-}
-
-#pragma mark - get
-// 使用默认 AFHTTPSessionManager
-- (void)getUrl:(NSString *_Nullable)urlString
-    parameters:(NSDictionary * _Nullable)parameters
-       success:(PoporAFNFinishBlock _Nullable)success
-       failure:(PoporAFNFailureBlock _Nullable)failure
-{
-    [self getUrl:urlString title:nil parameters:parameters afnManager:nil success:success failure:failure];
-}
-
-// 使用自定义 AFHTTPSessionManager,title
-- (void)getUrl:(NSString *_Nullable)urlString
-         title:(NSString *_Nullable)title
-    parameters:(NSDictionary * _Nullable)parameters
-    afnManager:(AFHTTPSessionManager * _Nullable)manager
-       success:(PoporAFNFinishBlock _Nullable)success
-       failure:(PoporAFNFailureBlock _Nullable)failure
-{
-   [self title:title url:urlString method:PoporMethodGet parameters:parameters afnManager:manager success:success failure:failure];
-}
-
 #pragma mark - NEW
-- (void)url:(NSString *_Nullable)urlString
-     method:(PoporMethod)method
- parameters:(NSDictionary *_Nullable)parameters
-    success:(PoporAFNFinishBlock _Nullable)success
-    failure:(PoporAFNFailureBlock _Nullable)failure
+- (void)title:(NSString *_Nullable)title
+          url:(NSString *_Nullable)urlString
+       method:(PoporMethod)method
+   parameters:(NSDictionary *_Nullable)parameters
+      success:(PoporAFNFinishBlock _Nullable)success
+      failure:(PoporAFNFailureBlock _Nullable)failure
 {
-    [self title:nil url:urlString method:method parameters:parameters afnManager:nil success:success failure:failure];
+    [self title:nil url:urlString method:method parameters:parameters afnManager:nil header:nil success:success failure:failure];
 }
 
 - (void)title:(NSString *_Nullable)title
@@ -70,41 +29,96 @@
        method:(PoporMethod)method
    parameters:(NSDictionary *_Nullable)parameters
    afnManager:(AFHTTPSessionManager *_Nullable)manager
+       header:(NSDictionary *_Nullable)header
       success:(PoporAFNFinishBlock _Nullable)success
       failure:(PoporAFNFailureBlock _Nullable)failure
 {
-    NSString * methodStr;
+    [self title:title url:urlString method:method parameters:parameters afnManager:manager header:header progress:nil success:success failure:failure];
+}
+
+- (void)title:(NSString *_Nullable)title
+          url:(NSString *_Nullable)urlString
+       method:(PoporMethod)method
+   parameters:(NSDictionary *_Nullable)parameters
+   afnManager:(AFHTTPSessionManager *_Nullable)manager
+       header:(NSDictionary *_Nullable)header
+     progress:(nullable void (^)(NSProgress *uploadProgress))uploadProgress
+      success:(PoporAFNFinishBlock _Nullable)success
+      failure:(PoporAFNFailureBlock _Nullable)failure
+{
     if (!manager) {
         manager = [PoporAFNConfig createManager];
     }
-    __weak typeof(manager) weakManager = manager;
-    if (method == PoporMethodGet) {
-        methodStr = @"GET";
-        [manager GET:urlString parameters:parameters headers:manager.requestSerializer.HTTPRequestHeaders progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [PoporAFN successManager:weakManager url:urlString title:title method:methodStr parameters:parameters task:task response:responseObject success:success];
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [PoporAFN failManager:weakManager url:urlString title:title method:methodStr parameters:parameters task:task error:error failure:failure];
-        }];
-    }else if (method == PoporMethodPost){
-        methodStr = @"POST";
-        [manager POST:urlString parameters:parameters headers:manager.requestSerializer.HTTPRequestHeaders progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [PoporAFN successManager:weakManager url:urlString title:title method:methodStr parameters:parameters task:task response:responseObject success:success];
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [PoporAFN failManager:weakManager url:urlString title:title method:methodStr parameters:parameters task:task error:error failure:failure];
-        }];
+    
+    if (!header) {
+        header = manager.requestSerializer.HTTPRequestHeaders;
     }
+    __weak typeof(manager) weakManager = manager;
+    switch(method) {
+        case PoporMethodGet : {
+            [manager GET:urlString parameters:parameters headers:header progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [PoporAFN successManager:weakManager url:urlString title:title method:method parameters:parameters task:task response:responseObject success:success];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [PoporAFN failManager:weakManager url:urlString title:title method:method parameters:parameters task:task error:error failure:failure];
+            }];
+            break;
+        }
+        case PoporMethodPost : {
+            [manager POST:urlString parameters:parameters headers:header progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [PoporAFN successManager:weakManager url:urlString title:title method:method parameters:parameters task:task response:responseObject success:success];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [PoporAFN failManager:weakManager url:urlString title:title method:method parameters:parameters task:task error:error failure:failure];
+            }];
+            break;
+        }
+        case PoporMethodFormData: {
+            NSMutableURLRequest * request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:urlString parameters:parameters error:nil];
+            for (NSString * key in header.keyEnumerator) {
+                [request addValue:header[key] forHTTPHeaderField:key];
+            }
+            
+            __weak NSURLSessionUploadTask * uploadTask;
+            uploadTask = [manager uploadTaskWithStreamedRequest:request progress:uploadProgress completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                // if (error) {
+                //     NSLog(@"Error: %@", error);
+                // } else {
+                //     NSLog(@"response:%@, responseObject:%@", response, responseObject);
+                //     NSString * message = responseObject[@"message"];
+                //     //NSString * str  = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                //     NSLog(@"message: %@", message);
+                // }
+                if (!error) {
+                    [PoporAFN successManager:weakManager url:urlString title:title method:method parameters:parameters task:uploadTask response:responseObject success:success];
+                } else {
+                    [PoporAFN failManager:weakManager url:urlString title:title method:method parameters:parameters task:uploadTask error:error failure:failure];
+                }
+            }];
+            
+            [uploadTask resume];
+            
+            break;
+        }
+    }
+    
 }
 
-+ (void)successManager:(AFHTTPSessionManager *)manager url:(NSString *)urlString title:(NSString *_Nullable)title method:(NSString *)method parameters:(NSDictionary * _Nullable)parameters task:(NSURLSessionDataTask * _Nullable)task response:(id _Nullable) responseObject success:(PoporAFNFinishBlock _Nullable )success
++ (void)successManager:(AFHTTPSessionManager *)manager url:(NSString *)urlString title:(NSString *_Nullable)title method:(PoporMethod)method parameters:(NSDictionary * _Nullable)parameters task:(NSURLSessionDataTask * _Nullable)task response:(id _Nullable) responseObject success:(PoporAFNFinishBlock _Nullable )success
 {
     [manager invalidateSessionCancelingTasks:YES resetSession:NO];
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *dic;
+        NSDictionary * dic = nil;
         if (responseObject) {
-            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-        }
-        if (success) {
-            success(urlString, responseObject, dic);
+            if ([responseObject isKindOfClass:[NSData class]]) {
+                dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+                if (success) {
+                    success(urlString, responseObject, dic);
+                }
+            } else if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                dic = (NSDictionary *)responseObject;
+                if (success) {
+                    success(urlString, nil, dic);
+                }
+            }
         }
         
         PoporAfnRecordBlock recordBlock = [PoporAFNConfig share].recordBlock;
@@ -113,15 +127,17 @@
             if (dic) {
                 responseID = dic;
             }else{
-                NSString * str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                responseID = str ? :nil;
+                if ([responseObject isKindOfClass:[NSData class]]) {
+                    NSString * str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                    responseID = str ? :nil;
+                }
             }
             recordBlock(task.currentRequest.URL.absoluteString, title, method, manager.requestSerializer.HTTPRequestHeaders, parameters, responseID);
         }
     });
 }
 
-+ (void)failManager:(AFHTTPSessionManager *)manager url:(NSString *)urlString title:(NSString *_Nullable)title method:(NSString *)method parameters:(NSDictionary * _Nullable)parameters task:(NSURLSessionDataTask * _Nullable)task error:(NSError *)error failure:(PoporAFNFailureBlock _Nullable)failure
++ (void)failManager:(AFHTTPSessionManager *)manager url:(NSString *)urlString title:(NSString *_Nullable)title method:(PoporMethod)method parameters:(NSDictionary * _Nullable)parameters task:(NSURLSessionDataTask * _Nullable)task error:(NSError *)error failure:(PoporAFNFailureBlock _Nullable)failure
 {
     [manager invalidateSessionCancelingTasks:YES resetSession:NO];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -174,3 +190,45 @@
 
 
 @end
+
+//#pragma mark - OLD
+//// 使用默认 AFHTTPSessionManager
+//- (void)postUrl:(NSString *_Nullable)urlString
+//     parameters:(NSDictionary * _Nullable)parameters
+//        success:(PoporAFNFinishBlock _Nullable)success
+//        failure:(PoporAFNFailureBlock _Nullable)failure
+//{
+//    [self postUrl:urlString title:nil parameters:parameters afnManager:nil success:success failure:failure];
+//}
+//
+//// 使用自定义 AFHTTPSessionManager,title
+//- (void)postUrl:(NSString *_Nullable)urlString
+//          title:(NSString *_Nullable)title
+//     parameters:(NSDictionary * _Nullable)parameters
+//     afnManager:(AFHTTPSessionManager * _Nullable)manager
+//        success:(PoporAFNFinishBlock _Nullable )success
+//        failure:(PoporAFNFailureBlock _Nullable)failure
+//{
+//    [self title:title url:urlString method:PoporMethodPost parameters:parameters afnManager:manager success:success failure:failure];
+//}
+//
+//#pragma mark - get
+//// 使用默认 AFHTTPSessionManager
+//- (void)getUrl:(NSString *_Nullable)urlString
+//    parameters:(NSDictionary * _Nullable)parameters
+//       success:(PoporAFNFinishBlock _Nullable)success
+//       failure:(PoporAFNFailureBlock _Nullable)failure
+//{
+//    [self getUrl:urlString title:nil parameters:parameters afnManager:nil success:success failure:failure];
+//}
+//
+//// 使用自定义 AFHTTPSessionManager,title
+//- (void)getUrl:(NSString *_Nullable)urlString
+//         title:(NSString *_Nullable)title
+//    parameters:(NSDictionary * _Nullable)parameters
+//    afnManager:(AFHTTPSessionManager * _Nullable)manager
+//       success:(PoporAFNFinishBlock _Nullable)success
+//       failure:(PoporAFNFailureBlock _Nullable)failure
+//{
+//   [self title:title url:urlString method:PoporMethodGet parameters:parameters afnManager:manager success:success failure:failure];
+//}

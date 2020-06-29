@@ -8,6 +8,7 @@
 
 #import <PoporJsonModel/PoporJsonModel.h>
 #import "PnrValuePrifix.h"
+#import <PoporAFN/PoporAFN.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,7 +28,7 @@ typedef void(^PnrEntityBlock) (NSArray *titleArray, NSArray *jsonArray, NSMutabl
 @property (nonatomic, strong) NSString * url;
 @property (nonatomic, strong) NSString * domain;
 @property (nonatomic, strong) NSString * path;
-@property (nonatomic, strong) NSString * method;// post get
+@property (nonatomic        ) PoporMethod method;// post get
 
 @property (nonatomic, strong) id<Ignore> headValue;
 @property (nonatomic, strong) id<Ignore> parameterValue;

@@ -81,7 +81,7 @@ static NSString * SepactorKey = @"_PnrMac_";
 }
 
 - (void)setPnrResubmit {
-    [PoporAFNConfig share].recordBlock = ^(NSString *url, NSString *title, NSString *method, id head, id parameters, id response) {
+    [PoporAFNConfig share].recordBlock = ^(NSString *url, NSString *title, PoporMethod method, id head, id parameters, id response) {
         NSRange range = [title rangeOfString:SepactorKey];
         NSString * deviceName = PnrCN_Simulator;
         if (range.length > 0) {
@@ -92,7 +92,7 @@ static NSString * SepactorKey = @"_PnrMac_";
         NSDictionary * dic =
         @{PnrKey_Url:url,
           PnrKey_Title:title,
-          PnrKey_Method:method,
+          PnrKey_Method:@(method),
           PnrKey_Head:head,
           PnrKey_Parameter:parameters,
           PnrKey_Response:response,
@@ -104,7 +104,7 @@ static NSString * SepactorKey = @"_PnrMac_";
     [PoporNetRecord setPnrBlockResubmit:^(NSDictionary *formDic, PnrBlockFeedback  _Nonnull blockFeedback) {
         NSString * title        = formDic[PnrKey_Title];
         NSString * urlStr       = formDic[PnrKey_Url];
-        NSString * methodStr    = formDic[PnrKey_Method];
+        NSInteger  method       = [formDic[PnrKey_Method] integerValue];
         NSString * headStr      = formDic[PnrKey_Head];
         NSString * parameterStr = formDic[PnrKey_Parameter];
         NSString * deviceName   = formDic[PnrKey_DeviceName];
@@ -132,18 +132,8 @@ static NSString * SepactorKey = @"_PnrMac_";
             });
         };
         
-        {
-            PoporMethod method;
-            if ([methodStr.lowercaseString isEqualToString:@"get"]) {
-                method = PoporMethodGet;
-            } else if ([methodStr.lowercaseString isEqualToString:@"post"]) {
-                method = PoporMethodPost;
-            } else {
-                return ;
-            }
-            
-            [[PoporAFN new] title:[NSString stringWithFormat:@"%@%@%@", title, SepactorKey, deviceName] url:urlStr method:PoporMethodGet parameters:parameterStr.toDic afnManager:manager success:finishBlock failure:errorBlock];
-        }
+        [PoporAFNTool title:[NSString stringWithFormat:@"%@%@%@", title, SepactorKey, deviceName] url:urlStr method:method parameters:parameterStr.toDic afnManager:manager header:nil progress:nil success:finishBlock failure:errorBlock];
+        
     } extraDic:@{}];
 }
 
