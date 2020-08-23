@@ -105,7 +105,7 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             port.portGetInt ++;
             // 异常之后只更改本次port,不保存
-            //[port savePort_get:[NSString stringWithFormat:@"%i", port.portGetInt]];
+            //[port savePort:[NSString stringWithFormat:@"%i", port.portGetInt]];
             [self updateServerPort];
         });
     }
@@ -129,7 +129,7 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             port.portGetInt ++;
             // 异常之后只更改本次port,不保存
-            //[port savePort_get:[NSString stringWithFormat:@"%i", port.portGetInt]];
+            //[port savePort:[NSString stringWithFormat:@"%i", port.portGetInt]];
             [self updateServerPort];
         });
     }
@@ -298,7 +298,7 @@
     }
     GCDWebServerURLEncodedFormRequest * formRequest = (GCDWebServerURLEncodedFormRequest *)request;
     
-    if ([path isEqualToString:PnrPost_recordAdd]) {
+    if ([path isEqualToString:[PnrPortEntity share].api]) {
         [PoporNetRecord addDic:formRequest.jsonObject];
         complete([GCDWebServerDataResponse responseWithText:@"{\"status\":1}"]);
     }

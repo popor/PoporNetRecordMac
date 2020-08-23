@@ -11,6 +11,7 @@
 #import "PnrWebCss.h"
 #import "PnrWebJs.h"
 #import "PnrValuePrifix.h"
+#import "PnrPortEntity.h"
 
 #import <PoporFoundation/NSDictionary+pTool.h>
 #import "PoporAppInfo.h"
@@ -103,8 +104,10 @@
         [body appendFormat:@"<img style=' width:200px; height:200px; margin-left:30px; ' src ='/%@' > </img>", PnrGet_QrUrlSelf];
         
         // MARK: 增加注释
+        
+        
         [body appendString:@"<ul>\n"];
-        [body appendFormat:@"<li>新增网络请求接口:%@ </li>\n", PnrPost_recordAdd];
+        [body appendFormat:@"<li>新增网络请求接口:%@ </li>\n", [PnrPortEntity share].api];
         
         [body appendString:@"<li> </li>\n"];
         

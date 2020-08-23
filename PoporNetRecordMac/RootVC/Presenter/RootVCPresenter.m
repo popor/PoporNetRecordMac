@@ -167,7 +167,7 @@ static NSString * SepactorKey = @"_PnrMac_";
     
     NSTextField *accessory = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 20)];
     accessory.placeholderString = @"8080";
-    accessory.stringValue = [NSString stringWithFormat:@"%i", [PnrPortEntity share].getPort_get];
+    accessory.stringValue = [NSString stringWithFormat:@"%i", [PnrPortEntity share].getPort];
     [accessory setEditable:YES];
     
     NSString * message = @"修改端口号";
@@ -186,11 +186,37 @@ static NSString * SepactorKey = @"_PnrMac_";
             if (port > 0) {
                 [weakSelf freshAction];
                 
-                [[PnrPortEntity share] savePort_get:[NSString stringWithFormat:@"%i", port]];
+                [[PnrPortEntity share] savePort:[NSString stringWithFormat:@"%i", port]];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [[PoporNetRecord share].webServer updateServerPort];
                 });
             }
+        }
+    }];
+}
+
+- (void)editApiAction {
+    
+    NSTextField *accessory = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 20)];
+    accessory.placeholderString = @"api";
+    accessory.stringValue = [PnrPortEntity share].api;
+    [accessory setEditable:YES];
+    
+    NSString * message = @"修改接口号";
+    NSAlert * alert = [NSAlert new];
+    [alert addButtonWithTitle:@"确定"];
+    [alert addButtonWithTitle:@"取消"];
+    [alert setMessageText:message];
+    [alert setAlertStyle:NSAlertStyleCritical];
+    
+    [alert setAccessoryView:accessory];
+    
+    __weak typeof(self) weakSelf = self;
+    [alert beginSheetModalForWindow:self.view.vc.view.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            NSString * api = accessory.stringValue;
+            [[PnrPortEntity share] saveApi:api];
+            [weakSelf freshAction];
         }
     }];
 }
@@ -311,8 +337,13 @@ static NSString * SepactorKey = @"_PnrMac_";
 
 - (void)freshUrlValue {
     PoporNetRecord * pnr = [PoporNetRecord share];
+    
     if (pnr.webServer.webServer.serverURL.absoluteString) {
         self.view.ipTF.stringValue = pnr.webServer.webServer.serverURL.absoluteString;
+        
+        self.view.recordApiL.text = [NSString stringWithFormat:@"网络请求接口: %@%@", pnr.webServer.webServer.serverURL.absoluteString, [PnrPortEntity share].api];
+    } else {
+        self.view.recordApiL.text = [NSString stringWithFormat:@"网络请求接口: %@%@", pnr.webServer.webServer.serverURL.absoluteString, [PnrPortEntity share].api];
     }
 }
 

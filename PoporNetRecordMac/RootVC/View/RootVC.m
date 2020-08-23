@@ -21,10 +21,14 @@
 @synthesize infoTVClickMenu;
 
 @synthesize editPortBT;
+
 @synthesize ipTF;
 @synthesize wifiTF;
 
 @synthesize funFirstBT;
+
+@synthesize recordApiL;
+@synthesize editRecordApiBT;
 
 @synthesize LeftIfrmeL;
 @synthesize editLeftIfrmeBT;
@@ -75,6 +79,7 @@
 - (void)addViews {
     
     [self addTFBT];
+    [self addRecordApiL];
     [self addRecordLeftIframe];
     [self addFunBT];
     [self addTagTVs];
@@ -107,7 +112,7 @@
     });
     
     self.editPortBT = ({
-        NSButton * button = [NSButton buttonWithTitle:@"修改" target:self.present action:@selector(editPortAction)];
+        NSButton * button = [NSButton buttonWithTitle:@"端口" target:self.present action:@selector(editPortAction)];
         [self.view addSubview:button];
         
         button;
@@ -131,7 +136,6 @@
         
         make.height.mas_equalTo(self.wifiTF);
     }];
-    
     [self.editPortBT mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
         make.left.mas_equalTo(self.ipTF.mas_right).mas_offset(10);
@@ -141,7 +145,39 @@
         
         make.height.mas_equalTo(self.wifiTF);
     }];
+}
+
+- (void)addRecordApiL {
+    self.recordApiL = ({
+        JHLabel * l = [JHLabel new];
+        l.backgroundColor    = [NSColor clearColor];
+        l.font               = [NSFont systemFontOfSize:13];
+        l.textColor          = [NSColor textColor];
+        
+        [self.view addSubview:l];
+        l;
+    });
     
+    self.editRecordApiBT = ({
+        NSButton * button = [NSButton buttonWithTitle:@"接口" target:self.present action:@selector(editApiAction)];
+        [self.view addSubview:button];
+        
+        button;
+    });
+    
+    [self.recordApiL mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.wifiTF.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(self.wifiTF);
+        make.height.mas_equalTo(self.wifiTF);
+        make.right.mas_lessThanOrEqualTo(self.editRecordApiBT.mas_left).mas_offset(-10);
+    }];
+    
+    [self.editRecordApiBT mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.recordApiL);
+        make.left.mas_equalTo(self.editPortBT);
+        make.height.mas_equalTo(self.editPortBT);
+        make.right.mas_equalTo(self.editPortBT);
+    }];
 }
 
 - (void)addRecordLeftIframe {
@@ -156,14 +192,14 @@
     });
     
     self.editLeftIfrmeBT = ({
-        NSButton * button = [NSButton buttonWithTitle:@"修改" target:self.present action:@selector(editLeftIfrmeAction)];
+        NSButton * button = [NSButton buttonWithTitle:@"宽度" target:self.present action:@selector(editLeftIfrmeAction)];
         [self.view addSubview:button];
         
         button;
     });
     
     [self.LeftIfrmeL mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.wifiTF.mas_bottom).mas_offset(10);
+        make.top.mas_equalTo(self.recordApiL.mas_bottom).mas_offset(10);
         make.left.mas_equalTo(self.wifiTF);
         make.height.mas_equalTo(self.wifiTF);
         

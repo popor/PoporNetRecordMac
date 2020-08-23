@@ -49,6 +49,19 @@
     return [PoporFMDB getPlistKey:PNR_Port];
 }
 
+// ---
++ (void)updateApi:(NSString *)api {
+    [PoporFMDB updatePlistKey:PNR_APi value:api];
+}
+
++ (void)addApi:(NSString *)api {
+    [PoporFMDB addPlistKey:PNR_APi value:api];
+}
+
++ (NSString *)getApi {
+    return [PoporFMDB getPlistKey:PNR_APi];
+}
+
 
 // MARK: 其他
 

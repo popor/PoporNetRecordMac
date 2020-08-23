@@ -45,6 +45,9 @@ static NSString * FunTest_Request       = @"模拟管理";
 
 @property (nonatomic, strong) NSButton          * funFirstBT;
 
+@property (nonatomic, strong) JHLabel           * recordApiL;
+@property (nonatomic, strong) NSButton          * editRecordApiBT;
+
 @property (nonatomic, strong) JHLabel           * LeftIfrmeL;
 @property (nonatomic, strong) NSButton          * editLeftIfrmeBT;
 
@@ -62,6 +65,7 @@ static NSString * FunTest_Request       = @"模拟管理";
 
 - (void)freshAction;
 - (void)editPortAction;
+- (void)editApiAction;
 - (void)editLeftIfrmeAction;
 - (void)createRequestAction;
 - (void)createTestAction;

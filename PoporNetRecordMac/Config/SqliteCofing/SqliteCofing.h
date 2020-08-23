@@ -29,6 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)addPort:(NSString *)port;
 + (NSString *)getPort;
 
+// MARK: 接口
++ (void)updateApi:(NSString *)api;
+
++ (void)addApi:(NSString *)api;
+
++ (NSString *)getApi;
 // MARK: 其他
 
 

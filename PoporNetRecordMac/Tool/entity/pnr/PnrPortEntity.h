@@ -15,11 +15,17 @@ static int PnrPortGet = 9000;
 @interface PnrPortEntity : NSObject
 
 @property (nonatomic        ) int portGetInt;
+@property (nonatomic, copy  ) NSString * api;
+
 + (instancetype)share;
 
 #pragma mark - plist
-- (void)savePort_get:(NSString *)port;
-- (int)getPort_get;
+- (void)savePort:(NSString *)port;
+- (int)getPort;
+
+- (void)saveApi:(NSString *)api;
+
+- (NSString *)getApi;
 
 @end
 

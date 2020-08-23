@@ -31,26 +31,45 @@
 }
 
 - (void)initPort {
-    int portGet  = [self getPort_get];
+    int portGet  = [self getPort];
     if (portGet != 0) {
         self.portGetInt  = portGet;
     }else{
         self.portGetInt  = PnrPortGet;
         NSString * text  = [NSString stringWithFormat:@"%i", PnrPortGet];
-        [self savePort_get:text];
         [SqliteCofing addPort:text];
+        //[self savePort:text];
+    }
+    
+    NSString * api = [self getApi];
+    if (api) {
+        self.api = api;
+    } else {
+        self.api = @"api";
+        [SqliteCofing addApi:self.api];
+        //[self saveApi:self.api];
     }
 }
 
 #pragma mark - plist
-- (void)savePort_get:(NSString *)port {
+- (void)savePort:(NSString *)port {
     [SqliteCofing updatePort:port];
     self.portGetInt = port.intValue;
 }
 
-- (int)getPort_get {
+- (int)getPort {
     NSString * info = [SqliteCofing getPort];
     return info.intValue;
+}
+
+- (void)saveApi:(NSString *)api {
+    [SqliteCofing updateApi:api];
+    self.api = api;
+}
+
+- (NSString *)getApi {
+    NSString * info = [SqliteCofing getApi];
+    return info;
 }
 
 @end
