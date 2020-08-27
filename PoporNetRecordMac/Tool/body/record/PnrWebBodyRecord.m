@@ -83,24 +83,29 @@
      ;    document.getElementById('%@').contentWindow.location.reload(true);\n\
      ;}", PnrIframeList];
     
-    // onload()
+    // onload(), 假如发现携带了deviceName, 左侧list加载对应的数据, 也要在标题上增加deviceName.
     [h5 appendFormat:@"\n\
      ;window.onload=function (){\n\
      ;    var deviceName = getQueryVariable('%@')\n\
      ;    var row        = getQueryVariable('%@')\n\
      ;    var srcList = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row;\n\
      ;    document.getElementById('%@').src = srcList;\n\
-     ;    if(row.length>0){\n\
+     ;    if (deviceName.length > 0) {\n\
+     ;        document.title = decodeURI(deviceName) +':%@';\n\
+     ;    }\n\
+     ;    if(row.length > 0){\n\
      ;        var srcDetail = '/%@' + '?' + '%@=' + deviceName + '&%@=' + row;\n\
      ;        document.getElementById('%@').src = srcDetail;\n\
      ;    }\n\
-     ;}",
-     PnrKey_DeviceName,
-     PnrKey_index,
-     PnrGet_recordList, PnrKey_DeviceName, PnrKey_index,
-     PnrIframeList,
-     PnrGet_recordDetail, PnrKey_DeviceName, PnrKey_index,
-     PnrIframeDetail
+     ;}"
+     , PnrKey_DeviceName
+     , PnrKey_index
+     , PnrGet_recordList, PnrKey_DeviceName, PnrKey_index
+     , PnrIframeList
+     
+     , config.webRootTitle// 标题增加用户名称
+     , PnrGet_recordDetail, PnrKey_DeviceName, PnrKey_index
+     , PnrIframeDetail
      ];
     
     // -------------------------------------------------------------------------
