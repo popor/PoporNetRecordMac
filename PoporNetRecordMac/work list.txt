@@ -29,3 +29,6 @@ PnrWebBodyRecord: 清空刷新 UI布局更新, 小屏幕内容多的时候,显�
 5. 增加查看deviceName指定的网页功能.
 6. mac app界面增加add方法和释义
 
+1.18
+网页: 网络请求增加了设备入口
+
