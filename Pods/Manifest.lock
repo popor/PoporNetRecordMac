@@ -79,7 +79,7 @@ DEPENDENCIES:
   - GCDWebServer
   - JSONModel
   - Masonry
-  - PoporAFN (= 1.05)
+  - PoporAFN
   - PoporFMDB
   - PoporFoundation
   - PoporJsonModel
@@ -113,6 +113,6 @@ SPEC CHECKSUMS:
   PoporQRCodeMacos: 0e070c3a43f5294b2eee36fa4781cd7fa35b4240
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
 
-PODFILE CHECKSUM: 2ff21ea6603ef35dccfd6286aa9df99fff478ecb
+PODFILE CHECKSUM: a4b028b9f49607e0f2c2ef009462a05178833025
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0.beta.2
