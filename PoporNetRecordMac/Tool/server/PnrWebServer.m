@@ -313,6 +313,23 @@
         }
     }
     
+    else if ([path isEqualToString:PnrPost_TestAdd]) {
+        GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
+        //NSString * str = [[NSString alloc] initWithData:dataReq.data encoding:NSUTF8StringEncoding];
+        NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
+        //NSLog(@"测试: %@", dic);
+        
+        PnrRequestTestEntity * entity = [PnrRequestTestEntity new];
+        entity.url      = PnrCN_crashTitle;
+        entity.response = [dic toJsonString];
+        
+        [PnrRequestTestEntity addEntity:entity];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            complete(H5String(PnrKey_success));
+        });
+    }
+    
     else if ([path isEqualToString:PnrPost_TestEdit]) {
         GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
         //NSString * str = [[NSString alloc] initWithData:dataReq.data encoding:NSUTF8StringEncoding];

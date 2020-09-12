@@ -55,6 +55,7 @@ static NSString * PnrPost_recordClear    = @"recordClear";
 static NSString * PnrGet_TestHeadAdd     = @"test";// 模拟假数据, 假如没有则会增加一个默认数据, post get 都支持
 
 static NSString * PnrGet_TestRoot        = @"request";// 模拟假数据 主页面
+static NSString * PnrPost_TestAdd        = @"requestAdd";// 模拟假数据 新增事件
 static NSString * PnrPost_TestEdit       = @"requestEdit";// 模拟假数据 编辑事件
 static NSString * PnrPost_TestDelete     = @"requestDelete";// 模拟假数据 删除事件
 

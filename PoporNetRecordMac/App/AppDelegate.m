@@ -29,6 +29,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     NSDictionary * dic =
     @{
+        @"appTitle":@"PoporNetRecordMac",
         @"version":version,
         @"buide":buide,
         @"reason":reason,
@@ -52,6 +53,12 @@ void UncaughtExceptionHandler(NSException *exception) {
 - (void)applicationWillFinishLaunching:(NSNotification *)notification {
     
     NSSetUncaughtExceptionHandler (&UncaughtExceptionHandler);
+    
+    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //        NSButton * bt = [NSButton buttonWithTitle:@"  " target:nil action:nil];
+    //        NSString * str = (NSString *)bt;
+    //        NSLog(@"str: %li", str.length);
+    //    });
     
     //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5), dispatch_get_main_queue(), ^{
     //    NSArray * array = @[];
