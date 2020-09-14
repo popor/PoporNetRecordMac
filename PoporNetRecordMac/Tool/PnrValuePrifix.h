@@ -57,7 +57,8 @@ static NSString * PnrGet_TestHeadAdd     = @"test";// 模拟假数据, 假如没
 static NSString * PnrGet_TestRoot        = @"request";// 模拟假数据 主页面
 static NSString * PnrPost_TestAdd        = @"requestAdd";// 模拟假数据 新增事件
 static NSString * PnrPost_TestEdit       = @"requestEdit";// 模拟假数据 编辑事件
-static NSString * PnrPost_TestDelete     = @"requestDelete";// 模拟假数据 删除事件
+static NSString * PnrPost_TestDeleteOne  = @"requestDeleteOne";// 模拟假数据 删除事件
+static NSString * PnrPost_TestDeleteAll  = @"requestDeleteAll";// 模拟假数据 删除事件
 
 // 图片URL解析
 static NSString * PnrGet_YcUrl           = @"ycUrl";
@@ -98,7 +99,8 @@ static NSString * PnrKey_TestResponse   = @"response";
 static NSString * PnrKey_TestIndex      = @"index";
 static NSString * PnrKey_TestType       = @"type";
 static NSString * PnrKey_TestSave       = @"save";
-static NSString * PnrKey_TestDelete     = @"delete";
+static NSString * PnrKey_TestDeleteOne  = @"deleteOne";
+static NSString * PnrKey_TestDeleteAll  = @"deleteAll";
 static NSString * PnrKey_TestSearch     = @"search";
 static NSString * PnrKey_TestSearchWord = @"word";
 static NSString * PnrKey_TestSearchForm = @"searchForm";

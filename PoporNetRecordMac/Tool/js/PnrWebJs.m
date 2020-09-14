@@ -108,13 +108,13 @@
     return js;
 }
 
-+ (NSString *)jsTestDeleteStatic {
++ (NSString *)jsTestDeleteOneStatic {
     static NSString * js;
     if (!js) {
         js =
         [NSString stringWithFormat:
          @"\n\n\
-         ;function jsTestDeleteStatic(formKey, index) {\n\
+         ;function jsTestDeleteOneStatic(formKey, index) {\n\
          ;    var form         = document.forms[formKey];\n\
          ;    var formDeleteBt = document.forms[formKey].elements['%@'];\n\
          ;    formDeleteBt.innerText = '删除中';\n\
@@ -136,10 +136,49 @@
          ;    var data = JSON.stringify({\"%@\": index}); \n\
          ;    xmlhttp.send(data);\n\
          ;}\n\n"
-         , PnrKey_TestDelete
-         , PnrPost_TestDelete
+         , PnrKey_TestDeleteOne
+         , PnrPost_TestDeleteOne
          , PnrKey_success
          , PnrKey_TestIndex
+         ];
+    }
+    return js;
+}
+
++ (NSString *)jsTestDeleteAllStatic {
+    static NSString * js;
+    if (!js) {
+        js =
+        [NSString stringWithFormat:
+         @"\n\n\
+         ;function jsTestDeleteAllStatic(formKey) {\n\
+         ;    var formSearch = document.forms[formKey].elements['%@'].value;\n\
+         ;    var form         = document.forms[formKey];\n\
+         ;    var formDeleteBt = document.forms[formKey].elements['%@'];\n\
+         ;    formDeleteBt.innerText = '删除中';\n\
+         ;    var xmlhttp = new XMLHttpRequest();\n\
+         ;    xmlhttp.open('POST','/%@',true);\n\
+         ;\n\
+         ;    xmlhttp.onreadystatechange = function() {\n\
+         ;        if (xmlhttp.readyState == 4) {\n\
+         ;            var text = xmlhttp.responseText;\n\
+         ;            if (text == '%@') {\n\
+         ;                formDeleteBt.innerText = '删除 成功';\n\
+         ;            } else {\n\
+         ;                formDeleteBt.innerText = '删除 失败';\n\
+         ;            }\n\
+         ;        }\n\
+         ;    }\n\
+         ;\n\
+         ;    xmlhttp.setRequestHeader('Content-Type', 'application/json');\n\
+         ;    var data = JSON.stringify({\"%@\": formSearch}); \n\
+         ;    xmlhttp.send(data);\n\
+         ;}\n\n"
+         , PnrKey_Conent
+         , PnrKey_TestDeleteAll
+         , PnrPost_TestDeleteAll
+         , PnrKey_success
+         , PnrKey_TestSearchWord
          ];
     }
     return js;

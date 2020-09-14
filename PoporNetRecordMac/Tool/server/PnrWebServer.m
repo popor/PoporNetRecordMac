@@ -361,7 +361,7 @@
         });
     }
     
-    else if ([path isEqualToString:PnrPost_TestDelete]) {
+    else if ([path isEqualToString:PnrPost_TestDeleteOne]) {
         GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
         //NSString * str = [[NSString alloc] initWithData:dataReq.data encoding:NSUTF8StringEncoding];
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
@@ -373,6 +373,23 @@
         if ( index ) {
             success = [PnrRequestTestEntity deleteIndex:index];
         }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (success) {
+                complete(H5String(PnrKey_success));
+            } else {
+                complete(H5String(PnrKey_fail));
+            }
+        });
+    }
+    
+    else if ([path isEqualToString:PnrPost_TestDeleteAll]) {
+        GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
+        //NSString * str = [[NSString alloc] initWithData:dataReq.data encoding:NSUTF8StringEncoding];
+        NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
+        //NSLog(@"测试: %@", dic);
+        NSString * word = dic[PnrKey_TestSearchWord];
+        
+        BOOL success = [PnrRequestTestEntity deleteAll:word];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (success) {
                 complete(H5String(PnrKey_success));

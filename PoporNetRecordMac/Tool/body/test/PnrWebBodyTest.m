@@ -50,13 +50,19 @@
              <a href='/'><img src ='favicon.ico' style=' width:28px; height:28px; margin:0 0 -8px 10px; '></img></a>\n\
              <input id='%@' type='text' style=\" width:300px; height:28px; font-size:16px; justify-content: center; margin-left:10px; \"  onkeydown=\"if(event.keyCode==13){ jsTestSearchStatic('%@'); return false;}\"  ></input>\n\
              <button id='%@' class=\"wBlack_80_0\" type='button' \" onclick=\"jsTestSearchStatic('%@')\" style=' margin-left:10px; ' > 搜索 </button> \n\
+             <button id='%@' style=' float:right; color:red; background-color:wheat; width:120px; height:28px; font-size:16px;'  type='button' \" onclick=\"jsTestDeleteAllStatic('%@')\" > 全部删除 </button> \n\
              </form>\n\
-             \n\
              </div>\n "
              , PnrKey_TestSearchForm
              , PnrKey_Conent, PnrKey_TestSearchForm
-             , PnrKey_TestSearch, PnrKey_TestSearchForm
+             , PnrKey_TestSearch, PnrKey_TestSearchForm // 搜索按钮
+             , PnrKey_TestDeleteAll, PnrKey_TestSearchForm // 删除按钮
              ];
+            
+            
+            //
+            // <div style=' width:120px; float:right; ' >\n\
+            // </div>
             
             h5_detail_head = h5;
         }
@@ -68,7 +74,8 @@
             [h5 appendString:[PnrWebJs jsJsonStatic]];
             [h5 appendString:[PnrWebJs jsTestEditStatic]];
             [h5 appendString:[PnrWebJs jsTestSearchStatic]];
-            [h5 appendString:[PnrWebJs jsTestDeleteStatic]];
+            [h5 appendString:[PnrWebJs jsTestDeleteOneStatic]];
+            [h5 appendString:[PnrWebJs jsTestDeleteAllStatic]];
             
             //[h5 appendFormat:@"\n %@ %@", [PnrWebJs textareaAutoHeightFuntion], [PnrWebJs textareaAuhoHeigtEventClass:PnrJsClassTaAutoH]];
             
@@ -131,7 +138,7 @@
      <input  id='%@' name='%@' type='text' style=\" width:calc(100%% - 2px); height:28px; font-size:16px; \" value='%@' onkeydown=\"if(event.keyCode==13){return false;}\" ></input> \n\
      </div>\n\
      <div style=' width:120px; float:left; ' >\n\
-     <button id='%@' class=\"w180Red1\" type='button' \" onclick=\"jsTestDeleteStatic('%@', '%li')\" > 删除 </button> \n\
+     <button id='%@' class=\"w180Red1\" type='button' \" onclick=\"jsTestDeleteOneStatic('%@', '%li')\" > 删除 </button> \n\
      </div>\n\
      </form>\n\
      <p style=' width:100%%; height:1px; float:left; '></p> \n\
@@ -139,7 +146,7 @@
      , formIdName, formIdName
      , PnrKey_TestSave, formIdName, index, type
      , taIdName, taIdName, taValue
-     , PnrKey_TestDelete, formIdName, index
+     , PnrKey_TestDeleteOne, formIdName, index
      ];
 }
 

@@ -54,7 +54,7 @@
             [h5 appendString:[PnrWebJs jsJsonStatic]];
             [h5 appendString:[PnrWebJs jsTestEditStatic]];
             [h5 appendString:[PnrWebJs jsTestSearchStatic]];
-            [h5 appendString:[PnrWebJs jsTestDeleteStatic]];
+            [h5 appendString:[PnrWebJs jsTestDeleteOneStatic]];
             [h5 appendString:[PnrWebJs jsYcUrlPsdEditStatic]];
             [h5 appendString:[PnrWebJs jsYcUrlAnalysisStatic]];
             

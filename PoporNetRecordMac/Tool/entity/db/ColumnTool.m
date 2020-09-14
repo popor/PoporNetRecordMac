@@ -22,7 +22,9 @@
 }
 
 - (void)initColumnTagArray {
-    _columnTagArray = [PDB arrayClass:[ColumnEntity class] where:ColumnEntity_type equal:ColumnTypeTag orderBy:@"sort" asc:YES];
+    _columnTagArray = [PDB arrayClass:[ColumnEntity class] where:ColumnEntity_type equal:ColumnTypeTag];
+    // orderBy:@"sort" asc:YES
+    
     if (_columnTagArray.count != 1) {
         [PDB deleteClass:[ColumnEntity class] where:ColumnEntity_type equal:ColumnTypeTag];
         _columnTagArray = [NSMutableArray new];

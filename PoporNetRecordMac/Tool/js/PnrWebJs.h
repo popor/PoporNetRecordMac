@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: test一些函数
 + (NSString *)jsTestEditStatic;
 + (NSString *)jsTestSearchStatic;
-+ (NSString *)jsTestDeleteStatic;
++ (NSString *)jsTestDeleteOneStatic;
++ (NSString *)jsTestDeleteAllStatic;
 
 // MARK: 动态的查看json js代码, 生成新的form,并且submit.
 + (NSString *)jsJsonDynamic;

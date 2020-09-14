@@ -15,6 +15,10 @@
     return [PoporFMDB addEntity:entity];
 }
 
++ (BOOL)deleteAll:(NSString *)url {
+    return [PoporFMDB deleteClass:[PnrRequestTestEntity class] where:@"url" like:[NSString stringWithFormat:@"%%%@%%", url]];
+}
+
 + (PnrRequestTestEntity *)findUrl:(NSString *)url {
     NSMutableArray * array = [PoporFMDB arrayClass:[PnrRequestTestEntity class] where:@"url" equal:url];
     if (array.count > 0) {
