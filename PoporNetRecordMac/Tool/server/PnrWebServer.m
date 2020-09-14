@@ -320,8 +320,12 @@
         //NSLog(@"测试: %@", dic);
         
         PnrRequestTestEntity * entity = [PnrRequestTestEntity new];
-        entity.url      = PnrCN_crashTitle;
-        entity.response = [dic toJsonString];
+        
+        // 假如posd dic 中包含title, 则不显示'崩溃信息'名称
+        NSString * title = dic[@"title"];
+        entity.url       = title ? : PnrCN_crashTitle;
+        
+        entity.response  = [dic toJsonString];
         
         [PnrRequestTestEntity addEntity:entity];
         
