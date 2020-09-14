@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * response;
 
 + (BOOL)addEntity:(PnrRequestTestEntity *)entity;
++ (BOOL)updateUrl:(NSString *)url setResponse:(NSString *)response;
+
 + (BOOL)deleteAll:(NSString *)url;
 
 + (PnrRequestTestEntity *)findUrl:(NSString *)url;

@@ -15,6 +15,29 @@
     return [PoporFMDB addEntity:entity];
 }
 
++ (BOOL)updateUrl:(NSString *)url setResponse:(NSString *)response {
+    PnrRequestTestEntity * entity = [self findUrl:url];
+    BOOL success;
+    if (entity) {
+        NSString * tableName  = NSStringFromClass([PnrRequestTestEntity class]);
+        NSString * futureSQL = [NSString stringWithFormat:@"UPDATE %@ set response = ? where url = ?;", tableName];
+        
+        PoporFMDB * tool = [PoporFMDB share];
+        [tool start];
+        success = [tool.db executeUpdate:futureSQL, response, url];
+        [tool end];
+    } else {
+        PnrRequestTestEntity * entity = [PnrRequestTestEntity new];
+        entity.url = url;
+        entity.response = response;
+        
+        success = [self addEntity:entity];
+    }
+    
+    return success;
+}
+
+
 + (BOOL)deleteAll:(NSString *)url {
     return [PoporFMDB deleteClass:[PnrRequestTestEntity class] where:@"url" like:[NSString stringWithFormat:@"%%%@%%", url]];
 }

@@ -319,16 +319,19 @@
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:dataReq.data options:NSJSONReadingAllowFragments error:nil];
         //NSLog(@"测试: %@", dic);
         
-        PnrRequestTestEntity * entity = [PnrRequestTestEntity new];
-        
         // 假如posd dic 中包含title, 则不显示'崩溃信息'名称
-        NSString * title = dic[@"title"];
-        entity.url       = title ? : PnrCN_crashTitle;
+        NSString * title = dic[PnrPost_TestAdd_title];
+        BOOL     replace = [dic[PnrPost_TestAdd_replace] boolValue];
         
-        entity.response  = [dic toJsonString];
-        
-        [PnrRequestTestEntity addEntity:entity];
-        
+        if (title && replace) {
+            [PnrRequestTestEntity updateUrl:title setResponse:[dic toJsonString]];
+        } else {
+            PnrRequestTestEntity * entity = [PnrRequestTestEntity new];
+            entity.url       = title ? : PnrCN_crashTitle;
+            entity.response  = [dic toJsonString];
+            
+            [PnrRequestTestEntity addEntity:entity];
+        }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             complete(H5String(PnrKey_success));
         });

@@ -55,7 +55,15 @@ static NSString * PnrPost_recordClear    = @"recordClear";
 static NSString * PnrGet_TestHeadAdd     = @"test";// 模拟假数据, 假如没有则会增加一个默认数据, post get 都支持
 
 static NSString * PnrGet_TestRoot        = @"request";// 模拟假数据 主页面
+
+/**
+ title: 新增url名称
+ replace:1 0,  是否替换title一样的事件, 前提title不能为空
+ */
 static NSString * PnrPost_TestAdd        = @"requestAdd";// 模拟假数据 新增事件
+static NSString * PnrPost_TestAdd_title  = @"title";  // 模拟假数据 title
+static NSString * PnrPost_TestAdd_replace= @"replace";// 模拟假数据 replace
+
 static NSString * PnrPost_TestEdit       = @"requestEdit";// 模拟假数据 编辑事件
 static NSString * PnrPost_TestDeleteOne  = @"requestDeleteOne";// 模拟假数据 删除事件
 static NSString * PnrPost_TestDeleteAll  = @"requestDeleteAll";// 模拟假数据 删除事件
