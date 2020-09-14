@@ -16,12 +16,14 @@
 #import <PoporFoundation/NSDictionary+pTool.h>
 #import "PoporAppInfo.h"
 #import "PoporNetRecord.h"
+#import "PnrRequestTestEntity.h"
 
-static NSString * PoporNetRecordReplaceString = @"PoporNetRecordReplaceString";
+static NSString * ReplaceRequestKey  = @"ReplaceRequestKey";
+static NSString * ReplaceTestKey     = @"ReplaceTestKey";
 
-static NSString * divFunListKey               = @"divFunList";
-static NSString * divFunItemKey               = @"item";
-static NSString * divFunItem_unitKey          = @"item_unit";
+static NSString * divFunListKey      = @"divFunList";
+static NSString * divFunItemKey      = @"item";
+static NSString * divFunItem_unitKey = @"item_unit";
 
 @implementation PnrWebBodyAdmin
 
@@ -83,27 +85,34 @@ static NSString * divFunItem_unitKey          = @"item_unit";
              , divFunList, divFunItem];
             
             
+            // 默认
             [h5 appendFormat:
              @".%@ .%@{\n\
              display: inline-block;\n\
              height: 40px;\n\
-             width: 100px;\n\
+             width: 160px;\n\
              text-align: center;\n\
              line-height: 40px;\n\
              color: orange;\n\
              position: relative;\n\
+             \n\
+             white-space: nowrap;\n\
+             text-overflow: ellipsis;\n\
+             overflow: hidden;\n\
+             word-break: break-all;\n\
+             \n\
              } \n"
              , divFunList, divFunItem_unit];
-            
+            // 鼠标漂浮
             [h5 appendFormat:
              @"\n\n.%@ .%@:hover:after{\n\
              content: '';\n\
              display: block;\n\
              position: absolute;\n\
-             width: 60px;\n\
+             width: 160px;\n\
              height: 2px;\n\
              bottom: 5px;\n\
-             left: 20px;\n\
+             left: 0px;\n\
              background-color: #FD463E;\n\
              } \n"
              , divFunList, divFunItem_unit];
@@ -137,10 +146,12 @@ static NSString * divFunItem_unitKey          = @"item_unit";
         [body appendFormat:@"<div class='%@' style=' width:1000px; height:100%%; margin:0 auto; ' >", divFunList];
         [body appendFormat:@"<p><a href='/%@' class='%@' > 网络请求 </a> </p>", PnrGet_recordRoot, divFunItem];
         
-        [body appendString:PoporNetRecordReplaceString];
+        [body appendString:ReplaceRequestKey];
         
         [body appendFormat:@"<p> <a href='/%@' class='%@' > 请求测试 </a> </p>", PnrGet_TestRoot,   divFunItem];
-        [body appendFormat:@"<p> <a href='/%@?%@=%@' class='%@' > 崩溃日志 </a> </p>", PnrGet_TestRoot, PnrKey_TestSearch, PnrCN_crashTitle,  divFunItem];
+        [body appendString:ReplaceTestKey];
+        
+        // [body appendFormat:@"<p> <a href='/%@?%@=%@' class='%@' > 崩溃日志 </a> </p>", PnrGet_TestRoot, PnrKey_TestSearch, PnrCN_crashTitle,  divFunItem];
         [body appendFormat:@"<p> <a href='/%@' class='%@' > MD5Test </a> </p>", PnrGet_YcUrl, divFunItem];
         
         // 二维码
@@ -174,7 +185,19 @@ static NSString * divFunItem_unitKey          = @"item_unit";
         [recordListBody appendString:@"</p>"];
     }
     
-    NSString * html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, [body replaceWithREG:PoporNetRecordReplaceString newString:recordListBody], h5_detail_tail];
+    NSMutableString * testBody = [NSMutableString new];
+    NSMutableArray * testUrlArray = [PnrRequestTestEntity urlArray];
+    if (testUrlArray.count > 0) {
+        [testBody appendString:@"<p>"];
+        for (NSString * url in testUrlArray) {
+            [testBody appendFormat:@"<a href='/%@?%@=%@' class='%@' > %@ </a>", PnrGet_TestRoot, PnrKey_TestSearch, url, divFunItem_unitKey, url];
+        }
+        [testBody appendString:@"</p>"];
+    }
+    NSString * editBody = [body replaceWithREG:ReplaceRequestKey newString:recordListBody];
+    editBody = [editBody replaceWithREG:ReplaceTestKey    newString:testBody];
+    
+    NSString * html = [NSString stringWithFormat:@"%@ \n %@ \n %@", h5_detail_head, editBody, h5_detail_tail];
     
     return html;
 }

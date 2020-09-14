@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)deleteIndex:(NSString *)index;
 
++ (NSMutableArray *)urlArray;
+
 @end
 
 NS_ASSUME_NONNULL_END

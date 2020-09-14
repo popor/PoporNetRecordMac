@@ -73,4 +73,25 @@
     return [PoporFMDB deleteClass:[PnrRequestTestEntity class] where:@"id" equal:index];
 }
 
+// https://www.w3school.com.cn/sql/sql_distinct.asp
++ (NSMutableArray *)urlArray {
+    NSMutableArray * array = [NSMutableArray new];
+    
+    PoporFMDB * tool = [PoporFMDB share];
+    [tool start];
+    
+    NSString * futureSQL = [NSString stringWithFormat:@"SELECT distinct url FROM %@", NSStringFromClass([self class])];
+    FMResultSet * rs = [tool.db executeQuery:futureSQL];
+    
+    while ([rs next]) {
+        PnrRequestTestEntity * entity = [PnrRequestTestEntity new];
+        [NSFMDB setFullEntity:entity withRS:rs];
+        
+        [array addObject:entity.url];
+    }
+    [tool end];
+    return array;
+    
+}
+
 @end
