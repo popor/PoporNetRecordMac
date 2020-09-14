@@ -23,7 +23,7 @@ target 'PoporNetRecordMac' do
   pod 'ReactiveObjC'
   
   pod 'PoporFoundation'
-  pod 'PoporFMDB'
+  pod 'PoporFMDB' # , '~>1.10'
   pod 'PoporJsonModel'
   pod 'PoporAFN'
   

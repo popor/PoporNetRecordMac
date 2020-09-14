@@ -22,9 +22,8 @@ PODS:
   - Masonry (1.1.0)
   - PoporAFN (1.05):
     - AFNetworking
-  - PoporFMDB (1.07):
+  - PoporFMDB (1.10):
     - FMDB
-    - PoporFoundation/NSString
   - PoporFoundation (1.14):
     - PoporFoundation/KVO (= 1.14)
     - PoporFoundation/NSArray (= 1.14)
@@ -80,7 +79,7 @@ DEPENDENCIES:
   - JSONModel
   - Masonry
   - PoporAFN
-  - PoporFMDB
+  - PoporFMDB (~> 1.10)
   - PoporFoundation
   - PoporJsonModel
   - PoporQRCodeMacos
@@ -107,12 +106,12 @@ SPEC CHECKSUMS:
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   PoporAFN: 5800e9adca375b1d564f047645ab8884403027c7
-  PoporFMDB: aeb61e83c9f2d815a695b74e086499cdf842ca92
+  PoporFMDB: 8f314f08213e0683dc61e2fcb78c66c11a3dfd6a
   PoporFoundation: 25f70450a23ad082beec1458185e993c16172ea4
   PoporJsonModel: e99396194a9b629907e14a134fe01677ed14b560
   PoporQRCodeMacos: 0e070c3a43f5294b2eee36fa4781cd7fa35b4240
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
 
-PODFILE CHECKSUM: a4b028b9f49607e0f2c2ef009462a05178833025
+PODFILE CHECKSUM: e0e5d1e1ef99281e711b64071d0a47ccc01c1d17
 
 COCOAPODS: 1.10.0.beta.2
