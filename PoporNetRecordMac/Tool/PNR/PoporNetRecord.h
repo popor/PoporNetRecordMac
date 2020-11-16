@@ -20,13 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak  ) PnrConfig           * config;
 @property (nonatomic, weak  ) PnrWebServer        * webServer;
 
-@property (nonatomic, strong) NSMutableArray      * infoArray;
+@property (nonatomic, strong) NSMutableArray      * allRequestArray;
 @property (nonatomic, strong) NSMutableArray      * deviceNameArray;
 @property (nonatomic, strong) NSMutableDictionary * deviceNameDic;
 
 @property (nonatomic, copy  ) BlockPVoid          blockFreshDeviceName;
 
-@property (nonatomic, strong) NSMutableString     * listWebH5;
+@property (nonatomic, strong) NSMutableString     * allRequestListWebH5;
 
 + (instancetype)share;
 

@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * note;
 @property (nonatomic, strong) NSString * deviceName;
 
-@property (nonatomic, strong) NSMutableArray<PnrEntity> * array;
+@property (nonatomic, strong) NSMutableArray<PnrEntity> * requestArray;
 @property (nonatomic, strong) NSMutableString * listWebH5;
 
 @end

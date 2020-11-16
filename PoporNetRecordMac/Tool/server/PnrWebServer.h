@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)share;
 
 @property (nonatomic, weak  ) PnrPortEntity * portEntity;
-@property (nonatomic, weak  ) NSMutableArray * infoArray; // PoporNetRecord.infoArray
+@property (nonatomic, weak  ) NSMutableArray * weakAllRequestArray; // PoporNetRecord.allRequestArray
 
 #pragma mark - server
 @property (nonatomic, strong, nullable) GCDWebServer * webServer;

@@ -802,7 +802,7 @@
 				CODE_SIGN_ENTITLEMENTS = PoporNetRecordMac/PoporNetRecordMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				GCC_PREFIX_HEADER = PoporNetRecordMac/PoporNetRecordMac_prefix.h;
 				INFOPLIST_FILE = PoporNetRecordMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -810,7 +810,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.18;
+				MARKETING_VERSION = 1.19;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ifcar99.PoporNetRecordMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -824,7 +824,7 @@
 				CODE_SIGN_ENTITLEMENTS = PoporNetRecordMac/PoporNetRecordMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				GCC_PREFIX_HEADER = PoporNetRecordMac/PoporNetRecordMac_prefix.h;
 				INFOPLIST_FILE = PoporNetRecordMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -832,7 +832,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.18;
+				MARKETING_VERSION = 1.19;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ifcar99.PoporNetRecordMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

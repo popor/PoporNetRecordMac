@@ -49,6 +49,7 @@ static NSString * PnrGet_recordResubmit  = @"recordResubmit";
 
 static NSString * PnrPost_recordResubmit = @"recordResubmit";
 static NSString * PnrPost_recordClear    = @"recordClear";
+static NSString * PnrPost_recordClearAll = @"PnrClearAll";
 //static NSString * PnrPost_recordAdd      = @"recordAdd";
 
 // 模拟测试部分

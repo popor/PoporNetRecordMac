@@ -557,8 +557,17 @@ for (var i = 0; i < text.length; i++) {\n\
          ;    xmlhttp.onreadystatechange=function() {\n\
          ;        location.reload();\n\
          ;    }\n\
-         ;    xmlhttp.send('clear'); \n\
-         ;}\n\n", PnrPost_recordClear];
+         ;    var deviceName = getQueryVariable('%@')\n\
+         ;    deviceName = decodeURIComponent(deviceName); \n\
+         ;    \n\
+         ;    if(deviceName.length > 0){\n\
+         ;        xmlhttp.send(deviceName); \n\
+         ;    } else {\n\
+         ;        xmlhttp.send('%@'); \n\
+         ;    }\n\
+         ;}\n\n", PnrPost_recordClear
+         , PnrKey_DeviceName
+         , PnrPost_recordClearAll];
     }
     return js;
 }

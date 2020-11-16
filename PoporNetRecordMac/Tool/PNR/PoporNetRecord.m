@@ -26,15 +26,15 @@
     static PoporNetRecord * instance;
     dispatch_once(&once, ^{
         instance = [self new];
-        instance.infoArray       = [NSMutableArray new];
-        instance.deviceNameDic   = [NSMutableDictionary new];
-        instance.deviceNameArray = [NSMutableArray new];
-        instance.listWebH5       = [NSMutableString new];
-        instance.config          = [PnrConfig share];
+        instance.allRequestArray     = [NSMutableArray new];
+        instance.deviceNameDic       = [NSMutableDictionary new];
+        instance.deviceNameArray     = [NSMutableArray new];
+        instance.allRequestListWebH5 = [NSMutableString new];
+        instance.config              = [PnrConfig share];
         
         // 相关联的关联数组
         instance.webServer = [PnrWebServer share];
-        [PnrWebServer share].infoArray = instance.infoArray;
+        [PnrWebServer share].weakAllRequestArray = instance.allRequestArray;
         //[[PnrWebServer share] startListServer:nil];
     });
     return instance;
@@ -81,19 +81,19 @@
     @synchronized (pnr) {
         if (pnr.config.isRecord) {
             
-            if (pnr.infoArray.count == 0) {
+            if (pnr.allRequestArray.count == 0) {
                 // 当执行了数组清空之后, h5代码清零一次.
-                [pnr.listWebH5 setString:@""];
+                [pnr.allRequestListWebH5 setString:@""];
             }
-            [pnr.infoArray addObject:entity];
-            [deviceEntity.array addObject:entity];
+            [pnr.allRequestArray addObject:entity];
+            [deviceEntity.requestArray addObject:entity];
             
             if (pnr.config.isShowListWeb) {
                 // 100%
-                NSMutableString * allListH5 = [PnrEntity createListWebH5:entity index:pnr.infoArray.count - 1];
-                NSMutableString * oneListH5 = [PnrEntity createListWebH5:entity index:deviceEntity.array.count - 1];
+                NSMutableString * allListH5 = [PnrEntity createListWebH5:entity index:pnr.allRequestArray.count - 1];
+                NSMutableString * oneListH5 = [PnrEntity createListWebH5:entity index:deviceEntity.requestArray.count - 1];
                 
-                [pnr.listWebH5          insertString:allListH5 atIndex:0];
+                [pnr.allRequestListWebH5 insertString:allListH5 atIndex:0];
                 [deviceEntity.listWebH5 insertString:oneListH5 atIndex:0];
             }else{
                 // 0%

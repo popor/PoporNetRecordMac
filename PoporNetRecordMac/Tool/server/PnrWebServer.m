@@ -163,7 +163,7 @@
                 if (deviceEntity) {
                     completionBlock(H5String([PnrWebBodyRecord listH5:deviceEntity.listWebH5]));
                 } else {
-                    completionBlock(H5String([PnrWebBodyRecord listH5:pnr.listWebH5]));
+                    completionBlock(H5String([PnrWebBodyRecord listH5:pnr.allRequestListWebH5]));
                 }
                 
             }
@@ -177,9 +177,9 @@
                     PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
                     PnrEntity * entity;
                     if (deviceEntity) {
-                        entity = deviceEntity.array[index];
+                        entity = deviceEntity.requestArray[index];
                     } else {
-                        entity = self.infoArray[index];
+                        entity = self.weakAllRequestArray[index];
                     }
                     if (!entity.h5Detail) {
                         [self startServerUnitEntity:entity index:index];
@@ -417,13 +417,33 @@
         }
     }
     else if([path isEqualToString:PnrPost_recordClear]){
-        PoporNetRecord * pnr  = [PoporNetRecord share];
-        for (PnrDeviceEntity * deviceEntity in pnr.deviceNameArray) {
-            [deviceEntity.listWebH5 setString:@""];
-            [deviceEntity.array removeAllObjects];
+        GCDWebServerDataRequest * dataReq = (GCDWebServerDataRequest *)request;
+        NSString * deviceName = dataReq.text;
+        PoporNetRecord  * pnr = [PoporNetRecord share];
+        
+        if ([deviceName isEqualToString:PnrPost_recordClearAll]) {
+            // 删除全部
+            for (PnrDeviceEntity * oneDeviceEntity in pnr.deviceNameArray) {
+                [oneDeviceEntity.listWebH5 setString:@""];
+                [oneDeviceEntity.requestArray removeAllObjects];
+            }
+            
+            [self.weakAllRequestArray removeAllObjects];
+            [pnr.allRequestListWebH5 setString:@""];
+            
+        } else {
+            // 删除单独的设备请求
+            PnrDeviceEntity * deviceEntity = pnr.deviceNameDic[deviceName];
+            if (deviceEntity) {
+                [self.weakAllRequestArray removeObjectsInArray:deviceEntity.requestArray];
+                
+                [deviceEntity.listWebH5 setString:@""];
+                [deviceEntity.requestArray removeAllObjects];
+                
+                // 单独删除的话, 不清空全部数据, 主要是太麻烦.还有排序啥的.不值得.
+                //[pnr.allRequestListWebH5 setString:@""];
+            }
         }
-        [self.infoArray removeAllObjects];
-        [pnr.listWebH5 setString:@""];
         
         complete(H5String(@"clear finish"));
     }
