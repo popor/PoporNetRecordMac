@@ -40,7 +40,7 @@
         return share.html;
     }
     NSMutableString * h5 = [NSMutableString new];
-
+    
     PnrConfig * config = [PnrConfig share];
     [h5 appendFormat:@"<html> <head><title>%@</title></head>", config.webRootTitle];
     
@@ -65,9 +65,9 @@
     
     // root()
     [h5 appendFormat:@"\n\
-    ;function root() {\n\
-    ;    window.location.href= '/'; \n\
-    ;}"
+     ;function root() {\n\
+     ;    window.location.href= '/'; \n\
+     ;}"
      ];
     
     // resubmit()
@@ -387,6 +387,7 @@
     NSString * responseStr  = [self contentString:pnrEntity.responseValue];
     NSString * extraStr     = extraDic ? extraDic.toJsonString : @"{\"extraKey\":\"extraValue\"}";
     
+    // 移除转义符, 方便 Web 查阅.
     parameterStr = [parameterStr replaceWithREG:@"\\\\" newString:@""];
     responseStr  = [responseStr replaceWithREG:@"\\\\" newString:@""];
     extraStr     = [extraStr replaceWithREG:@"\\\\" newString:@""];
