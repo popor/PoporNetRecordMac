@@ -387,6 +387,10 @@
     NSString * responseStr  = [self contentString:pnrEntity.responseValue];
     NSString * extraStr     = extraDic ? extraDic.toJsonString : @"{\"extraKey\":\"extraValue\"}";
     
+    parameterStr = [parameterStr replaceWithREG:@"\\\\" newString:@""];
+    responseStr  = [responseStr replaceWithREG:@"\\\\" newString:@""];
+    extraStr     = [extraStr replaceWithREG:@"\\\\" newString:@""];
+    
     NSMutableString * detail   = [NSMutableString new];
     NSMutableString * resubmit = [NSMutableString new];
     if (pnrEntity.log) {
